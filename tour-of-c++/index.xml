@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tour of C&#43;&#43; on Notebook</title>
-    <link>http://example.org/tour-of-c&#43;&#43;/</link>
+    <link>https://ajguerrer.github.io/tour-of-c&#43;&#43;/</link>
     <description>Recent content in Tour of C&#43;&#43; on Notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://example.org/tour-of-c++/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ajguerrer.github.io/tour-of-c++/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The Basics</title>
-      <link>http://example.org/tour-of-c&#43;&#43;/01_the_basics/</link>
+      <link>https://ajguerrer.github.io/tour-of-c&#43;&#43;/01_the_basics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/tour-of-c&#43;&#43;/01_the_basics/</guid>
+      <guid>https://ajguerrer.github.io/tour-of-c&#43;&#43;/01_the_basics/</guid>
       <description>Don&amp;rsquo;t panic! All will become clear in time. Don&amp;rsquo;t use the built-in features exclusively or on their own. On the contrary, built-in features are usually best used indirectly through libraries, such as the ISO C++ standard library.
 class Date { // ... public: Month month() const; // good int month() cont; // bad // ... }; void change_speed(double s); // bad void change_speed(Speed s); // good // ... change_speed(2.3); // bad change_speed(32m / 10s); // good  You don&amp;rsquo;t have to know every detail of C++ to write good programs.</description>
     </item>
     
     <item>
       <title>User-Defined Types</title>
-      <link>http://example.org/tour-of-c&#43;&#43;/02_user-defined-types/</link>
+      <link>https://ajguerrer.github.io/tour-of-c&#43;&#43;/02_user-defined-types/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/tour-of-c&#43;&#43;/02_user-defined-types/</guid>
+      <guid>https://ajguerrer.github.io/tour-of-c&#43;&#43;/02_user-defined-types/</guid>
       <description> Prefer well-defined user-defined types over built-in types when the built-in types are too low level. Organize related data into structures Represent the distinction between an interface and an implementation using a class A struct is simply a class with its members `public by default Define constructors to guarantee and simplify initialization of classes Avoid &amp;ldquo;naked&amp;rdquo; unions; wrap them in a class together with a type field Use enumerations to represent sets of named constants Prefer class enums over &amp;ldquo;plain&amp;rdquo; enums to minimize surprises Define operations on enumerations for safe and simple use  </description>
     </item>
     

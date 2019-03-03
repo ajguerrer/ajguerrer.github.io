@@ -3,28 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/tour-of-c&#43;&#43;/01_the_basics/</loc>
+    <loc>https://ajguerrer.github.io/tour-of-c&#43;&#43;/01_the_basics/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tour-of-c&#43;&#43;/02_user-defined-types/</loc>
+    <loc>https://ajguerrer.github.io/tour-of-c&#43;&#43;/02_user-defined-types/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tour-of-c&#43;&#43;/</loc>
+    <loc>https://ajguerrer.github.io/tour-of-c&#43;&#43;/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://ajguerrer.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://ajguerrer.github.io/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://ajguerrer.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
