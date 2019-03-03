@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.54.0" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <title>The Basics :: Notebook</title>
+
+    
+    <link href="/css/nucleus.css?1551643836" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1551643836" rel="stylesheet">
+    <link href="/css/hybrid.css?1551643836" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1551643836" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1551643836" rel="stylesheet">
+    <link href="/css/auto-complete.css?1551643836" rel="stylesheet">
+    <link href="/css/theme.css?1551643836" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1551643836" rel="stylesheet">
+    
+      <link href="/css/theme-gruvbox.css?1551643836" rel="stylesheet">
+    
+
+    <script src="/js/jquery-2.x.min.js?1551643836"></script>
+
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/tour-of-c&#43;&#43;/01_the_basics/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <div class="logo">
+  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 90.000000 183.000000"
+    preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)" stroke="none">
+      <path d="M437 1690 c-4 -30 -7 -131 -8 -225 -2 -224 -2 -224 -62 -242 -67 -19
+    -147 -97 -147 -141 0 -18 2 -32 4 -32 2 0 15 17 29 38 27 41 104 96 150 107
+    l28 7 -3 -107 -3 -108 -30 -11 c-54 -19 -106 -57 -103 -75 2 -9 35 -32 74 -51
+    l72 -35 7 -68 c8 -84 17 -80 19 8 l1 66 58 24 c32 13 67 31 78 41 17 15 18 19
+    4 34 -8 9 -42 29 -75 45 l-60 29 0 101 c0 56 3 104 6 107 7 8 100 -29 134 -53
+    14 -10 41 -40 60 -68 31 -45 50 -62 50 -46 0 17 -43 85 -72 114 -33 34 -119
+    81 -149 81 -19 0 -24 43 -35 309 -8 182 -17 235 -27 151z m-11 -806 l-7 -33
+    -40 18 c-68 31 -68 38 -8 66 l54 25 3 -21 c2 -12 1 -36 -2 -55z m101 50 c24
+    -9 43 -21 43 -25 0 -12 -40 -36 -72 -44 -27 -7 -28 -6 -28 39 0 25 3 46 7 46
+    4 0 27 -7 50 -16z" />
+      <path d="M92 893 c14 -133 101 -250 231 -311 37 -18 74 -32 81 -32 8 0 17 -4
+20 -8 3 -5 6 -109 7 -231 0 -123 5 -219 9 -214 19 20 30 125 30 278 l0 165 28
+6 c75 17 98 25 133 50 57 39 108 107 139 183 32 77 49 157 31 147 -6 -4 -11
+-12 -11 -17 0 -6 -16 -49 -36 -95 -31 -72 -46 -93 -98 -138 -69 -60 -120 -81
+-176 -72 -22 3 -41 2 -45 -4 -15 -25 -86 1 -173 63 -51 37 -127 151 -148 224
+-9 29 -18 53 -21 53 -3 0 -3 -21 -1 -47z" />
+    </g>
+  </svg>
+  <p>Notebook</p>
+</div>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1551643836"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1551643836"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/example.org\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1551643836"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/tour-of-c&#43;&#43;/" title="Tour of C&#43;&#43;" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/tour-of-c&#43;&#43;/">
+          Tour of C&#43;&#43;
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tour-of-c&#43;&#43;/01_the_basics/" title="The Basics" class="dd-item active">
+        <a href="/tour-of-c&#43;&#43;/01_the_basics/">
+        <b>1. </b>The Basics
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tour-of-c&#43;&#43;/02_user-defined-types/" title="User-Defined Types" class="dd-item ">
+        <a href="/tour-of-c&#43;&#43;/02_user-defined-types/">
+        <b>2. </b>User-Defined Types
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Notebook</a> > <a href='/tour-of-c++/'>Tour of C++</a> > The Basics
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>The Basics</h1>
+          
+
+        
+
+
+<ol>
+<li>Don&rsquo;t panic! All will become clear in time.</li>
+
+<li><p>Don&rsquo;t use the built-in features exclusively or on their own. On the contrary, built-in features are usually best used indirectly through libraries, such as the ISO C++ standard library.</p>
+
+<pre><code class="language-cpp">class Date {
+  // ...
+public:
+  Month month() const; // good
+  int month() cont;    // bad
+  // ...
+};
+
+void change_speed(double s); // bad
+void change_speed(Speed s);  // good
+// ...
+
+change_speed(2.3);       // bad
+change_speed(32m / 10s); // good
+</code></pre></li>
+
+<li><p>You don&rsquo;t have to know every detail of C++ to write good programs.</p></li>
+
+<li><p>Focus on programming techniques, not on language features.</p></li>
+
+<li><p>For the final word on language definition issues, see the ISO C++ standard.</p></li>
+
+<li><p>&ldquo;Package&rdquo; meaningful operations as carefully named functions.</p>
+
+<pre><code class="language-cpp">// bad
+void read_and_print(istream&amp; is)
+{
+  int x;
+  if (is &gt;&gt; x)
+    cout &lt;&lt; &quot;the int is &quot; &lt;&lt; x &lt;&lt; '\n';
+  else
+    cerr &lt;&lt; &quot;no int on input\n&quot;;
+}
+// good
+auto lessT = [](T x, T y) { return x.rank() &lt; y.rank() &amp;&amp; x.value() &lt; y.value(); };
+
+sort(a, b, lessT);
+find_if(a, b, lessT);
+</code></pre></li>
+
+<li><p>A function should perform as single logical operation.</p>
+
+<pre><code class="language-cpp">// bad
+void read_and_print()
+{
+    int x;
+    cin &gt;&gt; x;
+    // check for errors
+    cout &lt;&lt; x &lt;&lt; &quot;\n&quot;;
+}
+
+// better
+auto read = [](auto&amp; input, auto&amp; value)
+{
+  input &gt;&gt; value;
+  // check for errors
+};
+
+auto print(auto&amp; output, const auto&amp; value)
+{
+  output &lt;&lt; value &lt;&lt; &quot;\n&quot;;
+}
+</code></pre></li>
+
+<li><p>Keep functions short.</p>
+
+<pre><code class="language-cpp">// bad: complex control structure
+double simple_func(double val, int flag1, int flag2)
+// simple_func: takes a value and calculates the expected ASIC output,
+// given the two mode flags.
+{
+  double intermediate;
+  if (flag1 &gt; 0) {
+    intermediate = func1(val);
+    if (flag2 % 2)
+      intermediate = sqrt(intermediate);
+  }
+  else if (flag1 == -1) {
+    intermediate = func1(-val);
+    if (flag2 % 2)
+      intermediate = sqrt(-intermediate);
+    flag1 = -flag1;
+  }
+  if (abs(flag2) &gt; 10) {
+    intermediate = func2(intermediate);
+  }
+  switch (flag2 / 10) {
+    case 1: if (flag1 == -1) return finalize(intermediate, 1.171);
+      break;
+    case 2: return finalize(intermediate, 13.1);
+    default: break;
+  }
+  return finalize(intermediate, 0.);
+}
+
+// better: refactor
+double func1_muon(double val, int flag)
+{
+  // ???
+}
+
+double func1_tau(double val, int flag1, int flag2)
+{
+  // ???
+}
+
+double simple_func(double val, int flag1, int flag2)
+// simple_func: takes a value and calculates the expected ASIC output,
+// given the two mode flags.
+{
+  if (flag1 &gt; 0)
+    return func1_muon(val, flag2);
+  if (flag1 == -1)
+    // handled by func1_tau: flag1 = -flag1;
+    return func1_tau(-val, flag1, flag2);
+  return 0.;
+}
+</code></pre></li>
+
+<li><p>Use overloading when functions perform conceptually the same task on different types.</p></li>
+
+<li><p>If a function may have to be evaluated at compile time, declare it <code>constexpr</code>.</p>
+
+<pre><code class="language-cpp">constexpr int fac(int n)
+{
+  constexpr int max_exp = 17;      // constexpr enables max_exp to be used in Expects
+  Expects(0 &lt;= n &amp;&amp; n &lt; max_exp);  // prevent silliness and overflow
+  int x = 1;
+  for (int i = 2; i &lt;= n; ++i) x *= i;
+  return x;
+}
+</code></pre></li>
+
+<li><p>Understand how language primitives map to hardware.</p></li>
+
+<li><p>Use digit separators to make large literals readable.</p>
+
+<pre><code class="language-cpp">auto c = 299'792'458;
+auto hello = &quot;Hello!&quot;s;
+auto interval = 100ms; // &lt;chrono&gt;
+</code></pre></li>
+
+<li><p>Avoid complicated expressions.</p>
+
+<pre><code class="language-cpp">// bad: multiple assignments &quot;hidden&quot; in subexpressions
+x = a + (b = f()) + (c = g()) * 7;
+
+// bad: relies on commonly misunderstood precedence rules
+x = a &amp; b + c * d &amp;&amp; e ^ f == 7;
+
+// bad: undefined behavior
+x = x++ + x++ + ++x;
+
+x = k * y + z;             // OK
+
+auto t1 = k * y;           // bad: unnecessarily verbose
+x = t1 + z;
+    
+if (0 &lt;= x &amp;&amp; x &lt; max)   // OK
+    
+auto t1 = 0 &lt;= x;        // bad: unnecessarily verbose
+auto t2 = x &lt; max;
+if (t1 &amp;&amp; t2)            // ...
+</code></pre></li>
+
+<li><p>Avoid narrowing conversions.</p>
+
+<pre><code class="language-cpp">double d = 7.9;
+int i = d;    // bad: narrowing: i becomes 7
+i = (int) d;  // bad: we're going to claim this is still not explicit enough
+// ...
+
+// using guideline support library
+i = narrow_cast&lt;int&gt;(d);   // ok (you asked for it): narrowing: i becomes 7
+i = narrow&lt;int&gt;(d);        // ok: throws narrowing_error
+</code></pre></li>
+
+<li><p>Minimize the scope of a variable.</p></li>
+
+<li><p>Avoid &ldquo;magic constants&rdquo;; use symbolic constants.</p>
+
+<pre><code class="language-cpp">// bad: magic constant 12
+for (int m = 1; m &lt;= 12; ++m)
+cout &lt;&lt; month[m] &lt;&lt; '\n';
+
+// better
+constexpr int first_month = 1;
+constexpr int last_month = 12;
+
+for (int m = first_month; m &lt;= last_month; ++m)
+cout &lt;&lt; month[m] &lt;&lt; '\n';
+
+// better still
+for (auto m : month)
+cout &lt;&lt; m &lt;&lt; '\n';
+</code></pre></li>
+
+<li><p>Prefer immutable data.</p></li>
+
+<li><p>Declare one name (only) per declaration.</p>
+
+<pre><code class="language-cpp">char *p, c, a[7], *pp[7], **aa[10];   // yuck!
+</code></pre>
+
+<p>Structured bindings are specifically designed to introduce several variables.</p>
+
+<pre><code class="language-cpp">auto [iter, inserted] = m.insert_or_assign(k, val);
+if (inserted) { /* new entry was inserted */ }
+</code></pre></li>
+
+<li><p>Keep common and local names short, and keep uncommon an non-local names longer.</p>
+
+<pre><code class="language-cpp">template&lt;typename T&gt;    // good
+void print(ostream&amp; os, const vector&lt;T&gt;&amp; v)
+{ /* ... */ }
+
+template&lt;typename Element_type&gt;   // bad: verbose, hard to read
+void print(ostream&amp; target_stream, const vector&lt;Element_type&gt;&amp; current_vector)
+{ /* ... */ }
+
+void use1(const string&amp; s)
+{
+  // ...
+  tt(s);   // bad: what is tt()?
+  // ...
+}
+
+void use1(const string&amp; s)
+{
+  // ...
+  trim_tail(s);   // better
+  // ...
+}
+
+// bad: large functions are de facto non-local; vr, vi and out need to be more meaningful
+void complicated_algorithm(vector&lt;Record&gt;&amp; vr, const vector&lt;int&gt;&amp; vi, map&lt;string, int&gt;&amp; out)
+{
+  // ... 500 lines of code using vr, vi, and out ...
+}
+</code></pre></li>
+
+<li><p>Avoid similar-looking names.</p>
+
+<pre><code class="language-cpp">if (readable(i1 + l1 + ol + o1 + o0 + ol + o1 + I0 + l0)) surprise(); // bad
+
+struct foo { int n; };
+struct foo foo();       // bad: foo is a type already in scope
+struct foo x = foo();   // bad: requires disambiguation
+</code></pre></li>
+
+<li><p>Avoid <code>ALL_CAPS</code> names. <code>ALL_CAPS</code> should used for macros only.</p></li>
+
+<li><p>Prefer the <code>{}</code>-initializer syntax for declarations with a named type.</p>
+
+<pre><code class="language-cpp">int x {7.9};   // error: narrowing
+int y = 7.9;   // y becomes 7. Hope for a compiler warning
+</code></pre></li>
+
+<li><p>Use <code>auto</code> to avoid repeating type names.</p>
+
+<pre><code class="language-cpp">auto p = v.begin();   // vector&lt;int&gt;::iterator
+auto h = t.future();
+auto q = make_unique&lt;int[]&gt;(s);
+auto f = [](int x){ return x + 10; };
+</code></pre>
+
+<p>Avoid <code>auto</code> for initializer lists.</p>
+
+<pre><code class="language-cpp">auto lst = { 1, 2, 3 };   // lst is an initializer list
+auto x{1};   // x is an int (in C++17; initializer_list in C++11)
+</code></pre></li>
+
+<li><p>Avoid uninitialized variables.</p>
+
+<pre><code class="language-cpp">void use(int arg)
+{
+  int i;   // bad: uninitialized variable
+  // ...
+  i = 7;   // initialize i
+}
+
+void use(int arg)   // ok
+{
+  int i = 7;   // ok: initialized
+  string s;    // ok: default initialized
+  // ...
+}
+</code></pre></li>
+
+<li><p>Keep scopes small.</p>
+
+<pre><code class="language-cpp">int i;    // bad: i is needlessly accessible after loop
+for (i = 0; i &lt; 20; ++i) { /* ... */ }
+
+for (int i = 0; i &lt; 20; ++i) { /* ... */ }  // good: i is local to for-loop
+    
+// bad
+string fn = name + &quot;.txt&quot;;
+ifstream is {fn};
+// ... 200 lines of code without intended use of fn or is ...
+</code></pre></li>
+
+<li><p>When declaring a variable in the condition of an <code>if</code>-statement, prefer the version with the implicit test against <code>0</code>.</p></li>
+
+<li><p>Use <code>unsigned</code> for bit manipulation only.</p>
+
+<pre><code class="language-cpp">unsigned area(unsigned height, unsigned width) { return height*width; }
+// ...
+int height;
+cin &gt;&gt; height;
+auto a = area(height, 2);   // if the input is -2 a becomes 4294967292
+</code></pre></li>
+
+<li><p>Keep use of pointers simple and straightforward.</p>
+
+<pre><code class="language-cpp">void f(int* p, int count)
+{
+  if (count &lt; 2) return;
+  
+  int* q = p + 1;   // bad: pointer arithmetic
+  
+  ptrdiff_t d;
+  int n;
+  d = (p - &amp;n);     // ok
+  d = (q - p);      // ok
+  
+  int n = *p++;     // bad: pointer arithmetic
+  
+  if (count &lt; 6) return;
+  
+  p[4] = 1;         // bad: pointer indexing
+  
+  p[count - 1] = 2; // bad: pointer indexing
+  
+  use(&amp;p[0], 3);    // bad: implicit conversion of array to pointer
+}
+</code></pre></li>
+
+<li><p>Use <code>nullptr</code> rather than <code>0</code> or <code>NULL</code>.</p></li>
+
+<li><p>Don&rsquo;t declare a variable until you have a value to initialize with.</p>
+
+<pre><code class="language-cpp">string s;
+// ... no use of s here ...
+s = &quot;what a waste&quot;;
+</code></pre></li>
+
+<li><p>Dont&rsquo; say in comments what can be clearly stated in code.</p>
+
+<pre><code class="language-cpp">// bad
+auto x = m * v1 + vv;   // multiply m with v1 and add the result to v
+</code></pre></li>
+
+<li><p>State intent in comments.</p>
+
+<pre><code class="language-cpp">// sort c in the order determined by &lt;, keep equal elements (as defined by ==) in
+// their original relative order
+void stable_sort(Sortable&amp; c)
+{
+  // ... quite a few lines of non-trivial code ...
+}
+</code></pre></li>
+
+<li><p>Maintain a consistent indentation style.</p></li>
+</ol>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/tour-of-c&#43;&#43;/" title="Tour of C&#43;&#43;"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/tour-of-c&#43;&#43;/02_user-defined-types/" title="User-Defined Types" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1551643836"></script>
+    <script src="/js/perfect-scrollbar.min.js?1551643836"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1551643836"></script>
+    <script src="/js/jquery.sticky.js?1551643836"></script>
+    <script src="/js/featherlight.min.js?1551643836"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1551643836"></script>
+    <script src="/js/highlight.pack.js?1551643836"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom.71422.js?1551643836"></script>
+    <script src="/js/learn.js?1551643836"></script>
+    <script src="/js/hugo-learn.js?1551643836"></script>
+
+    <link href="/mermaid/mermaid.css?1551643836" type="text/css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1551643836"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+
