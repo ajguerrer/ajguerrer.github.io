@@ -3,15 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ajguerrer.github.io/tour-of-c&#43;&#43;/01_the_basics/</loc>
-  </url>
-  
-  <url>
-    <loc>https://ajguerrer.github.io/tour-of-c&#43;&#43;/02_user-defined-types/</loc>
-  </url>
-  
-  <url>
-    <loc>https://ajguerrer.github.io/tour-of-c&#43;&#43;/</loc>
+    <loc>https://ajguerrer.github.io/google-testing-blog/</loc>
   </url>
   
   <url>
@@ -26,6 +18,10 @@
   <url>
     <loc>https://ajguerrer.github.io/tags/</loc>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ajguerrer.github.io/google-testing-blog/tott/</loc>
   </url>
   
 </urlset>
