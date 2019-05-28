@@ -16,11 +16,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/google-testing-blog/tott/</guid>
-      <description>Exercise Service Call Contracts in Tests November 27, 2018 - original post
+      <description>This page contains portable (potable?) bits of testing best-practices that will keep you riveted to your seat.
+Exercise Service Call Contracts in Tests November 27, 2018 - original post
 If the code under test relies on the contract of a service, prefer exercising the service call instead of mocking it out. Some service owners provide a fake. Otherwise, use a hermetic server.
-Make Interfaces Hard to Misuse July 25, 2018 - original post
-Don&amp;rsquo;t push the responsibility of maintaining invariants on the caller.
-class Vector { explicit Vector(int num_slots); int RemainingSlots() const; void AddSlots(int num_slots); void Insert(int value); };   Caller needs to check RemainingSlots and if 0, AddSlots in order for Insert to work properly.</description>
+Make Interfaces Hard to Misuse July 25, 2018 - original post</description>
     </item>
     
   </channel>

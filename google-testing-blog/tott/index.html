@@ -4,26 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Hugo 0.54.0" />
-    <meta name="description" content="">
-
-
+    <meta name="theme-color" content="#85ad85">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="translucent">
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1558239265" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1558239265" rel="stylesheet">
-    <link href="/css/hybrid.css?1558239265" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1558239265" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1558239265" rel="stylesheet">
-    <link href="/css/auto-complete.css?1558239265" rel="stylesheet">
-    <link href="/css/theme.css?1558239265" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1558239265" rel="stylesheet">
+    <link href="/css/nucleus.css?1559005018" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1559005018" rel="stylesheet">
+    <link href="/css/hybrid.css?1559005018" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1559005018" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1559005018" rel="stylesheet">
+    <link href="/css/auto-complete.css?1559005018" rel="stylesheet">
+    <link href="/css/theme.css?1559005018" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1559005018" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1558239265" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1559005018" rel="stylesheet">
     
 
-    <script src="/js/jquery-2.x.min.js?1558239265"></script>
+    <script src="/js/jquery-2.x.min.js?1559005018"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -72,14 +72,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1558239265"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1558239265"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1559005018"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1559005018"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1558239265"></script>
+<script type="text/javascript" src="/js/search.js?1559005018"></script>
 
     
   </div>
@@ -223,6 +223,16 @@
 <li><a href="#change-detector-tests-considered-harmful">Change-Detector Tests Considered Harmful</a></li>
 <li><a href="#prefer-testing-public-apis-over-implementation-detail-classes">Prefer Testing Public APIs Over Implementation-Detail Classes</a></li>
 <li><a href="#writing-descriptive-test-names">Writing Descriptive Test Names</a></li>
+<li><a href="#don-t-put-logic-in-tests">Don&rsquo;t Put Logic in Tests</a></li>
+<li><a href="#risk-driven-testing">Risk-Driven Testing</a></li>
+<li><a href="#effective-testing">Effective Testing</a></li>
+<li><a href="#test-behaviors-not-methods">Test Behaviors, Not Methods</a></li>
+<li><a href="#what-makes-a-good-test">What Makes a Good Test?</a></li>
+<li><a href="#test-behavior-not-implementation">Test Behavior, Not Implementation</a></li>
+<li><a href="#know-your-test-doubles">Know Your Test Doubles</a></li>
+<li><a href="#fake-your-way-to-better-tests">Fake Your Way To Better Tests</a></li>
+<li><a href="#don-t-overuse-mocks">Don&rsquo;t Overuse Mocks</a></li>
+<li><a href="#testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -244,6 +254,9 @@
 
 
 
+
+<p>This page contains portable (potable?) bits of testing best-practices that will keep you riveted to
+your seat.</p>
 
 <h2 id="exercise-service-call-contracts-in-tests">Exercise Service Call Contracts in Tests</h2>
 
@@ -301,12 +314,12 @@ or documentation.</p>
 <p>Tests become fragile when they expect exact values on irrelevant arguments.</p>
 
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
-  fakeClock_.SetTime(kNewYearsDay);
-  fakeUser_.SetName(&quot;Fake User&quot;);
-  EXPECT_CALL(mockUserPrompter_, UpdatePrompt(&quot;Hi Fake User! Happy New Year!&quot;,
-                                              TitleBar(&quot;2018-01-01&quot;),
-                                              PromptStyle::kNormal));
-  userGreeter_.DisplayGreeting();
+  fake_clock_.SetTime(kNewYearsDay);
+  fake_user_.SetName(&quot;Fake User&quot;);
+  EXPECT_CALL(mock_user_Prompter_, UpdatePrompt(&quot;Hi Fake User! Happy New Year!&quot;,
+                                                TitleBar(&quot;2018-01-01&quot;),
+                                                PromptStyle::kNormal));
+  user_greeter_.DisplayGreeting();
 }
 </code></pre>
 </div>
@@ -316,15 +329,15 @@ or documentation.</p>
 behavior being tested.</p>
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
-  fakeClock_.SetTime(kNewYearsDay);
-  EXPECT_CALL(mockUserPrompter_, UpdatePrompt(HasSubstr(&quot;Happy New Year!&quot;), _, _));
-  userGreeter_.DisplayGreeting();
+  fake_clock_.SetTime(kNewYearsDay);
+  EXPECT_CALL(mock_user_prompter_, UpdatePrompt(HasSubstr(&quot;Happy New Year!&quot;), _, _));
+  user_greeter_.DisplayGreeting();
 }
 
 TEST_F(DisplayGreetingTest, RenderUserName) {
-  fakeUser_.SetName(&quot;Fake User&quot;);
-  EXPECT_CALL(mockUserPrompter_, UpdatePrompt(HasSubstr(&quot;Fake User&quot;), _, _));
-  userGreeter_.DisplayGreeting();
+  fake_user_.SetName(&quot;Fake User&quot;);
+  EXPECT_CALL(mock_user_prompter_, UpdatePrompt(HasSubstr(&quot;Fake User&quot;), _, _));
+  user_greeter_.DisplayGreeting();
 }
 </code></pre>
 </div>
@@ -339,7 +352,7 @@ TEST_F(DisplayGreetingTest, RenderUserName) {
 failure.</p>
 
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(BankAcountTest, WidthdrawFromAccount) {
-  Transaction transaction = acceunt_.Deposit(Usd(5));
+  Transaction transaction = account_.Deposit(Usd(5));
   clock_.AdvanceTime(kMinTimeToSettle);
   account_.Settle(transaction);
 
@@ -438,7 +451,7 @@ Company bankrupt = Company::Builder{}.SetBankruptcyDate(kPastDate).Build();
 Company default_company = Company::Builder{}.Build();
 
 class Company::Builder {
-public:
+ public:
   Builder&amp; SetEmployees(int n) { employees_ = n; return *this; }
   Builder&amp; SetBoardMembers(int n) { board_members_ = n; return *this; }
   Builder&amp; SetBankruptcyDate(BankruptcyDate d) { date_ = d; return *this; }
@@ -446,7 +459,7 @@ public:
 
   Company Build() const { return Company(employees_, board_members_, date_, type_); }
 
-private:
+ private:
   int employees_ = 0;
   int board_members_ = 0;
   BankruptcyDate date_ = kBeforeDate;
@@ -543,8 +556,8 @@ post</a></p>
 
 <p>Don&rsquo;t mention the type in the variable name. It&rsquo;s OK for the name and the type match.</p>
 
-<div class="notices warning" ><pre><code class="language-cpp">std::string nameString;
-std::list&lt;std::time_t&gt; holidayDateList;
+<div class="notices warning" ><pre><code class="language-cpp">std::string name_string;
+std::list&lt;std::time_t&gt; holiday_date_list;
 </code></pre>
 </div>
 
@@ -616,11 +629,11 @@ return width / height;
 discount = std::min(5, num_items) * item_price * 0.1;
 final_price = price - discount;
 
-filterOffensiveWords(words);
+FilterOffensiveWords(words);
 
 Pixels width = ...;
 
-checkArgument(height &gt; 0);
+CheckArgument(height &gt; 0);
 return width / height;
 </code></pre>
 </div>
@@ -836,7 +849,7 @@ post</a></p>
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(IsUserLockedOutTest, InvalidLogin) {
   authenticator_.Authenticate(username_, password_);
   EXPECT_FALSE(authenticator_.IsUserLockedOut(username_));
-  
+
   authenticator_.Authenticate(username_, password_);
   EXPECT_FALSE(authenticator_.IsUserLockedOut(username_));
 
@@ -848,7 +861,7 @@ post</a></p>
 
 
 <p>Descriptive test names make it easy to tell what behavior is broken without looking at code. Also,
-test names naturally become longer making for a good indicator that a test needs to be split apart.</p>
+the length of a good test name helps indicate when a test needs to be split apart.</p>
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(IsUserLockedOutTest, ShouldLockOutUserAfterThreeInvalidLoginAttempts) {
  // ...
@@ -857,8 +870,305 @@ test names naturally become longer making for a good indicator that a test needs
 </div>
 
 
-<p>You should be able to understand the behavior being tested just by reading the test name. Make sure
-the test names contain both the scenario being tested and the expected outcome.</p>
+<p>A test&rsquo;s name should be all you need to know to understand the behavior being tested. Make sure
+the name contains both the scenario being tested and the expected outcome.</p>
+
+<h2 id="don-t-put-logic-in-tests">Don&rsquo;t Put Logic in Tests</h2>
+
+<p><em>July 31, 2014</em> - <a href="https://testing.googleblog.com/2014/07/testing-on-toilet-dont-put-logic-in.html">original
+post</a></p>
+
+<p>Tests should be simple by stating I/O directly rather than computing them.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">TEST(NavigatorTest, ShouldNavigateToPhotosPage) {
+  const std::string baseUrl = &quot;http://plus.google.com/&quot;;
+  Navigator nav(baseUrl);
+  nav.GoToPhotosPage();
+  EXPECT_EQ(baseUrl + &quot;/u/0/photos&quot;, nav.GetCurrentUrl());
+}
+</code></pre>
+</div>
+
+
+<p>Even a simple string concatenation can lead to bugs.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">TEST(NavigatorTest, ShouldNavigateToPhotosPage) {
+  Navigator nav(&quot;http://plug.google.com/&quot;);
+  nav.GoToPhotosPage();
+  EXPECT_EQ(&quot;http://plus.google.com//u/0/photos&quot;, nav.GetCurrentUrl());
+}
+</code></pre>
+</div>
+
+
+<p>If a test requires logic, move that logic out of the test body into utilities and helper functions
+and write tests for them too.</p>
+
+<h2 id="risk-driven-testing">Risk-Driven Testing</h2>
+
+<p><em>May 30, 2014</em> - <a href="https://testing.googleblog.com/2014/05/testing-on-toilet-risk-driven-testing.html">original
+post</a></p>
+
+<p>Blindly writing tests can lead to a false sense of security or wasted effort. Before writing tests,
+think about testing. Small tests are cheap, larger tests protect core use-cases and integration.
+Manual testing can sometimes be the cheapest, most effective option.</p>
+
+<h2 id="effective-testing">Effective Testing</h2>
+
+<p><em>May 7, 2014</em> - <a href="https://testing.googleblog.com/2014/05/testing-on-toilet-effective-testing.html">original
+post</a></p>
+
+<p>To be effective, a test maximizes three important qualities:</p>
+
+<ul>
+<li><strong>Fidelity</strong> - Sensitive to defects in the code under test.</li>
+<li><strong>Resilience</strong> - Fails only when a breaking change is made to the code under test.</li>
+<li><strong>Precision</strong> - Upon failure reports exactly where the defect lies.</li>
+</ul>
+
+<h2 id="test-behaviors-not-methods">Test Behaviors, Not Methods</h2>
+
+<p>A single method can exhibit many behaviors. Likewise, a single behavior can span multiple methods.</p>
+
+<p>It can be harmful to think that tests and public methods should have a 1:1 relationship.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">TEST_F(TransactionProcessorTest, ProcessTransaction) {
+  User user = NewUserWithBalance(kLowBalanceThreshold + Dollars(2));
+  transaction_processor_.ProcessTransaction(user, Transaction(&quot;Pile of Beanie Babies&quot;, Dollars(3)));
+  EXPECT_THAT(ui_.GetText(), HasSubstr(&quot;You bought a Pile of Beanie Babies&quot;));
+  EXPECT_EQ(user.GetEmails().size(), 1);
+  EXPECT_STREQ(user.GetEmails().at(0).GetSubject(), &quot;Your balance is low&quot;);
+}
+</code></pre>
+</div>
+
+
+<p>Each test should verify one behavior. Each method may take several tests to verify.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">TEST_F(TransactionProcessorTest, ShouldDisplayNotification) {
+  transaction_processor_.ProcessTransaction(User(), Transaction(&quot;Pile of Beanie Babies&quot;));
+  EXPECT_THAT(ui_.GetText(), HasSubstr(&quot;You bought a Pile of Beanie Babies&quot;));
+}
+
+TEST_F(TransactionProcessorTest, ShouldSendEmailWhenBalanceIsLow) {
+  User user = NewUserWithBalance(kLowBalanceThreshold + Dollars(2));
+  transaction_processor_.ProcessTransaction(user, Transaction(Dollars(3)));
+  EXPECT_EQ(user.GetEmails().size(), 1);
+  EXPECT_STREQ(user.GetEmails().at(0).GetSubject(), &quot;Your balance is low&quot;);
+}
+</code></pre>
+</div>
+
+
+<h2 id="what-makes-a-good-test">What Makes a Good Test?</h2>
+
+<p>Tests provide more than verification. They also serve as documentation.</p>
+
+<p>As a source of documentation, test should not be distracting or hide information.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">TEST(CalculatorTest, ShouldPerformAddition) {
+  Calculator calculator(RoundingStrategy(),
+    &quot;unused&quot;, kEnableCosinFeature, 0.01, kCalculusEngine, false);
+  int result = calculator.DoComputation(MakeTestComputation());
+  EXPECT_EQ(result, 5);
+}
+</code></pre>
+</div>
+
+
+<div class="notices tip" ><pre><code class="language-cpp">TEST_(CalculatorTest, ShouldPerformAddition) {
+  const int result = calculator_.DoComputation(MakeAdditionComputation(2, 3));
+  EXPECT_EQ(result, 5);
+}
+</code></pre>
+</div>
+
+
+<h2 id="test-behavior-not-implementation">Test Behavior, Not Implementation</h2>
+
+<p><em>August 5, 2013</em> - <a href="https://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html">original
+post</a></p>
+
+<p>Except where explicitly intended, tests should work independent of the implementation details being
+tested.</p>
+
+<pre><code class="language-cpp">class Calculator {
+ public:
+  int Add(int a, int b)  {
+    return a + b;
+  }
+};
+
+class Calculator {
+ public:
+  int Add(int a, int b) {
+    Adder adder = adder_factory_.CreateAdder();
+    ReturnValue return_value = adder.Compute(Number(a), Number(b));
+    return return_value.ConvertToInteger();
+  }
+
+ private:
+  AdderFactory adder_factory_;
+};
+
+TEST_F(CalculatorTest, ShouldAddIntegers) {
+  EXPECT_EQ(3, calculator_.Add(2, 1));
+  EXPECT_EQ(2, calculator_.Add(2, 0));
+  EXPECT_EQ(1, calculator_.Add(2, -1));
+}
+</code></pre>
+
+<h2 id="know-your-test-doubles">Know Your Test Doubles</h2>
+
+<p><em>July 18, 2013</em> - <a href="https://testing.googleblog.com/2013/07/testing-on-toilet-know-your-test-doubles.html">original
+post</a></p>
+
+<p>A test double is an object that can stand in for a real object in test. The most common types of
+test doubles are:</p>
+
+<ul>
+<li><strong>Stub</strong> - Returns a specific values to promote a specific state.</li>
+</ul>
+
+<pre><code class="language-cpp">  AccessManager access_manager(kStubAuthentificationService);
+
+  ON_CALL(kStubAuthentificationService, IsAuthenticated(kUserId)).WillByDefault(Return(false));
+  EXPECT_FALSE(access_manager.UserHasAccess(kUserId));
+
+  ON_CALL(kStubAuthentificationService, IsAuthenticated(kUserId)).WillByDefault(Return(true));
+  EXPECT_TRUE(access_manager.UserHasAccess(kUserId));
+</code></pre>
+
+<ul>
+<li><strong>Mock</strong> - Sets expectations about how other objects should interact with it.</li>
+</ul>
+
+<pre><code class="language-cpp">  AccessManager access_manager(mockAuthentificationService);
+
+  EXPECT_CALL(mockAuthentificationService, IsAuthenticated(kUserId));
+  access_manager.UserHasAccess(kUserId);
+</code></pre>
+
+<ul>
+<li><strong>Fake</strong> - A lightweight implementation when the real implementation is unsuitable for test.</li>
+</ul>
+
+<pre><code class="language-cpp">  FakeAuthentificationService fake_authentification_service;
+  AccessManager access_manager(fake_authentification_service);
+
+  EXPECT_FALSE(access_manager.UserHasAccess(kUserId));
+
+  fake_authentification_service.AddAuthenticatedUser(kUser);
+  EXPECT_TRUE(access_manager.UserHasAccess(kUserId));
+</code></pre>
+
+<h2 id="fake-your-way-to-better-tests">Fake Your Way To Better Tests</h2>
+
+<p><em>June 28, 2013</em> - <a href="https://testing.googleblog.com/2013/06/testing-on-toilet-fake-your-way-to.html">original
+post</a></p>
+
+<p>Suppose you would like to test your blog platform API, but you don&rsquo;t want your tests talking to a
+remote server.</p>
+
+<pre><code class="language-cpp">void DeletePostsWithTag(const Tag&amp; tag) {
+  for (const Post post : blog_service_-&gt;GetAllPosts()) {
+    if (post.HasTag(tag)) {
+      blog_service_-&gt;DeletePost(post.GetId());
+    }
+  }
+}
+</code></pre>
+
+<p>A fake is a lightweight implementation of an API that behaves like the real implementation, but
+isn&rsquo;t suitable for production.</p>
+
+<pre><code class="language-cpp">class FakeBlogService : public BlogService {
+ public:
+  void AddPost(const Post&amp; post) { posts.insert(post); }
+  void DeletePost(const int id) {
+    for (auto&amp; post : posts) {
+      if (post.GetId() == id) { posts.erase(post); return; }
+    }
+  }
+  std::set&lt;Post&gt; GetAllPosts() const { return posts; }
+
+ private:
+  std::set&lt;Post&gt; posts;
+};
+</code></pre>
+
+<p>Fakes should be created and maintained by the person or team that owns the real implementation.</p>
+
+<p>Fakes should have their own tests to make sure they behave like the real implementation.</p>
+
+<h2 id="don-t-overuse-mocks">Don&rsquo;t Overuse Mocks</h2>
+
+<p><em>May 28, 2013</em> - <a href="https://testing.googleblog.com/2013/05/testing-on-toilet-dont-overuse-mocks.html">original
+post</a></p>
+
+<p>Mocks are powerful, but easy to abuse.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">TEST_F(PaymentProcessorTest, ShouldChargeCreditCard) {
+  PaymentProcessor payment_processor(mock_credit_card_server_);
+
+  InSequence s;
+  EXPECT_CALL(mock_credit_card_server_, IsServerAvailable()).WillOnce(Return(true));
+  EXPECT_CALL(mock_credit_card_server_, BeginTransaction()).WillOnce(Return(mock_transaction_manager_));
+  EXPECT_CALL(mock_transaction_manager_, GetTransaction()).WillOnce(Return(transaction_));
+  EXPECT_CALL(mock_credit_card_server_, Pay(transaction_, credit_card_, 500)).WillOnce(Return(mock_payment_));
+  EXPECT_CALL(mock_payment_, IsOverMaxBalance()).WillOnce(Return(false));
+
+  payment_processor.ProcessPayment(credit_card_, Dollars(500));
+}
+</code></pre>
+</div>
+
+
+<p>Overusing mocks makes tests harder to understand, maintain, and provides less insurance that your
+code is working properly.</p>
+
+<p>If you don&rsquo;t need a mock, don&rsquo;t use one. Understanding when to use a mock comes from understanding
+what you want to test.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">TEST_F(PaymentProcessorTest, ShouldChargeCreditCard) {
+  PaymentProcessor payment_processor(credit_card_server_);
+  payment_processor.ProcessPayment(credit_card_, Dollars(500));
+  EXPECT_EQ(credit_card_server_.GetMostRecentCharge(credit_card_), 500);
+}
+</code></pre>
+</div>
+
+
+<h2 id="testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</h2>
+
+<p><em>March 22, 2013</em> - <a href="https://testing.googleblog.com/2013/03/testing-on-toilet-testing-state-vs.html">original
+post</a></p>
+
+<ul>
+<li><strong>Testing State</strong> - Verifying the code under test returns the correct results.</li>
+</ul>
+
+<pre><code class="language-cpp">  TEST(NumberSorterTest, ShouldSortIntegers) {
+    NumberSorter number_sorter({quicksort, bubblesort});
+    std::vector&lt;int&gt; numbers = {3, 1, 2};
+    EXPECT_EQ({1, 2, 3}, number_sorter.SortNumbers(numbers));
+  }
+</code></pre>
+
+<ul>
+<li><strong>Testing Interaction</strong> - Verifying the code under test calls methods correctly.</li>
+</ul>
+
+<pre><code class="language-cpp">  TEST(NumberSorterTest, ShouldUseQuicksort) {
+    NumberSorter number_sorter({mock_quicksort, mock_bubblesort});
+    std::vector&lt;int&gt; numbers = {3, 1, 2};
+    EXPECT_CALL(mock_quicksort, Sort(numbers);
+    number_sorter.SortNumbers(numbers);
+  }
+</code></pre>
+
+<p>Most of the time you want to test state. Occasionally interactions need to be tested when the number
+of calls or order of calls matter.</p>
 
 
 <footer class=" footline" >
@@ -946,20 +1256,20 @@ the test names contain both the scenario being tested and the expected outcome.<
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1558239265"></script>
-    <script src="/js/perfect-scrollbar.min.js?1558239265"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1558239265"></script>
-    <script src="/js/jquery.sticky.js?1558239265"></script>
-    <script src="/js/featherlight.min.js?1558239265"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1558239265"></script>
-    <script src="/js/highlight.pack.js?1558239265"></script>
+    <script src="/js/clipboard.min.js?1559005018"></script>
+    <script src="/js/perfect-scrollbar.min.js?1559005018"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1559005018"></script>
+    <script src="/js/jquery.sticky.js?1559005018"></script>
+    <script src="/js/featherlight.min.js?1559005018"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1559005018"></script>
+    <script src="/js/highlight.pack.js?1559005018"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom.71422.js?1558239265"></script>
-    <script src="/js/learn.js?1558239265"></script>
-    <script src="/js/hugo-learn.js?1558239265"></script>
+    <script src="/js/modernizr.custom.71422.js?1559005018"></script>
+    <script src="/js/learn.js?1559005018"></script>
+    <script src="/js/hugo-learn.js?1559005018"></script>
 
-    <link href="/mermaid/mermaid.css?1558239265" type="text/css" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1558239265"></script>
+    <link href="/mermaid/mermaid.css?1559005018" type="text/css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1559005018"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
