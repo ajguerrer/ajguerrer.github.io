@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Blog Notes</title>
+      <link>https://ajguerrer.github.io/google-testing-blog/blog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/google-testing-blog/blog/</guid>
+      <description>Test Reliability  Test binary size and RAM have strong correlations on whether a test is flaky. This includes the influence any third-party testing tools have. - Source  Productivity  Releasing often give teams an incentive to automate testing and reduce coupling with the rest of the system. - Source  Code Health  When a team provides fakes and writes tests for them, they become clients of their own software.</description>
+    </item>
+    
+    <item>
       <title>Testing on the Toilet</title>
       <link>https://ajguerrer.github.io/google-testing-blog/tott/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

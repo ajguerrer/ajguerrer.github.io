@@ -11,19 +11,19 @@
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1559005018" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1559005018" rel="stylesheet">
-    <link href="/css/hybrid.css?1559005018" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1559005018" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1559005018" rel="stylesheet">
-    <link href="/css/auto-complete.css?1559005018" rel="stylesheet">
-    <link href="/css/theme.css?1559005018" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1559005018" rel="stylesheet">
+    <link href="/css/nucleus.css?1559533219" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1559533219" rel="stylesheet">
+    <link href="/css/hybrid.css?1559533219" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1559533219" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1559533219" rel="stylesheet">
+    <link href="/css/auto-complete.css?1559533219" rel="stylesheet">
+    <link href="/css/theme.css?1559533219" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1559533219" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1559005018" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1559533219" rel="stylesheet">
     
 
-    <script src="/js/jquery-2.x.min.js?1559005018"></script>
+    <script src="/js/jquery-2.x.min.js?1559533219"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -72,14 +72,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1559005018"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1559005018"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1559533219"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1559533219"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1559005018"></script>
+<script type="text/javascript" src="/js/search.js?1559533219"></script>
 
     
   </div>
@@ -112,6 +112,25 @@
           
           
         
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/blog/" title="Blog Notes" class="dd-item ">
+        <a href="/google-testing-blog/blog/">
+        Blog Notes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
           
             
             
@@ -233,6 +252,11 @@
 <li><a href="#fake-your-way-to-better-tests">Fake Your Way To Better Tests</a></li>
 <li><a href="#don-t-overuse-mocks">Don&rsquo;t Overuse Mocks</a></li>
 <li><a href="#testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</a></li>
+<li><a href="#data-driven-traps">Data Driven Traps!</a></li>
+<li><a href="#sleeping-synchronization">Sleeping != Synchronization</a></li>
+<li><a href="#defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</a></li>
+<li><a href="#testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</a></li>
+<li><a href="#understanding-your-coverage-data">Understanding Your Coverage Data</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -283,9 +307,10 @@ instead of mocking it out. Some service owners provide a fake. Otherwise, use a 
 </div>
 
 
-<p>Caller needs to check <code>RemainingSlots</code> and if 0, <code>AddSlots</code> in order for <code>Insert</code> to work properly.</p>
+<p>In the code above, the caller needs to check <code>RemainingSlots</code>, and if <code>0</code>, <code>AddSlots</code> in order for
+<code>Insert</code> to work properly.</p>
 
-<p><code>Insert</code> could automatically manage slots.</p>
+<p>Instead, <code>Insert</code> could automatically manage slots.</p>
 
 <div class="notices tip" ><pre><code class="language-cpp">class Vector {
   explicit Vector(int num_slots);
@@ -295,7 +320,7 @@ instead of mocking it out. Some service owners provide a fake. Otherwise, use a 
 </div>
 
 
-<p>Other examples:</p>
+<p>Other signs an interface is hard to use:</p>
 
 <ul>
 <li><code>Initialize</code> / <code>Deitialize</code> functions.</li>
@@ -316,7 +341,7 @@ or documentation.</p>
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
   fake_clock_.SetTime(kNewYearsDay);
   fake_user_.SetName(&quot;Fake User&quot;);
-  EXPECT_CALL(mock_user_Prompter_, UpdatePrompt(&quot;Hi Fake User! Happy New Year!&quot;,
+  EXPECT_CALL(mock_user_prompter_, UpdatePrompt(&quot;Hi Fake User! Happy New Year!&quot;,
                                                 TitleBar(&quot;2018-01-01&quot;),
                                                 PromptStyle::kNormal));
   user_greeter_.DisplayGreeting();
@@ -325,8 +350,10 @@ or documentation.</p>
 </div>
 
 
-<p>Only verify one behavior per test. Only verify arguments that affect the correctness of the specific
-behavior being tested.</p>
+<ul>
+<li>Only verify one behavior per test.</li>
+<li>Only verify arguments that affect the correctness of the specific behavior being tested.</li>
+</ul>
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
   fake_clock_.SetTime(kNewYearsDay);
@@ -351,7 +378,7 @@ TEST_F(DisplayGreetingTest, RenderUserName) {
 <p>Testing too many scenarios at once can make it difficult to understand test and reason about the
 failure.</p>
 
-<div class="notices warning" ><pre><code class="language-cpp">TEST_F(BankAcountTest, WidthdrawFromAccount) {
+<div class="notices warning" ><pre><code class="language-cpp">TEST_F(BankAccountTest, WithdrawFromAccount) {
   Transaction transaction = account_.Deposit(Usd(5));
   clock_.AdvanceTime(kMinTimeToSettle);
   account_.Settle(transaction);
@@ -386,7 +413,7 @@ TEST_F(BankAccountTest, CanOverdrawUpToOverdraftLimit) {
 </div>
 
 
-<p>Notice how each test only asserts on the output of one call per test.</p>
+<p>Notice how each test only verifies the output of one call per test.</p>
 
 <h2 id="understanding-code-in-review">Understanding Code in Review</h2>
 
@@ -422,7 +449,7 @@ post</a></p>
 
 <h2 id="cleanly-create-test-data">Cleanly Create Test Data</h2>
 
-<p><em>Febuary 20, 2018</em> - <a href="https://testing.googleblog.com/2018/02/testing-on-toilet-cleanly-create-test.html">original
+<p><em>February 20, 2018</em> - <a href="https://testing.googleblog.com/2018/02/testing-on-toilet-cleanly-create-test.html">original
 post</a></p>
 
 <p>Helper methods make it easier to create test data, but they don&rsquo;t age well.</p>
@@ -491,9 +518,9 @@ provide a false sense of security.</p>
 </div>
 
 
-<p>Instead of expecting non-state-changing methods to be called, use them to verify state.</p>
+<p>It is fine, however, to use non-state-changing methods for simulating test conditions.</p>
 
-<div class="notices warning" ><pre><code class="language-cpp">EXPECT_FALSE(IsUserActive(kUser));
+<div class="notices tip" ><pre><code class="language-cpp">ON_CALL(mock_user_service_, IsUserActive(kUser)).WillByDefault(Return(false));
 </code></pre>
 </div>
 
@@ -694,7 +721,7 @@ if (response.GetStatus() == Status::kOk) {
 </div>
 
 
-<p>The code above could be refactored using a technique called guard clause.</p>
+<p>The code above could be refactored to use guard clauses.</p>
 
 <div class="notices tip" ><pre><code class="language-cpp">Response response = server.Call(request);
 
@@ -1030,12 +1057,12 @@ test doubles are:</p>
 <li><strong>Stub</strong> - Returns a specific values to promote a specific state.</li>
 </ul>
 
-<pre><code class="language-cpp">  AccessManager access_manager(kStubAuthentificationService);
+<pre><code class="language-cpp">  AccessManager access_manager(kStubAuthenticationService);
 
-  ON_CALL(kStubAuthentificationService, IsAuthenticated(kUserId)).WillByDefault(Return(false));
+  ON_CALL(kStubAuthenticationService, IsAuthenticated(kUserId)).WillByDefault(Return(false));
   EXPECT_FALSE(access_manager.UserHasAccess(kUserId));
 
-  ON_CALL(kStubAuthentificationService, IsAuthenticated(kUserId)).WillByDefault(Return(true));
+  ON_CALL(kStubAuthenticationService, IsAuthenticated(kUserId)).WillByDefault(Return(true));
   EXPECT_TRUE(access_manager.UserHasAccess(kUserId));
 </code></pre>
 
@@ -1043,9 +1070,9 @@ test doubles are:</p>
 <li><strong>Mock</strong> - Sets expectations about how other objects should interact with it.</li>
 </ul>
 
-<pre><code class="language-cpp">  AccessManager access_manager(mockAuthentificationService);
+<pre><code class="language-cpp">  AccessManager access_manager(mockAuthenticationService);
 
-  EXPECT_CALL(mockAuthentificationService, IsAuthenticated(kUserId));
+  EXPECT_CALL(mockAuthenticationService, IsAuthenticated(kUserId));
   access_manager.UserHasAccess(kUserId);
 </code></pre>
 
@@ -1053,12 +1080,12 @@ test doubles are:</p>
 <li><strong>Fake</strong> - A lightweight implementation when the real implementation is unsuitable for test.</li>
 </ul>
 
-<pre><code class="language-cpp">  FakeAuthentificationService fake_authentification_service;
-  AccessManager access_manager(fake_authentification_service);
+<pre><code class="language-cpp">  FakeAuthenticationService fake_authentication_service;
+  AccessManager access_manager(fake_authentication_service);
 
   EXPECT_FALSE(access_manager.UserHasAccess(kUserId));
 
-  fake_authentification_service.AddAuthenticatedUser(kUser);
+  fake_authentication_service.AddAuthenticatedUser(kUser);
   EXPECT_TRUE(access_manager.UserHasAccess(kUserId));
 </code></pre>
 
@@ -1170,6 +1197,229 @@ post</a></p>
 <p>Most of the time you want to test state. Occasionally interactions need to be tested when the number
 of calls or order of calls matter.</p>
 
+<h2 id="data-driven-traps">Data Driven Traps!</h2>
+
+<p><em>September 4, 2008</em> -
+<a href="https://testing.googleblog.com/2008/09/tott-data-driven-traps.html">original post</a></p>
+
+<p>Data driven tests are efficient, but easy to abuse.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">struct TestData {
+  const std::string word;
+  const bool is_word;
+};
+
+const std::vector&lt;TestData&gt; test_data = {
+    {&quot;milk&quot;, true},
+    {&quot;centre&quot;, false},
+    {&quot;jklm&quot;, false},
+};
+
+TEST(IsWordTest, TestEverything) {
+  for (const auto&amp; entry : test_data) {
+    EXPECT_EQ(IsWord(entry.word), entry.is_word);
+  }
+}
+</code></pre>
+</div>
+
+
+<p>Data-driven tests make debugging and understanding failures, let alone false positives, more
+difficult.</p>
+
+<p>As the code grows in complexity, data tends to grow even faster. It quickly becomes impossible to
+discern what behavior each piece of data is meant to test.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">const std::vector&lt;Locale&gt; locales = { Word::US, Word::UK, Word::France, ... };
+
+struct TestData {
+  std::string word;
+  bool[kNumLocales] is_word;
+};
+
+const std::vector&lt;TestData&gt; test_data = {
+    {&quot;milk&quot;, {true, true, false, ...},
+    {&quot;centre&quot;, {false, true, true, ...}},
+    {&quot;jklm&quot;, {false, false, false, ...}},
+};
+
+TEST(IsWordTest, TestEverything) {
+  for (const auto&amp; entry : test_data) {
+    for (const auto* locale: locales) {
+      EXPECT_EQ(IsWord(entry.word, locale), entry.is_word);
+    }
+  }
+}
+</code></pre>
+</div>
+
+
+<p>Instead, think critically about what behaviors are worth testing.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">TEST(IsWordTest, ShouldExistInMultipleLocales) {
+  EXPECT_TRUE(IsWord(&quot;milk&quot;, Word::US));
+  EXPECT_TRUE(IsWord(&quot;milk&quot;, Word::UK));
+  EXPECT_FALSE(IsWord(&quot;milk&quot;, Word::France));
+}
+
+TEST(IsWordTest, ShouldNotExist) {
+  // &quot;jklm&quot; test not repeated as it uses the same code path
+  EXPECT_FALSE(IsWord(&quot;jklm&quot;, Word::US));
+}
+</code></pre>
+</div>
+
+
+<h2 id="sleeping-synchronization">Sleeping != Synchronization</h2>
+
+<p><em>August 21, 2008</em> -
+<a href="https://testing.googleblog.com/2008/08/tott-sleeping-synchronization.html">original post</a></p>
+
+<p>Any code that <code>sleep</code>s should be considered taboo. In test, <code>sleep</code> should be banned.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">class Employee {
+ public:
+  void DrinkCoffee() { caffeinated_ = true; }
+  bool IsCaffeinated() { return caffeinated_; }
+
+  void DemandCoffee(Intern&amp; intern) {
+    std::thread t(&amp;Intern::MakeCoffee, &amp;intern,
+                  std::bind(&amp;Employee::DrinkCoffee, this));
+    t.detach();
+  }
+ private:
+  bool caffeinated_ = false;
+};
+
+TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
+  Employee e;
+  Intern i;
+  e.DemandCoffee(i);
+  EXPECT_FALSE(e.IsCaffeinated());
+  std::this_thread::sleep_for(60s);
+  EXPECT_TRUE(e.IsCaffeinated());
+}
+</code></pre>
+</div>
+
+
+<p>Code that sleeps can be improved by waiting on a <code>std::future</code> or a <code>std::condition_variable</code>.
+If your waiting on a non-trivial operation, use a fake.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">class CoffeeMaker {
+ public:
+  virtual void MakeCoffee(const std::function&lt;void()&gt; callback) = 0;
+};
+
+class FakeIntern : public CoffeeMaker {
+ public:
+  void MakeCoffee(const std::function&lt;void()&gt; callback) { callback(); }
+};
+
+class Employee {
+ public:
+  void DrinkCoffee() { caffeinated_ = true; }
+  bool IsCaffeinated() { return caffeinated_; }
+
+  void DemandCoffee(CoffeeMaker&amp; cm) {
+    std::future&lt;void&gt; f = std::async(&amp;CoffeeMaker::MakeCoffee, &amp;cm,
+                                     std::bind(&amp;Employee::DrinkCoffee, this));
+    f.wait_for(60s);
+  }
+ private:
+  bool caffeinated_ = false;
+};
+
+TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
+  Employee e;
+  FakeIntern i;
+  EXPECT_FALSE(e.IsCaffeinated());
+  e.DemandCoffee(i);
+  EXPECT_TRUE(e.IsCaffeinated());
+}
+</code></pre>
+</div>
+
+
+<h2 id="defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</h2>
+
+<p><em>June 26</em> -
+<a href="https://testing.googleblog.com/2008/06/defeat-static-cling.html">original post</a></p>
+
+<p>Static functions, like this singleton <code>GetInstance</code> method, are a sign of tight coupling.</p>
+
+<pre><code class="language-cpp">class MyObject {
+ public:
+  int DoSomething(int id) { return TheirEntity::GetInstance().GetSomething(); }
+};
+</code></pre>
+
+<p>There is a way around this using the Repository Pattern.</p>
+
+<pre><code class="language-cpp">class TheirEntityStaticRepository : public TheirEntityRepository {
+ public:
+  TheirEntity&amp; GetInstance() { return TheirEntity::GetInstance(); }
+};
+
+class MyObject {
+ public:
+  explicit MyObject(std::unique_ptr&lt;TheirEntityRepository&gt; repository)
+      : repository_(std::move(repository)) {}
+  int DoSomething(int id) { return repository_-&gt;GetInstance().GetSomething(); }
+
+ private:
+  std::unique_ptr&lt;TheirEntityRepository&gt; repository_;
+};
+</code></pre>
+
+<p>All thats left is to derive a <code>TheirEntityRepository</code> suitable for your testing needs.</p>
+
+<h2 id="testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</h2>
+
+<p><em>May 28, 2008</em> -
+<a href="https://testing.googleblog.com/2008/05/tott-testable-contracts-make.html">original post</a></p>
+
+<p>Modify external visible state only after completing all operations which could possibly fail.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
+  objects.clear();
+  for (const auto&amp; object : collection_) {
+    if (object.IsFubarred()) return false;
+    objects.push_back(object);
+  }
+  return true;
+}
+</code></pre>
+</div>
+
+
+<p>This can be done using the <code>swap</code> trick.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
+  std::vector&lt;Object&gt; known_good_objects;
+  for (const auto&amp; object : collection_) {
+    if (object.IsFubarred()) return false;
+    known_good_objects.push_back(object);
+  }
+  objects.swap(known_good_objects);
+  return true;
+}
+</code></pre>
+</div>
+
+
+<p>Now, the caller has good objects on success, or unchanged objects on failure.</p>
+
+<h2 id="understanding-your-coverage-data">Understanding Your Coverage Data</h2>
+
+<p><em>March 6, 2008</em> -
+<a href="https://testing.googleblog.com/2008/03/tott-understanding-your-coverage-data.html">original post</a></p>
+
+<p>High test coverage is necessary but not sufficient.</p>
+
+<p>Use your test coverage results to look for unexpected coverage patterns, which usually indicate
+bugs, and add test cases to address them.</p>
+
 
 <footer class=" footline" >
 	
@@ -1221,6 +1471,25 @@ of calls or order of calls matter.</p>
             
                 
                     
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -1245,8 +1514,10 @@ of calls or order of calls matter.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/google-testing-blog/" title="Google Testing Blog"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/google-testing-blog/blog/" title="Blog Notes"> <i class="fa fa-chevron-left"></i></a>
 		
+		
+			<a class="nav nav-next" href="/google-testing-blog/blog/" title="Blog Notes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1256,20 +1527,20 @@ of calls or order of calls matter.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1559005018"></script>
-    <script src="/js/perfect-scrollbar.min.js?1559005018"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1559005018"></script>
-    <script src="/js/jquery.sticky.js?1559005018"></script>
-    <script src="/js/featherlight.min.js?1559005018"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1559005018"></script>
-    <script src="/js/highlight.pack.js?1559005018"></script>
+    <script src="/js/clipboard.min.js?1559533219"></script>
+    <script src="/js/perfect-scrollbar.min.js?1559533219"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1559533219"></script>
+    <script src="/js/jquery.sticky.js?1559533219"></script>
+    <script src="/js/featherlight.min.js?1559533219"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1559533219"></script>
+    <script src="/js/highlight.pack.js?1559533219"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom.71422.js?1559005018"></script>
-    <script src="/js/learn.js?1559005018"></script>
-    <script src="/js/hugo-learn.js?1559005018"></script>
+    <script src="/js/modernizr.custom.71422.js?1559533219"></script>
+    <script src="/js/learn.js?1559533219"></script>
+    <script src="/js/hugo-learn.js?1559533219"></script>
 
-    <link href="/mermaid/mermaid.css?1559005018" type="text/css" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1559005018"></script>
+    <link href="/mermaid/mermaid.css?1559533219" type="text/css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1559533219"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

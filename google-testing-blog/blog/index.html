@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-    <title>Categories :: Notebook</title>
+    <title>Blog Notes :: Notebook</title>
 
     
     <link href="/css/nucleus.css?1559533219" rel="stylesheet">
@@ -33,7 +33,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/google-testing-blog/blog/">
     <nav id="sidebar" class="">
 
 
@@ -96,7 +96,7 @@
   
     
     <li data-nav-id="/google-testing-blog/" title="Google Testing Blog" class="dd-item 
-        
+        parent
         
         
         ">
@@ -120,7 +120,7 @@
  
   
     
-      <li data-nav-id="/google-testing-blog/blog/" title="Blog Notes" class="dd-item ">
+      <li data-nav-id="/google-testing-blog/blog/" title="Blog Notes" class="dd-item active">
         <a href="/google-testing-blog/blog/">
         Blog Notes
         
@@ -200,7 +200,19 @@
                     
           
           
-            Categories
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Notebook</a> > <a href='/google-testing-blog/'>Google Testing Blog</a> > Blog Notes
+          
+         
+          
+         
           
         
                  
@@ -209,7 +221,16 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#test-reliability">Test Reliability</a></li>
+<li><a href="#productivity">Productivity</a></li>
+<li><a href="#code-health">Code Health</a></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -221,7 +242,7 @@
         
         <div id="body-inner">
           
-            <h1>Categories</h1>
+            <h1>Blog Notes</h1>
           
 
         
@@ -229,9 +250,35 @@
 
 
 
+<h2 id="test-reliability">Test Reliability</h2>
+
+<ul>
+<li>Test binary size and RAM have strong correlations on whether a test is flaky. This includes the
+influence any third-party testing tools have. -
+<a href="https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html">Source</a></li>
+</ul>
+
+<h2 id="productivity">Productivity</h2>
+
+<ul>
+<li>Releasing often give teams an incentive to automate testing and reduce coupling with the rest of
+the system. - <a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">Source</a></li>
+</ul>
+
+<h2 id="code-health">Code Health</h2>
+
+<ul>
+<li>When a team provides <a href="../tott/#know-your-test-doubles">fakes</a> and writes tests for them, they
+become clients of their own software. Experiencing the perspective of the client gives the team an
+incentive to make their API easier to use. -
+<a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">Source</a></li>
+</ul>
+
+
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -264,8 +311,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -279,6 +324,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -295,6 +341,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -319,8 +368,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/google-testing-blog/" title="Google Testing Blog"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/google-testing-blog/" title="Google Testing Blog" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/google-testing-blog/tott/" title="Testing on the Toilet" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -351,3 +402,4 @@
 
   </body>
 </html>
+
