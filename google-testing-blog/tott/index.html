@@ -11,19 +11,19 @@
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1559533219" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1559533219" rel="stylesheet">
-    <link href="/css/hybrid.css?1559533219" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1559533219" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1559533219" rel="stylesheet">
-    <link href="/css/auto-complete.css?1559533219" rel="stylesheet">
-    <link href="/css/theme.css?1559533219" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1559533219" rel="stylesheet">
+    <link href="/css/nucleus.css?1559707398" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1559707398" rel="stylesheet">
+    <link href="/css/hybrid.css?1559707398" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1559707398" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1559707398" rel="stylesheet">
+    <link href="/css/auto-complete.css?1559707398" rel="stylesheet">
+    <link href="/css/theme.css?1559707398" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1559707398" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1559533219" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1559707398" rel="stylesheet">
     
 
-    <script src="/js/jquery-2.x.min.js?1559533219"></script>
+    <script src="/js/jquery-2.x.min.js?1559707398"></script>
 
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{
@@ -72,14 +72,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1559533219"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1559533219"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1559707398"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1559707398"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1559533219"></script>
+<script type="text/javascript" src="/js/search.js?1559707398"></script>
 
     
   </div>
@@ -257,6 +257,9 @@
 <li><a href="#defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</a></li>
 <li><a href="#testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</a></li>
 <li><a href="#understanding-your-coverage-data">Understanding Your Coverage Data</a></li>
+<li><a href="#too-many-tests">Too Many Tests</a></li>
+<li><a href="#avoiding-friend-twister-in-c">Avoiding Friend Twister in C++</a></li>
+<li><a href="#refactoring-tests-in-the-red">Refactoring Tests in the Red</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1275,18 +1278,33 @@ TEST(IsWordTest, ShouldNotExist) {
 <p><em>August 21, 2008</em> -
 <a href="https://testing.googleblog.com/2008/08/tott-sleeping-synchronization.html">original post</a></p>
 
-<p>Any code that <code>sleep</code>s should be considered taboo. In test, <code>sleep</code> should be banned.</p>
+<p>Any code that <code>sleep</code>s should be considered taboo. In test, calling any code that <code>sleep</code>s
+should be banned.</p>
 
-<div class="notices warning" ><pre><code class="language-cpp">class Employee {
+<div class="notices warning" ><pre><code class="language-cpp">class CoffeeMaker {
+ public:
+  virtual void MakeCoffee(const std::function&lt;void()&gt; callback) = 0;
+};
+
+class Intern : public CoffeeMaker {
+ public:
+  void MakeCoffee(const std::function&lt;void()&gt; callback) {
+    // make coffee, hopefully within 60 seconds.
+    callback();
+  }
+};
+
+class Employee {
  public:
   void DrinkCoffee() { caffeinated_ = true; }
   bool IsCaffeinated() { return caffeinated_; }
 
-  void DemandCoffee(Intern&amp; intern) {
-    std::thread t(&amp;Intern::MakeCoffee, &amp;intern,
+  void DemandCoffee(CoffeeMaker&amp; cm) {
+    std::thread t(&amp;CoffeeMaker::MakeCoffee, &amp;cm,
                   std::bind(&amp;Employee::DrinkCoffee, this));
     t.detach();
   }
+
  private:
   bool caffeinated_ = false;
 };
@@ -1304,37 +1322,42 @@ TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
 
 
 <p>Code that sleeps can be improved by waiting on a <code>std::future</code> or a <code>std::condition_variable</code>.
-If your waiting on a non-trivial operation, use a fake.</p>
+As always, if your waiting on a non-trivial operation, like <code>Intern::MakeCoffee</code>, use a fake.</p>
 
-<div class="notices tip" ><pre><code class="language-cpp">class CoffeeMaker {
+<div class="notices tip" ><pre><code class="language-cpp">class FakeIntern : public CoffeeMaker {
  public:
-  virtual void MakeCoffee(const std::function&lt;void()&gt; callback) = 0;
-};
+  void MakeCoffee(const std::function&lt;void()&gt; callback) {
+    std::unique_lock&lt;std::mutex&gt; lock(mut_);
+    cv_.wait(lock, [this] { return ready_; });
 
-class FakeIntern : public CoffeeMaker {
- public:
-  void MakeCoffee(const std::function&lt;void()&gt; callback) { callback(); }
-};
+    callback();
+    done_ = true;
 
-class Employee {
- public:
-  void DrinkCoffee() { caffeinated_ = true; }
-  bool IsCaffeinated() { return caffeinated_; }
-
-  void DemandCoffee(CoffeeMaker&amp; cm) {
-    std::future&lt;void&gt; f = std::async(&amp;CoffeeMaker::MakeCoffee, &amp;cm,
-                                     std::bind(&amp;Employee::DrinkCoffee, this));
-    f.wait_for(60s);
+    lock.unlock();
+    cv_.notify_one();
   }
+
+  void SignalAndWait() {
+    std::unique_lock&lt;std::mutex&gt; lock(mut_);
+    ready_ = true;
+    cv_.notify_one();
+
+    cv_.wait(lock, [this] { return done_; });
+  }
+
  private:
-  bool caffeinated_ = false;
+  bool ready_ = false;
+  bool done_ = false;
+  std::condition_variable cv_;
+  std::mutex mut_;
 };
 
 TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
   Employee e;
   FakeIntern i;
-  EXPECT_FALSE(e.IsCaffeinated());
   e.DemandCoffee(i);
+  EXPECT_FALSE(e.IsCaffeinated());
+  i.SignalAndWait();
   EXPECT_TRUE(e.IsCaffeinated());
 }
 </code></pre>
@@ -1372,7 +1395,7 @@ class MyObject {
 };
 </code></pre>
 
-<p>All thats left is to derive a <code>TheirEntityRepository</code> suitable for your testing needs.</p>
+<p>All thats left is to derive a <code>MockTheirEntityRepository</code> suitable for your testing needs.</p>
 
 <h2 id="testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</h2>
 
@@ -1393,7 +1416,7 @@ class MyObject {
 </div>
 
 
-<p>This can be done using the <code>swap</code> trick.</p>
+<p>In these situations, the <code>swap</code> trick comes in handy.</p>
 
 <div class="notices tip" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
   std::vector&lt;Object&gt; known_good_objects;
@@ -1419,6 +1442,125 @@ class MyObject {
 
 <p>Use your test coverage results to look for unexpected coverage patterns, which usually indicate
 bugs, and add test cases to address them.</p>
+
+<h2 id="too-many-tests">Too Many Tests</h2>
+
+<p><em>February 21, 2008</em> -
+<a href="https://testing.googleblog.com/2008/02/in-movie-amadeus-austrian-emperor.html">original post</a></p>
+
+<p>How many tests? Answering this question requires a good grasp of the context.</p>
+
+<pre><code class="language-cpp">void Decide(int32_t a, int32_t b, int32_t c, int32_t d, int32_t e, int32_t d) {
+  if (a &gt; b || c &gt; d || e &gt; f) {
+    DoOneThing();
+  } else {
+    DoAnother();
+  }
+}
+</code></pre>
+
+<ul>
+<li>Testing every possible input would require 2<sup>192</sup> tests. Thats too many.</li>
+<li>Testing enough to get full line coverage would require 2 tests. Thats too few.</li>
+<li>Testing each logical expression (e.g <code>a &gt; b</code>, <code>a == b</code>, <code>a &lt; b</code>) independently is 27 tests. Still
+probably too many.</li>
+</ul>
+
+<p>More context can focus the decision.</p>
+
+<pre><code class="language-cpp">void Decide(int32_t a, int32_t b, int32_t c, int32_t d, int32_t e, int32_t d) {
+  if (TallerThan(a, b) || HarderThan(c, d) || HeavierThan(e, f)) {
+    DoOneThing();
+  } else {
+    DoAnother();
+  }
+}
+
+bool TallerThan(int32_t a, int32_t b) { return a &gt; b; }
+bool HarderThan(int32_t c, int32_t d) { return d &gt; d; }
+bool HeavierThan(int32_t e, int32_t f) { return e &gt; f; }
+</code></pre>
+
+<p>Testing the cases where each extracted function is true, they all are false, and writing 2 tests for
+each of the extracted functions would require 4 + 3*2 = 10 tests. Considering the number of inputs,
+thats just enough tests.</p>
+
+<h2 id="avoiding-friend-twister-in-c">Avoiding Friend Twister in C++</h2>
+
+<p><em>October 30, 2007</em> -
+<a href="https://testing.googleblog.com/2007/10/tott-avoiding-friend-twister-in-c.html">original post</a></p>
+
+<p>&ldquo;Testing private members requires more <code>friend</code> contortions than a game of Twister®.&rdquo;</p>
+
+<p>If you find yourself saying that, theres a better way.</p>
+
+<div class="notices warning" ><pre><code class="language-cpp">// include/my_project/dashboard.h
+
+class Dashboard {
+ private:
+  // Declaration of functions getResults(), GetResultsFromCache(),
+  // GetResultsFromDatabase(), and CountPassFail()
+
+  std::unique_ptr&lt;Database&gt; database_; // instantiated in constructor
+
+  friend class DashboardTest; // one friend declaration per test fixture
+};
+</code></pre>
+</div>
+
+
+<p>Instead, make a helper class by extracting a helper class (a variant of the Pimple idiom).</p>
+
+<p>To preserve privacy, the helper class is tucked away in a private implementation directory separate
+from the public API.</p>
+
+<div class="notices tip" ><pre><code class="language-cpp">// include/my_project/dashboard.h
+
+class ResultsLog; // Foreword declare extracted helper interface
+
+class Dashboard {
+ public:
+  explicit Dashboard(std::unique_ptr&lt;ResultsLog&gt; results)
+      : results_(std::move(results)) {}
+
+ private:
+   std::unique_ptr&lt;ResultsLog&gt; results_;
+};
+
+// src/results_log.h
+
+class ResultsLog {
+ public:
+  // Declaration of functions getResults(), GetResultsFromCache(),
+  // GetResultsFromDatabase(), and CountPassFail()
+};
+
+// src/live_results_log.h
+
+class LiveResultsLog : public ResultsLog {
+ public:
+  explicit LiveResultsLog(std::shared_ptr&lt;Database&gt; database)
+      : database_(std::move(database)) {}
+};
+</code></pre>
+</div>
+
+
+<p>As an added bonus, now you can inject a <code>MockResultsLog</code> or a <code>FakeDatabase</code> for testing the
+<code>Dashboard</code> class.</p>
+
+<h2 id="refactoring-tests-in-the-red">Refactoring Tests in the Red</h2>
+
+<p><em>April 26, 2007</em> -
+<a href="https://testing.googleblog.com/2007/04/tott-refactoring-tests-in-red.html">original post</a></p>
+
+<p>As your test suite grows, you will find yourself needing to refactor your tests. However,
+your tests don&rsquo;t have tests!</p>
+
+<p>One thing you can do is intentionally break the test, refactor the test, and make sure the test
+still fails as expected.</p>
+
+<p>Just remember to revert your code under test!</p>
 
 
 <footer class=" footline" >
@@ -1527,20 +1669,20 @@ bugs, and add test cases to address them.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1559533219"></script>
-    <script src="/js/perfect-scrollbar.min.js?1559533219"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1559533219"></script>
-    <script src="/js/jquery.sticky.js?1559533219"></script>
-    <script src="/js/featherlight.min.js?1559533219"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1559533219"></script>
-    <script src="/js/highlight.pack.js?1559533219"></script>
+    <script src="/js/clipboard.min.js?1559707398"></script>
+    <script src="/js/perfect-scrollbar.min.js?1559707398"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1559707398"></script>
+    <script src="/js/jquery.sticky.js?1559707398"></script>
+    <script src="/js/featherlight.min.js?1559707398"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1559707398"></script>
+    <script src="/js/highlight.pack.js?1559707398"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom.71422.js?1559533219"></script>
-    <script src="/js/learn.js?1559533219"></script>
-    <script src="/js/hugo-learn.js?1559533219"></script>
+    <script src="/js/modernizr.custom.71422.js?1559707398"></script>
+    <script src="/js/learn.js?1559707398"></script>
+    <script src="/js/hugo-learn.js?1559707398"></script>
 
-    <link href="/mermaid/mermaid.css?1559533219" type="text/css" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1559533219"></script>
+    <link href="/mermaid/mermaid.css?1559707398" type="text/css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1559707398"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
