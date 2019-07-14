@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="theme-color" content="#85ad85">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <title>Guide to Writing Testable Code :: Notebook</title>
+
+    
+    <link href="/css/nucleus.css?1563127644" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1563127644" rel="stylesheet">
+    <link href="/css/hybrid.css?1563127644" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1563127644" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1563127644" rel="stylesheet">
+    <link href="/css/auto-complete.css?1563127644" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1563127644" rel="stylesheet">
+    <link href="/css/theme.css?1563127644" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1563127644" rel="stylesheet">
+    
+      <link href="/css/theme-gruvbox.css?1563127644" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1563127644"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link href="/css/gruvbox-dark.css" rel="stylesheet"/>
+  </head>
+  <body class="" data-url="/google-testing-blog/testable_code/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <div class="logo">
+  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 90.000000 183.000000"
+    preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)" stroke="none">
+      <path d="M437 1690 c-4 -30 -7 -131 -8 -225 -2 -224 -2 -224 -62 -242 -67 -19
+    -147 -97 -147 -141 0 -18 2 -32 4 -32 2 0 15 17 29 38 27 41 104 96 150 107
+    l28 7 -3 -107 -3 -108 -30 -11 c-54 -19 -106 -57 -103 -75 2 -9 35 -32 74 -51
+    l72 -35 7 -68 c8 -84 17 -80 19 8 l1 66 58 24 c32 13 67 31 78 41 17 15 18 19
+    4 34 -8 9 -42 29 -75 45 l-60 29 0 101 c0 56 3 104 6 107 7 8 100 -29 134 -53
+    14 -10 41 -40 60 -68 31 -45 50 -62 50 -46 0 17 -43 85 -72 114 -33 34 -119
+    81 -149 81 -19 0 -24 43 -35 309 -8 182 -17 235 -27 151z m-11 -806 l-7 -33
+    -40 18 c-68 31 -68 38 -8 66 l54 25 3 -21 c2 -12 1 -36 -2 -55z m101 50 c24
+    -9 43 -21 43 -25 0 -12 -40 -36 -72 -44 -27 -7 -28 -6 -28 39 0 25 3 46 7 46
+    4 0 27 -7 50 -16z" />
+      <path d="M92 893 c14 -133 101 -250 231 -311 37 -18 74 -32 81 -32 8 0 17 -4
+20 -8 3 -5 6 -109 7 -231 0 -123 5 -219 9 -214 19 20 30 125 30 278 l0 165 28
+6 c75 17 98 25 133 50 57 39 108 107 139 183 32 77 49 157 31 147 -6 -4 -11
+-12 -11 -17 0 -6 -16 -49 -36 -95 -31 -72 -46 -93 -98 -138 -69 -60 -120 -81
+-176 -72 -22 3 -41 2 -45 -4 -15 -25 -86 1 -173 63 -51 37 -127 151 -148 224
+-9 29 -18 53 -21 53 -3 0 -3 -21 -1 -47z" />
+    </g>
+  </svg>
+  <p>Notebook</p>
+</div>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1563127644"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1563127644"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ajguerrer.github.io\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1563127644"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/google-testing-blog/" title="Google Testing Blog" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/google-testing-blog/">
+          Google Testing Blog
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/blog/" title="Blog Notes" class="dd-item ">
+        <a href="/google-testing-blog/blog/">
+        Blog Notes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/testable_code/" title="Guide to Writing Testable Code" class="dd-item active">
+        <a href="/google-testing-blog/testable_code/">
+        Guide to Writing Testable Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/tott/" title="Testing on the Toilet" class="dd-item ">
+        <a href="/google-testing-blog/tott/">
+        Testing on the Toilet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/seven_plagues/" title="The Seven Plagues of Software Testing" class="dd-item ">
+        <a href="/google-testing-blog/seven_plagues/">
+        The Seven Plagues of Software Testing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Notebook</a> > <a href='/google-testing-blog/'>Google Testing Blog</a> > Guide to Writing Testable Code
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#dependency-injection">Dependency Injection</a>
+<ul>
+<li><a href="#fixing-violations">Fixing violations</a>
+<ul>
+<li><a href="#static-method-calls">Static method calls</a></li>
+<li><a href="#conditional-logic">Conditional logic</a></li>
+<li><a href="#constructing-dependencies">Constructing dependencies</a></li>
+<li><a href="#partial-construction">Partial construction</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#law-of-demeter">Law of Demeter</a>
+<ul>
+<li><a href="#fixing-violations-1">Fixing violations</a>
+<ul>
+<li><a href="#indirect-dependencies">Indirect dependencies</a></li>
+<li><a href="#overusing-member-access-operator">Overusing member access operator</a></li>
+<li><a href="#exposing-dependencies">Exposing dependencies</a></li>
+<li><a href="#context-objects">Context Objects</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#global-state">Global State</a>
+<ul>
+<li><a href="#fixing-violations-2">Fixing violations</a>
+<ul>
+<li><a href="#singletons">Singletons</a></li>
+<li><a href="#flags">Flags</a></li>
+<li><a href="#static-methods">Static methods</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#single-responsibility-principle">Single Responsibility Principle</a>
+<ul>
+<li><a href="#fixing-violations-3">Fixing violations</a>
+<ul>
+<li><a href="#proactive">Proactive</a></li>
+<li><a href="#reactive">Reactive</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Guide to Writing Testable Code
+            </h1>
+          
+
+        
+
+
+
+
+
+<div style="text-align:center">
+  <h3>Miško Hevery</h3>
+</div>
+
+<p>You may find Miško&rsquo;s original guide <a href="http://misko.hevery.com/code-reviewers-guide/">here</a>.</p>
+
+<h2 id="dependency-injection">Dependency Injection</h2>
+
+<p>A testable class is one that can be constructed in isolation or with test double collaborators. Once
+constructed, they have all the dependencies they need. This is known as Dependency Injection.</p>
+
+<p>Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage
+inheritance for creating test double collaborators. This is the primary tool in a testers toolkit
+and the primary benefit Dependency Injection brings.</p>
+
+<h3 id="fixing-violations">Fixing violations</h3>
+
+<p>Below are some examples of constructor flaws and how they can be fixed with Dependency Injection.</p>
+
+<h4 id="static-method-calls">Static method calls</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class AccountView {
+  public:
+  AccountView() { user_ = RPCClient::GetInstance().GetUser(); }
+
+  private:
+  User user_;
+}
+
+TEST(AccountViewTest, SlowAndFlakyTest) {
+  // Unit test is slow and requires working network connection.
+  AccountView view;
+};
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class AccountView {
+  public:
+  explicit AccountView(const User&amp; user): user_(user) {}
+
+  private:
+  User user_;
+};
+
+TEST(AccountViewTest, FastAndReliableTest) {
+  // User does not need to be retrieved over the network.
+  MockUser user;
+  AccountView view(user);
+}
+</code></pre>
+</div>
+
+
+<h4 id="conditional-logic">Conditional logic</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class Car {
+ public:
+  explicit Car(CarType type) {
+    switch (type) {
+      case kCoupe: {
+        engine_ = FastEngine();
+        tires_ = SmoothTires();
+        break;
+      }
+      case kTruck: {
+        engine_ = StrongEngine();
+        tires_ = KnobbyTires();
+      }
+      default:
+        assert(false);
+    }
+  }
+
+ private:
+  Engine engine_;
+  Tires tires_;
+};
+
+TEST(CarTest, HardToTest) {
+  // Want a car with fake engine and tires but can only make real ones.
+  Car car(kCoupe);
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class Car {
+ public:
+  Car(std::unique_ptr&lt;Engine&gt; engine, std::unique_ptr&lt;Tires&gt; tires)
+      : engine_(std::move(engine)), tires_(std::move(tires)) {}
+
+ private:
+  std::unique_ptr&lt;Engine&gt; engine_;
+  std::unique_ptr&lt;Tires&gt; tires_;
+};
+
+TEST(CarTest, EasyToTest) {
+  // Car is fully configurable
+  Car car(std::make_unique&lt;FakeEngine&gt;(), std::make_unique&lt;FakeTires&gt;());
+}
+</code></pre>
+</div>
+
+
+<h4 id="constructing-dependencies">Constructing dependencies</h4>
+
+<p>
+<div class="notices warning" ><pre><code class="language-cpp">class House {
+  public:
+  House() : kitchen_(), bedroom_() {}
+  // ...
+
+  private:
+  Kitchen kitchen_;
+  Bedroom bedroom_;
+};
+
+TEST(HouseTest, HardToTest) {
+  // house is stuck with Kitchen and Bedroom objects
+  House house;
+}
+</code></pre>
+</div>
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class House {
+  public:
+  House(std::unique_ptr&lt;Kitchen&gt; kitchen, std::unique_ptr&lt;Bedroom&gt; bedroom)
+      : kitchen_(std::move(kitchen)), bedroom_(std::move(bedroom)) {}
+  // ...
+
+  private:
+  std::unique_ptr&lt;Kitchen&gt; kitchen_;
+  std::unique_ptr&lt;Bedroom&gt; bedroom_;
+};
+
+TEST(HouseTest, EasyToTest) {
+  // house uses lightweight test doubles
+  House house(std::make_unique&lt;MockKitchen&gt;(),
+              std::make_unique&lt;MockBedroom&gt;());
+}
+</code></pre>
+</div>
+</p>
+
+<h4 id="partial-construction">Partial construction</h4>
+
+<p>
+<div class="notices warning" ><pre><code class="language-cpp">class VisualVoicemail {
+  public:
+  // Constructs a partially initialized VisualVoicemail.
+  // Don't forget to call Initialize in production, or SetCalls in test!
+  explicit VisualVoicemail(const User&amp; user) : user_(user) {}
+
+  void Initialize() {
+    calls_ = Server::GetCallsFor(user_);
+  }
+
+  private:
+  // Hack to allow test access to private methods.
+  // Making this function public is not a better idea.
+  friend class VisualVoicemailTest_BrittleDesign_Test;
+  void SetCalls(std::vector&lt;Call&gt;&amp; calls) { calls_ = calls; }
+
+  User user_;
+  std::vector&lt;Call&gt; calls_;
+};
+
+TEST(VisualVoicemailTest, BrittleTest) {
+  DummyUser user;
+  VisualVoicemail voicemail(user);
+  std::vector&lt;Call&gt; calls = BuildListOfTestCalls();
+  voicemail.SetCalls(calls);
+}
+</code></pre>
+</div>
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class VisualVoicemail {
+  public:
+  explicit VisualVoicemail(const std::vector&lt;Call&gt;&amp; calls) : calls_(calls) {}
+
+  private:
+  std::vector&lt;Call&gt; calls_;
+};
+
+TEST(VisualVoicemailTest, FlexibleTest) {
+  VisualVoicemail voicemail(BuildListOfTestCalls());
+}
+</code></pre>
+</div>
+</p>
+
+<h2 id="law-of-demeter">Law of Demeter</h2>
+
+<p>A class becomes difficult to test if it gets its dependencies from anywhere besides it&rsquo;s interface.
+For example, a class may get a dependency by asking one of it dependencies, breaking the Law of Demeter.</p>
+
+<p>Violations of the Law of Demeter are a sign of bad Dependency Injection, for passing in the wrong
+dependency, and bad encapsulation, for exposing secondary dependencies in the first place.</p>
+
+<h3 id="fixing-violations-1">Fixing violations</h3>
+
+<p>Below are examples of Law of Demeter violations and how they can be fixed with accurate interfaces
+and encapsulation.</p>
+
+<h4 id="indirect-dependencies">Indirect dependencies</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class SalesTaxCalculator {
+ public:
+  SalesTaxCalculator(const TaxTable&amp; taxTable) : taxTable_(taxTable) {}
+
+  float ComputeSalesTax(const User&amp; user, const Invoice&amp; invoice) {
+    // Get the correct dependencies first.
+    Address address = user.GetAddress();
+    float amount = invoice.GetSubTotal();
+    // Then, do the calculation.
+    return amount * taxTable_.GetTaxRate(address);
+  }
+
+ public:
+  TaxTable taxTable_;
+}
+
+TEST(SalesTaxCalculatorTest, ComplexTest) {
+  SalesTaxCalculator calc(TaxTable());
+  User user(Address(&quot;1600 Amphitheater Parkway...&quot;));
+  Invoice invoice(1, ProductX(95.00));
+  // ...
+  EXPECT_EQ(0.09, calc.ComputeSalesTax(user, invoice));
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class SalesTaxCalculator {
+ public:
+  SalesTaxCalculator(const TaxTable&amp; taxTable) : taxTable_(taxTable) {}
+
+  float ComputeSalesTax(const Address&amp; address, const float amount) {
+    // Already have the correct dependencies; do the calculation.
+    return amount * taxTable_.GetTaxRate(address);
+  }
+
+ public:
+  TaxTable taxTable_;
+}
+
+TEST(SalesTaxCalculatorTest, StraightforwardTest) {
+  SalesTaxCalculator calc(TaxTable());
+  Address address(&quot;1600 Amphitheater Parkway...&quot;)
+  // ...
+  EXPECT_EQ(0.09, calc.ComputeSalesTax(address, 95.00));
+}
+</code></pre>
+</div>
+
+
+<h4 id="overusing-member-access-operator">Overusing member access operator</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class LoginPage {
+ public:
+  LoginPage(std::shared_ptr&lt;RPCClient&gt; client, const HttpRequest&amp; request)
+      : client_(client), request_(request) {}
+
+  bool Login() {
+    // Even using member access access operator once is one more time than it
+    // needs to be.
+    std::string cookie = request_.GetCookie(&quot;g&quot;);
+    // Using a member access operator twice in one statement is right out!
+    return client_.GetAuthenticator().Authenticate();
+  }
+
+ private:
+  std::shared_ptr&lt;RPCClient&gt; client_;
+  HttpRequest request_;
+};
+
+TEST(LoginPageTest, ComplexBrittleTest) {
+  MockRPCClient mock_client(make_shared&lt;FakeAuthenticator&gt;());
+  std::vector&lt;Cookie&gt; cookies = {Cookie(&quot;g&quot;, &quot;xyz123&quot;)};
+  MockHttpRequest mock_request(cookies);
+  LoginPage page(client, request);
+
+  EXPECT_CALL(mock_client, GetAuthenticator());
+  EXPECT_CALL(mock_request, GetCookie(&quot;g&quot;));
+
+  EXPECT_TRUE(page.Login());
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class LoginPage {
+ public:
+  LoginPage(std::shared_ptr&lt;Authenticator&gt; authenticator, const Cookie&amp; cookie)
+      : authenticator_(authenticator), cookie_(cookie) {}
+
+  bool Login() { return authenticator_.Authenticate(cookie_); }
+
+ private:
+  std::shared_ptr&lt;Authenticator&gt; authenticator_;
+  Cookie cookie_;
+};
+
+TEST(LoginPageTest, SimpleFlexibleTest) {
+  LoginPage page(std::make_shared&lt;FakeAuthenticator&gt;(), Cookie(&quot;g&quot;, &quot;xyz123&quot;));
+  EXPECT_TRUE(page.Login());
+}
+</code></pre>
+</div>
+
+
+<h4 id="exposing-dependencies">Exposing dependencies</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class UpdateBug {
+ public:
+  explicit UpdateBug(std::shared_ptr&lt;DatabaseInterface&gt; db) : db_(db) {}
+  void Execute(const Bug&amp; bug) {
+    // Impose internal lock management on client.
+    db_-&gt;GetLock().Lock();
+    db_-&gt;Save(bug);
+    db_-&gt;GetLock().Unlock();
+  }
+
+ private:
+  std::shared_ptr&lt;DatabaseInterface&gt; db_;
+};
+
+// This test shouldn't be needed, but we must enforce Lock/Unlock is called
+// around Save.
+TEST(UpdateBugTest, HardToTest) {
+  MockLock mock_lock;
+  auto mock_db = std::make_shared&lt;MockDatabase&gt;();
+  Bug bug(&quot;description&quot;);
+  UpdateBug updateBug(mock_db);
+
+  EXPECT_CALL(*mock_db, GetLock()).WillRepeatedly(ReturnRef(mock_lock));
+  {
+    InSequence dummy;
+    EXPECT_CALL(mock_lock, Lock());
+    EXPECT_CALL(*mock_db, Save(Ref(bug)));
+    EXPECT_CALL(mock_lock, Unlock());
+  }
+
+  updateBug.Execute(bug);
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class UpdateBug {
+ public:
+  explicit UpdateBug(std::shared_ptr&lt;DatabaseInterface&gt; db) : db_(db) {}
+  void Execute(const Bug&amp; bug) {
+    // Save calls Lock/Unlock internally
+    db_-&gt;Save(bug);
+  }
+
+ private:
+  std::shared_ptr&lt;DatabaseInterface&gt; db_;
+};
+
+// Go strait to testing state. No need for mock test since locking interaction
+// is encapsulated in the database.
+TEST(UpdateBugTest, EasyTest) {
+  auto db = std::make_shared&lt;FakeDatabase&gt;();
+  UpdateBug updateBug();
+  Bug bug(&quot;description&quot;);
+  updateBug.Execute(bug);
+
+  EXPECT_EQ(bug, db.GetLastSaved());
+}
+</code></pre>
+</div>
+
+
+<h4 id="context-objects">Context Objects</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class MembershipPlan {
+  // ...
+ public:
+  void ProcessOrder(UserContext&amp; userContext) {
+    User user = userContext.GetUser();
+    PlanLevel level = userContext.GetLevel();
+    Order order = userContext.GetOrder();
+
+    // process...
+  }
+};
+
+TEST(MembershipPlanTest, BrittleUnreadableTest) {
+  MembershipPlan plan;
+  UserContext userContext;
+  userContext.SetUser(User(&quot;Kim&quot;));
+  userContext.SetLevel(PlanLevel(143, &quot;yearly&quot;));
+  userContext.SetOrder(Order(&quot;SuperDeluxe&quot;, 100, true));
+  // Hopefully this is all the setup the userContext needs to call ProcessOrder
+  plan.ProcessOrder(userContext);
+
+  // Make assertions against userContext and plan...
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class MembershipPlan {
+  // ...
+ public:
+  void ProcessOrder(User&amp; user, Order&amp; order, const PlanLevel&amp; level) {
+    // process...
+  }
+};
+
+TEST(MembershipPlanTest, FlexibleSimpleTest) {
+  MembershipPlan plan;
+  User user(&quot;Kim&quot;);
+  Order order(&quot;SuperDeluxe&quot;, 100, true);
+  const PlanLevel level(143, &quot;yearly&quot;);
+  plan.ProcessOrder(user, order, level);
+
+  // Make assertions against user, order and plan...
+}
+</code></pre>
+</div>
+
+
+<h2 id="global-state">Global State</h2>
+
+<p>Global state is difficult to understand. Ideally, the interface of an object should fully describe
+it&rsquo;s dependencies. Global state ruins this ideal because it can be used anywhere without warning.
+Such flexibility may seem convenient to the original developer, but to others it&rsquo;s confusing.
+Especially in large code bases, it can be difficult to realize that some global state exists and
+reason about the circumstances in which it should or shouldn&rsquo;t be used.</p>
+
+<p>Global state is the enemy of testing. It strongly couples itself to the code that uses it. Global
+scope encourages widespread usage, further compounding coupling issues. Coupling to concrete types
+makes it impossible to write test doubles and global state must be concrete because it uses the
+<code>static</code> keyword.</p>
+
+<h3 id="fixing-violations-2">Fixing violations</h3>
+
+<p>Below are some examples of global state and how they can be fixed with Dependency Injection.
+However, Dependency Injection alone is often not enough to fix <code>static</code> methods. For those, an
+adapter called the repository pattern can help remove the
+<a href="../tott/#defeat-static-cling">static cling</a>.</p>
+
+<p>Note, the solutions to the examples should not feel good and require a lot of work. It is really
+tough to test global state. The best solution is to never use it or refactor away from it
+altogether.</p>
+
+<h4 id="singletons">Singletons</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class LoginService {
+ public:
+  static LoginService&amp; GetInstance() {
+    static LoginService instance;
+    return instance;
+  }
+  // ...
+};
+
+class AdminDashboard {
+ public:
+  bool IsAuthenticatedAdmin(const User&amp; user) {
+    return LoginService::GetInstance().IsAuthenticatedAdmin(user);
+  }
+  // ...
+};
+
+TEST_F(AdminDashboardTest, FlakeySlowAndBrittleTest) {
+  // Forced to use the real LoginService singleton.
+  User user(&quot;username&quot;, &quot;password&quot;);
+  ASSERT_TRUE(adminDashboard_.IsAuthenticatedAdmin(user));
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class LoginServiceRepository {
+ public:
+  virtual ~LoginServiceRepository() = default;
+  virtual LoginService&amp; GetInstance() = 0;
+};
+
+class AdminDashboard {
+ public:
+  explicit AdminDashboard(std::shared_ptr&lt;LoginServiceRepository&gt; loginService)
+      : loginService_(loginService) {}
+  bool IsAuthenticatedAdmin(const User&amp; user) {
+    return loginService_-&gt;GetInstance().IsAuthenticatedAdmin(user);
+  }
+
+ private:
+  std::shared_ptr&lt;LoginServiceRepository&gt; loginService_;
+};
+
+TEST(AdminDashboardTest, ReliableFastAndFlexibleTest) {
+  // Can now use test doubles for the LoginService singleton.
+  AdminDashboard adminDashboard(std::make_shared&lt;MockLoginService&gt;());
+  User user(&quot;username&quot;, &quot;password&quot;);
+  ASSERT_TRUE(adminDashboard.IsAuthenticatedAdmin(user));
+}
+</code></pre>
+</div>
+
+
+<h4 id="flags">Flags</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">static bool kFlagUseRealBackend;
+
+class RpcClient {
+ public:
+  static RpcClient&amp; GetInstance() {
+    static RpcClient instance;
+    return instance;
+  }
+
+  bool IsReal() { return backend_-&gt;IsReal(); }
+
+ private:
+  RpcClient() {
+    if (kFlagUseRealBackend) {
+      backend_ = std::make_unique&lt;RealBackend&gt;();
+    } else {
+      backend_ = std::make_unique&lt;DummyBackend&gt;();
+    }
+  }
+  //...
+
+  std::unique_ptr&lt;Backend&gt; backend_;
+};
+
+// The 2nd test to run will fail if both tests are run together
+// because the RpcClient is static.
+
+TEST(RpcClientTest, SmallComplexAndFlakeyTest) {
+  kFlagUseRealBackend = false;
+  RpcClient&amp; client = RpcClient::GetInstance();
+  EXPECT_FALSE(client.IsReal());
+}
+
+TEST(RpcClientTest, LargeComplexAndFlakeyTest) {
+  kFlagUseRealBackend = true;
+  RpcClient&amp; client = RpcClient::GetInstance();
+  EXPECT_TRUE(client.IsReal());
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class RpcClient {
+ public:
+  explicit RpcClient(std::unique_ptr&lt;Backend&gt; backend)
+      : backend_(std::move(backend)) {}
+
+  bool IsReal() { return backend_-&gt;IsReal(); }
+
+ private:
+  std::unique_ptr&lt;Backend&gt; backend_;
+};
+
+// Now, both tests pass.
+
+TEST(RpcClientTest, SmallSimpleAndReliableTest) {
+  RpcClient client(std::make_unique&lt;DummyBackend&gt;());
+  EXPECT_FALSE(client.IsReal());
+}
+
+TEST(RpcClientTest, LargeSimpleAndReliableTest) {
+  RpcClient client(std::make_unique&lt;RealBackend&gt;());
+  EXPECT_TRUE(client.IsReal());
+}
+</code></pre>
+</div>
+
+
+<h4 id="static-methods">Static methods</h4>
+
+
+<div class="notices warning" ><pre><code class="language-cpp">class TrainSchedule {
+  // ...
+  std::shared_ptr&lt;Schedule&gt; FindNextTrain() {
+    // ...
+    // Slow third party service
+    if (TrackStatus::IsClosed(track)) {
+      // ...
+    }
+    // ...
+    return schedule;
+  }
+}
+
+TEST_F(TrainScheduleTest, FlakeySlowAndBrittleTest) {
+  // Forces third party TrackStatus to get called
+  ASSERT_NE(trainSchedule_.FindNextTrain(), nullptr);
+}
+</code></pre>
+</div>
+
+
+
+<div class="notices tip" ><pre><code class="language-cpp">class TrackStatusRepository {
+ public:
+  virtual ~TrackStatusRepository() = default;
+  virtual bool IsClosed(const Track&amp; track) = 0;
+};
+
+class RealTrackStatusRepository : public TrackStatusRepository {
+  public:
+    // ... Wrap each of the third party library's methods.
+    bool IsClosed(const Track&amp; track) {
+      return TrackStatus::IsClosed(track);
+    }
+};
+
+class TrainSchedule {
+ public:
+  TrainSchedule(std::unique_ptr&lt;TrackStatusRepository&gt; trackStatus)
+      : trackStatus_(std::move(trackStatus)) {}
+  // ...
+  std::shared_ptr&lt;Schedule&gt; FindNextTrain() {
+    // ...
+    if (trackStatus_-&gt;IsClosed(track)) {
+      // ...
+    }
+    // ...
+    return schedule;
+  }
+
+ private:
+  std::unique_ptr&lt;TrackStatusRepository&gt; trackStatus_;
+};
+
+TEST(TrainScheduleTest, ReliableFastAndFlexibleTest) {
+  // Now TrainSchedule can be tested in isolation.
+  TrainSchedule trainSchedule(std::make_unique&lt;StubTrackStatusRepository&gt;());
+  ASSERT_NE(trainSchedule.FindNextTrain(), nullptr);
+}
+</code></pre>
+</div>
+
+
+<h2 id="single-responsibility-principle">Single Responsibility Principle</h2>
+
+<p>If you have a class that feels like it:</p>
+
+<ul>
+<li>Contains hidden interactions that make you scratch your head.</li>
+<li>Is difficult to read and retain in memory.</li>
+<li>Is difficult to reason about its state or contains a bunch of conditional logic.</li>
+<li>Is difficult to describe what it does or the word &lsquo;and&rsquo; is used.</li>
+<li>Requires too many dependencies.</li>
+<li>Requires too much work to write a test double.</li>
+<li>Requires too many tests for full coverage.</li>
+<li>Requires large tests with complex setup/teardown.</li>
+</ul>
+
+<p>Then, that class is likely violating the Single Responsibility Principle. Such classes hide points
+of flexibility and encapsulate interaction instead of encapsulating behavior. Poor flexibility and
+encapsulation creates brittle design and strong coupling. The result is a class that&rsquo;s hard to test.</p>
+
+<h3 id="fixing-violations-3">Fixing violations</h3>
+
+<p>Opportunity to fix a violation of the Single Responsibility Principle is either proactive or
+reactive, depending on whether the violation is caught before or after it&rsquo;s committed to the
+codebase.</p>
+
+<p>It should go without saying that the proactive approach is less work.</p>
+
+<h4 id="proactive">Proactive</h4>
+
+<ol>
+<li>Identify the individual responsibilities.</li>
+<li>Give each responsibility a crisp name.</li>
+<li>Extract functionality into each class.</li>
+<li>Celebrate how much easier the class is to test.</li>
+</ol>
+
+<h4 id="reactive">Reactive</h4>
+
+<ol>
+<li>Extract a class in the place where behavior is being altered with new functionality.</li>
+<li>Start to move chunks of behavior out of the legacy class and test each chunk in isolation.</li>
+</ol>
+
+
+<div class="notices tip" ><p><code>static</code> methods are a sign of a homeless method. It likely belongs to one of the parameters it
+takes.</p>
+</div>
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/google-testing-blog/blog/" title="Blog Notes"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/google-testing-blog/tott/" title="Testing on the Toilet" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1563127644"></script>
+    <script src="/js/perfect-scrollbar.min.js?1563127644"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1563127644"></script>
+    <script src="/js/jquery.sticky.js?1563127644"></script>
+    <script src="/js/featherlight.min.js?1563127644"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1563127644"></script>
+    <script src="/js/highlight.pack.js?1563127644"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1563127644"></script>
+    <script src="/js/learn.js?1563127644"></script>
+    <script src="/js/hugo-learn.js?1563127644"></script>
+
+    <link href="/mermaid/mermaid.css?1563127644" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1563127644"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

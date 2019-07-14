@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.54.0" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,27 +11,28 @@
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1559707398" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1559707398" rel="stylesheet">
-    <link href="/css/hybrid.css?1559707398" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1559707398" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1559707398" rel="stylesheet">
-    <link href="/css/auto-complete.css?1559707398" rel="stylesheet">
-    <link href="/css/theme.css?1559707398" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1559707398" rel="stylesheet">
+    <link href="/css/nucleus.css?1563127644" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1563127644" rel="stylesheet">
+    <link href="/css/hybrid.css?1563127644" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1563127644" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1563127644" rel="stylesheet">
+    <link href="/css/auto-complete.css?1563127644" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1563127644" rel="stylesheet">
+    <link href="/css/theme.css?1563127644" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1563127644" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1559707398" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1563127644" rel="stylesheet">
     
 
-    <script src="/js/jquery-2.x.min.js?1559707398"></script>
+    <script src="/js/jquery-3.3.1.min.js?1563127644"></script>
 
-    <style type="text/css">
+    <style>
       :root #header + #content > #left > #rlblock_left{
           display:none !important;
       }
       
     </style>
-    
+    <link href="/css/gruvbox-dark.css" rel="stylesheet"/>
   </head>
   <body class="" data-url="/google-testing-blog/tott/">
     <nav id="sidebar" class="">
@@ -72,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1559707398"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1559707398"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1563127644"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1563127644"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1559707398"></script>
+<script type="text/javascript" src="/js/search.js?1563127644"></script>
 
     
   </div>
@@ -139,9 +140,47 @@
  
   
     
+      <li data-nav-id="/google-testing-blog/testable_code/" title="Guide to Writing Testable Code" class="dd-item ">
+        <a href="/google-testing-blog/testable_code/">
+        Guide to Writing Testable Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
       <li data-nav-id="/google-testing-blog/tott/" title="Testing on the Toilet" class="dd-item active">
         <a href="/google-testing-blog/tott/">
         Testing on the Toilet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/seven_plagues/" title="The Seven Plagues of Software Testing" class="dd-item ">
+        <a href="/google-testing-blog/seven_plagues/">
+        The Seven Plagues of Software Testing
         
         </a>
     </li>
@@ -167,7 +206,7 @@
 
     
     <section id="footer">
-      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
 
     </section>
   </div>
@@ -270,14 +309,20 @@
               </div>
             </div>
             
-
+        <div id="head-tags">
+        
+        </div>
         
         <div id="body-inner">
           
-            <h1>Testing on the Toilet</h1>
+            <h1>
+              
+              Testing on the Toilet
+            </h1>
           
 
         
+
 
 
 
@@ -300,6 +345,7 @@ instead of mocking it out. Some service owners provide a fake. Otherwise, use a 
 
 <p>Don&rsquo;t push the responsibility of maintaining invariants on the caller.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">class Vector {
   explicit Vector(int num_slots);
   int RemainingSlots() const;
@@ -314,6 +360,7 @@ instead of mocking it out. Some service owners provide a fake. Otherwise, use a 
 <code>Insert</code> to work properly.</p>
 
 <p>Instead, <code>Insert</code> could automatically manage slots.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">class Vector {
   explicit Vector(int num_slots);
@@ -341,6 +388,7 @@ or documentation.</p>
 
 <p>Tests become fragile when they expect exact values on irrelevant arguments.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
   fake_clock_.SetTime(kNewYearsDay);
   fake_user_.SetName(&quot;Fake User&quot;);
@@ -357,6 +405,7 @@ or documentation.</p>
 <li>Only verify one behavior per test.</li>
 <li>Only verify arguments that affect the correctness of the specific behavior being tested.</li>
 </ul>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
   fake_clock_.SetTime(kNewYearsDay);
@@ -381,6 +430,7 @@ TEST_F(DisplayGreetingTest, RenderUserName) {
 <p>Testing too many scenarios at once can make it difficult to understand test and reason about the
 failure.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(BankAccountTest, WithdrawFromAccount) {
   Transaction transaction = account_.Deposit(Usd(5));
   clock_.AdvanceTime(kMinTimeToSettle);
@@ -396,6 +446,7 @@ failure.</p>
 
 
 <p>Break up each scenario into its own test.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(BankAccountTest, CanWithdrawWithinBalance) {
   DepositAndSettle(Usd(5));
@@ -425,6 +476,7 @@ post</a></p>
 
 <p>If you find yourself reviewing code that is difficult to understand, don&rsquo;t waste time reviewing it.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">bool IsOkay(int n) {
   bool f = false;
   for (int i = 2; i &lt;= n; ++i) {
@@ -437,6 +489,7 @@ post</a></p>
 
 
 <p>Ask for it to be clarified.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">bool IsPrime(int n) {
   for (int divisor = 2; divisor &lt;= n / 2; ++divisor) {
@@ -457,6 +510,7 @@ post</a></p>
 
 <p>Helper methods make it easier to create test data, but they don&rsquo;t age well.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">// Starts simple
 Company company = NewCompany(kPublic);
 
@@ -474,6 +528,7 @@ Company bankrupt = NewCompanyWithBankruptcyDate(kPastDate, kPublic);
 
 
 <p>Try the builder pattern.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">Company small = Company::Builder{}.SetEmployees(2).SetBoardMembers(2).Build();
 Company privately_owned = Company::Builder{}.SetType(kPrivate).Build();
@@ -507,6 +562,7 @@ post</a></p>
 <p>Expecting calls to methods that don&rsquo;t change state can make a test brittle, less readable, and
 provide a false sense of security.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST(UserAuthorizer, AddPermissionToDatabase) {
   UserAuthorizer user_authorizer(mock_user_service_, mock_permission_db_);
 
@@ -523,12 +579,14 @@ provide a false sense of security.</p>
 
 <p>It is fine, however, to use non-state-changing methods for simulating test conditions.</p>
 
+
 <div class="notices tip" ><pre><code class="language-cpp">ON_CALL(mock_user_service_, IsUserActive(kUser)).WillByDefault(Return(false));
 </code></pre>
 </div>
 
 
 <p>With unnecessary <code>EXPECT_CALL</code>s removed, the test becomes:</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">Test(UserAuthorizer, AddPermissionToDatabase) {
   UserAuthorizer user_authorizer(mock_user_service_, mock_permission_db_);
@@ -549,6 +607,7 @@ post</a></p>
 <p>Code that relies too heavily on primitive types instead of custom abstractions can be hard to
 understand and maintain.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">std::vector&lt;std::pair&lt;int, int&gt;&gt; polygon = { std::make_pair(0, 0),
                                              std::make_pair(0, 4),
                                              std::make_pair(4, 0) };
@@ -562,6 +621,7 @@ int area = (bounding_box.second.first  - bounding_box.first.first) *
 
 <p>Make higher-level abstractions.</p>
 
+
 <div class="notices tip" ><pre><code class="language-cpp">Polygon polygon = RightTriangle(4, 4);
 int area = polygon.GetBoundingBox().GetArea();
 </code></pre>
@@ -570,6 +630,7 @@ int area = polygon.GetBoundingBox().GetArea();
 
 <p>This advice doesn&rsquo;t just apply to primitives and The STL. It&rsquo;s possible for any type to be too
 primitive for the job.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">Polygon polygon = IsoscelesRightTriangle(4);
 int area = polygon.GetBoundingBox().GetArea();
@@ -586,10 +647,12 @@ post</a></p>
 
 <p>Don&rsquo;t mention the type in the variable name. It&rsquo;s OK for the name and the type match.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">std::string name_string;
 std::list&lt;std::time_t&gt; holiday_date_list;
 </code></pre>
 </div>
+
 
 
 <div class="notices tip" ><pre><code class="language-cpp">std::string name;
@@ -601,10 +664,12 @@ Payments payments;
 
 <p>Don&rsquo;t use overly specific names. Get more specific if there is a need for disambiguation.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">Monster final_battle_most_dangerous_boss_monster;
 Payments non_typical_monthly_payments;
 </code></pre>
 </div>
+
 
 
 <div class="notices tip" ><pre><code class="language-cpp">Monster boss;
@@ -615,12 +680,14 @@ Payments payments;
 
 <p>Do not repeat context.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">class AnnualHolidaySale {
   bool PromoteHolidaySale();
   int annual_sale_rebate_;
 };
 </code></pre>
 </div>
+
 
 
 <div class="notices tip" ><pre><code class="language-cpp">class AnnualHolidaySale {
@@ -638,6 +705,7 @@ post</a></p>
 
 <p>Comments are not always helpful.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">// Subtract discount from final price.
 final_price = (num_items * item_price) -
               std::min(5, num_items) * item_price *  0.1;
@@ -654,6 +722,7 @@ return width / height;
 
 
 <p>It&rsquo;s often better to make your code self-explanatory.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">price = num_items * item_price;
 discount = std::min(5, num_items) * item_price * 0.1;
@@ -700,6 +769,7 @@ post</a></p>
 
 <p>Deeply nested code is error-prone and hurts readability.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">Response response = server.Call(request);
 
 if (response.GetStatus() == Status::kOk) {
@@ -725,6 +795,7 @@ if (response.GetStatus() == Status::kOk) {
 
 
 <p>The code above could be refactored to use guard clauses.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">Response response = server.Call(request);
 
@@ -760,6 +831,7 @@ post</a></p>
 
 <p>It&rsquo;s difficult to reason about a test when the cause is hidden far away from the effect.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">class TallyTest : public ::testing::Test {
 protected:
   void SetUp() override {
@@ -781,6 +853,7 @@ TEST_F(TallyTest, IncrementExistingKey) {
 
 
 <p>Write tests where the effects immediately follow the causes.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">class TallyTest : public ::testing::Test {
 protected:
@@ -829,6 +902,7 @@ post</a></p>
 <p>Tests that break in response to any change to production code without verifying correct behavior
 only add to maintenance costs without catching defects.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">void Processor::Process(Work w) {
   first_part_.Process(w);
   second_part_.Process(w);
@@ -876,6 +950,7 @@ post</a></p>
 
 <p>Vague test names make it hard to keep track of what is tested.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(IsUserLockedOutTest, InvalidLogin) {
   authenticator_.Authenticate(username_, password_);
   EXPECT_FALSE(authenticator_.IsUserLockedOut(username_));
@@ -892,6 +967,7 @@ post</a></p>
 
 <p>Descriptive test names make it easy to tell what behavior is broken without looking at code. Also,
 the length of a good test name helps indicate when a test needs to be split apart.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(IsUserLockedOutTest, ShouldLockOutUserAfterThreeInvalidLoginAttempts) {
  // ...
@@ -910,6 +986,7 @@ post</a></p>
 
 <p>Tests should be simple by stating I/O directly rather than computing them.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST(NavigatorTest, ShouldNavigateToPhotosPage) {
   const std::string baseUrl = &quot;http://plus.google.com/&quot;;
   Navigator nav(baseUrl);
@@ -921,6 +998,7 @@ post</a></p>
 
 
 <p>Even a simple string concatenation can lead to bugs.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST(NavigatorTest, ShouldNavigateToPhotosPage) {
   Navigator nav(&quot;http://plug.google.com/&quot;);
@@ -962,6 +1040,7 @@ post</a></p>
 
 <p>It can be harmful to think that tests and public methods should have a 1:1 relationship.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(TransactionProcessorTest, ProcessTransaction) {
   User user = NewUserWithBalance(kLowBalanceThreshold + Dollars(2));
   transaction_processor_.ProcessTransaction(user, Transaction(&quot;Pile of Beanie Babies&quot;, Dollars(3)));
@@ -974,6 +1053,7 @@ post</a></p>
 
 
 <p>Each test should verify one behavior. Each method may take several tests to verify.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(TransactionProcessorTest, ShouldDisplayNotification) {
   transaction_processor_.ProcessTransaction(User(), Transaction(&quot;Pile of Beanie Babies&quot;));
@@ -996,6 +1076,7 @@ TEST_F(TransactionProcessorTest, ShouldSendEmailWhenBalanceIsLow) {
 
 <p>As a source of documentation, test should not be distracting or hide information.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST(CalculatorTest, ShouldPerformAddition) {
   Calculator calculator(RoundingStrategy(),
     &quot;unused&quot;, kEnableCosinFeature, 0.01, kCalculusEngine, false);
@@ -1004,6 +1085,7 @@ TEST_F(TransactionProcessorTest, ShouldSendEmailWhenBalanceIsLow) {
 }
 </code></pre>
 </div>
+
 
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_(CalculatorTest, ShouldPerformAddition) {
@@ -1138,6 +1220,7 @@ post</a></p>
 
 <p>Mocks are powerful, but easy to abuse.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">TEST_F(PaymentProcessorTest, ShouldChargeCreditCard) {
   PaymentProcessor payment_processor(mock_credit_card_server_);
 
@@ -1159,6 +1242,7 @@ code is working properly.</p>
 
 <p>If you don&rsquo;t need a mock, don&rsquo;t use one. Understanding when to use a mock comes from understanding
 what you want to test.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">TEST_F(PaymentProcessorTest, ShouldChargeCreditCard) {
   PaymentProcessor payment_processor(credit_card_server_);
@@ -1207,6 +1291,7 @@ of calls or order of calls matter.</p>
 
 <p>Data driven tests are efficient, but easy to abuse.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">struct TestData {
   const std::string word;
   const bool is_word;
@@ -1232,6 +1317,7 @@ difficult.</p>
 
 <p>As the code grows in complexity, data tends to grow even faster. It quickly becomes impossible to
 discern what behavior each piece of data is meant to test.</p>
+
 
 <div class="notices warning" ><pre><code class="language-cpp">const std::vector&lt;Locale&gt; locales = { Word::US, Word::UK, Word::France, ... };
 
@@ -1259,6 +1345,7 @@ TEST(IsWordTest, TestEverything) {
 
 <p>Instead, think critically about what behaviors are worth testing.</p>
 
+
 <div class="notices tip" ><pre><code class="language-cpp">TEST(IsWordTest, ShouldExistInMultipleLocales) {
   EXPECT_TRUE(IsWord(&quot;milk&quot;, Word::US));
   EXPECT_TRUE(IsWord(&quot;milk&quot;, Word::UK));
@@ -1278,11 +1365,12 @@ TEST(IsWordTest, ShouldNotExist) {
 <p><em>August 21, 2008</em> -
 <a href="https://testing.googleblog.com/2008/08/tott-sleeping-synchronization.html">original post</a></p>
 
-<p>Any code that <code>sleep</code>s should be considered taboo. In test, calling any code that <code>sleep</code>s
-should be banned.</p>
+<p>Beware of <code>sleep</code>. <code>sleep</code> should never be used for synchronization, or in test.</p>
+
 
 <div class="notices warning" ><pre><code class="language-cpp">class CoffeeMaker {
  public:
+  virtual ~CoffeeMaker() = default;
   virtual void MakeCoffee(const std::function&lt;void()&gt; callback) = 0;
 };
 
@@ -1309,7 +1397,7 @@ class Employee {
   bool caffeinated_ = false;
 };
 
-TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
+TEST(EmployeeTest, ShouldBeCaffeinatedOnlyAfterDrinkingCoffee) {
   Employee e;
   Intern i;
   e.DemandCoffee(i);
@@ -1323,6 +1411,7 @@ TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
 
 <p>Code that sleeps can be improved by waiting on a <code>std::future</code> or a <code>std::condition_variable</code>.
 As always, if your waiting on a non-trivial operation, like <code>Intern::MakeCoffee</code>, use a fake.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">class FakeIntern : public CoffeeMaker {
  public:
@@ -1352,7 +1441,7 @@ As always, if your waiting on a non-trivial operation, like <code>Intern::MakeCo
   std::mutex mut_;
 };
 
-TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
+TEST(EmployeeTest, ShouldBeCaffeinatedOnlyAfterDrinkingCoffee) {
   Employee e;
   FakeIntern i;
   e.DemandCoffee(i);
@@ -1373,13 +1462,22 @@ TEST(EmployeeTest, ShouldBeCaffeinatedWithinAMinute) {
 
 <pre><code class="language-cpp">class MyObject {
  public:
-  int DoSomething(int id) { return TheirEntity::GetInstance().GetSomething(); }
+  int DoSomething(int id) {
+    return TheirEntity::GetInstance().GetSomething(id);
+  }
 };
 </code></pre>
 
 <p>There is a way around this using the Repository Pattern.</p>
 
-<pre><code class="language-cpp">class TheirEntityStaticRepository : public TheirEntityRepository {
+<pre><code class="language-cpp">class TheirEntityRepository {
+ public:
+  virtual ~TheirEntityRepository() = default;
+  virtual TheirEntity&amp; GetInstance() = 0;
+  // Other static methods here
+};
+
+class TheirEntityStaticRepository : public TheirEntityRepository {
  public:
   TheirEntity&amp; GetInstance() { return TheirEntity::GetInstance(); }
 };
@@ -1404,6 +1502,7 @@ class MyObject {
 
 <p>Modify external visible state only after completing all operations which could possibly fail.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
   objects.clear();
   for (const auto&amp; object : collection_) {
@@ -1417,6 +1516,7 @@ class MyObject {
 
 
 <p>In these situations, the <code>swap</code> trick comes in handy.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
   std::vector&lt;Object&gt; known_good_objects;
@@ -1494,6 +1594,7 @@ thats just enough tests.</p>
 
 <p>If you find yourself saying that, theres a better way.</p>
 
+
 <div class="notices warning" ><pre><code class="language-cpp">// include/my_project/dashboard.h
 
 class Dashboard {
@@ -1513,6 +1614,7 @@ class Dashboard {
 
 <p>To preserve privacy, the helper class is tucked away in a private implementation directory separate
 from the public API.</p>
+
 
 <div class="notices tip" ><pre><code class="language-cpp">// include/my_project/dashboard.h
 
@@ -1632,6 +1734,41 @@ still fails as expected.</p>
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -1656,10 +1793,10 @@ still fails as expected.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/google-testing-blog/blog/" title="Blog Notes"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/google-testing-blog/testable_code/" title="Guide to Writing Testable Code"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/google-testing-blog/blog/" title="Blog Notes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/google-testing-blog/seven_plagues/" title="The Seven Plagues of Software Testing" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1669,20 +1806,20 @@ still fails as expected.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1559707398"></script>
-    <script src="/js/perfect-scrollbar.min.js?1559707398"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1559707398"></script>
-    <script src="/js/jquery.sticky.js?1559707398"></script>
-    <script src="/js/featherlight.min.js?1559707398"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1559707398"></script>
-    <script src="/js/highlight.pack.js?1559707398"></script>
+    <script src="/js/clipboard.min.js?1563127644"></script>
+    <script src="/js/perfect-scrollbar.min.js?1563127644"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1563127644"></script>
+    <script src="/js/jquery.sticky.js?1563127644"></script>
+    <script src="/js/featherlight.min.js?1563127644"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1563127644"></script>
+    <script src="/js/highlight.pack.js?1563127644"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom.71422.js?1559707398"></script>
-    <script src="/js/learn.js?1559707398"></script>
-    <script src="/js/hugo-learn.js?1559707398"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1563127644"></script>
+    <script src="/js/learn.js?1563127644"></script>
+    <script src="/js/hugo-learn.js?1563127644"></script>
 
-    <link href="/mermaid/mermaid.css?1559707398" type="text/css" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1559707398"></script>
+    <link href="/mermaid/mermaid.css?1563127644" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1563127644"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

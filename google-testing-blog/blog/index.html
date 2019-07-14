@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.54.0" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,27 +11,28 @@
     <title>Blog Notes :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1559707398" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1559707398" rel="stylesheet">
-    <link href="/css/hybrid.css?1559707398" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1559707398" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1559707398" rel="stylesheet">
-    <link href="/css/auto-complete.css?1559707398" rel="stylesheet">
-    <link href="/css/theme.css?1559707398" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1559707398" rel="stylesheet">
+    <link href="/css/nucleus.css?1563127644" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1563127644" rel="stylesheet">
+    <link href="/css/hybrid.css?1563127644" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1563127644" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1563127644" rel="stylesheet">
+    <link href="/css/auto-complete.css?1563127644" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1563127644" rel="stylesheet">
+    <link href="/css/theme.css?1563127644" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1563127644" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1559707398" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1563127644" rel="stylesheet">
     
 
-    <script src="/js/jquery-2.x.min.js?1559707398"></script>
+    <script src="/js/jquery-3.3.1.min.js?1563127644"></script>
 
-    <style type="text/css">
+    <style>
       :root #header + #content > #left > #rlblock_left{
           display:none !important;
       }
       
     </style>
-    
+    <link href="/css/gruvbox-dark.css" rel="stylesheet"/>
   </head>
   <body class="" data-url="/google-testing-blog/blog/">
     <nav id="sidebar" class="">
@@ -72,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1559707398"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1559707398"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1563127644"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1563127644"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1559707398"></script>
+<script type="text/javascript" src="/js/search.js?1563127644"></script>
 
     
   </div>
@@ -139,9 +140,47 @@
  
   
     
+      <li data-nav-id="/google-testing-blog/testable_code/" title="Guide to Writing Testable Code" class="dd-item ">
+        <a href="/google-testing-blog/testable_code/">
+        Guide to Writing Testable Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
       <li data-nav-id="/google-testing-blog/tott/" title="Testing on the Toilet" class="dd-item ">
         <a href="/google-testing-blog/tott/">
         Testing on the Toilet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/seven_plagues/" title="The Seven Plagues of Software Testing" class="dd-item ">
+        <a href="/google-testing-blog/seven_plagues/">
+        The Seven Plagues of Software Testing
         
         </a>
     </li>
@@ -167,7 +206,7 @@
 
     
     <section id="footer">
-      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
 
     </section>
   </div>
@@ -228,6 +267,7 @@
 <li><a href="#test-reliability">Test Reliability</a></li>
 <li><a href="#productivity">Productivity</a></li>
 <li><a href="#code-health">Code Health</a></li>
+<li><a href="#metrics">Metrics</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -238,14 +278,20 @@
               </div>
             </div>
             
-
+        <div id="head-tags">
+        
+        </div>
         
         <div id="body-inner">
           
-            <h1>Blog Notes</h1>
+            <h1>
+              
+              Blog Notes
+            </h1>
           
 
         
+
 
 
 
@@ -253,16 +299,23 @@
 <h2 id="test-reliability">Test Reliability</h2>
 
 <ul>
-<li>Test binary size and RAM have strong correlations on whether a test is flaky. This includes the
-influence any third-party testing tools have. -
-<a href="https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html">Source</a></li>
+<li>Test binary size and memory usage, including third-party testing tools, have a strong correlation
+on whether a test is flaky. <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup></li>
+<li>Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and
+more reliable to have smaller tests that break closer to the source of the problem.<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">2</a></sup> <sup class="footnote-ref" id="fnref:6"><a href="#fn:6">3</a></sup></li>
 </ul>
 
 <h2 id="productivity">Productivity</h2>
 
 <ul>
-<li>Releasing often give teams an incentive to automate testing and reduce coupling with the rest of
-the system. - <a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">Source</a></li>
+<li>Releasing often gives teams an incentive to automate testing and reduce coupling with the rest of
+the system.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">4</a></sup></li>
+<li>Automation is costly. Automate only the tests that you find yourself running often to reliably
+catch regressions on features with business value.<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">2</a></sup></li>
+<li>Tighten the feedback loop between test engineers and development engineers. Share the same space,
+tools, daily stand-ups, and design discussions. <sup class="footnote-ref" id="fnref:5"><a href="#fn:5">2</a></sup></li>
+<li>Effective automation depends on test design. Good test design is built from a solid foundation of
+manual tests.<sup class="footnote-ref" id="fnref:8"><a href="#fn:8">5</a></sup></li>
 </ul>
 
 <h2 id="code-health">Code Health</h2>
@@ -270,9 +323,42 @@ the system. - <a href="https://testing.googleblog.com/2017/02/discomfort-as-tool
 <ul>
 <li>When a team provides <a href="../tott/#know-your-test-doubles">fakes</a> and writes tests for them, they
 become clients of their own software. Experiencing the perspective of the client gives the team an
-incentive to make their API easier to use. -
-<a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">Source</a></li>
+incentive to make their API easier to use.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">4</a></sup></li>
+<li>Remove the detective work of tracking down bad changes by investing in a pre-submit system that
+runs automated tests against the commit before it reaches the depot. <sup class="footnote-ref" id="fnref:7"><a href="#fn:7">6</a></sup></li>
 </ul>
+
+<h2 id="metrics">Metrics</h2>
+
+<ul>
+<li><em>Pre- vs post-production defect ratio</em> and a breakdown of <em>defects by component or functional
+area</em> help identify holes in test.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">7</a></sup></li>
+<li>Premature performance optimization makes bad code. Develop in a clean, maintainable and
+extensible manner <em>first</em>, and then let benchmarks drive performance optimizations.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">8</a></sup></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html">https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:5"><a href="https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html">https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html</a>
+ <a class="footnote-return" href="#fnref:5"><sup>[return]</sup></a></li>
+<li id="fn:6"><a href="https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html">https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html</a>
+ <a class="footnote-return" href="#fnref:6"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:8"><a href="https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html">https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html</a>
+ <a class="footnote-return" href="#fnref:8"><sup>[return]</sup></a></li>
+<li id="fn:7"><a href="https://testing.googleblog.com/2008/09/presubmit-and-performance.html">https://testing.googleblog.com/2008/09/presubmit-and-performance.html</a>
+ <a class="footnote-return" href="#fnref:7"><sup>[return]</sup></a></li>
+<li id="fn:3"><a href="https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html">https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html</a>
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+<li id="fn:4"><a href="https://testing.googleblog.com/2007/10/performance-testing.html">https://testing.googleblog.com/2007/10/performance-testing.html</a>
+ <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
 
 <footer class=" footline" >
@@ -356,6 +442,38 @@ incentive to make their API easier to use. -
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -371,7 +489,7 @@ incentive to make their API easier to use. -
 			<a class="nav nav-prev" href="/google-testing-blog/" title="Google Testing Blog"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/google-testing-blog/tott/" title="Testing on the Toilet" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/google-testing-blog/testable_code/" title="Guide to Writing Testable Code" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -381,20 +499,20 @@ incentive to make their API easier to use. -
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1559707398"></script>
-    <script src="/js/perfect-scrollbar.min.js?1559707398"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1559707398"></script>
-    <script src="/js/jquery.sticky.js?1559707398"></script>
-    <script src="/js/featherlight.min.js?1559707398"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1559707398"></script>
-    <script src="/js/highlight.pack.js?1559707398"></script>
+    <script src="/js/clipboard.min.js?1563127644"></script>
+    <script src="/js/perfect-scrollbar.min.js?1563127644"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1563127644"></script>
+    <script src="/js/jquery.sticky.js?1563127644"></script>
+    <script src="/js/featherlight.min.js?1563127644"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1563127644"></script>
+    <script src="/js/highlight.pack.js?1563127644"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom.71422.js?1559707398"></script>
-    <script src="/js/learn.js?1559707398"></script>
-    <script src="/js/hugo-learn.js?1559707398"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1563127644"></script>
+    <script src="/js/learn.js?1563127644"></script>
+    <script src="/js/hugo-learn.js?1563127644"></script>
 
-    <link href="/mermaid/mermaid.css?1559707398" type="text/css" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1559707398"></script>
+    <link href="/mermaid/mermaid.css?1563127644" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1563127644"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

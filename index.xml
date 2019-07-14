@@ -16,7 +16,18 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/google-testing-blog/blog/</guid>
-      <description>Test Reliability  Test binary size and RAM have strong correlations on whether a test is flaky. This includes the influence any third-party testing tools have. - Source  Productivity  Releasing often give teams an incentive to automate testing and reduce coupling with the rest of the system. - Source  Code Health  When a team provides fakes and writes tests for them, they become clients of their own software.</description>
+      <description>Test Reliability  Test binary size and memory usage, including third-party testing tools, have a strong correlation on whether a test is flaky. 1 Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and more reliable to have smaller tests that break closer to the source of the problem.2 3  Productivity  Releasing often gives teams an incentive to automate testing and reduce coupling with the rest of the system.</description>
+    </item>
+    
+    <item>
+      <title>Guide to Writing Testable Code</title>
+      <link>https://ajguerrer.github.io/google-testing-blog/testable_code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/google-testing-blog/testable_code/</guid>
+      <description>Miško Hevery  You may find Miško&amp;rsquo;s original guide here.
+Dependency Injection A testable class is one that can be constructed in isolation or with test double collaborators. Once constructed, they have all the dependencies they need. This is known as Dependency Injection.
+Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage inheritance for creating test double collaborators. This is the primary tool in a testers toolkit and the primary benefit Dependency Injection brings.</description>
     </item>
     
     <item>
@@ -29,6 +40,18 @@
 Exercise Service Call Contracts in Tests November 27, 2018 - original post
 If the code under test relies on the contract of a service, prefer exercising the service call instead of mocking it out. Some service owners provide a fake. Otherwise, use a hermetic server.
 Make Interfaces Hard to Misuse July 25, 2018 - original post</description>
+    </item>
+    
+    <item>
+      <title>The Seven Plagues of Software Testing</title>
+      <link>https://ajguerrer.github.io/google-testing-blog/seven_plagues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/google-testing-blog/seven_plagues/</guid>
+      <description>James A. Whittaker  The Plague of Aimlessness June 22, 2009 - original post
+The software testing industry lacks lore. Build a testing spell book and share it with others.
+The Plague of Repetitiveness June 24, 2009 - original post
+Tests are a pesticide that kills software bugs. Once a field has been spayed with a pesticide, spraying again with the same pesticide won&amp;rsquo;t kill the remaining bugs. Farmers know to adjust their pesticide formula for the specific type of pest in their field.</description>
     </item>
     
   </channel>
