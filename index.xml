@@ -42,17 +42,5 @@ If the code under test relies on the contract of a service, prefer exercising th
 Make Interfaces Hard to Misuse July 25, 2018 - original post</description>
     </item>
     
-    <item>
-      <title>The Seven Plagues of Software Testing</title>
-      <link>https://ajguerrer.github.io/google-testing-blog/seven_plagues/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://ajguerrer.github.io/google-testing-blog/seven_plagues/</guid>
-      <description>James A. Whittaker  The Plague of Aimlessness June 22, 2009 - original post
-The software testing industry lacks lore. Build a testing spell book and share it with others.
-The Plague of Repetitiveness June 24, 2009 - original post
-Tests are a pesticide that kills software bugs. Once a field has been spayed with a pesticide, spraying again with the same pesticide won&amp;rsquo;t kill the remaining bugs. Farmers know to adjust their pesticide formula for the specific type of pest in their field.</description>
-    </item>
-    
   </channel>
 </rss>

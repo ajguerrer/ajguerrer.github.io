@@ -11,20 +11,20 @@
     <title>Blog Notes :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1563127644" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1563127644" rel="stylesheet">
-    <link href="/css/hybrid.css?1563127644" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1563127644" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1563127644" rel="stylesheet">
-    <link href="/css/auto-complete.css?1563127644" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1563127644" rel="stylesheet">
-    <link href="/css/theme.css?1563127644" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1563127644" rel="stylesheet">
+    <link href="/css/nucleus.css?1563156705" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1563156705" rel="stylesheet">
+    <link href="/css/hybrid.css?1563156705" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1563156705" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1563156705" rel="stylesheet">
+    <link href="/css/auto-complete.css?1563156705" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1563156705" rel="stylesheet">
+    <link href="/css/theme.css?1563156705" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1563156705" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1563127644" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1563156705" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1563127644"></script>
+    <script src="/js/jquery-3.3.1.min.js?1563156705"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1563127644"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1563127644"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1563156705"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1563156705"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1563127644"></script>
+<script type="text/javascript" src="/js/search.js?1563156705"></script>
 
     
   </div>
@@ -171,25 +171,6 @@
 
             
           
-            
-            
-
-
- 
-  
-    
-      <li data-nav-id="/google-testing-blog/seven_plagues/" title="The Seven Plagues of Software Testing" class="dd-item ">
-        <a href="/google-testing-blog/seven_plagues/">
-        The Seven Plagues of Software Testing
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
         
         </ul>
               
@@ -268,6 +249,7 @@
 <li><a href="#productivity">Productivity</a></li>
 <li><a href="#code-health">Code Health</a></li>
 <li><a href="#metrics">Metrics</a></li>
+<li><a href="#the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -336,6 +318,29 @@ area</em> help identify holes in test.<sup class="footnote-ref" id="fnref:3"><a 
 <li>Premature performance optimization makes bad code. Develop in a clean, maintainable and
 extensible manner <em>first</em>, and then let benchmarks drive performance optimizations.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">8</a></sup></li>
 </ul>
+
+<h2 id="the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</h2>
+
+<ul>
+<li><strong>Aimlessness</strong> - Do not test for the sake of testing. Every test should have a goal. Document
+what works and analyze what doesn&rsquo;t. Then, share with your colleagues.<sup class="footnote-ref" id="fnref:9"><a href="#fn:9">9</a></sup></li>
+<li><strong>Repetitiveness</strong> - Running the same test suite over again without finding new bugs does not
+mean that there are no bugs. Variation is healthy.<sup class="footnote-ref" id="fnref:10"><a href="#fn:10">10</a></sup></li>
+<li><strong>Amnesia</strong> - Chances are the problem your are trying to solve has been solved before. If the same
+issue keeps stinging you, or you had to answer a question the hard way, document it and put it in
+a place others will find it.<sup class="footnote-ref" id="fnref:11"><a href="#fn:11">11</a></sup></li>
+<li><strong>Boredom</strong> - A bored tester rushes through the tactical aspects of testing without considering
+the interesting strategic aspects. The day testing gets &ldquo;figured out&rdquo; is the day it gets
+completely automated away.<sup class="footnote-ref" id="fnref:12"><a href="#fn:12">12</a></sup></li>
+<li><strong>Homelessness</strong> - Testers are homeless. They don&rsquo;t actually live in the software like users do.
+Some bugs are only found with the hands of users doing their work in their environment.<sup class="footnote-ref" id="fnref:13"><a href="#fn:13">13</a></sup></li>
+<li><strong>Blindness</strong> - Software is a series of electromagnetic fluctuations on a storage media. Thats
+hardly a helpful visual for a software tester. So, we rely on auxiliary tools to provide useful
+feedback, but what other useful information are we blind to?<sup class="footnote-ref" id="fnref:14"><a href="#fn:14">14</a></sup></li>
+<li><strong>Entropy</strong> - Testers introduce entropy by increasing the amount of things developers need to do.
+This is unavoidable, but preventative. As developers do more <em>during</em> development, entropy tends
+towards its minimum.<sup class="footnote-ref" id="fnref:15"><a href="#fn:15">15</a></sup></li>
+</ul>
 <div class="footnotes">
 
 <hr />
@@ -357,6 +362,20 @@ extensible manner <em>first</em>, and then let benchmarks drive performance opti
  <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
 <li id="fn:4"><a href="https://testing.googleblog.com/2007/10/performance-testing.html">https://testing.googleblog.com/2007/10/performance-testing.html</a>
  <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
+<li id="fn:9"><a href="https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html">https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html</a>
+ <a class="footnote-return" href="#fnref:9"><sup>[return]</sup></a></li>
+<li id="fn:10"><a href="https://testing.googleblog.com/2009/06/by-james.html">https://testing.googleblog.com/2009/06/by-james.html</a>
+ <a class="footnote-return" href="#fnref:10"><sup>[return]</sup></a></li>
+<li id="fn:11"><a href="https://testing.googleblog.com/2009/07/plague-of-amnesia.html">https://testing.googleblog.com/2009/07/plague-of-amnesia.html</a>
+ <a class="footnote-return" href="#fnref:11"><sup>[return]</sup></a></li>
+<li id="fn:12"><a href="https://testing.googleblog.com/2009/07/plague-of-boredom.html">https://testing.googleblog.com/2009/07/plague-of-boredom.html</a>
+ <a class="footnote-return" href="#fnref:12"><sup>[return]</sup></a></li>
+<li id="fn:13"><a href="https://testing.googleblog.com/2009/07/plague-of-homelessness.html">https://testing.googleblog.com/2009/07/plague-of-homelessness.html</a>
+ <a class="footnote-return" href="#fnref:13"><sup>[return]</sup></a></li>
+<li id="fn:14"><a href="https://testing.googleblog.com/2009/07/plague-of-blindness.html">https://testing.googleblog.com/2009/07/plague-of-blindness.html</a>
+ <a class="footnote-return" href="#fnref:14"><sup>[return]</sup></a></li>
+<li id="fn:15"><a href="https://testing.googleblog.com/2009/09/plague-of-entropy.html">https://testing.googleblog.com/2009/09/plague-of-entropy.html</a>
+ <a class="footnote-return" href="#fnref:15"><sup>[return]</sup></a></li>
 </ol>
 </div>
 
@@ -458,22 +477,6 @@ extensible manner <em>first</em>, and then let benchmarks drive performance opti
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -499,20 +502,20 @@ extensible manner <em>first</em>, and then let benchmarks drive performance opti
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1563127644"></script>
-    <script src="/js/perfect-scrollbar.min.js?1563127644"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1563127644"></script>
-    <script src="/js/jquery.sticky.js?1563127644"></script>
-    <script src="/js/featherlight.min.js?1563127644"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1563127644"></script>
-    <script src="/js/highlight.pack.js?1563127644"></script>
+    <script src="/js/clipboard.min.js?1563156705"></script>
+    <script src="/js/perfect-scrollbar.min.js?1563156705"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1563156705"></script>
+    <script src="/js/jquery.sticky.js?1563156705"></script>
+    <script src="/js/featherlight.min.js?1563156705"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1563156705"></script>
+    <script src="/js/highlight.pack.js?1563156705"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1563127644"></script>
-    <script src="/js/learn.js?1563127644"></script>
-    <script src="/js/hugo-learn.js?1563127644"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1563156705"></script>
+    <script src="/js/learn.js?1563156705"></script>
+    <script src="/js/hugo-learn.js?1563156705"></script>
 
-    <link href="/mermaid/mermaid.css?1563127644" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1563127644"></script>
+    <link href="/mermaid/mermaid.css?1563156705" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1563156705"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
