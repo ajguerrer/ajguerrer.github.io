@@ -11,7 +11,7 @@
     
     
     <item>
-      <title>Blog Notes</title>
+      <title>General Notes</title>
       <link>https://ajguerrer.github.io/google-testing-blog/blog/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -28,6 +28,15 @@
       <description>Miško Hevery  You may find Miško&amp;rsquo;s original guide here.
 Dependency Injection A testable class is one that can be constructed in isolation or with test double collaborators. Once constructed, they have all the dependencies they need. This is known as Dependency Injection.
 Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage inheritance for creating test double collaborators. This is the primary tool in a testers toolkit and the primary benefit Dependency Injection brings.</description>
+    </item>
+    
+    <item>
+      <title>James Whittaker</title>
+      <link>https://ajguerrer.github.io/google-testing-blog/whittaker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/google-testing-blog/whittaker/</guid>
+      <description>The Seven Plagues of Software Testing  Aimlessness - Do not test for the sake of testing. Every test should have a goal. Document what works and analyze what doesn&amp;rsquo;t. Then, share with your colleagues.1 Repetitiveness - Running the same test suite over again without finding new bugs does not mean that there are no bugs. Variation is healthy.2 Amnesia - Chances are the problem your are trying to solve has been solved before.</description>
     </item>
     
     <item>
