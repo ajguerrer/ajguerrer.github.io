@@ -11,20 +11,20 @@
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1563939875" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1563939875" rel="stylesheet">
-    <link href="/css/hybrid.css?1563939875" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1563939875" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1563939875" rel="stylesheet">
-    <link href="/css/auto-complete.css?1563939875" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1563939875" rel="stylesheet">
-    <link href="/css/theme.css?1563939875" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1563939875" rel="stylesheet">
+    <link href="/css/nucleus.css?1564022436" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1564022436" rel="stylesheet">
+    <link href="/css/hybrid.css?1564022436" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1564022436" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1564022436" rel="stylesheet">
+    <link href="/css/auto-complete.css?1564022436" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1564022436" rel="stylesheet">
+    <link href="/css/theme.css?1564022436" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1564022436" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1563939875" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1564022436" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1563939875"></script>
+    <script src="/js/jquery-3.3.1.min.js?1564022436"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1563939875"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1563939875"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1564022436"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1564022436"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1563939875"></script>
+<script type="text/javascript" src="/js/search.js?1564022436"></script>
 
     
   </div>
@@ -121,8 +121,8 @@
  
   
     
-      <li data-nav-id="/google-testing-blog/blog/" title="General Notes" class="dd-item ">
-        <a href="/google-testing-blog/blog/">
+      <li data-nav-id="/google-testing-blog/general/" title="General Notes" class="dd-item ">
+        <a href="/google-testing-blog/general/">
         General Notes
         
         </a>
@@ -291,6 +291,7 @@
 <li><a href="#fake-your-way-to-better-tests">Fake Your Way To Better Tests</a></li>
 <li><a href="#don-t-overuse-mocks">Don&rsquo;t Overuse Mocks</a></li>
 <li><a href="#testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</a></li>
+<li><a href="#code-coverage-goal-80-and-no-less">Code coverage goal: 80% and no less!</a></li>
 <li><a href="#data-driven-traps">Data Driven Traps!</a></li>
 <li><a href="#sleeping-synchronization">Sleeping != Synchronization</a></li>
 <li><a href="#defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</a></li>
@@ -1255,8 +1256,8 @@ what you want to test.</p>
 
 <h2 id="testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</h2>
 
-<p><em>March 22, 2013</em> - <a href="https://testing.googleblog.com/2013/03/testing-on-toilet-testing-state-vs.html">original
-post</a></p>
+<p><em>March 22, 2013</em> -
+<a href="https://testing.googleblog.com/2013/03/testing-on-toilet-testing-state-vs.html">original post</a></p>
 
 <ul>
 <li><strong>Testing State</strong> - Verifying the code under test returns the correct results.</li>
@@ -1283,6 +1284,62 @@ post</a></p>
 
 <p>Most of the time you want to test state. Occasionally interactions need to be tested when the number
 of calls or order of calls matter.</p>
+
+<h2 id="code-coverage-goal-80-and-no-less">Code coverage goal: 80% and no less!</h2>
+
+<p><em>July 20, 2010</em> -
+<a href="https://testing.googleblog.com/2010/07/code-coverage-goal-80-and-no-less.html">original post</a></p>
+
+<p>Early one morning, a young programmer asked the great master, “I am ready to write some unit tests.
+What code coverage should I aim for?”</p>
+
+<p>The great master replied, “Don’t worry about coverage, just write some good tests.”</p>
+
+<p>The young programmer smiled, bowed, and left.</p>
+
+<p>Later that day, a second programmer asked the same question. The great master pointed at a pot of
+boiling water and asked, “How many grains of rice should I put in that pot?”</p>
+
+<p>The programmer, looking puzzled, replied, “How can I possibly tell you? It depends on how many
+people you need to feed, how hungry they are, what other food you are serving, how much rice you
+have available, and so on.”</p>
+
+<p>“Exactly,” said the great master.</p>
+
+<p>The second programmer smiled, bowed, and left.</p>
+
+<p>Toward the end of the day, a third programmer came and asked the same question about code coverage.</p>
+
+<p>“Eighty percent and no less!” Replied the master in a stern voice, pounding his fist on the table.</p>
+
+<p>The third programmer smiled, bowed, and left.</p>
+
+<p>After this last reply, a young apprentice approached the great master, “Great master, today I
+overheard you answer the same question about code coverage with three different answers. Why?”</p>
+
+<p>The great master stood up from his chair. “Come get some fresh tea with me and let’s talk about it.”
+After they filled their cups with smoking hot green tea, the great master began:</p>
+
+<p>“The first programmer is new and just getting started with testing. Right now he has a lot of code
+and no tests. He has a long way to go; focusing on code coverage at this time would be depressing
+and quite useless. He’s better off just getting used to writing and running some tests. He can worry
+about coverage later.</p>
+
+<p>&ldquo;The second programmer, on the other hand, is quite experienced both at programming and testing.
+When I replied by asking her how many grains of rice I should put in a pot, I helped her realize
+that the amount of testing necessary depends on a number of factors, and she knows those factors
+better than I do – it’s her code after all. There is no single, simple, answer, and she’s smart
+enough to handle the truth and work with that.”</p>
+
+<p>“I see,” said the young apprentice, “but if there is no single simple answer, then why did you tell
+the third programmer ‘Eighty percent and no less’?”</p>
+
+<p>The great master laughed so hard and loud that his belly, evidence that he drank more than just
+green tea, flopped up and down. “The third programmer wants only simple answers – even when there
+are no simple answers … and then does not follow them anyway.”</p>
+
+<p>The young apprentice and the grizzled great master finished drinking their tea in contemplative
+silence.</p>
 
 <h2 id="data-driven-traps">Data Driven Traps!</h2>
 
@@ -1793,7 +1850,7 @@ still fails as expected.</p>
 			<a class="nav nav-prev" href="/google-testing-blog/whittaker/" title="James Whittaker"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/google-testing-blog/blog/" title="General Notes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/google-testing-blog/general/" title="General Notes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1803,20 +1860,20 @@ still fails as expected.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1563939875"></script>
-    <script src="/js/perfect-scrollbar.min.js?1563939875"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1563939875"></script>
-    <script src="/js/jquery.sticky.js?1563939875"></script>
-    <script src="/js/featherlight.min.js?1563939875"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1563939875"></script>
-    <script src="/js/highlight.pack.js?1563939875"></script>
+    <script src="/js/clipboard.min.js?1564022436"></script>
+    <script src="/js/perfect-scrollbar.min.js?1564022436"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1564022436"></script>
+    <script src="/js/jquery.sticky.js?1564022436"></script>
+    <script src="/js/featherlight.min.js?1564022436"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1564022436"></script>
+    <script src="/js/highlight.pack.js?1564022436"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1563939875"></script>
-    <script src="/js/learn.js?1563939875"></script>
-    <script src="/js/hugo-learn.js?1563939875"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1564022436"></script>
+    <script src="/js/learn.js?1564022436"></script>
+    <script src="/js/hugo-learn.js?1564022436"></script>
 
-    <link href="/mermaid/mermaid.css?1563939875" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1563939875"></script>
+    <link href="/mermaid/mermaid.css?1564022436" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1564022436"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

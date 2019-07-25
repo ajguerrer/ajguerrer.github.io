@@ -12,11 +12,11 @@
     
     <item>
       <title>General Notes</title>
-      <link>https://ajguerrer.github.io/google-testing-blog/blog/</link>
+      <link>https://ajguerrer.github.io/google-testing-blog/general/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://ajguerrer.github.io/google-testing-blog/blog/</guid>
-      <description>Test Reliability  Test binary size and memory usage, including third-party testing tools, have a strong correlation on whether a test is flaky. 1 Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and more reliable to have smaller tests that break closer to the source of the problem.2 3  Productivity  Releasing often gives teams an incentive to automate testing and reduce coupling with the rest of the system.</description>
+      <guid>https://ajguerrer.github.io/google-testing-blog/general/</guid>
+      <description>Test Reliability  Test binary size and memory usage, including third-party testing tools, have a strong correlation on whether a test is flaky. 1 Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and more reliable to have smaller tests that break closer to the source of the problem.2 3  Productivity  Automation is costly. Automate only the tests that you find yourself running often to reliably catch regressions on features with business value.</description>
     </item>
     
     <item>

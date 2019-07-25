@@ -11,20 +11,20 @@
     <title>James Whittaker :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1563939875" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1563939875" rel="stylesheet">
-    <link href="/css/hybrid.css?1563939875" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1563939875" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1563939875" rel="stylesheet">
-    <link href="/css/auto-complete.css?1563939875" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1563939875" rel="stylesheet">
-    <link href="/css/theme.css?1563939875" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1563939875" rel="stylesheet">
+    <link href="/css/nucleus.css?1564022436" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1564022436" rel="stylesheet">
+    <link href="/css/hybrid.css?1564022436" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1564022436" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1564022436" rel="stylesheet">
+    <link href="/css/auto-complete.css?1564022436" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1564022436" rel="stylesheet">
+    <link href="/css/theme.css?1564022436" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1564022436" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1563939875" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1564022436" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1563939875"></script>
+    <script src="/js/jquery-3.3.1.min.js?1564022436"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1563939875"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1563939875"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1564022436"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1564022436"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1563939875"></script>
+<script type="text/javascript" src="/js/search.js?1564022436"></script>
 
     
   </div>
@@ -121,8 +121,8 @@
  
   
     
-      <li data-nav-id="/google-testing-blog/blog/" title="General Notes" class="dd-item ">
-        <a href="/google-testing-blog/blog/">
+      <li data-nav-id="/google-testing-blog/general/" title="General Notes" class="dd-item ">
+        <a href="/google-testing-blog/general/">
         General Notes
         
         </a>
@@ -351,23 +351,40 @@ Instead, each of the three roles look at the product from different angles:</p>
 
 <ul>
 <li><em>SWE (Software Engineer)</em> - Feature creators responsible for their work. SWEs design and write
-features, and prove they work by writing and running tests.</li>
+features, and then prove they work by writing and running tests.</li>
 <li><em>SET (Software Engineer in Test)</em> - Codebase caretakers who enable SWEs to write tests. SETs
 refactor code for testability, and write test features including test doubles and test framework.</li>
 <li><em>TE (Test Engineer)</em> - Product experts who analyze quality and risk from the perspective of the
-user. TEs write automation scripts, drive test execution and interpret test results.<sup class="footnote-ref" id="fnref:15"><a href="#fn:15">17</a></sup></li>
+user. TEs write large tests and automation scrips as well as drive test execution and interpret
+their results.<sup class="footnote-ref" id="fnref:15"><a href="#fn:15">17</a></sup></li>
 </ul>
+
+<p>SETs and TEs&rsquo; are usually not involved early in the design phase of a product. Only when the product
+gains traction do they begin to exert their influence.<sup class="footnote-ref" id="fnref:19"><a href="#fn:19">18</a></sup> <sup class="footnote-ref" id="fnref:21"><a href="#fn:21">19</a></sup></p>
+
+<p>SETs and SWEs have similar skill sets. Conversions from one role to another are common.<sup class="footnote-ref" id="fnref:20"><a href="#fn:20">20</a></sup></p>
 
 <p>Quality is a work in progress that relies on getting product out to users and receiving feedback as
 quickly as possible. As its being developed, a release is pushed through several channels in order
-of increasing confidence in product quality:</p>
+of increasing confidence in quality:</p>
 
 <ul>
 <li><em>Canary</em> - Only fit for ultra tolerant users running experiments.</li>
-<li><em>Dev</em> - What developers use on their day-to-day work.</li>
+<li><em>Dev</em> - Used by developers for day-to-day work.</li>
 <li><em>Test</em> - Used internally for day-to-day work.</li>
 <li><em>Beta/Release</em> - Fit for external exposure.<sup class="footnote-ref" id="fnref:17"><a href="#fn:17">10</a></sup></li>
 </ul>
+
+<p>Tests are classified by scope, falling under three categories:</p>
+
+<ul>
+<li><em>Small</em> - Covers a single function, focusing on logic.</li>
+<li><em>Medium</em> - Covers a function and its nearest neighbors, focusing on interoperability.</li>
+<li><em>Large</em> -  Covers an entire user scenario, focusing on business requirements.<sup class="footnote-ref" id="fnref:18"><a href="#fn:18">21</a></sup></li>
+</ul>
+
+<p>If a test doesn&rsquo;t require human cleverness or intuition, it is automated. Bug reporting is automated
+too.<sup class="footnote-ref" id="fnref:18"><a href="#fn:18">21</a></sup></p>
 <div class="footnotes">
 
 <hr />
@@ -407,6 +424,14 @@ of increasing confidence in product quality:</p>
  <a class="footnote-return" href="#fnref:16"><sup>[return]</sup></a></li>
 <li id="fn:15"><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html">https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html</a>
  <a class="footnote-return" href="#fnref:15"><sup>[return]</sup></a></li>
+<li id="fn:19"><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html">https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html</a>
+ <a class="footnote-return" href="#fnref:19"><sup>[return]</sup></a></li>
+<li id="fn:21"><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html">https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html</a>
+ <a class="footnote-return" href="#fnref:21"><sup>[return]</sup></a></li>
+<li id="fn:20"><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html">https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html</a>
+ <a class="footnote-return" href="#fnref:20"><sup>[return]</sup></a></li>
+<li id="fn:18"><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html">https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html</a>
+ <a class="footnote-return" href="#fnref:18"><sup>[return]</sup></a></li>
 </ol>
 </div>
 
@@ -552,20 +577,20 @@ of increasing confidence in product quality:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1563939875"></script>
-    <script src="/js/perfect-scrollbar.min.js?1563939875"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1563939875"></script>
-    <script src="/js/jquery.sticky.js?1563939875"></script>
-    <script src="/js/featherlight.min.js?1563939875"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1563939875"></script>
-    <script src="/js/highlight.pack.js?1563939875"></script>
+    <script src="/js/clipboard.min.js?1564022436"></script>
+    <script src="/js/perfect-scrollbar.min.js?1564022436"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1564022436"></script>
+    <script src="/js/jquery.sticky.js?1564022436"></script>
+    <script src="/js/featherlight.min.js?1564022436"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1564022436"></script>
+    <script src="/js/highlight.pack.js?1564022436"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1563939875"></script>
-    <script src="/js/learn.js?1563939875"></script>
-    <script src="/js/hugo-learn.js?1563939875"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1564022436"></script>
+    <script src="/js/learn.js?1564022436"></script>
+    <script src="/js/hugo-learn.js?1564022436"></script>
 
-    <link href="/mermaid/mermaid.css?1563939875" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1563939875"></script>
+    <link href="/mermaid/mermaid.css?1564022436" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1564022436"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
