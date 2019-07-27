@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/google-testing-blog/general/</guid>
-      <description>Test Reliability  Test binary size and memory usage, including third-party testing tools, have a strong correlation on whether a test is flaky. 1 Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and more reliable to have smaller tests that break closer to the source of the problem.2 3  Productivity  Automation is costly. Automate only the tests that you find yourself running often to reliably catch regressions on features with business value.</description>
+      <description>Test Reliability  Smaller tests run faster, are less flakey, and isolate failures. As a general rule of thumb, favor a composition of 70% small, 20% medium, and 10% large tests.1 Test binary size and memory usage, including third-party testing tools, have a strong correlation on whether a test is flaky.2 Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and more reliable to have smaller tests that break closer to the source of the problem.</description>
     </item>
     
     <item>
