@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>James Whittaker :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1564259592" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564259592" rel="stylesheet">
-    <link href="/css/hybrid.css?1564259592" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564259592" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564259592" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564259592" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564259592" rel="stylesheet">
-    <link href="/css/theme.css?1564259592" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564259592" rel="stylesheet">
+    <link href="/css/nucleus.css?1579407787" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1579407787" rel="stylesheet">
+    <link href="/css/hybrid.css?1579407787" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1579407787" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1579407787" rel="stylesheet">
+    <link href="/css/auto-complete.css?1579407787" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1579407787" rel="stylesheet">
+    <link href="/css/theme.css?1579407787" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1579407787" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1564259592" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1579407787" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564259592"></script>
+    <script src="/js/jquery-3.3.1.min.js?1579407787"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564259592"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564259592"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1579407787"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1579407787"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564259592"></script>
+<script type="text/javascript" src="/js/search.js?1579407787"></script>
 
     
   </div>
@@ -261,14 +261,11 @@
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</a></li>
-<li><a href="#an-ingredients-list-for-testing">An Ingredients List for Testing</a></li>
-<li><a href="#how-google-tests-software">How Google Tests Software</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</a></li>
+    <li><a href="#an-ingredients-list-for-testing">An Ingredients List for Testing</a></li>
+    <li><a href="#how-google-tests-software">How Google Tests Software</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -293,62 +290,52 @@
 
 
 
-
-
 <h2 id="the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</h2>
-
 <ul>
 <li><em>Aimlessness</em> - Do not test for the sake of testing. Every test should have a goal. Document
-what works and analyze what doesn&rsquo;t. Then, share with your colleagues.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup></li>
+what works and analyze what doesn't. Then, share with your colleagues.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
 <li><em>Repetitiveness</em> - Running the same test suite over again without finding new bugs does not
-mean that there are no bugs. Variation is healthy.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></li>
+mean that there are no bugs. Variation is healthy.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
 <li><em>Amnesia</em> - Chances are the problem your are trying to solve has been solved before. If the same
 issue keeps stinging you, or you had to answer a question the hard way, document it and put it in
-a place others will find it.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup></li>
+a place others will find it.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
 <li><em>Boredom</em> - A bored tester rushes through the tactical aspects of testing without considering
 the interesting strategic aspects. The day testing gets &ldquo;figured out&rdquo; is the day it gets
-completely automated away.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup></li>
-<li><em>Homelessness</em> - Testers are homeless. They don&rsquo;t actually live in the software like users do.
-Some bugs are only found with the hands of users doing their work in their environment.<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">5</a></sup></li>
-<li><em>Blindness</em> - Testers require tools to provide helpful feedback from software. It&rsquo;s tempting to
+completely automated away.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
+<li><em>Homelessness</em> - Testers are homeless. They don't actually live in the software like users do.
+Some bugs are only found with the hands of users doing their work in their environment.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
+<li><em>Blindness</em> - Testers require tools to provide helpful feedback from software. It's tempting to
 settle down with a trusty set of tools, but doing so causes self-inflicted blindness to a growing
-ecosystem of useful feedback.<sup class="footnote-ref" id="fnref:6"><a href="#fn:6">6</a></sup></li>
+ecosystem of useful feedback.<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></li>
 <li><em>Entropy</em> - Testers increase entropy by giving developers things to do. This is unavoidable, but
 preventative. As developers do more <em>during</em> development, testers add less work, and entropy tends
-towards a minimum.<sup class="footnote-ref" id="fnref:7"><a href="#fn:7">7</a></sup></li>
+towards a minimum.<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></li>
 </ul>
-
 <h2 id="an-ingredients-list-for-testing">An Ingredients List for Testing</h2>
-
 <ul>
 <li><em>Product expertise</em> - A good developer knows how the product works; a good tester knows how to use
-it.<sup class="footnote-ref" id="fnref:8"><a href="#fn:8">8</a></sup></li>
+it.<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup></li>
 <li><em>Bill of materials</em> - Testers should bea able to reference a complete list of features that can be
-tested.<sup class="footnote-ref" id="fnref:9"><a href="#fn:9">9</a></sup></li>
+tested.<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup></li>
 <li><em>Risk analysis</em> - Features are not equally important, or equally time consuming to test. Have a
-model to quantitatively analyze the risk of each feature.<sup class="footnote-ref" id="fnref:17"><a href="#fn:17">10</a></sup></li>
+model to quantitatively analyze the risk of each feature.<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup></li>
 <li><em>Domain expertise</em> - It is not enough to be good at testing. Testers also need expertise with the
-technologies of the domain the product operates in.<sup class="footnote-ref" id="fnref:10"><a href="#fn:10">11</a></sup></li>
+technologies of the domain the product operates in.<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup></li>
 <li><em>Test guidance</em> - Whether it be technique, nomenclature, or history, testers need a way to
-identify and store tribal knowledge of the team.<sup class="footnote-ref" id="fnref:11"><a href="#fn:11">12</a></sup></li>
+identify and store tribal knowledge of the team.<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup></li>
 <li><em>Variation</em> - Tests often get stale. Wasting time running stale tests is also a form of risk.
-Adding variation can breathe new life into stale tests.<sup class="footnote-ref" id="fnref:12"><a href="#fn:12">13</a></sup></li>
+Adding variation can breathe new life into stale tests.<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup></li>
 <li><em>Completeness analysis</em> - Teams need a model to measure how well their testing efforts have
-covered the risk landscape of their product.<sup class="footnote-ref" id="fnref:13"><a href="#fn:13">14</a></sup></li>
+covered the risk landscape of their product.<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup></li>
 </ul>
-
 <h2 id="how-google-tests-software">How Google Tests Software</h2>
-
 <p>Engineers are loaned out to product teams on an as-needed basis. Engineers are free to change
-product teams at their own cadence.<sup class="footnote-ref" id="fnref:14"><a href="#fn:14">15</a></sup></p>
-
+product teams at their own cadence.<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup></p>
 <p>Developers own quality while testers support developers with tools and feedback. As developers get
 better at testing, less testers are needed. Successful teams have higher developer-to-tester
-ratios. <sup class="footnote-ref" id="fnref:14"><a href="#fn:14">15</a></sup></p>
-
-<p>Development and test are not treated as separate disciplines. Developers test and testers code.<sup class="footnote-ref" id="fnref:16"><a href="#fn:16">16</a></sup>
+ratios. <sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup></p>
+<p>Development and test are not treated as separate disciplines. Developers test and testers code.<sup id="fnref:16"><a href="#fn:16" class="footnote-ref" role="doc-noteref">16</a></sup>
 Instead, each of the three roles look at the product from different angles:</p>
-
 <ul>
 <li><em>SWE (Software Engineer)</em> - Feature creators responsible for their work. SWEs design and write
 features, and then prove they work by writing and running tests.</li>
@@ -356,84 +343,96 @@ features, and then prove they work by writing and running tests.</li>
 refactor code for testability, and write test features including test doubles and test framework.</li>
 <li><em>TE (Test Engineer)</em> - Product experts who analyze quality and risk from the perspective of the
 user. TEs write large tests and automation scrips as well as drive test execution and interpret
-their results.<sup class="footnote-ref" id="fnref:15"><a href="#fn:15">17</a></sup></li>
+their results.<sup id="fnref:17"><a href="#fn:17" class="footnote-ref" role="doc-noteref">17</a></sup></li>
 </ul>
-
 <p>SETs and TEs&rsquo; are usually not involved early in the design phase of a product. Only when the product
-gains traction do they begin to exert their influence.<sup class="footnote-ref" id="fnref:19"><a href="#fn:19">18</a></sup> <sup class="footnote-ref" id="fnref:21"><a href="#fn:21">19</a></sup></p>
-
-<p>SETs and SWEs have similar skill sets. Conversions from one role to another are common.<sup class="footnote-ref" id="fnref:20"><a href="#fn:20">20</a></sup></p>
-
+gains traction do they begin to exert their influence.<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup> <sup id="fnref:19"><a href="#fn:19" class="footnote-ref" role="doc-noteref">19</a></sup></p>
+<p>SETs and SWEs have similar skill sets. Conversions from one role to another are common.<sup id="fnref:20"><a href="#fn:20" class="footnote-ref" role="doc-noteref">20</a></sup></p>
 <p>Quality is a work in progress that relies on getting product out to users and receiving feedback as
 quickly as possible. As its being developed, a release is pushed through several channels in order
 of increasing confidence in quality:</p>
-
 <ul>
 <li><em>Canary</em> - Only fit for ultra tolerant users running experiments.</li>
 <li><em>Dev</em> - Used by developers for day-to-day work.</li>
 <li><em>Test</em> - Used internally for day-to-day work.</li>
-<li><em>Beta/Release</em> - Fit for external exposure.<sup class="footnote-ref" id="fnref:17"><a href="#fn:17">10</a></sup></li>
+<li><em>Beta/Release</em> - Fit for external exposure.<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup></li>
 </ul>
-
 <p>Tests are classified by scope, falling under three categories:</p>
-
 <ul>
 <li><em>Small</em> - Covers a single function, focusing on logic.</li>
 <li><em>Medium</em> - Covers a function and its nearest neighbors, focusing on interoperability.</li>
-<li><em>Large</em> -  Covers an entire user scenario, focusing on business requirements.<sup class="footnote-ref" id="fnref:18"><a href="#fn:18">21</a></sup></li>
+<li><em>Large</em> -  Covers an entire user scenario, focusing on business requirements.<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref">21</a></sup></li>
 </ul>
-
-<p>If a test doesn&rsquo;t require human cleverness or intuition, it is automated. Bug reporting is automated
-too.<sup class="footnote-ref" id="fnref:18"><a href="#fn:18">21</a></sup></p>
-<div class="footnotes">
-
-<hr />
-
+<p>If a test doesn't require human cleverness or intuition, it is automated. Bug reporting is automated
+too.<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref">21</a></sup></p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1"><a href="https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html">https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html</a>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2"><a href="https://testing.googleblog.com/2009/06/by-james.html">https://testing.googleblog.com/2009/06/by-james.html</a>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-<li id="fn:3"><a href="https://testing.googleblog.com/2009/07/plague-of-amnesia.html">https://testing.googleblog.com/2009/07/plague-of-amnesia.html</a>
- <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
-<li id="fn:4"><a href="https://testing.googleblog.com/2009/07/plague-of-boredom.html">https://testing.googleblog.com/2009/07/plague-of-boredom.html</a>
- <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
-<li id="fn:5"><a href="https://testing.googleblog.com/2009/07/plague-of-homelessness.html">https://testing.googleblog.com/2009/07/plague-of-homelessness.html</a>
- <a class="footnote-return" href="#fnref:5"><sup>[return]</sup></a></li>
-<li id="fn:6"><a href="https://testing.googleblog.com/2009/07/plague-of-blindness.html">https://testing.googleblog.com/2009/07/plague-of-blindness.html</a>
- <a class="footnote-return" href="#fnref:6"><sup>[return]</sup></a></li>
-<li id="fn:7"><a href="https://testing.googleblog.com/2009/09/plague-of-entropy.html">https://testing.googleblog.com/2009/09/plague-of-entropy.html</a>
- <a class="footnote-return" href="#fnref:7"><sup>[return]</sup></a></li>
-<li id="fn:8"><a href="https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-one.html">https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-one.html</a>
- <a class="footnote-return" href="#fnref:8"><sup>[return]</sup></a></li>
-<li id="fn:9"><a href="https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-three.html">https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-three.html</a>
- <a class="footnote-return" href="#fnref:9"><sup>[return]</sup></a></li>
-<li id="fn:17"><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-four.html">https://testing.googleblog.com/2011/03/how-google-tests-software-part-four.html</a>
- <a class="footnote-return" href="#fnref:17"><sup>[return]</sup></a></li>
-<li id="fn:10"><a href="https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-four.html">https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-four.html</a>
- <a class="footnote-return" href="#fnref:10"><sup>[return]</sup></a></li>
-<li id="fn:11"><a href="https://testing.googleblog.com/2010/10/ingredients-list-for-testing-part-five.html">https://testing.googleblog.com/2010/10/ingredients-list-for-testing-part-five.html</a>
- <a class="footnote-return" href="#fnref:11"><sup>[return]</sup></a></li>
-<li id="fn:12"><a href="https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-six.html">https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-six.html</a>
- <a class="footnote-return" href="#fnref:12"><sup>[return]</sup></a></li>
-<li id="fn:13"><a href="https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-seven.html">https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-seven.html</a>
- <a class="footnote-return" href="#fnref:13"><sup>[return]</sup></a></li>
-<li id="fn:14"><a href="https://testing.googleblog.com/2011/01/how-google-tests-software.html">https://testing.googleblog.com/2011/01/how-google-tests-software.html</a>
- <a class="footnote-return" href="#fnref:14"><sup>[return]</sup></a></li>
-<li id="fn:16"><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-three.html">https://testing.googleblog.com/2011/02/how-google-tests-software-part-three.html</a>
- <a class="footnote-return" href="#fnref:16"><sup>[return]</sup></a></li>
-<li id="fn:15"><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html">https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html</a>
- <a class="footnote-return" href="#fnref:15"><sup>[return]</sup></a></li>
-<li id="fn:19"><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html">https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html</a>
- <a class="footnote-return" href="#fnref:19"><sup>[return]</sup></a></li>
-<li id="fn:21"><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html">https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html</a>
- <a class="footnote-return" href="#fnref:21"><sup>[return]</sup></a></li>
-<li id="fn:20"><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html">https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html</a>
- <a class="footnote-return" href="#fnref:20"><sup>[return]</sup></a></li>
-<li id="fn:18"><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html">https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html</a>
- <a class="footnote-return" href="#fnref:18"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html">https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/06/by-james.html">https://testing.googleblog.com/2009/06/by-james.html</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-amnesia.html">https://testing.googleblog.com/2009/07/plague-of-amnesia.html</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-boredom.html">https://testing.googleblog.com/2009/07/plague-of-boredom.html</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-homelessness.html">https://testing.googleblog.com/2009/07/plague-of-homelessness.html</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-blindness.html">https://testing.googleblog.com/2009/07/plague-of-blindness.html</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/09/plague-of-entropy.html">https://testing.googleblog.com/2009/09/plague-of-entropy.html</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-one.html">https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-one.html</a> <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-two.html">https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-two.html</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-four.html">https://testing.googleblog.com/2011/03/how-google-tests-software-part-four.html</a> <a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-four.html">https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-four.html</a> <a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2010/10/ingredients-list-for-testing-part-five.html">https://testing.googleblog.com/2010/10/ingredients-list-for-testing-part-five.html</a> <a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-six.html">https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-six.html</a> <a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-seven.html">https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-seven.html</a> <a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:15" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/01/how-google-tests-software.html">https://testing.googleblog.com/2011/01/how-google-tests-software.html</a> <a href="#fnref:15" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:16" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-three.html">https://testing.googleblog.com/2011/02/how-google-tests-software-part-three.html</a> <a href="#fnref:16" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:17" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html">https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html</a> <a href="#fnref:17" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:18" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html">https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html</a> <a href="#fnref:18" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:19" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html">https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html</a> <a href="#fnref:19" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:20" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html">https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html</a> <a href="#fnref:20" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:21" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html">https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html</a> <a href="#fnref:21" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
 
 <footer class=" footline" >
@@ -577,20 +576,19 @@ too.<sup class="footnote-ref" id="fnref:18"><a href="#fn:18">21</a></sup></p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564259592"></script>
-    <script src="/js/jquery.sticky.js?1564259592"></script>
-    <script src="/js/featherlight.min.js?1564259592"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564259592"></script>
-    <script src="/js/highlight.pack.js?1564259592"></script>
+    <script src="/js/clipboard.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1579407787"></script>
+    <script src="/js/jquery.sticky.js?1579407787"></script>
+    <script src="/js/featherlight.min.js?1579407787"></script>
+    <script src="/js/highlight.pack.js?1579407787"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564259592"></script>
-    <script src="/js/learn.js?1564259592"></script>
-    <script src="/js/hugo-learn.js?1564259592"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1579407787"></script>
+    <script src="/js/learn.js?1579407787"></script>
+    <script src="/js/hugo-learn.js?1579407787"></script>
 
-    <link href="/mermaid/mermaid.css?1564259592" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564259592"></script>
+    <link href="/mermaid/mermaid.css?1579407787" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1579407787"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Guide to Writing Testable Code :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1564259592" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564259592" rel="stylesheet">
-    <link href="/css/hybrid.css?1564259592" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564259592" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564259592" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564259592" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564259592" rel="stylesheet">
-    <link href="/css/theme.css?1564259592" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564259592" rel="stylesheet">
+    <link href="/css/nucleus.css?1579407787" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1579407787" rel="stylesheet">
+    <link href="/css/hybrid.css?1579407787" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1579407787" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1579407787" rel="stylesheet">
+    <link href="/css/auto-complete.css?1579407787" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1579407787" rel="stylesheet">
+    <link href="/css/theme.css?1579407787" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1579407787" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1564259592" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1579407787" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564259592"></script>
+    <script src="/js/jquery-3.3.1.min.js?1579407787"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564259592"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564259592"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1579407787"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1579407787"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564259592"></script>
+<script type="text/javascript" src="/js/search.js?1579407787"></script>
 
     
   </div>
@@ -261,48 +261,28 @@
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#dependency-injection">Dependency Injection</a>
-<ul>
-<li><a href="#fixing-violations">Fixing violations</a>
-<ul>
-<li><a href="#static-method-calls">Static method calls</a></li>
-<li><a href="#conditional-logic">Conditional logic</a></li>
-<li><a href="#constructing-dependencies">Constructing dependencies</a></li>
-<li><a href="#partial-construction">Partial construction</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#law-of-demeter">Law of Demeter</a>
-<ul>
-<li><a href="#fixing-violations-1">Fixing violations</a>
-<ul>
-<li><a href="#indirect-dependencies">Indirect dependencies</a></li>
-<li><a href="#overusing-member-access-operator">Overusing member access operator</a></li>
-<li><a href="#exposing-dependencies">Exposing dependencies</a></li>
-<li><a href="#context-objects">Context Objects</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#global-state">Global State</a>
-<ul>
-<li><a href="#fixing-violations-2">Fixing violations</a>
-<ul>
-<li><a href="#singletons">Singletons</a></li>
-<li><a href="#flags">Flags</a></li>
-<li><a href="#static-methods">Static methods</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#single-responsibility-principle">Single Responsibility Principle</a>
-<ul>
-<li><a href="#fixing-violations-3">Fixing violations</a>
-<ul>
-<li><a href="#proactive">Proactive</a></li>
-<li><a href="#reactive">Reactive</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#dependency-injection">Dependency Injection</a>
+      <ul>
+        <li><a href="#fixing-violations">Fixing violations</a></li>
+      </ul>
+    </li>
+    <li><a href="#law-of-demeter">Law of Demeter</a>
+      <ul>
+        <li><a href="#fixing-violations-1">Fixing violations</a></li>
+      </ul>
+    </li>
+    <li><a href="#global-state">Global State</a>
+      <ul>
+        <li><a href="#fixing-violations-2">Fixing violations</a></li>
+      </ul>
+    </li>
+    <li><a href="#single-responsibility-principle">Single Responsibility Principle</a>
+      <ul>
+        <li><a href="#fixing-violations-3">Fixing violations</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -327,672 +307,597 @@
 
 
 
-
-
 <div style="text-align:center">
-  <h3>Miško Hevery</h3>
+    <h3>Miško Hevery</h3>
 </div>
-
-<p>You may find Miško&rsquo;s original guide <a href="http://misko.hevery.com/code-reviewers-guide/">here</a>.</p>
-
+<p>You may find Miško's original guide <a href="http://misko.hevery.com/code-reviewers-guide/">here</a>.</p>
 <h2 id="dependency-injection">Dependency Injection</h2>
-
 <p>A testable class is one that can be constructed in isolation or with test double collaborators. Once
 constructed, they have all the dependencies they need. This is known as Dependency Injection.</p>
-
 <p>Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage
 inheritance for creating test double collaborators. This is the primary tool in a testers toolkit
 and the primary benefit Dependency Injection brings.</p>
-
 <h3 id="fixing-violations">Fixing violations</h3>
-
 <p>Below are some examples of constructor flaws and how they can be fixed with Dependency Injection.</p>
-
 <h4 id="static-method-calls">Static method calls</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AccountView</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+  <span class="n">AccountView</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="n">user_</span> <span class="o">=</span> <span class="n">RPCClient</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetUser</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class AccountView {
-  public:
-  AccountView() { user_ = RPCClient::GetInstance().GetUser(); }
+  <span class="k">private</span><span class="o">:</span>
+  <span class="n">User</span> <span class="n">user_</span><span class="p">;</span>
+<span class="p">}</span>
 
-  private:
-  User user_;
-}
-
-TEST(AccountViewTest, SlowAndFlakyTest) {
-  // Unit test is slow and requires working network connection.
-  AccountView view;
-};
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">AccountViewTest</span><span class="p">,</span> <span class="n">SlowAndFlakyTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Unit test is slow and requires working network connection.
+</span><span class="c1"></span>  <span class="n">AccountView</span> <span class="n">view</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AccountView</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">AccountView</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span><span class="o">:</span> <span class="n">user_</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class AccountView {
-  public:
-  explicit AccountView(const User&amp; user): user_(user) {}
+  <span class="k">private</span><span class="o">:</span>
+  <span class="n">User</span> <span class="n">user_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-  private:
-  User user_;
-};
-
-TEST(AccountViewTest, FastAndReliableTest) {
-  // User does not need to be retrieved over the network.
-  MockUser user;
-  AccountView view(user);
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">AccountViewTest</span><span class="p">,</span> <span class="n">FastAndReliableTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// User does not need to be retrieved over the network.
+</span><span class="c1"></span>  <span class="n">MockUser</span> <span class="n">user</span><span class="p">;</span>
+  <span class="n">AccountView</span> <span class="nf">view</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="conditional-logic">Conditional logic</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">Car</span><span class="p">(</span><span class="n">CarType</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="nl">kCoupe</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">engine_</span> <span class="o">=</span> <span class="n">FastEngine</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="n">tires_</span> <span class="o">=</span> <span class="n">SmoothTires</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">case</span> <span class="nl">kTruck</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">engine_</span> <span class="o">=</span> <span class="n">StrongEngine</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="n">tires_</span> <span class="o">=</span> <span class="n">KnobbyTires</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">default</span><span class="o">:</span>
+        <span class="n">assert</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class Car {
- public:
-  explicit Car(CarType type) {
-    switch (type) {
-      case kCoupe: {
-        engine_ = FastEngine();
-        tires_ = SmoothTires();
-        break;
-      }
-      case kTruck: {
-        engine_ = StrongEngine();
-        tires_ = KnobbyTires();
-      }
-      default:
-        assert(false);
-    }
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">Engine</span> <span class="n">engine_</span><span class="p">;</span>
+  <span class="n">Tires</span> <span class="n">tires_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  Engine engine_;
-  Tires tires_;
-};
-
-TEST(CarTest, HardToTest) {
-  // Want a car with fake engine and tires but can only make real ones.
-  Car car(kCoupe);
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">CarTest</span><span class="p">,</span> <span class="n">HardToTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Want a car with fake engine and tires but can only make real ones.
+</span><span class="c1"></span>  <span class="n">Car</span> <span class="nf">car</span><span class="p">(</span><span class="n">kCoupe</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Car</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Engine</span><span class="o">&gt;</span> <span class="n">engine</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Tires</span><span class="o">&gt;</span> <span class="n">tires</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">engine_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">tires_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">tires</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class Car {
- public:
-  Car(std::unique_ptr&lt;Engine&gt; engine, std::unique_ptr&lt;Tires&gt; tires)
-      : engine_(std::move(engine)), tires_(std::move(tires)) {}
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Engine</span><span class="o">&gt;</span> <span class="n">engine_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Tires</span><span class="o">&gt;</span> <span class="n">tires_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::unique_ptr&lt;Engine&gt; engine_;
-  std::unique_ptr&lt;Tires&gt; tires_;
-};
-
-TEST(CarTest, EasyToTest) {
-  // Car is fully configurable
-  Car car(std::make_unique&lt;FakeEngine&gt;(), std::make_unique&lt;FakeTires&gt;());
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">CarTest</span><span class="p">,</span> <span class="n">EasyToTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Car is fully configurable
+</span><span class="c1"></span>  <span class="n">Car</span> <span class="nf">car</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FakeEngine</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FakeTires</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="constructing-dependencies">Constructing dependencies</h4>
-
 <p>
-<div class="notices warning" ><pre><code class="language-cpp">class House {
-  public:
-  House() : kitchen_(), bedroom_() {}
-  // ...
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">House</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+  <span class="n">House</span><span class="p">(</span><span class="p">)</span> <span class="o">:</span> <span class="n">kitchen_</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">bedroom_</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>
+  <span class="k">private</span><span class="o">:</span>
+  <span class="n">Kitchen</span> <span class="n">kitchen_</span><span class="p">;</span>
+  <span class="n">Bedroom</span> <span class="n">bedroom_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-  private:
-  Kitchen kitchen_;
-  Bedroom bedroom_;
-};
-
-TEST(HouseTest, HardToTest) {
-  // house is stuck with Kitchen and Bedroom objects
-  House house;
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">HouseTest</span><span class="p">,</span> <span class="n">HardToTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// house is stuck with Kitchen and Bedroom objects
+</span><span class="c1"></span>  <span class="n">House</span> <span class="n">house</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
-<div class="notices tip" ><pre><code class="language-cpp">class House {
-  public:
-  House(std::unique_ptr&lt;Kitchen&gt; kitchen, std::unique_ptr&lt;Bedroom&gt; bedroom)
-      : kitchen_(std::move(kitchen)), bedroom_(std::move(bedroom)) {}
-  // ...
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">House</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+  <span class="n">House</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kitchen</span><span class="o">&gt;</span> <span class="n">kitchen</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Bedroom</span><span class="o">&gt;</span> <span class="n">bedroom</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">kitchen_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">kitchen</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">bedroom_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">bedroom</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>
+  <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kitchen</span><span class="o">&gt;</span> <span class="n">kitchen_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Bedroom</span><span class="o">&gt;</span> <span class="n">bedroom_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-  private:
-  std::unique_ptr&lt;Kitchen&gt; kitchen_;
-  std::unique_ptr&lt;Bedroom&gt; bedroom_;
-};
-
-TEST(HouseTest, EasyToTest) {
-  // house uses lightweight test doubles
-  House house(std::make_unique&lt;MockKitchen&gt;(),
-              std::make_unique&lt;MockBedroom&gt;());
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">HouseTest</span><span class="p">,</span> <span class="n">EasyToTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// house uses lightweight test doubles
+</span><span class="c1"></span>  <span class="n">House</span> <span class="nf">house</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockKitchen</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+              <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockBedroom</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 </p>
-
 <h4 id="partial-construction">Partial construction</h4>
-
 <p>
-<div class="notices warning" ><pre><code class="language-cpp">class VisualVoicemail {
-  public:
-  // Constructs a partially initialized VisualVoicemail.
-  // Don't forget to call Initialize in production, or SetCalls in test!
-  explicit VisualVoicemail(const User&amp; user) : user_(user) {}
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">VisualVoicemail</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Constructs a partially initialized VisualVoicemail.
+</span><span class="c1"></span>  <span class="c1">// Don&#39;t forget to call Initialize in production, or SetCalls in test!
+</span><span class="c1"></span>  <span class="k">explicit</span> <span class="n">VisualVoicemail</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="o">:</span> <span class="n">user_</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-  void Initialize() {
-    calls_ = Server::GetCallsFor(user_);
-  }
+  <span class="kt">void</span> <span class="nf">Initialize</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">calls_</span> <span class="o">=</span> <span class="n">Server</span><span class="o">:</span><span class="o">:</span><span class="n">GetCallsFor</span><span class="p">(</span><span class="n">user_</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  private:
-  // Hack to allow test access to private methods.
-  // Making this function public is not a better idea.
-  friend class VisualVoicemailTest_BrittleDesign_Test;
-  void SetCalls(std::vector&lt;Call&gt;&amp; calls) { calls_ = calls; }
+  <span class="k">private</span><span class="o">:</span>
+  <span class="c1">// Hack to allow test access to private methods.
+</span><span class="c1"></span>  <span class="c1">// Making this function public is not a better idea.
+</span><span class="c1"></span>  <span class="k">friend</span> <span class="k">class</span> <span class="nc">VisualVoicemailTest_BrittleDesign_Test</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">SetCalls</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span><span class="o">&amp;</span> <span class="n">calls</span><span class="p">)</span> <span class="p">{</span> <span class="n">calls_</span> <span class="o">=</span> <span class="n">calls</span><span class="p">;</span> <span class="p">}</span>
 
-  User user_;
-  std::vector&lt;Call&gt; calls_;
-};
+  <span class="n">User</span> <span class="n">user_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-TEST(VisualVoicemailTest, BrittleTest) {
-  DummyUser user;
-  VisualVoicemail voicemail(user);
-  std::vector&lt;Call&gt; calls = BuildListOfTestCalls();
-  voicemail.SetCalls(calls);
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">VisualVoicemailTest</span><span class="p">,</span> <span class="n">BrittleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">DummyUser</span> <span class="n">user</span><span class="p">;</span>
+  <span class="n">VisualVoicemail</span> <span class="nf">voicemail</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls</span> <span class="o">=</span> <span class="n">BuildListOfTestCalls</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">voicemail</span><span class="p">.</span><span class="n">SetCalls</span><span class="p">(</span><span class="n">calls</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
-<div class="notices tip" ><pre><code class="language-cpp">class VisualVoicemail {
-  public:
-  explicit VisualVoicemail(const std::vector&lt;Call&gt;&amp; calls) : calls_(calls) {}
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">VisualVoicemail</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">VisualVoicemail</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span><span class="o">&amp;</span> <span class="n">calls</span><span class="p">)</span> <span class="o">:</span> <span class="n">calls_</span><span class="p">(</span><span class="n">calls</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-  private:
-  std::vector&lt;Call&gt; calls_;
-};
+  <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-TEST(VisualVoicemailTest, FlexibleTest) {
-  VisualVoicemail voicemail(BuildListOfTestCalls());
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">VisualVoicemailTest</span><span class="p">,</span> <span class="n">FlexibleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">VisualVoicemail</span> <span class="nf">voicemail</span><span class="p">(</span><span class="n">BuildListOfTestCalls</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 </p>
-
 <h2 id="law-of-demeter">Law of Demeter</h2>
-
-<p>A class becomes difficult to test if it gets its dependencies from anywhere besides it&rsquo;s interface.
+<p>A class becomes difficult to test if it gets its dependencies from anywhere besides it's interface.
 For example, a class may get a dependency by asking one of it dependencies, breaking the Law of Demeter.</p>
-
 <p>Violations of the Law of Demeter are a sign of bad Dependency Injection, for passing in the wrong
 dependency, and bad encapsulation, for exposing secondary dependencies in the first place.</p>
-
 <h3 id="fixing-violations-1">Fixing violations</h3>
-
 <p>Below are examples of Law of Demeter violations and how they can be fixed with accurate interfaces
 and encapsulation.</p>
-
 <h4 id="indirect-dependencies">Indirect dependencies</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">SalesTaxCalculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">SalesTaxCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">TaxTable</span><span class="o">&amp;</span> <span class="n">taxTable</span><span class="p">)</span> <span class="o">:</span> <span class="n">taxTable_</span><span class="p">(</span><span class="n">taxTable</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class SalesTaxCalculator {
- public:
-  SalesTaxCalculator(const TaxTable&amp; taxTable) : taxTable_(taxTable) {}
+  <span class="kt">float</span> <span class="nf">ComputeSalesTax</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">,</span> <span class="k">const</span> <span class="n">Invoice</span><span class="o">&amp;</span> <span class="n">invoice</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Get the correct dependencies first.
+</span><span class="c1"></span>    <span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">GetAddress</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">amount</span> <span class="o">=</span> <span class="n">invoice</span><span class="p">.</span><span class="n">GetSubTotal</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// Then, do the calculation.
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">taxTable_</span><span class="p">.</span><span class="n">GetTaxRate</span><span class="p">(</span><span class="n">address</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  float ComputeSalesTax(const User&amp; user, const Invoice&amp; invoice) {
-    // Get the correct dependencies first.
-    Address address = user.GetAddress();
-    float amount = invoice.GetSubTotal();
-    // Then, do the calculation.
-    return amount * taxTable_.GetTaxRate(address);
-  }
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TaxTable</span> <span class="n">taxTable_</span><span class="p">;</span>
+<span class="p">}</span>
 
- public:
-  TaxTable taxTable_;
-}
-
-TEST(SalesTaxCalculatorTest, ComplexTest) {
-  SalesTaxCalculator calc(TaxTable());
-  User user(Address(&quot;1600 Amphitheater Parkway...&quot;));
-  Invoice invoice(1, ProductX(95.00));
-  // ...
-  EXPECT_EQ(0.09, calc.ComputeSalesTax(user, invoice));
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">SalesTaxCalculatorTest</span><span class="p">,</span> <span class="n">ComplexTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">SalesTaxCalculator</span> <span class="nf">calc</span><span class="p">(</span><span class="n">TaxTable</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="n">Address</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">1600 Amphitheater Parkway...</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Invoice</span> <span class="nf">invoice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ProductX</span><span class="p">(</span><span class="mf">95.00</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">ComputeSalesTax</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">invoice</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">SalesTaxCalculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">SalesTaxCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">TaxTable</span><span class="o">&amp;</span> <span class="n">taxTable</span><span class="p">)</span> <span class="o">:</span> <span class="n">taxTable_</span><span class="p">(</span><span class="n">taxTable</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class SalesTaxCalculator {
- public:
-  SalesTaxCalculator(const TaxTable&amp; taxTable) : taxTable_(taxTable) {}
+  <span class="kt">float</span> <span class="nf">ComputeSalesTax</span><span class="p">(</span><span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Already have the correct dependencies; do the calculation.
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">taxTable_</span><span class="p">.</span><span class="n">GetTaxRate</span><span class="p">(</span><span class="n">address</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  float ComputeSalesTax(const Address&amp; address, const float amount) {
-    // Already have the correct dependencies; do the calculation.
-    return amount * taxTable_.GetTaxRate(address);
-  }
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TaxTable</span> <span class="n">taxTable_</span><span class="p">;</span>
+<span class="p">}</span>
 
- public:
-  TaxTable taxTable_;
-}
-
-TEST(SalesTaxCalculatorTest, StraightforwardTest) {
-  SalesTaxCalculator calc(TaxTable());
-  Address address(&quot;1600 Amphitheater Parkway...&quot;)
-  // ...
-  EXPECT_EQ(0.09, calc.ComputeSalesTax(address, 95.00));
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">SalesTaxCalculatorTest</span><span class="p">,</span> <span class="n">StraightforwardTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">SalesTaxCalculator</span> <span class="nf">calc</span><span class="p">(</span><span class="n">TaxTable</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Address</span> <span class="nf">address</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">1600 Amphitheater Parkway...</span><span class="s">&#34;</span><span class="p">)</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">ComputeSalesTax</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mf">95.00</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="overusing-member-access-operator">Overusing member access operator</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginPage</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">LoginPage</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RPCClient</span><span class="o">&gt;</span> <span class="n">client</span><span class="p">,</span> <span class="k">const</span> <span class="n">HttpRequest</span><span class="o">&amp;</span> <span class="n">request</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">client_</span><span class="p">(</span><span class="n">client</span><span class="p">)</span><span class="p">,</span> <span class="n">request_</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class LoginPage {
- public:
-  LoginPage(std::shared_ptr&lt;RPCClient&gt; client, const HttpRequest&amp; request)
-      : client_(client), request_(request) {}
+  <span class="kt">bool</span> <span class="nf">Login</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Even using member access access operator once is one more time than it
+</span><span class="c1"></span>    <span class="c1">// needs to be.
+</span><span class="c1"></span>    <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">cookie</span> <span class="o">=</span> <span class="n">request_</span><span class="p">.</span><span class="n">GetCookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// Using a member access operator twice in one statement is right out!
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">client_</span><span class="p">.</span><span class="n">GetAuthenticator</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  bool Login() {
-    // Even using member access access operator once is one more time than it
-    // needs to be.
-    std::string cookie = request_.GetCookie(&quot;g&quot;);
-    // Using a member access operator twice in one statement is right out!
-    return client_.GetAuthenticator().Authenticate();
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RPCClient</span><span class="o">&gt;</span> <span class="n">client_</span><span class="p">;</span>
+  <span class="n">HttpRequest</span> <span class="n">request_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::shared_ptr&lt;RPCClient&gt; client_;
-  HttpRequest request_;
-};
+<span class="n">TEST</span><span class="p">(</span><span class="n">LoginPageTest</span><span class="p">,</span> <span class="n">ComplexBrittleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MockRPCClient</span> <span class="nf">mock_client</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeAuthenticator</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">Cookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">xyz123</span><span class="s">&#34;</span><span class="p">)</span><span class="p">}</span><span class="p">;</span>
+  <span class="n">MockHttpRequest</span> <span class="nf">mock_request</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">LoginPage</span> <span class="nf">page</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span><span class="p">;</span>
 
-TEST(LoginPageTest, ComplexBrittleTest) {
-  MockRPCClient mock_client(make_shared&lt;FakeAuthenticator&gt;());
-  std::vector&lt;Cookie&gt; cookies = {Cookie(&quot;g&quot;, &quot;xyz123&quot;)};
-  MockHttpRequest mock_request(cookies);
-  LoginPage page(client, request);
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_client</span><span class="p">,</span> <span class="n">GetAuthenticator</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_request</span><span class="p">,</span> <span class="n">GetCookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
 
-  EXPECT_CALL(mock_client, GetAuthenticator());
-  EXPECT_CALL(mock_request, GetCookie(&quot;g&quot;));
-
-  EXPECT_TRUE(page.Login());
-}
-</code></pre>
-</div>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">Login</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginPage</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">LoginPage</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Authenticator</span><span class="o">&gt;</span> <span class="n">authenticator</span><span class="p">,</span> <span class="k">const</span> <span class="n">Cookie</span><span class="o">&amp;</span> <span class="n">cookie</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">authenticator_</span><span class="p">(</span><span class="n">authenticator</span><span class="p">)</span><span class="p">,</span> <span class="n">cookie_</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class LoginPage {
- public:
-  LoginPage(std::shared_ptr&lt;Authenticator&gt; authenticator, const Cookie&amp; cookie)
-      : authenticator_(authenticator), cookie_(cookie) {}
+  <span class="kt">bool</span> <span class="nf">Login</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">authenticator_</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="n">cookie_</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
-  bool Login() { return authenticator_.Authenticate(cookie_); }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Authenticator</span><span class="o">&gt;</span> <span class="n">authenticator_</span><span class="p">;</span>
+  <span class="n">Cookie</span> <span class="n">cookie_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::shared_ptr&lt;Authenticator&gt; authenticator_;
-  Cookie cookie_;
-};
-
-TEST(LoginPageTest, SimpleFlexibleTest) {
-  LoginPage page(std::make_shared&lt;FakeAuthenticator&gt;(), Cookie(&quot;g&quot;, &quot;xyz123&quot;));
-  EXPECT_TRUE(page.Login());
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">LoginPageTest</span><span class="p">,</span> <span class="n">SimpleFlexibleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">LoginPage</span> <span class="nf">page</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeAuthenticator</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">Cookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">xyz123</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">Login</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="exposing-dependencies">Exposing dependencies</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">UpdateBug</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">UpdateBug</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db</span><span class="p">)</span> <span class="o">:</span> <span class="n">db_</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="kt">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">const</span> <span class="n">Bug</span><span class="o">&amp;</span> <span class="n">bug</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Impose internal lock management on client.
+</span><span class="c1"></span>    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetLock</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">Lock</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">Save</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetLock</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">Unlock</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class UpdateBug {
- public:
-  explicit UpdateBug(std::shared_ptr&lt;DatabaseInterface&gt; db) : db_(db) {}
-  void Execute(const Bug&amp; bug) {
-    // Impose internal lock management on client.
-    db_-&gt;GetLock().Lock();
-    db_-&gt;Save(bug);
-    db_-&gt;GetLock().Unlock();
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::shared_ptr&lt;DatabaseInterface&gt; db_;
-};
+<span class="c1">// This test shouldn&#39;t be needed, but we must enforce Lock/Unlock is called
+</span><span class="c1"></span><span class="c1">// around Save.
+</span><span class="c1"></span><span class="n">TEST</span><span class="p">(</span><span class="n">UpdateBugTest</span><span class="p">,</span> <span class="n">HardToTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MockLock</span> <span class="n">mock_lock</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">mock_db</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MockDatabase</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Bug</span> <span class="nf">bug</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">description</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">UpdateBug</span> <span class="nf">updateBug</span><span class="p">(</span><span class="n">mock_db</span><span class="p">)</span><span class="p">;</span>
 
-// This test shouldn't be needed, but we must enforce Lock/Unlock is called
-// around Save.
-TEST(UpdateBugTest, HardToTest) {
-  MockLock mock_lock;
-  auto mock_db = std::make_shared&lt;MockDatabase&gt;();
-  Bug bug(&quot;description&quot;);
-  UpdateBug updateBug(mock_db);
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="o">*</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">GetLock</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillRepeatedly</span><span class="p">(</span><span class="n">ReturnRef</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">{</span>
+    <span class="n">InSequence</span> <span class="n">dummy</span><span class="p">;</span>
+    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">,</span> <span class="n">Lock</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="o">*</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">Save</span><span class="p">(</span><span class="n">Ref</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">,</span> <span class="n">Unlock</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  EXPECT_CALL(*mock_db, GetLock()).WillRepeatedly(ReturnRef(mock_lock));
-  {
-    InSequence dummy;
-    EXPECT_CALL(mock_lock, Lock());
-    EXPECT_CALL(*mock_db, Save(Ref(bug)));
-    EXPECT_CALL(mock_lock, Unlock());
-  }
-
-  updateBug.Execute(bug);
-}
-</code></pre>
-</div>
+  <span class="n">updateBug</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">UpdateBug</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">UpdateBug</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db</span><span class="p">)</span> <span class="o">:</span> <span class="n">db_</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="kt">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">const</span> <span class="n">Bug</span><span class="o">&amp;</span> <span class="n">bug</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Save calls Lock/Unlock internally
+</span><span class="c1"></span>    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">Save</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class UpdateBug {
- public:
-  explicit UpdateBug(std::shared_ptr&lt;DatabaseInterface&gt; db) : db_(db) {}
-  void Execute(const Bug&amp; bug) {
-    // Save calls Lock/Unlock internally
-    db_-&gt;Save(bug);
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::shared_ptr&lt;DatabaseInterface&gt; db_;
-};
+<span class="c1">// Go strait to testing state. No need for mock test since locking interaction
+</span><span class="c1"></span><span class="c1">// is encapsulated in the database.
+</span><span class="c1"></span><span class="n">TEST</span><span class="p">(</span><span class="n">UpdateBugTest</span><span class="p">,</span> <span class="n">EasyTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">db</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeDatabase</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">UpdateBug</span> <span class="nf">updateBug</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Bug</span> <span class="nf">bug</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">description</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">updateBug</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
 
-// Go strait to testing state. No need for mock test since locking interaction
-// is encapsulated in the database.
-TEST(UpdateBugTest, EasyTest) {
-  auto db = std::make_shared&lt;FakeDatabase&gt;();
-  UpdateBug updateBug();
-  Bug bug(&quot;description&quot;);
-  updateBug.Execute(bug);
-
-  EXPECT_EQ(bug, db.GetLastSaved());
-}
-</code></pre>
-</div>
-
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">bug</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">GetLastSaved</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="context-objects">Context Objects</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MembershipPlan</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span> <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">ProcessOrder</span><span class="p">(</span><span class="n">UserContext</span><span class="o">&amp;</span> <span class="n">userContext</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetUser</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">PlanLevel</span> <span class="n">level</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetLevel</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetOrder</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class MembershipPlan {
-  // ...
- public:
-  void ProcessOrder(UserContext&amp; userContext) {
-    User user = userContext.GetUser();
-    PlanLevel level = userContext.GetLevel();
-    Order order = userContext.GetOrder();
+    <span class="c1">// process...
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
 
-    // process...
-  }
-};
+<span class="n">TEST</span><span class="p">(</span><span class="n">MembershipPlanTest</span><span class="p">,</span> <span class="n">BrittleUnreadableTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MembershipPlan</span> <span class="n">plan</span><span class="p">;</span>
+  <span class="n">UserContext</span> <span class="n">userContext</span><span class="p">;</span>
+  <span class="n">userContext</span><span class="p">.</span><span class="n">SetUser</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Kim</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">userContext</span><span class="p">.</span><span class="n">SetLevel</span><span class="p">(</span><span class="n">PlanLevel</span><span class="p">(</span><span class="mi">143</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">yearly</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">userContext</span><span class="p">.</span><span class="n">SetOrder</span><span class="p">(</span><span class="n">Order</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">SuperDeluxe</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="c1">// Hopefully this is all the setup the userContext needs to call ProcessOrder
+</span><span class="c1"></span>  <span class="n">plan</span><span class="p">.</span><span class="n">ProcessOrder</span><span class="p">(</span><span class="n">userContext</span><span class="p">)</span><span class="p">;</span>
 
-TEST(MembershipPlanTest, BrittleUnreadableTest) {
-  MembershipPlan plan;
-  UserContext userContext;
-  userContext.SetUser(User(&quot;Kim&quot;));
-  userContext.SetLevel(PlanLevel(143, &quot;yearly&quot;));
-  userContext.SetOrder(Order(&quot;SuperDeluxe&quot;, 100, true));
-  // Hopefully this is all the setup the userContext needs to call ProcessOrder
-  plan.ProcessOrder(userContext);
-
-  // Make assertions against userContext and plan...
-}
-</code></pre>
-</div>
+  <span class="c1">// Make assertions against userContext and plan...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MembershipPlan</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span> <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">ProcessOrder</span><span class="p">(</span><span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">,</span> <span class="n">Order</span><span class="o">&amp;</span> <span class="n">order</span><span class="p">,</span> <span class="k">const</span> <span class="n">PlanLevel</span><span class="o">&amp;</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// process...
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class MembershipPlan {
-  // ...
- public:
-  void ProcessOrder(User&amp; user, Order&amp; order, const PlanLevel&amp; level) {
-    // process...
-  }
-};
+<span class="n">TEST</span><span class="p">(</span><span class="n">MembershipPlanTest</span><span class="p">,</span> <span class="n">FlexibleSimpleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MembershipPlan</span> <span class="n">plan</span><span class="p">;</span>
+  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Kim</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Order</span> <span class="nf">order</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">SuperDeluxe</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">PlanLevel</span> <span class="nf">level</span><span class="p">(</span><span class="mi">143</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">yearly</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">plan</span><span class="p">.</span><span class="n">ProcessOrder</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span><span class="p">;</span>
 
-TEST(MembershipPlanTest, FlexibleSimpleTest) {
-  MembershipPlan plan;
-  User user(&quot;Kim&quot;);
-  Order order(&quot;SuperDeluxe&quot;, 100, true);
-  const PlanLevel level(143, &quot;yearly&quot;);
-  plan.ProcessOrder(user, order, level);
-
-  // Make assertions against user, order and plan...
-}
-</code></pre>
-</div>
-
+  <span class="c1">// Make assertions against user, order and plan...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="global-state">Global State</h2>
-
 <p>Global state is difficult to understand. Ideally, the interface of an object should fully describe
-it&rsquo;s dependencies. Global state ruins this ideal because it can be used anywhere without warning.
-Such flexibility may seem convenient to the original developer, but to others it&rsquo;s confusing.
+it's dependencies. Global state ruins this ideal because it can be used anywhere without warning.
+Such flexibility may seem convenient to the original developer, but to others it's confusing.
 Especially in large code bases, it can be difficult to realize that some global state exists and
-reason about the circumstances in which it should or shouldn&rsquo;t be used.</p>
-
+reason about the circumstances in which it should or shouldn't be used.</p>
 <p>Global state is the enemy of testing. It strongly couples itself to the code that uses it. Global
 scope encourages widespread usage, further compounding coupling issues. Coupling to concrete types
 makes it impossible to write test doubles and global state must be concrete because it uses the
 <code>static</code> keyword.</p>
-
 <h3 id="fixing-violations-2">Fixing violations</h3>
-
 <p>Below are some examples of global state and how they can be fixed with Dependency Injection.
 However, Dependency Injection alone is often not enough to fix <code>static</code> methods. For those, an
 adapter called the repository pattern can help remove the
 <a href="../tott/#defeat-static-cling">static cling</a>.</p>
-
 <p>Note, the solutions to the examples should not feel good and require a lot of work. It is really
 tough to test global state. The best solution is to never use it or refactor away from it
 altogether.</p>
-
 <h4 id="singletons">Singletons</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginService</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">static</span> <span class="n">LoginService</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">LoginService</span> <span class="n">instance</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class LoginService {
- public:
-  static LoginService&amp; GetInstance() {
-    static LoginService instance;
-    return instance;
-  }
-  // ...
-};
+<span class="k">class</span> <span class="nc">AdminDashboard</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">LoginService</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
 
-class AdminDashboard {
- public:
-  bool IsAuthenticatedAdmin(const User&amp; user) {
-    return LoginService::GetInstance().IsAuthenticatedAdmin(user);
-  }
-  // ...
-};
-
-TEST_F(AdminDashboardTest, FlakeySlowAndBrittleTest) {
-  // Forced to use the real LoginService singleton.
-  User user(&quot;username&quot;, &quot;password&quot;);
-  ASSERT_TRUE(adminDashboard_.IsAuthenticatedAdmin(user));
-}
-</code></pre>
-</div>
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">AdminDashboardTest</span><span class="p">,</span> <span class="n">FlakeySlowAndBrittleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Forced to use the real LoginService singleton.
+</span><span class="c1"></span>  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">username</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">password</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">adminDashboard_</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginServiceRepository</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">LoginServiceRepository</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">LoginService</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class LoginServiceRepository {
- public:
-  virtual ~LoginServiceRepository() = default;
-  virtual LoginService&amp; GetInstance() = 0;
-};
+<span class="k">class</span> <span class="nc">AdminDashboard</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">AdminDashboard</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">LoginServiceRepository</span><span class="o">&gt;</span> <span class="n">loginService</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">loginService_</span><span class="p">(</span><span class="n">loginService</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="kt">bool</span> <span class="nf">IsAuthenticatedAdmin</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">loginService_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-class AdminDashboard {
- public:
-  explicit AdminDashboard(std::shared_ptr&lt;LoginServiceRepository&gt; loginService)
-      : loginService_(loginService) {}
-  bool IsAuthenticatedAdmin(const User&amp; user) {
-    return loginService_-&gt;GetInstance().IsAuthenticatedAdmin(user);
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">LoginServiceRepository</span><span class="o">&gt;</span> <span class="n">loginService_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::shared_ptr&lt;LoginServiceRepository&gt; loginService_;
-};
-
-TEST(AdminDashboardTest, ReliableFastAndFlexibleTest) {
-  // Can now use test doubles for the LoginService singleton.
-  AdminDashboard adminDashboard(std::make_shared&lt;MockLoginService&gt;());
-  User user(&quot;username&quot;, &quot;password&quot;);
-  ASSERT_TRUE(adminDashboard.IsAuthenticatedAdmin(user));
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">AdminDashboardTest</span><span class="p">,</span> <span class="n">ReliableFastAndFlexibleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Can now use test doubles for the LoginService singleton.
+</span><span class="c1"></span>  <span class="n">AdminDashboard</span> <span class="nf">adminDashboard</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MockLoginService</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">username</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">password</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">adminDashboard</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="flags">Flags</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">bool</span> <span class="n">kFlagUseRealBackend</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">static bool kFlagUseRealBackend;
+<span class="k">class</span> <span class="nc">RpcClient</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">static</span> <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">RpcClient</span> <span class="n">instance</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+  <span class="p">}</span>
 
-class RpcClient {
- public:
-  static RpcClient&amp; GetInstance() {
-    static RpcClient instance;
-    return instance;
-  }
+  <span class="kt">bool</span> <span class="nf">IsReal</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
-  bool IsReal() { return backend_-&gt;IsReal(); }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">RpcClient</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">kFlagUseRealBackend</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">backend_</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">RealBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">backend_</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">DummyBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">//...
+</span><span class="c1"></span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  RpcClient() {
-    if (kFlagUseRealBackend) {
-      backend_ = std::make_unique&lt;RealBackend&gt;();
-    } else {
-      backend_ = std::make_unique&lt;DummyBackend&gt;();
-    }
-  }
-  //...
+<span class="c1">// The 2nd test to run will fail if both tests are run together
+</span><span class="c1"></span><span class="c1">// because the RpcClient is static.
+</span><span class="c1"></span>
+<span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">SmallComplexAndFlakeyTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">kFlagUseRealBackend</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-  std::unique_ptr&lt;Backend&gt; backend_;
-};
-
-// The 2nd test to run will fail if both tests are run together
-// because the RpcClient is static.
-
-TEST(RpcClientTest, SmallComplexAndFlakeyTest) {
-  kFlagUseRealBackend = false;
-  RpcClient&amp; client = RpcClient::GetInstance();
-  EXPECT_FALSE(client.IsReal());
-}
-
-TEST(RpcClientTest, LargeComplexAndFlakeyTest) {
-  kFlagUseRealBackend = true;
-  RpcClient&amp; client = RpcClient::GetInstance();
-  EXPECT_TRUE(client.IsReal());
-}
-</code></pre>
-</div>
+<span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">LargeComplexAndFlakeyTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">kFlagUseRealBackend</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">RpcClient</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">RpcClient</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">backend_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class RpcClient {
- public:
-  explicit RpcClient(std::unique_ptr&lt;Backend&gt; backend)
-      : backend_(std::move(backend)) {}
+  <span class="kt">bool</span> <span class="nf">IsReal</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
-  bool IsReal() { return backend_-&gt;IsReal(); }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::unique_ptr&lt;Backend&gt; backend_;
-};
+<span class="c1">// Now, both tests pass.
+</span><span class="c1"></span>
+<span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">SmallSimpleAndReliableTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">RpcClient</span> <span class="nf">client</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">DummyBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-// Now, both tests pass.
-
-TEST(RpcClientTest, SmallSimpleAndReliableTest) {
-  RpcClient client(std::make_unique&lt;DummyBackend&gt;());
-  EXPECT_FALSE(client.IsReal());
-}
-
-TEST(RpcClientTest, LargeSimpleAndReliableTest) {
-  RpcClient client(std::make_unique&lt;RealBackend&gt;());
-  EXPECT_TRUE(client.IsReal());
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">LargeSimpleAndReliableTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">RpcClient</span> <span class="nf">client</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">RealBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="static-methods">Static methods</h4>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TrainSchedule</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;</span> <span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>    <span class="c1">// Slow third party service
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">TrackStatus</span><span class="o">:</span><span class="o">:</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// ...
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">schedule</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class TrainSchedule {
-  // ...
-  std::shared_ptr&lt;Schedule&gt; FindNextTrain() {
-    // ...
-    // Slow third party service
-    if (TrackStatus::IsClosed(track)) {
-      // ...
-    }
-    // ...
-    return schedule;
-  }
-}
-
-TEST_F(TrainScheduleTest, FlakeySlowAndBrittleTest) {
-  // Forces third party TrackStatus to get called
-  ASSERT_NE(trainSchedule_.FindNextTrain(), nullptr);
-}
-</code></pre>
-</div>
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">TrainScheduleTest</span><span class="p">,</span> <span class="n">FlakeySlowAndBrittleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Forces third party TrackStatus to get called
+</span><span class="c1"></span>  <span class="n">ASSERT_NE</span><span class="p">(</span><span class="n">trainSchedule_</span><span class="p">.</span><span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TrackStatusRepository</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">TrackStatusRepository</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">bool</span> <span class="nf">IsClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">Track</span><span class="o">&amp;</span> <span class="n">track</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class TrackStatusRepository {
- public:
-  virtual ~TrackStatusRepository() = default;
-  virtual bool IsClosed(const Track&amp; track) = 0;
-};
+<span class="k">class</span> <span class="nc">RealTrackStatusRepository</span> <span class="o">:</span> <span class="k">public</span> <span class="n">TrackStatusRepository</span> <span class="p">{</span>
+  <span class="k">public</span><span class="o">:</span>
+    <span class="c1">// ... Wrap each of the third party library&#39;s methods.
+</span><span class="c1"></span>    <span class="kt">bool</span> <span class="n">IsClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">Track</span><span class="o">&amp;</span> <span class="n">track</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">TrackStatus</span><span class="o">:</span><span class="o">:</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
 
-class RealTrackStatusRepository : public TrackStatusRepository {
-  public:
-    // ... Wrap each of the third party library's methods.
-    bool IsClosed(const Track&amp; track) {
-      return TrackStatus::IsClosed(track);
-    }
-};
+<span class="k">class</span> <span class="nc">TrainSchedule</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TrainSchedule</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TrackStatusRepository</span><span class="o">&gt;</span> <span class="n">trackStatus</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">trackStatus_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">trackStatus</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;</span> <span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">trackStatus_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// ...
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">schedule</span><span class="p">;</span>
+  <span class="p">}</span>
 
-class TrainSchedule {
- public:
-  TrainSchedule(std::unique_ptr&lt;TrackStatusRepository&gt; trackStatus)
-      : trackStatus_(std::move(trackStatus)) {}
-  // ...
-  std::shared_ptr&lt;Schedule&gt; FindNextTrain() {
-    // ...
-    if (trackStatus_-&gt;IsClosed(track)) {
-      // ...
-    }
-    // ...
-    return schedule;
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TrackStatusRepository</span><span class="o">&gt;</span> <span class="n">trackStatus_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  std::unique_ptr&lt;TrackStatusRepository&gt; trackStatus_;
-};
-
-TEST(TrainScheduleTest, ReliableFastAndFlexibleTest) {
-  // Now TrainSchedule can be tested in isolation.
-  TrainSchedule trainSchedule(std::make_unique&lt;StubTrackStatusRepository&gt;());
-  ASSERT_NE(trainSchedule.FindNextTrain(), nullptr);
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">TrainScheduleTest</span><span class="p">,</span> <span class="n">ReliableFastAndFlexibleTest</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Now TrainSchedule can be tested in isolation.
+</span><span class="c1"></span>  <span class="n">TrainSchedule</span> <span class="nf">trainSchedule</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">StubTrackStatusRepository</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">ASSERT_NE</span><span class="p">(</span><span class="n">trainSchedule</span><span class="p">.</span><span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="single-responsibility-principle">Single Responsibility Principle</h2>
-
 <p>If you have a class that feels like it:</p>
-
 <ul>
 <li>Contains hidden interactions that make you scratch your head.</li>
 <li>Is difficult to read and retain in memory.</li>
@@ -1003,35 +908,26 @@ TEST(TrainScheduleTest, ReliableFastAndFlexibleTest) {
 <li>Requires too many tests for full coverage.</li>
 <li>Requires large tests with complex setup/teardown.</li>
 </ul>
-
 <p>Then, that class is likely violating the Single Responsibility Principle. Such classes hide points
 of flexibility and encapsulate interaction instead of encapsulating behavior. Poor flexibility and
-encapsulation creates brittle design and strong coupling. The result is a class that&rsquo;s hard to test.</p>
-
+encapsulation creates brittle design and strong coupling. The result is a class that's hard to test.</p>
 <h3 id="fixing-violations-3">Fixing violations</h3>
-
 <p>Opportunity to fix a violation of the Single Responsibility Principle is either proactive or
-reactive, depending on whether the violation is caught before or after it&rsquo;s committed to the
+reactive, depending on whether the violation is caught before or after it's committed to the
 codebase.</p>
-
 <p>It should go without saying that the proactive approach is less work.</p>
-
 <h4 id="proactive">Proactive</h4>
-
 <ol>
 <li>Identify the individual responsibilities.</li>
 <li>Give each responsibility a crisp name.</li>
 <li>Extract functionality into each class.</li>
 <li>Celebrate how much easier the class is to test.</li>
 </ol>
-
 <h4 id="reactive">Reactive</h4>
-
 <ol>
 <li>Extract a class in the place where behavior is being altered with new functionality.</li>
 <li>Start to move chunks of behavior out of the legacy class and test each chunk in isolation.</li>
 </ol>
-
 
 <div class="notices tip" ><p><code>static</code> methods are a sign of a homeless method. It likely belongs to one of the parameters it
 takes.</p>
@@ -1180,20 +1076,19 @@ takes.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564259592"></script>
-    <script src="/js/jquery.sticky.js?1564259592"></script>
-    <script src="/js/featherlight.min.js?1564259592"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564259592"></script>
-    <script src="/js/highlight.pack.js?1564259592"></script>
+    <script src="/js/clipboard.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1579407787"></script>
+    <script src="/js/jquery.sticky.js?1579407787"></script>
+    <script src="/js/featherlight.min.js?1579407787"></script>
+    <script src="/js/highlight.pack.js?1579407787"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564259592"></script>
-    <script src="/js/learn.js?1564259592"></script>
-    <script src="/js/hugo-learn.js?1564259592"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1579407787"></script>
+    <script src="/js/learn.js?1579407787"></script>
+    <script src="/js/hugo-learn.js?1579407787"></script>
 
-    <link href="/mermaid/mermaid.css?1564259592" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564259592"></script>
+    <link href="/mermaid/mermaid.css?1579407787" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1579407787"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>General Notes :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1564259592" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564259592" rel="stylesheet">
-    <link href="/css/hybrid.css?1564259592" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564259592" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564259592" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564259592" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564259592" rel="stylesheet">
-    <link href="/css/theme.css?1564259592" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564259592" rel="stylesheet">
+    <link href="/css/nucleus.css?1579407787" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1579407787" rel="stylesheet">
+    <link href="/css/hybrid.css?1579407787" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1579407787" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1579407787" rel="stylesheet">
+    <link href="/css/auto-complete.css?1579407787" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1579407787" rel="stylesheet">
+    <link href="/css/theme.css?1579407787" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1579407787" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1564259592" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1579407787" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564259592"></script>
+    <script src="/js/jquery-3.3.1.min.js?1579407787"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564259592"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564259592"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1579407787"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1579407787"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564259592"></script>
+<script type="text/javascript" src="/js/search.js?1579407787"></script>
 
     
   </div>
@@ -261,16 +261,13 @@
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#test-reliability">Test Reliability</a></li>
-<li><a href="#code-quality">Code Quality</a></li>
-<li><a href="#productivity">Productivity</a></li>
-<li><a href="#infrastructure">Infrastructure</a></li>
-<li><a href="#metrics-logging">Metrics &amp; Logging</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#test-reliability">Test Reliability</a></li>
+    <li><a href="#code-quality">Code Quality</a></li>
+    <li><a href="#productivity">Productivity</a></li>
+    <li><a href="#infrastructure">Infrastructure</a></li>
+    <li><a href="#metrics--logging">Metrics & Logging</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -295,126 +292,131 @@
 
 
 
-
-
 <h2 id="test-reliability">Test Reliability</h2>
-
 <ul>
 <li>Smaller tests run faster, are less flakey, and isolate failures. As a general rule of thumb, favor
-a composition of 70% small, 20% medium, and 10% large tests.<sup class="footnote-ref" id="fnref:11"><a href="#fn:11">1</a></sup></li>
+a composition of 70% small, 20% medium, and 10% large tests.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
 <li>Test binary size and memory usage, including third-party testing tools, have a strong correlation
-on whether a test is flaky.<sup class="footnote-ref" id="fnref:18"><a href="#fn:18">2</a></sup></li>
+on whether a test is flaky.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
 <li>Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and
-more reliable to have smaller tests that break closer to the source of the problem.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> <sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup></li>
+more reliable to have smaller tests that break closer to the source of the problem.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></li>
 <li>Hermetic servers add speed and reliability into end-to-end tests. A environment is considered
 Hermetic if it can run an entire system under test on a single machine with fake network
-connections and database implementations.<sup class="footnote-ref" id="fnref:9"><a href="#fn:9">5</a></sup></li>
+connections and database implementations.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></li>
 <li>Filter out flakey tests by rerunning failing tests. If a test fails three times in a row, consider it
-a real failure.<sup class="footnote-ref" id="fnref:13"><a href="#fn:13">6</a></sup></li>
+a real failure.<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></li>
 <li>Build testability into the product. For example, a real-time system can rely on a fake clock
 instead of a hardware clock. Processes can spawn other processes attached to a debugger with
-debugging flags.<sup class="footnote-ref" id="fnref:15"><a href="#fn:15">7</a></sup></li>
+debugging flags.<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></li>
 </ul>
-
 <h2 id="code-quality">Code Quality</h2>
-
 <ul>
 <li>Releasing often gives teams an incentive to automate testing and reduce coupling with the rest of
-the system.<sup class="footnote-ref" id="fnref:17"><a href="#fn:17">8</a></sup></li>
+the system.<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup></li>
 <li>When a team provides <a href="../tott/#know-your-test-doubles">fakes</a> and writes tests for them, they
 become clients of their own software. Experiencing the perspective of the client gives the team an
-incentive to make their API easier to use.<sup class="footnote-ref" id="fnref:17"><a href="#fn:17">8</a></sup></li>
+incentive to make their API easier to use.<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup></li>
 <li>While writing the header first encourages consideration for the interface, writing tests first
-encourages consideration for how the interface will be <em>used</em>.<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">9</a></sup></li>
+encourages consideration for how the interface will be <em>used</em>.<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup></li>
 <li>Good code quality is taught, not enforced. Create a culture that teaches code quality through code
-review, pair programming, and mentoring.<sup class="footnote-ref" id="fnref:15"><a href="#fn:15">7</a></sup></li>
+review, pair programming, and mentoring.<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></li>
 </ul>
-
 <h2 id="productivity">Productivity</h2>
-
 <ul>
 <li>Automation is costly. Automate only the tests that you find yourself running often to reliably
-catch regressions on features with business value.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup></li>
+catch regressions on features with business value.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
 <li>Speed up the feedback loop between test engineers and development engineers. Share the same space,
-tools, daily stand-ups, and design discussions.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup></li>
+tools, daily stand-ups, and design discussions.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
 <li>Effective automation depends on test design. Good test design is built from a solid foundation of
-manual tests.<sup class="footnote-ref" id="fnref:6"><a href="#fn:6">10</a></sup></li>
-<li>If a test plan isn&rsquo;t worth bothering to update, it isn&rsquo;t worth creating in the first place. A
-quick brainstorming session will suffice.<sup class="footnote-ref" id="fnref:8"><a href="#fn:8">11</a></sup></li>
-<li>Use formatting tools, like clang-format, to improve readability.<sup class="footnote-ref" id="fnref:14"><a href="#fn:14">12</a></sup></li>
+manual tests.<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup></li>
+<li>If a test plan isn't worth bothering to update, it isn't worth creating in the first place. A
+quick brainstorming session will suffice.<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup></li>
+<li>Use formatting tools, like clang-format, to improve readability.<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup></li>
 </ul>
-
 <h2 id="infrastructure">Infrastructure</h2>
-
 <ul>
 <li>Remove the detective work of tracking down bad changes by investing in a pre-submit system that
-runs automated tests against the commit before it reaches the depot.<sup class="footnote-ref" id="fnref:7"><a href="#fn:7">13</a></sup> <sup class="footnote-ref" id="fnref:13"><a href="#fn:13">6</a></sup></li>
-<li>Don&rsquo;t fall behind on updating third party dependencies. Update them quickly by setting up CI
-system with dependencies pinned at head.<sup class="footnote-ref" id="fnref:12"><a href="#fn:12">14</a></sup></li>
-<li>Avoid making more than one branch by putting risky new changes behind feature flags.<sup class="footnote-ref" id="fnref:14"><a href="#fn:14">12</a></sup></li>
+runs automated tests against the commit before it reaches the depot.<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup> <sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></li>
+<li>Don't fall behind on updating third party dependencies. Update them quickly by setting up CI
+system with dependencies pinned at head.<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup></li>
+<li>Avoid making more than one branch by putting risky new changes behind feature flags.<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup></li>
 <li>Constantly look for opportunities to make the build system faster. Reduce the amount of code being
-compiled, replace tools with faster counterparts, and use distributed build systems.<sup class="footnote-ref" id="fnref:16"><a href="#fn:16">15</a></sup></li>
+compiled, replace tools with faster counterparts, and use distributed build systems.<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup></li>
 <li>Release early and release often. Services and websites can deploy rapidly. A good target for
-client projects is Chromes six week cycle.<sup class="footnote-ref" id="fnref:16"><a href="#fn:16">15</a></sup></li>
+client projects is Chromes six week cycle.<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup></li>
 </ul>
-
-<h2 id="metrics-logging">Metrics &amp; Logging</h2>
-
+<h2 id="metrics--logging">Metrics &amp; Logging</h2>
 <ul>
 <li><em>Pre- vs post-production defect ratio</em> and a breakdown of <em>defects by component or functional
-area</em> help identify holes in test.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">16</a></sup></li>
+area</em> help identify holes in test.<sup id="fnref:16"><a href="#fn:16" class="footnote-ref" role="doc-noteref">16</a></sup></li>
 <li>Premature performance optimization makes bad code. Develop in a clean, maintainable and
-extensible manner <em>first</em>, and then let benchmarks drive performance optimizations.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">17</a></sup></li>
+extensible manner <em>first</em>, and then let benchmarks drive performance optimizations.<sup id="fnref:17"><a href="#fn:17" class="footnote-ref" role="doc-noteref">17</a></sup></li>
 <li>Remove unwanted noise by logging with conditional verbosity. Log all levels to a logging queue.
-If a transaction completes successfully, discard the unimportant levels.<sup class="footnote-ref" id="fnref:10"><a href="#fn:10">18</a></sup></li>
-<li>Use two sets of logging levels, one for production builds and one for development builds.<sup class="footnote-ref" id="fnref:10"><a href="#fn:10">18</a></sup></li>
+If a transaction completes successfully, discard the unimportant levels.<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup></li>
+<li>Use two sets of logging levels, one for production builds and one for development builds.<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup></li>
 <li>Trace the time spent on every significant processing step. Measuring is the only way to detect
-performance issues or make claims about performance.<sup class="footnote-ref" id="fnref:10"><a href="#fn:10">18</a></sup></li>
-<li>Write automated performance tests for performance sensitive parts of your product.<sup class="footnote-ref" id="fnref:16"><a href="#fn:16">15</a></sup></li>
+performance issues or make claims about performance.<sup id="fnref:18"><a href="#fn:18" class="footnote-ref" role="doc-noteref">18</a></sup></li>
+<li>Write automated performance tests for performance sensitive parts of your product.<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup></li>
 </ul>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:11"><a href="https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html">https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html</a>
- <a class="footnote-return" href="#fnref:11"><sup>[return]</sup></a></li>
-<li id="fn:18"><a href="https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html">https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html</a>
- <a class="footnote-return" href="#fnref:18"><sup>[return]</sup></a></li>
-<li id="fn:3"><a href="https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html">https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html</a>
- <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
-<li id="fn:4"><a href="https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html">https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html</a>
- <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
-<li id="fn:9"><a href="https://testing.googleblog.com/2012/10/hermetic-servers.html">https://testing.googleblog.com/2012/10/hermetic-servers.html</a>
- <a class="footnote-return" href="#fnref:9"><sup>[return]</sup></a></li>
-<li id="fn:13"><a href="https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html">https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html</a>
- <a class="footnote-return" href="#fnref:13"><sup>[return]</sup></a></li>
-<li id="fn:15"><a href="https://testing.googleblog.com/2016/10/hackable-projects-pillar-2-debuggability.html">https://testing.googleblog.com/2016/10/hackable-projects-pillar-2-debuggability.html</a>
- <a class="footnote-return" href="#fnref:15"><sup>[return]</sup></a></li>
-<li id="fn:17"><a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html</a>
- <a class="footnote-return" href="#fnref:17"><sup>[return]</sup></a></li>
-<li id="fn:5"><a href="https://testing.googleblog.com/2008/09/test-first-is-fun_08.html">https://testing.googleblog.com/2008/09/test-first-is-fun_08.html</a>
- <a class="footnote-return" href="#fnref:5"><sup>[return]</sup></a></li>
-<li id="fn:6"><a href="https://testing.googleblog.com/2008/09/presubmit-and-performance.html">https://testing.googleblog.com/2008/09/presubmit-and-performance.html</a>
- <a class="footnote-return" href="#fnref:6"><sup>[return]</sup></a></li>
-<li id="fn:8"><a href="https://testing.googleblog.com/2011/09/10-minute-test-plan.html">https://testing.googleblog.com/2011/09/10-minute-test-plan.html</a>
- <a class="footnote-return" href="#fnref:8"><sup>[return]</sup></a></li>
-<li id="fn:14"><a href="https://testing.googleblog.com/2016/08/hackable-projects.html">https://testing.googleblog.com/2016/08/hackable-projects.html</a>
- <a class="footnote-return" href="#fnref:14"><sup>[return]</sup></a></li>
-<li id="fn:7"><a href="https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html">https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html</a>
- <a class="footnote-return" href="#fnref:7"><sup>[return]</sup></a></li>
-<li id="fn:12"><a href="https://testing.googleblog.com/2015/05/multi-repository-development.html">https://testing.googleblog.com/2015/05/multi-repository-development.html</a>
- <a class="footnote-return" href="#fnref:12"><sup>[return]</sup></a></li>
-<li id="fn:16"><a href="https://testing.googleblog.com/2016/11/hackable-projects-pillar-3.html">https://testing.googleblog.com/2016/11/hackable-projects-pillar-3.html</a>
- <a class="footnote-return" href="#fnref:16"><sup>[return]</sup></a></li>
-<li id="fn:1"><a href="https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html">https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html</a>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2"><a href="https://testing.googleblog.com/2007/10/performance-testing.html">https://testing.googleblog.com/2007/10/performance-testing.html</a>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-<li id="fn:10"><a href="https://testing.googleblog.com/2013/06/optimal-logging.html">https://testing.googleblog.com/2013/06/optimal-logging.html</a>
- <a class="footnote-return" href="#fnref:10"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html">https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html">https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html">https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html">https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2012/10/hermetic-servers.html">https://testing.googleblog.com/2012/10/hermetic-servers.html</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html">https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2016/10/hackable-projects-pillar-2-debuggability.html">https://testing.googleblog.com/2016/10/hackable-projects-pillar-2-debuggability.html</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html</a> <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2008/09/test-first-is-fun_08.html">https://testing.googleblog.com/2008/09/test-first-is-fun_08.html</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2008/09/presubmit-and-performance.html">https://testing.googleblog.com/2008/09/presubmit-and-performance.html</a> <a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2011/09/10-minute-test-plan.html">https://testing.googleblog.com/2011/09/10-minute-test-plan.html</a> <a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2016/08/hackable-projects.html">https://testing.googleblog.com/2016/08/hackable-projects.html</a> <a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html">https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html</a> <a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2015/05/multi-repository-development.html">https://testing.googleblog.com/2015/05/multi-repository-development.html</a> <a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:15" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2016/11/hackable-projects-pillar-3.html">https://testing.googleblog.com/2016/11/hackable-projects-pillar-3.html</a> <a href="#fnref:15" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:16" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html">https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html</a> <a href="#fnref:16" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:17" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2007/10/performance-testing.html">https://testing.googleblog.com/2007/10/performance-testing.html</a> <a href="#fnref:17" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:18" role="doc-endnote">
+<p><a href="https://testing.googleblog.com/2013/06/optimal-logging.html">https://testing.googleblog.com/2013/06/optimal-logging.html</a> <a href="#fnref:18" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
 
 <footer class=" footline" >
@@ -555,20 +557,19 @@ performance issues or make claims about performance.<sup class="footnote-ref" id
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564259592"></script>
-    <script src="/js/jquery.sticky.js?1564259592"></script>
-    <script src="/js/featherlight.min.js?1564259592"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564259592"></script>
-    <script src="/js/highlight.pack.js?1564259592"></script>
+    <script src="/js/clipboard.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1579407787"></script>
+    <script src="/js/jquery.sticky.js?1579407787"></script>
+    <script src="/js/featherlight.min.js?1579407787"></script>
+    <script src="/js/highlight.pack.js?1579407787"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564259592"></script>
-    <script src="/js/learn.js?1564259592"></script>
-    <script src="/js/hugo-learn.js?1564259592"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1579407787"></script>
+    <script src="/js/learn.js?1579407787"></script>
+    <script src="/js/hugo-learn.js?1579407787"></script>
 
-    <link href="/mermaid/mermaid.css?1564259592" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564259592"></script>
+    <link href="/mermaid/mermaid.css?1579407787" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1579407787"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1564259592" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1564259592" rel="stylesheet">
-    <link href="/css/hybrid.css?1564259592" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1564259592" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1564259592" rel="stylesheet">
-    <link href="/css/auto-complete.css?1564259592" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1564259592" rel="stylesheet">
-    <link href="/css/theme.css?1564259592" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1564259592" rel="stylesheet">
+    <link href="/css/nucleus.css?1579407787" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1579407787" rel="stylesheet">
+    <link href="/css/hybrid.css?1579407787" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1579407787" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1579407787" rel="stylesheet">
+    <link href="/css/auto-complete.css?1579407787" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1579407787" rel="stylesheet">
+    <link href="/css/theme.css?1579407787" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1579407787" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1564259592" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1579407787" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1564259592"></script>
+    <script src="/js/jquery-3.3.1.min.js?1579407787"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -73,14 +73,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1564259592"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1564259592"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1579407787"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1579407787"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1564259592"></script>
+<script type="text/javascript" src="/js/search.js?1579407787"></script>
 
     
   </div>
@@ -261,47 +261,45 @@
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#exercise-service-call-contracts-in-tests">Exercise Service Call Contracts in Tests</a></li>
-<li><a href="#make-interfaces-hard-to-misuse">Make Interfaces Hard to Misuse</a></li>
-<li><a href="#only-verify-relevant-method-arguments">Only Verify Relevant Method Arguments</a></li>
-<li><a href="#keep-tests-focused">Keep Tests Focused</a></li>
-<li><a href="#understanding-code-in-review">Understanding Code in Review</a></li>
-<li><a href="#cleanly-create-test-data">Cleanly Create Test Data</a></li>
-<li><a href="#only-expect-state-changing-method-calls">Only Expect State-Changing Method Calls</a></li>
-<li><a href="#obsessed-with-primitives">Obsessed With Primitives?</a></li>
-<li><a href="#identifiernamingpostforworldwidewebblog">IdentifierNamingPostForWorldWideWebBlog</a></li>
-<li><a href="#to-comment-or-not-to-comment">To Comment or Not to Comment</a></li>
-<li><a href="#too-many-comments-on-your-code-reviews">Too Many Comments on Your Code Reviews?</a></li>
-<li><a href="#reduce-nesting-reduce-complexity">Reduce Nesting, Reduce Complexity</a></li>
-<li><a href="#keep-cause-and-effect-clear">Keep Cause and Effect Clear</a></li>
-<li><a href="#what-makes-a-good-end-to-end-test">What Makes a Good End-to-End Test?</a></li>
-<li><a href="#change-detector-tests-considered-harmful">Change-Detector Tests Considered Harmful</a></li>
-<li><a href="#prefer-testing-public-apis-over-implementation-detail-classes">Prefer Testing Public APIs Over Implementation-Detail Classes</a></li>
-<li><a href="#writing-descriptive-test-names">Writing Descriptive Test Names</a></li>
-<li><a href="#don-t-put-logic-in-tests">Don&rsquo;t Put Logic in Tests</a></li>
-<li><a href="#risk-driven-testing">Risk-Driven Testing</a></li>
-<li><a href="#effective-testing">Effective Testing</a></li>
-<li><a href="#test-behaviors-not-methods">Test Behaviors, Not Methods</a></li>
-<li><a href="#what-makes-a-good-test">What Makes a Good Test?</a></li>
-<li><a href="#test-behavior-not-implementation">Test Behavior, Not Implementation</a></li>
-<li><a href="#know-your-test-doubles">Know Your Test Doubles</a></li>
-<li><a href="#fake-your-way-to-better-tests">Fake Your Way To Better Tests</a></li>
-<li><a href="#don-t-overuse-mocks">Don&rsquo;t Overuse Mocks</a></li>
-<li><a href="#testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</a></li>
-<li><a href="#code-coverage-goal-80-and-no-less">Code coverage goal: 80% and no less!</a></li>
-<li><a href="#data-driven-traps">Data Driven Traps!</a></li>
-<li><a href="#sleeping-synchronization">Sleeping != Synchronization</a></li>
-<li><a href="#defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</a></li>
-<li><a href="#testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</a></li>
-<li><a href="#understanding-your-coverage-data">Understanding Your Coverage Data</a></li>
-<li><a href="#too-many-tests">Too Many Tests</a></li>
-<li><a href="#avoiding-friend-twister-in-c">Avoiding Friend Twister in C++</a></li>
-<li><a href="#refactoring-tests-in-the-red">Refactoring Tests in the Red</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#tests-too-dry-make-them-damp">Tests Too DRY? Make Them DAMP!</a></li>
+    <li><a href="#exercise-service-call-contracts-in-tests">Exercise Service Call Contracts in Tests</a></li>
+    <li><a href="#make-interfaces-hard-to-misuse">Make Interfaces Hard to Misuse</a></li>
+    <li><a href="#only-verify-relevant-method-arguments">Only Verify Relevant Method Arguments</a></li>
+    <li><a href="#keep-tests-focused">Keep Tests Focused</a></li>
+    <li><a href="#understanding-code-in-review">Understanding Code in Review</a></li>
+    <li><a href="#cleanly-create-test-data">Cleanly Create Test Data</a></li>
+    <li><a href="#only-expect-state-changing-method-calls">Only Expect State-Changing Method Calls</a></li>
+    <li><a href="#obsessed-with-primitives">Obsessed With Primitives?</a></li>
+    <li><a href="#identifiernamingpostforworldwidewebblog">IdentifierNamingPostForWorldWideWebBlog</a></li>
+    <li><a href="#to-comment-or-not-to-comment">To Comment or Not to Comment</a></li>
+    <li><a href="#too-many-comments-on-your-code-reviews">Too Many Comments on Your Code Reviews?</a></li>
+    <li><a href="#reduce-nesting-reduce-complexity">Reduce Nesting, Reduce Complexity</a></li>
+    <li><a href="#keep-cause-and-effect-clear">Keep Cause and Effect Clear</a></li>
+    <li><a href="#what-makes-a-good-end-to-end-test">What Makes a Good End-to-End Test?</a></li>
+    <li><a href="#change-detector-tests-considered-harmful">Change-Detector Tests Considered Harmful</a></li>
+    <li><a href="#prefer-testing-public-apis-over-implementation-detail-classes">Prefer Testing Public APIs Over Implementation-Detail Classes</a></li>
+    <li><a href="#writing-descriptive-test-names">Writing Descriptive Test Names</a></li>
+    <li><a href="#dont-put-logic-in-tests">Don't Put Logic in Tests</a></li>
+    <li><a href="#risk-driven-testing">Risk-Driven Testing</a></li>
+    <li><a href="#effective-testing">Effective Testing</a></li>
+    <li><a href="#test-behaviors-not-methods">Test Behaviors, Not Methods</a></li>
+    <li><a href="#what-makes-a-good-test">What Makes a Good Test?</a></li>
+    <li><a href="#test-behavior-not-implementation">Test Behavior, Not Implementation</a></li>
+    <li><a href="#know-your-test-doubles">Know Your Test Doubles</a></li>
+    <li><a href="#fake-your-way-to-better-tests">Fake Your Way To Better Tests</a></li>
+    <li><a href="#dont-overuse-mocks">Don't Overuse Mocks</a></li>
+    <li><a href="#testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</a></li>
+    <li><a href="#code-coverage-goal-80-and-no-less">Code coverage goal: 80% and no less!</a></li>
+    <li><a href="#data-driven-traps">Data Driven Traps!</a></li>
+    <li><a href="#sleeping--synchronization">Sleeping != Synchronization</a></li>
+    <li><a href="#defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</a></li>
+    <li><a href="#testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</a></li>
+    <li><a href="#understanding-your-coverage-data">Understanding Your Coverage Data</a></li>
+    <li><a href="#too-many-tests">Too Many Tests</a></li>
+    <li><a href="#avoiding-friend-twister-in-c">Avoiding Friend Twister in C++</a></li>
+    <li><a href="#refactoring-tests-in-the-red">Refactoring Tests in the Red</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -326,1399 +324,1132 @@
 
 
 
-
-
-<p>This page contains portable (potable?) bits of testing best-practices that will keep you riveted to
+<p>This page contains potable bits of testing best-practices that will keep you riveted to
 your seat.</p>
+<h2 id="tests-too-dry-make-them-damp">Tests Too DRY? Make Them DAMP!</h2>
+<p><em>December 03, 2019</em> -
+<a href="https://testing.googleblog.com/2019/12/testing-on-toilet-tests-too-dry-make.html">original post</a></p>
+<p>Though the DRY (&ldquo;Don't Repeat Yourself&rdquo;) principle is great for production code, tests don't test
+themselves.</p>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">ForumTest</span> <span class="o">:</span> <span class="k">public</span> <span class="o">:</span><span class="o">:</span><span class="n">testing</span><span class="o">:</span><span class="o">:</span><span class="n">Test</span> <span class="p">{</span>
+ <span class="k">protected</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">SetUp</span><span class="p">(</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">user</span> <span class="p">:</span> <span class="n">users_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">forum_</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">Forum</span> <span class="n">forum_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">users_</span> <span class="o">=</span> <span class="p">{</span><span class="n">User</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Alice</span><span class="s">&#34;</span><span class="p">)</span><span class="p">,</span> <span class="n">User</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Bob</span><span class="s">&#34;</span><span class="p">)</span><span class="p">}</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">ForumTest</span><span class="p">,</span> <span class="n">CanRegisterMultipleUsers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">user</span> <span class="p">:</span> <span class="n">users_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">forum_</span><span class="p">.</span><span class="n">HasRegisteredUser</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Tests should optimize for readability, even at the expense of redundancy. Prefer the DAMP
+(&ldquo;Descriptive and Meaningful Phrases&rdquo;) principle.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">ForumTest</span><span class="p">,</span> <span class="n">CanRegisterMultipleUsers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Forum</span> <span class="n">forum</span><span class="p">;</span>
+  <span class="n">User</span> <span class="nf">user1</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Alice</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">User</span> <span class="nf">user2</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Bob</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">forum</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">forum</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="n">user2</span><span class="p">)</span><span class="p">;</span>
+
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">forum</span><span class="p">.</span><span class="n">HasRegisteredUser</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">forum</span><span class="p">.</span><span class="n">HasRegisteredUser</span><span class="p">(</span><span class="n">user2</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="exercise-service-call-contracts-in-tests">Exercise Service Call Contracts in Tests</h2>
-
 <p><em>November 27, 2018</em> -
 <a href="https://testing.googleblog.com/2018/11/testing-on-toilet-exercise-service-call.html">original post</a></p>
-
 <p>If the code under test relies on the contract of a service, prefer exercising the service call
 instead of mocking it out. Some service owners provide a fake. Otherwise, use a hermetic server.</p>
-
 <h2 id="make-interfaces-hard-to-misuse">Make Interfaces Hard to Misuse</h2>
-
 <p><em>July 25, 2018</em> -
 <a href="https://testing.googleblog.com/2018/07/code-health-make-interfaces-hard-to.html">original post</a></p>
+<p>Don't push the responsibility of maintaining invariants on the caller.</p>
 
-<p>Don&rsquo;t push the responsibility of maintaining invariants on the caller.</p>
-
-
-<div class="notices warning" ><pre><code class="language-cpp">class Vector {
-  explicit Vector(int num_slots);
-  int RemainingSlots() const;
-  void AddSlots(int num_slots);
-  void Insert(int value);
-};
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Vector</span> <span class="p">{</span>
+  <span class="k">explicit</span> <span class="nf">Vector</span><span class="p">(</span><span class="kt">int</span> <span class="n">num_slots</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="nf">RemainingSlots</span><span class="p">(</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">AddSlots</span><span class="p">(</span><span class="kt">int</span> <span class="n">num_slots</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>In the code above, the caller needs to check <code>RemainingSlots</code>, and if <code>0</code>, <code>AddSlots</code> in order for
 <code>Insert</code> to work properly.</p>
-
 <p>Instead, <code>Insert</code> could automatically manage slots.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">class Vector {
-  explicit Vector(int num_slots);
-  void Insert(int value);
-};
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Vector</span> <span class="p">{</span>
+  <span class="k">explicit</span> <span class="nf">Vector</span><span class="p">(</span><span class="kt">int</span> <span class="n">num_slots</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Other signs an interface is hard to use:</p>
-
 <ul>
 <li><code>Initialize</code> / <code>Deitialize</code> functions.</li>
 <li>Allowing partially created objects.</li>
 <li>Parameters that can have invalid values.</li>
 </ul>
-
-<p>Sometimes it&rsquo;s not practical to have a foolproof interface. In those cases rely on static analysis
+<p>Sometimes it's not practical to have a foolproof interface. In those cases rely on static analysis
 or documentation.</p>
-
 <h2 id="only-verify-relevant-method-arguments">Only Verify Relevant Method Arguments</h2>
-
 <p><em>June 26, 2018</em> -
 <a href="https://testing.googleblog.com/2018/06/testing-on-toilet-only-verify-relevant.html">original post</a></p>
-
 <p>Tests become fragile when they expect exact values on irrelevant arguments.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
-  fake_clock_.SetTime(kNewYearsDay);
-  fake_user_.SetName(&quot;Fake User&quot;);
-  EXPECT_CALL(mock_user_prompter_, UpdatePrompt(&quot;Hi Fake User! Happy New Year!&quot;,
-                                                TitleBar(&quot;2018-01-01&quot;),
-                                                PromptStyle::kNormal));
-  user_greeter_.DisplayGreeting();
-}
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">DisplayGreetingTest</span><span class="p">,</span> <span class="n">ShowSpecialGreetingOnNewYearsDay</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">fake_clock_</span><span class="p">.</span><span class="n">SetTime</span><span class="p">(</span><span class="n">kNewYearsDay</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">fake_user_</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Fake User</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_user_prompter_</span><span class="p">,</span> <span class="n">UpdatePrompt</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Hi Fake User! Happy New Year!</span><span class="s">&#34;</span><span class="p">,</span>
+                                                <span class="n">TitleBar</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">2018-01-01</span><span class="s">&#34;</span><span class="p">)</span><span class="p">,</span>
+                                                <span class="n">PromptStyle</span><span class="o">:</span><span class="o">:</span><span class="n">kNormal</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">user_greeter_</span><span class="p">.</span><span class="n">DisplayGreeting</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <ul>
 <li>Only verify one behavior per test.</li>
 <li>Only verify arguments that affect the correctness of the specific behavior being tested.</li>
 </ul>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">DisplayGreetingTest</span><span class="p">,</span> <span class="n">ShowSpecialGreetingOnNewYearsDay</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">fake_clock_</span><span class="p">.</span><span class="n">SetTime</span><span class="p">(</span><span class="n">kNewYearsDay</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_user_prompter_</span><span class="p">,</span> <span class="n">UpdatePrompt</span><span class="p">(</span><span class="n">HasSubstr</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Happy New Year!</span><span class="s">&#34;</span><span class="p">)</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">user_greeter_</span><span class="p">.</span><span class="n">DisplayGreeting</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">TEST_F(DisplayGreetingTest, ShowSpecialGreetingOnNewYearsDay) {
-  fake_clock_.SetTime(kNewYearsDay);
-  EXPECT_CALL(mock_user_prompter_, UpdatePrompt(HasSubstr(&quot;Happy New Year!&quot;), _, _));
-  user_greeter_.DisplayGreeting();
-}
-
-TEST_F(DisplayGreetingTest, RenderUserName) {
-  fake_user_.SetName(&quot;Fake User&quot;);
-  EXPECT_CALL(mock_user_prompter_, UpdatePrompt(HasSubstr(&quot;Fake User&quot;), _, _));
-  user_greeter_.DisplayGreeting();
-}
-</code></pre>
-</div>
-
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">DisplayGreetingTest</span><span class="p">,</span> <span class="n">RenderUserName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">fake_user_</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Fake User</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_user_prompter_</span><span class="p">,</span> <span class="n">UpdatePrompt</span><span class="p">(</span><span class="n">HasSubstr</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Fake User</span><span class="s">&#34;</span><span class="p">)</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">user_greeter_</span><span class="p">.</span><span class="n">DisplayGreeting</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="keep-tests-focused">Keep Tests Focused</h2>
-
 <p><em>June 11, 2018</em> -
 <a href="https://testing.googleblog.com/2018/06/testing-on-toilet-keep-tests-focused.html">original post</a></p>
-
 <p>Testing too many scenarios at once can make it difficult to understand test and reason about the
 failure.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">BankAccountTest</span><span class="p">,</span> <span class="n">WithdrawFromAccount</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Transaction</span> <span class="n">transaction</span> <span class="o">=</span> <span class="n">account_</span><span class="p">.</span><span class="n">Deposit</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">clock_</span><span class="p">.</span><span class="n">AdvanceTime</span><span class="p">(</span><span class="n">kMinTimeToSettle</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">account_</span><span class="p">.</span><span class="n">Settle</span><span class="p">(</span><span class="n">transaction</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">TEST_F(BankAccountTest, WithdrawFromAccount) {
-  Transaction transaction = account_.Deposit(Usd(5));
-  clock_.AdvanceTime(kMinTimeToSettle);
-  account_.Settle(transaction);
-
-  EXPECT_THAT(account_.Withdraw(Usd(5)), IsOk());
-  EXPECT_THAT(account_.Withdraw(USd(1)), IsRejected());
-  account_.SetOverdraftLimit(Usd(1));
-  EXPECT_THAT(account_.Withdraw(Usd(1)), IsOk());
-}
-</code></pre>
-</div>
-
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">account_</span><span class="p">.</span><span class="n">Withdraw</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">IsOk</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">account_</span><span class="p">.</span><span class="n">Withdraw</span><span class="p">(</span><span class="n">USd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">IsRejected</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">account_</span><span class="p">.</span><span class="n">SetOverdraftLimit</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">account_</span><span class="p">.</span><span class="n">Withdraw</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">IsOk</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Break up each scenario into its own test.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">BankAccountTest</span><span class="p">,</span> <span class="n">CanWithdrawWithinBalance</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">DepositAndSettle</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">account_</span><span class="p">.</span><span class="n">Withdraw</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">IsOk</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">TEST_F(BankAccountTest, CanWithdrawWithinBalance) {
-  DepositAndSettle(Usd(5));
-  EXPECT_THAT(account_.Withdraw(Usd(5)), IsOk());
-}
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">BankAccountTest</span><span class="p">,</span> <span class="n">CannotOverdraw</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">DepositAndSettle</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">account_</span><span class="p">.</span><span class="n">Withdraw</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">IsRejected</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-TEST_F(BankAccountTest, CannotOverdraw) {
-  DepositAndSettle(Usd(5));
-  EXPECT_THAT(account_.Withdraw(Usd(6)), IsRejected());
-}
-
-TEST_F(BankAccountTest, CanOverdrawUpToOverdraftLimit) {
-  DepositAndSettle(Usd(5));
-  account_.SetOverdraftLimit(Usd(1));
-  EXPECT_THAT(account_.Withdraw(Usd(6)), IsOk());
-}
-</code></pre>
-</div>
-
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">BankAccountTest</span><span class="p">,</span> <span class="n">CanOverdrawUpToOverdraftLimit</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">DepositAndSettle</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">account_</span><span class="p">.</span><span class="n">SetOverdraftLimit</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">account_</span><span class="p">.</span><span class="n">Withdraw</span><span class="p">(</span><span class="n">Usd</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">IsOk</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Notice how each test only verifies the output of one call per test.</p>
-
 <h2 id="understanding-code-in-review">Understanding Code in Review</h2>
-
 <p><em>May 1, 2018</em> - <a href="https://testing.googleblog.com/2018/05/code-health-understanding-code-in-review.html">original
 post</a></p>
+<p>If you find yourself reviewing code that is difficult to understand, don't waste time reviewing it.</p>
 
-<p>If you find yourself reviewing code that is difficult to understand, don&rsquo;t waste time reviewing it.</p>
-
-
-<div class="notices warning" ><pre><code class="language-cpp">bool IsOkay(int n) {
-  bool f = false;
-  for (int i = 2; i &lt;= n; ++i) {
-    if (n % i == 0) f = true;
-  }
-  return !f;
-}
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsOkay</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span><span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="o">+</span><span class="o">+</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">=</span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="o">!</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Ask for it to be clarified.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">bool IsPrime(int n) {
-  for (int divisor = 2; divisor &lt;= n / 2; ++divisor) {
-    if (n % divisor == 0) return false;
-  }
-  return true;
-}
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsPrime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">divisor</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">divisor</span> <span class="o">&lt;</span><span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="o">+</span><span class="o">+</span><span class="n">divisor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">divisor</span> <span class="o">=</span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Clarifying code often results in noticing improvements.</p>
-
 <h2 id="cleanly-create-test-data">Cleanly Create Test Data</h2>
-
 <p><em>February 20, 2018</em> - <a href="https://testing.googleblog.com/2018/02/testing-on-toilet-cleanly-create-test.html">original
 post</a></p>
+<p>Helper methods make it easier to create test data, but they don't age well.</p>
 
-<p>Helper methods make it easier to create test data, but they don&rsquo;t age well.</p>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Starts simple
+</span><span class="c1"></span><span class="n">Company</span> <span class="n">company</span> <span class="o">=</span> <span class="n">NewCompany</span><span class="p">(</span><span class="n">kPublic</span><span class="p">)</span><span class="p">;</span>
 
+<span class="c1">// But soon acquires more parameters
+</span><span class="c1"></span><span class="n">Company</span> <span class="n">small</span> <span class="o">=</span> <span class="n">NewCompany</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">kPublic</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">privately_owned</span> <span class="o">=</span> <span class="n">NewCompany</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">kPrivate</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">bankrupt</span> <span class="o">=</span> <span class="n">NewCompany</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kPastDate</span><span class="p">,</span> <span class="n">kPublic</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">// Starts simple
-Company company = NewCompany(kPublic);
-
-// But soon acquires more parameters
-Company small = NewCompany(2, 2, nullptr, kPublic);
-Company privately_owned = NewCompany(0, 0, nullptr, kPrivate);
-Company bankrupt = NewCompany(0 , 0, kPastDate, kPublic);
-
-// Or more methods
-Company small = NewCompanyWithEmployeesAndBoardMembers(2, 2, kPublic);
-Company privately_owned = NewCompanyWithType(kPrivate);
-Company bankrupt = NewCompanyWithBankruptcyDate(kPastDate, kPublic);
-</code></pre>
-</div>
-
+<span class="c1">// Or more methods
+</span><span class="c1"></span><span class="n">Company</span> <span class="n">small</span> <span class="o">=</span> <span class="n">NewCompanyWithEmployeesAndBoardMembers</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kPublic</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">privately_owned</span> <span class="o">=</span> <span class="n">NewCompanyWithType</span><span class="p">(</span><span class="n">kPrivate</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">bankrupt</span> <span class="o">=</span> <span class="n">NewCompanyWithBankruptcyDate</span><span class="p">(</span><span class="n">kPastDate</span><span class="p">,</span> <span class="n">kPublic</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Try the builder pattern.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Company</span> <span class="n">small</span> <span class="o">=</span> <span class="n">Company</span><span class="o">:</span><span class="o">:</span><span class="n">Builder</span><span class="p">{</span><span class="p">}</span><span class="p">.</span><span class="n">SetEmployees</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">.</span><span class="n">SetBoardMembers</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">.</span><span class="n">Build</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">privately_owned</span> <span class="o">=</span> <span class="n">Company</span><span class="o">:</span><span class="o">:</span><span class="n">Builder</span><span class="p">{</span><span class="p">}</span><span class="p">.</span><span class="n">SetType</span><span class="p">(</span><span class="n">kPrivate</span><span class="p">)</span><span class="p">.</span><span class="n">Build</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">bankrupt</span> <span class="o">=</span> <span class="n">Company</span><span class="o">:</span><span class="o">:</span><span class="n">Builder</span><span class="p">{</span><span class="p">}</span><span class="p">.</span><span class="n">SetBankruptcyDate</span><span class="p">(</span><span class="n">kPastDate</span><span class="p">)</span><span class="p">.</span><span class="n">Build</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="n">Company</span> <span class="n">default_company</span> <span class="o">=</span> <span class="n">Company</span><span class="o">:</span><span class="o">:</span><span class="n">Builder</span><span class="p">{</span><span class="p">}</span><span class="p">.</span><span class="n">Build</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">Company small = Company::Builder{}.SetEmployees(2).SetBoardMembers(2).Build();
-Company privately_owned = Company::Builder{}.SetType(kPrivate).Build();
-Company bankrupt = Company::Builder{}.SetBankruptcyDate(kPastDate).Build();
-Company default_company = Company::Builder{}.Build();
+<span class="k">class</span> <span class="nc">Company</span><span class="o">:</span><span class="o">:</span><span class="n">Builder</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Builder</span><span class="o">&amp;</span> <span class="n">SetEmployees</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="n">employees_</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">Builder</span><span class="o">&amp;</span> <span class="n">SetBoardMembers</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="n">board_members_</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">Builder</span><span class="o">&amp;</span> <span class="n">SetBankruptcyDate</span><span class="p">(</span><span class="n">BankruptcyDate</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span> <span class="n">date_</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">Builder</span><span class="o">&amp;</span> <span class="n">SetType</span><span class="p">(</span><span class="n">Type</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span> <span class="n">type_</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="p">}</span>
 
-class Company::Builder {
- public:
-  Builder&amp; SetEmployees(int n) { employees_ = n; return *this; }
-  Builder&amp; SetBoardMembers(int n) { board_members_ = n; return *this; }
-  Builder&amp; SetBankruptcyDate(BankruptcyDate d) { date_ = d; return *this; }
-  Builder&amp; SetType(Type t) { type_ = t; return *this; }
+  <span class="n">Company</span> <span class="nf">Build</span><span class="p">(</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Company</span><span class="p">(</span><span class="n">employees_</span><span class="p">,</span> <span class="n">board_members_</span><span class="p">,</span> <span class="n">date_</span><span class="p">,</span> <span class="n">type_</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
-  Company Build() const { return Company(employees_, board_members_, date_, type_); }
-
- private:
-  int employees_ = 0;
-  int board_members_ = 0;
-  BankruptcyDate date_ = kBeforeDate;
-  Type type_ = kPublic;
-};
-</code></pre>
-</div>
-
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">employees_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">board_members_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">BankruptcyDate</span> <span class="n">date_</span> <span class="o">=</span> <span class="n">kBeforeDate</span><span class="p">;</span>
+  <span class="n">Type</span> <span class="n">type_</span> <span class="o">=</span> <span class="n">kPublic</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 <h2 id="only-expect-state-changing-method-calls">Only Expect State-Changing Method Calls</h2>
-
 <p><em>December 11, 2017</em> - <a href="https://testing.googleblog.com/2017/12/testing-on-toilet-only-verify-state.html">original
 post</a></p>
-
-<p>Expecting calls to methods that don&rsquo;t change state can make a test brittle, less readable, and
+<p>Expecting calls to methods that don't change state can make a test brittle, less readable, and
 provide a false sense of security.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">UserAuthorizer</span><span class="p">,</span> <span class="n">AddPermissionToDatabase</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UserAuthorizer</span> <span class="nf">user_authorizer</span><span class="p">(</span><span class="n">mock_user_service_</span><span class="p">,</span> <span class="n">mock_permission_db_</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">TEST(UserAuthorizer, AddPermissionToDatabase) {
-  UserAuthorizer user_authorizer(mock_user_service_, mock_permission_db_);
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_user_service_</span><span class="p">,</span> <span class="n">IsUserActive</span><span class="p">(</span><span class="n">kUser</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_permission_db_</span><span class="p">,</span> <span class="n">GetPermission</span><span class="p">(</span><span class="n">kUser</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_permission_db_</span><span class="p">,</span> <span class="n">IsValidPermission</span><span class="p">(</span><span class="n">kReadAccess</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_permission_db_</span><span class="p">,</span> <span class="n">AddPermission</span><span class="p">(</span><span class="n">kUser</span><span class="p">,</span> <span class="n">kReadAccess</span><span class="p">)</span><span class="p">;</span>
 
-  EXPECT_CALL(mock_user_service_, IsUserActive(kUser);
-  EXPECT_CALL(mock_permission_db_, GetPermission(kUser);
-  EXPECT_CALL(mock_permission_db_, IsValidPermission(kReadAccess);
-  EXPECT_CALL(mock_permission_db_, AddPermission(kUser, kReadAccess);
-
-  user_authorizer.GrantPermission(kUser, kReadAccess);
-}
-</code></pre>
-</div>
-
+  <span class="n">user_authorizer</span><span class="p">.</span><span class="n">GrantPermission</span><span class="p">(</span><span class="n">kUser</span><span class="p">,</span> <span class="n">kReadAccess</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>It is fine, however, to use non-state-changing methods for simulating test conditions.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">ON_CALL(mock_user_service_, IsUserActive(kUser)).WillByDefault(Return(false));
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">ON_CALL</span><span class="p">(</span><span class="n">mock_user_service_</span><span class="p">,</span> <span class="n">IsUserActive</span><span class="p">(</span><span class="n">kUser</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillByDefault</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>With unnecessary <code>EXPECT_CALL</code>s removed, the test becomes:</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Test</span><span class="p">(</span><span class="n">UserAuthorizer</span><span class="p">,</span> <span class="n">AddPermissionToDatabase</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">UserAuthorizer</span> <span class="nf">user_authorizer</span><span class="p">(</span><span class="n">mock_user_service_</span><span class="p">,</span> <span class="n">mock_permission_db_</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">Test(UserAuthorizer, AddPermissionToDatabase) {
-  UserAuthorizer user_authorizer(mock_user_service_, mock_permission_db_);
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_permission_db_</span><span class="p">,</span> <span class="n">AddPermission</span><span class="p">(</span><span class="n">kUser</span><span class="p">,</span> <span class="n">kReadAccess</span><span class="p">)</span><span class="p">;</span>
 
-  EXPECT_CALL(mock_permission_db_, AddPermission(kUser, kReadAccess);
-
-  user_authorizer.GrantPermission(kUser, kReadAccess);
-}
-</code></pre>
-</div>
-
+  <span class="n">user_authorizer</span><span class="p">.</span><span class="n">GrantPermission</span><span class="p">(</span><span class="n">kUser</span><span class="p">,</span> <span class="n">kReadAccess</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="obsessed-with-primitives">Obsessed With Primitives?</h2>
-
 <p><em>November 14, 2017</em> - <a href="https://testing.googleblog.com/2017/11/obsessed-with-primitives.html">original
 post</a></p>
-
 <p>Code that relies too heavily on primitive types instead of custom abstractions can be hard to
 understand and maintain.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">polygon</span> <span class="o">=</span> <span class="p">{</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="p">,</span>
+                                             <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="p">,</span>
+                                             <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="p">}</span><span class="p">;</span>
+<span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">bounding_box</span> <span class="o">=</span> <span class="n">GetBoundingBox</span><span class="p">(</span><span class="n">polygon</span><span class="p">)</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">bounding_box</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span>  <span class="o">-</span> <span class="n">bounding_box</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="o">*</span>
+           <span class="p">(</span><span class="n">bounding_box</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span> <span class="o">-</span> <span class="n">bounding_box</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">second</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">std::vector&lt;std::pair&lt;int, int&gt;&gt; polygon = { std::make_pair(0, 0),
-                                             std::make_pair(0, 4),
-                                             std::make_pair(4, 0) };
-std::pair&lt;std::pair&lt;int, int&gt;, std::pair&lt;int, int&gt;&gt; bounding_box = GetBoundingBox(polygon);
-int area = (bounding_box.second.first  - bounding_box.first.first) *
-           (bounding_box.second.second - bounding_box.first.second);
-
-</code></pre>
-</div>
-
+</code></pre></div></div>
 
 <p>Make higher-level abstractions.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Polygon</span> <span class="n">polygon</span> <span class="o">=</span> <span class="n">RightTriangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">area</span> <span class="o">=</span> <span class="n">polygon</span><span class="p">.</span><span class="n">GetBoundingBox</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetArea</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></div>
 
-<div class="notices tip" ><pre><code class="language-cpp">Polygon polygon = RightTriangle(4, 4);
-int area = polygon.GetBoundingBox().GetArea();
-</code></pre>
-</div>
-
-
-<p>This advice doesn&rsquo;t just apply to primitives and The STL. It&rsquo;s possible for any type to be too
+<p>This advice doesn't just apply to primitives and The STL. It's possible for any type to be too
 primitive for the job.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">Polygon polygon = IsoscelesRightTriangle(4);
-int area = polygon.GetBoundingBox().GetArea();
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Polygon</span> <span class="n">polygon</span> <span class="o">=</span> <span class="n">IsoscelesRightTriangle</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">area</span> <span class="o">=</span> <span class="n">polygon</span><span class="p">.</span><span class="n">GetBoundingBox</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetArea</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></div>
 
 <h2 id="identifiernamingpostforworldwidewebblog">IdentifierNamingPostForWorldWideWebBlog</h2>
-
 <p><em>October 23, 2017</em> - <a href="https://testing.googleblog.com/2017/10/code-health-identifiernamingpostforworl.html">original
 post</a></p>
-
 <p>Names should be clear and precise.</p>
+<p>Don't mention the type in the variable name. It's OK for the name and the type match.</p>
 
-<p>Don&rsquo;t mention the type in the variable name. It&rsquo;s OK for the name and the type match.</p>
-
-
-<div class="notices warning" ><pre><code class="language-cpp">std::string name_string;
-std::list&lt;std::time_t&gt; holiday_date_list;
-</code></pre>
-</div>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name_string</span><span class="p">;</span>
+<span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">time_t</span><span class="o">&gt;</span> <span class="n">holiday_date_list</span><span class="p">;</span>
+</code></pre></div></div>
 
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+<span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">time_t</span><span class="o">&gt;</span> <span class="n">holidays</span><span class="p">;</span>
+<span class="n">Payments</span> <span class="n">payments</span><span class="p">;</span>
+</code></pre></div></div>
 
-<div class="notices tip" ><pre><code class="language-cpp">std::string name;
-std::list&lt;std::time_t&gt; holidays;
-Payments payments;
-</code></pre>
-</div>
+<p>Don't use overly specific names. Get more specific if there is a need for disambiguation.</p>
 
-
-<p>Don&rsquo;t use overly specific names. Get more specific if there is a need for disambiguation.</p>
-
-
-<div class="notices warning" ><pre><code class="language-cpp">Monster final_battle_most_dangerous_boss_monster;
-Payments non_typical_monthly_payments;
-</code></pre>
-</div>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Monster</span> <span class="n">final_battle_most_dangerous_boss_monster</span><span class="p">;</span>
+<span class="n">Payments</span> <span class="n">non_typical_monthly_payments</span><span class="p">;</span>
+</code></pre></div></div>
 
 
-
-<div class="notices tip" ><pre><code class="language-cpp">Monster boss;
-Payments payments;
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Monster</span> <span class="n">boss</span><span class="p">;</span>
+<span class="n">Payments</span> <span class="n">payments</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Do not repeat context.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">class AnnualHolidaySale {
-  bool PromoteHolidaySale();
-  int annual_sale_rebate_;
-};
-</code></pre>
-</div>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AnnualHolidaySale</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="nf">PromoteHolidaySale</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">annual_sale_rebate_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 
-
-<div class="notices tip" ><pre><code class="language-cpp">class AnnualHolidaySale {
-  bool Promote();
-  int rebate_;
-}
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AnnualHolidaySale</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="nf">Promote</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">rebate_</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="to-comment-or-not-to-comment">To Comment or Not to Comment</h2>
-
 <p><em>July 17, 2017</em> - <a href="https://testing.googleblog.com/2017/07/code-health-to-comment-or-not-to-comment.html">original
 post</a></p>
-
 <p>Comments are not always helpful.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Subtract discount from final price.
+</span><span class="c1"></span><span class="n">final_price</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_items</span> <span class="o">*</span> <span class="n">item_price</span><span class="p">)</span> <span class="o">-</span>
+              <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">min</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_items</span><span class="p">)</span> <span class="o">*</span> <span class="n">item_price</span> <span class="o">*</span>  <span class="mf">0.1</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">// Subtract discount from final price.
-final_price = (num_items * item_price) -
-              std::min(5, num_items) * item_price *  0.1;
+<span class="c1">// Filter offensive words.
+</span><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="nl">word</span> <span class="p">:</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span> <span class="p">}</span>
 
-// Filter offensive words.
-for (std::string word : words) { ... }
+<span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">;</span> <span class="c1">// Width in pixels.
+</span><span class="c1"></span>
+<span class="c1">// Safe since height is always &gt; 0.
+</span><span class="c1"></span><span class="k">return</span> <span class="n">width</span> <span class="o">/</span> <span class="n">height</span><span class="p">;</span>
+</code></pre></div></div>
 
-int width = ...; // Width in pixels.
+<p>It's often better to make your code self-explanatory.</p>
 
-// Safe since height is always &gt; 0.
-return width / height;
-</code></pre>
-</div>
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">price</span> <span class="o">=</span> <span class="n">num_items</span> <span class="o">*</span> <span class="n">item_price</span><span class="p">;</span>
+<span class="n">discount</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">min</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_items</span><span class="p">)</span> <span class="o">*</span> <span class="n">item_price</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">;</span>
+<span class="n">final_price</span> <span class="o">=</span> <span class="n">price</span> <span class="o">-</span> <span class="n">discount</span><span class="p">;</span>
 
+<span class="n">FilterOffensiveWords</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="p">;</span>
 
-<p>It&rsquo;s often better to make your code self-explanatory.</p>
+<span class="n">Pixels</span> <span class="n">width</span> <span class="o">=</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">;</span>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">price = num_items * item_price;
-discount = std::min(5, num_items) * item_price * 0.1;
-final_price = price - discount;
-
-FilterOffensiveWords(words);
-
-Pixels width = ...;
-
-CheckArgument(height &gt; 0);
-return width / height;
-</code></pre>
-</div>
-
+<span class="n">CheckArgument</span><span class="p">(</span><span class="n">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="p">;</span>
+<span class="k">return</span> <span class="n">width</span> <span class="o">/</span> <span class="n">height</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Avoid using comments to explain <em>what</em> code does. Use comments to explain <em>why</em> code does something.</p>
-
 <h2 id="too-many-comments-on-your-code-reviews">Too Many Comments on Your Code Reviews?</h2>
-
 <p><em>June 19, 2017</em> - <a href="https://testing.googleblog.com/2017/06/code-health-too-many-comments-on-your.html">original
 post</a></p>
-
 <p>Before you send out the code review:</p>
-
 <ul>
 <li>Review your own code first.</li>
 <li>Discuss with colleagues.</li>
 <li>Make bite-sized reviews.</li>
 <li>Add comments to the code if necessary.</li>
 </ul>
-
 <p>When addressing code review comments:</p>
-
 <ul>
 <li>Review your code after addressing non-trivial comments.</li>
 <li>Understand the reviews thought process.</li>
 <li>Answer questions in the code.</li>
 </ul>
-
 <h2 id="reduce-nesting-reduce-complexity">Reduce Nesting, Reduce Complexity</h2>
-
 <p><em>June 15, 2017</em> - <a href="https://testing.googleblog.com/2017/06/code-health-reduce-nesting-reduce.html">original
 post</a></p>
-
 <p>Deeply nested code is error-prone and hurts readability.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">server</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">Response response = server.Call(request);
-
-if (response.GetStatus() == Status::kOk) {
-  if (!IsAuthorized(response.GetUser())) {
-    if (response.GetEnc() == &quot;utf-8&quot;) {
-      std::vector&lt;Row&gt; rows = response.GetRows();
-      if (!rows.empty()) {
-        avg = std::accumulate(rows.begin(), rows.end(), 0, ParseRow) / rows.size();
-        return avg;
-      } else {
-      throw EmptyException();
-    } else {
-      throw AuthException('unauthorized');
-    }
-  } else {
-    throw ValueException('wrong encoding');
-  }
-} else {
-  throw RpcException(response.GetStatus());
-}
-</code></pre>
-</div>
-
+<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span><span class="o">=</span> <span class="n">Status</span><span class="o">:</span><span class="o">:</span><span class="n">kOk</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">IsAuthorized</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetUser</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetEnc</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span><span class="o">=</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">utf-8</span><span class="s">&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">GetRows</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">rows</span><span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">accumulate</span><span class="p">(</span><span class="n">rows</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">rows</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ParseRow</span><span class="p">)</span> <span class="o">/</span> <span class="n">rows</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">avg</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="nf">EmptyException</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="nf">AuthException</span><span class="p">(</span><span class="err">&#39;</span><span class="n">unauthorized</span><span class="err">&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nf">ValueException</span><span class="p">(</span><span class="err">&#39;</span><span class="n">wrong</span> <span class="n">encoding</span><span class="err">&#39;</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="nf">RpcException</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>The code above could be refactored to use guard clauses.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">server</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">Response response = server.Call(request);
+<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">(</span><span class="p">)</span> <span class="o">!</span><span class="o">=</span> <span class="n">Status</span><span class="o">:</span><span class="o">:</span><span class="n">kOk</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="nf">RpcException</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetStatus</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-if (response.GetStatus() != Status::kOk) {
-  throw RpcException(response.GetStatus());
-}
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">IsAuthorized</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetUser</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="nf">ValueException</span><span class="p">(</span><span class="err">&#39;</span><span class="n">wrong</span> <span class="n">encoding</span><span class="err">&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-if (!IsAuthorized(response.GetUser())) {
-  throw ValueException('wrong encoding');
-}
+<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">GetEnc</span><span class="p">(</span><span class="p">)</span> <span class="o">!</span><span class="o">=</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">utf-8</span><span class="s">&#34;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="nf">AuthException</span><span class="p">(</span><span class="err">&#39;</span><span class="n">unauthorized</span><span class="err">&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-if (response.GetEnc() != &quot;utf-8&quot;) {
-  throw AuthException('unauthorized');
-}
+<span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">GetRows</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">rows</span><span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="nf">EmptyException</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-std::vector&lt;Row&gt; rows = response.GetRows();
-if (rows.empty()) {
-  throw EmptyException();
-}
-
-avg = std::accumulate(rows.begin(), rows.end(), 0, ParseRow) / rows.size();
-return avg;
-</code></pre>
-</div>
-
+<span class="n">avg</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">accumulate</span><span class="p">(</span><span class="n">rows</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">rows</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ParseRow</span><span class="p">)</span> <span class="o">/</span> <span class="n">rows</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="k">return</span> <span class="n">avg</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Can you spot the bug now?</p>
-
 <h2 id="keep-cause-and-effect-clear">Keep Cause and Effect Clear</h2>
-
 <p><em>January 31, 2017</em> - <a href="https://testing.googleblog.com/2017/01/testing-on-toilet-keep-cause-and-effect.html">original
 post</a></p>
+<p>It's difficult to reason about a test when the cause is hidden far away from the effect.</p>
 
-<p>It&rsquo;s difficult to reason about a test when the cause is hidden far away from the effect.</p>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TallyTest</span> <span class="o">:</span> <span class="k">public</span> <span class="o">:</span><span class="o">:</span><span class="n">testing</span><span class="o">:</span><span class="o">:</span><span class="n">Test</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">SetUp</span><span class="p">(</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key1</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key2</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key1</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key1</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">class TallyTest : public ::testing::Test {
-protected:
-  void SetUp() override {
-    tally_.Increment(&quot;key1&quot;, 8);
-    tally_.Increment(&quot;key2&quot;, 100);
-    tally_.Increment(&quot;key1&quot;, 0);
-    tally_.Increment(&quot;key1&quot;, 1);
-  }
-
-  Tally tally_;
-}
-// 200 lines of code
-
-TEST_F(TallyTest, IncrementExistingKey) {
-  EXPECT_EQ(9, tally_.Get(&quot;key1&quot;));
-}
-</code></pre>
-</div>
-
+  <span class="n">Tally</span> <span class="n">tally_</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 200 lines of code
+</span><span class="c1"></span>
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">TallyTest</span><span class="p">,</span> <span class="n">IncrementExistingKey</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">tally_</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key1</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Write tests where the effects immediately follow the causes.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TallyTest</span> <span class="o">:</span> <span class="k">public</span> <span class="o">:</span><span class="o">:</span><span class="n">testing</span><span class="o">:</span><span class="o">:</span><span class="n">Test</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">Tally</span> <span class="n">tally_</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class TallyTest : public ::testing::Test {
-protected:
-  Tally tally_;
-}
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">TallyTest</span><span class="p">,</span> <span class="n">NewKey</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">tally_</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-TEST_F(TallyTest, NewKey) {
-  tally_.Increment(&quot;key&quot;, 100);
-  EXPECT_EQ(100, tally_.Get(&quot;key&quot;));
-}
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">TallyTest</span><span class="p">,</span> <span class="n">ExistingKey</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">tally_</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-TEST_F(TallyTest, ExistingKey) {
-  tally_.Increment(&quot;key&quot;, 8);
-  tally_.Increment(&quot;key&quot;, 1);
-  EXPECT_EQ(9, tally_.Get(&quot;key&quot;));
-}
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">TallyTest</span><span class="p">,</span> <span class="n">IncrementByZeroDoesNothing</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">tally_</span><span class="p">.</span><span class="n">Increment</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">tally_</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">key</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-TEST_F(TallyTest, IncrementByZeroDoesNothing) {
-  tally_.Increment(&quot;key&quot;, 8);
-  tally_.Increment(&quot;key&quot;, 0);
-  EXPECT_EQ(8, tally_.Get(&quot;key&quot;));
-}
-</code></pre>
-</div>
-
-
-<p>It may require a bit more code, but it&rsquo;s easier to read and maintain.</p>
-
+<p>It may require a bit more code, but it's easier to read and maintain.</p>
 <h2 id="what-makes-a-good-end-to-end-test">What Makes a Good End-to-End Test?</h2>
-
 <p><em>September, 2016</em> - <a href="https://testing.googleblog.com/2016/09/testing-on-toilet-what-makes-good-end.html">original
 post</a></p>
-
 <p>End-to-end tests give confidence about the health of the system when it is in a near production
 state, but they tend to be more flaky and expensive to maintain.</p>
-
 <p>To be cost effective, end-to-end tests should focus on aspects of the system that cannot be
 evaluated by smaller tests. Minor and/or frequently changing details like error messages or visual
 layouts should not effect the test.</p>
-
 <h2 id="change-detector-tests-considered-harmful">Change-Detector Tests Considered Harmful</h2>
-
 <p><em>January 27, 2015</em> - <a href="https://testing.googleblog.com/2015/01/testing-on-toilet-change-detector-tests.html">original
 post</a></p>
-
 <p>Tests that break in response to any change to production code without verifying correct behavior
 only add to maintenance costs without catching defects.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="n">Processor</span><span class="o">:</span><span class="o">:</span><span class="n">Process</span><span class="p">(</span><span class="n">Work</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">first_part_</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">second_part_</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">void Processor::Process(Work w) {
-  first_part_.Process(w);
-  second_part_.Process(w);
-}
+<span class="n">TEST</span><span class="p">(</span><span class="n">ProcessorTest</span><span class="p">,</span> <span class="n">ProcessWork</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MockFirstPart</span> <span class="n">part1</span><span class="p">;</span>
+  <span class="n">MockSecondPart</span> <span class="n">part2</span><span class="p">;</span>
+  <span class="n">Processor</span> <span class="nf">p</span><span class="p">(</span><span class="n">part1</span><span class="p">,</span> <span class="n">part2</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Work</span> <span class="n">w</span><span class="p">;</span>
 
-TEST(ProcessorTest, ProcessWork) {
-  MockFirstPart part1;
-  MockSecondPart part2;
-  Processor p(part1, part2);
-  Work w;
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">part1</span><span class="p">,</span> <span class="n">Process</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">part2</span><span class="p">,</span> <span class="n">Process</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
 
-  EXPECT_CALL(part1, Process(w));
-  EXPECT_CALL(part2, Process(w));
-
-  p.Process(w);
-}
-</code></pre>
-</div>
-
+  <span class="n">p</span><span class="p">.</span><span class="n">Process</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Tests like these should either be re-written or deleted.</p>
-
 <h2 id="prefer-testing-public-apis-over-implementation-detail-classes">Prefer Testing Public APIs Over Implementation-Detail Classes</h2>
-
 <p><em>January 14, 2015</em> - <a href="https://testing.googleblog.com/2015/01/testing-on-toilet-prefer-testing-public.html">original
 post</a></p>
-
 <p>Public APIs can be called by many users. Implementation details are only called by public APIs.
 If the public APIs are well tested, as they should be, then the implementation details will get
 tested by association.</p>
-
 <p>Heavy testing against implementation details can cause a couple problems:</p>
-
 <ul>
 <li>Unlike public APIs, implementation details are vulnerable to refactoring. Tests for implementation
 details can fail even though the behavior from the public API is fine.</li>
 <li>Testing implementation details can give false confidence. Even if an implementation detail is well
-tested, that doesn&rsquo;t mean the pubic API behaves properly.</li>
+tested, that doesn't mean the pubic API behaves properly.</li>
 </ul>
-
 <h2 id="writing-descriptive-test-names">Writing Descriptive Test Names</h2>
-
 <p><em>October 16, 2014</em> - <a href="https://testing.googleblog.com/2014/10/testing-on-toilet-writing-descriptive.html">original
 post</a></p>
-
 <p>Vague test names make it hard to keep track of what is tested.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">IsUserLockedOutTest</span><span class="p">,</span> <span class="n">InvalidLogin</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">authenticator_</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="n">username_</span><span class="p">,</span> <span class="n">password_</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">authenticator_</span><span class="p">.</span><span class="n">IsUserLockedOut</span><span class="p">(</span><span class="n">username_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">TEST_F(IsUserLockedOutTest, InvalidLogin) {
-  authenticator_.Authenticate(username_, password_);
-  EXPECT_FALSE(authenticator_.IsUserLockedOut(username_));
+  <span class="n">authenticator_</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="n">username_</span><span class="p">,</span> <span class="n">password_</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">authenticator_</span><span class="p">.</span><span class="n">IsUserLockedOut</span><span class="p">(</span><span class="n">username_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
 
-  authenticator_.Authenticate(username_, password_);
-  EXPECT_FALSE(authenticator_.IsUserLockedOut(username_));
-
-  authenticator_.Authenticate(username_, password_);
-  EXPECT_TRUE(authenticator_.IsUserLockedOut(username_));
-}
-</code></pre>
-</div>
-
+  <span class="n">authenticator_</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="n">username_</span><span class="p">,</span> <span class="n">password_</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">authenticator_</span><span class="p">.</span><span class="n">IsUserLockedOut</span><span class="p">(</span><span class="n">username_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Descriptive test names make it easy to tell what behavior is broken without looking at code. Also,
 the length of a good test name helps indicate when a test needs to be split apart.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">IsUserLockedOutTest</span><span class="p">,</span> <span class="n">ShouldLockOutUserAfterThreeInvalidLoginAttempts</span><span class="p">)</span> <span class="p">{</span>
+ <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div></div>
 
-<div class="notices tip" ><pre><code class="language-cpp">TEST_F(IsUserLockedOutTest, ShouldLockOutUserAfterThreeInvalidLoginAttempts) {
- // ...
-}
-</code></pre>
-</div>
-
-
-<p>A test&rsquo;s name should be all you need to know to understand the behavior being tested. Make sure
+<p>A test's name should be all you need to know to understand the behavior being tested. Make sure
 the name contains both the scenario being tested and the expected outcome.</p>
-
-<h2 id="don-t-put-logic-in-tests">Don&rsquo;t Put Logic in Tests</h2>
-
+<h2 id="dont-put-logic-in-tests">Don't Put Logic in Tests</h2>
 <p><em>July 31, 2014</em> - <a href="https://testing.googleblog.com/2014/07/testing-on-toilet-dont-put-logic-in.html">original
 post</a></p>
-
 <p>Tests should be simple by stating I/O directly rather than computing them.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">TEST(NavigatorTest, ShouldNavigateToPhotosPage) {
-  const std::string baseUrl = &quot;http://plus.google.com/&quot;;
-  Navigator nav(baseUrl);
-  nav.GoToPhotosPage();
-  EXPECT_EQ(baseUrl + &quot;/u/0/photos&quot;, nav.GetCurrentUrl());
-}
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">NavigatorTest</span><span class="p">,</span> <span class="n">ShouldNavigateToPhotosPage</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">baseUrl</span> <span class="o">=</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">http://plus.google.com/</span><span class="s">&#34;</span><span class="p">;</span>
+  <span class="n">Navigator</span> <span class="nf">nav</span><span class="p">(</span><span class="n">baseUrl</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">nav</span><span class="p">.</span><span class="n">GoToPhotosPage</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">baseUrl</span> <span class="o">+</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">/u/0/photos</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">nav</span><span class="p">.</span><span class="n">GetCurrentUrl</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Even a simple string concatenation can lead to bugs.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">TEST(NavigatorTest, ShouldNavigateToPhotosPage) {
-  Navigator nav(&quot;http://plug.google.com/&quot;);
-  nav.GoToPhotosPage();
-  EXPECT_EQ(&quot;http://plus.google.com//u/0/photos&quot;, nav.GetCurrentUrl());
-}
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">NavigatorTest</span><span class="p">,</span> <span class="n">ShouldNavigateToPhotosPage</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Navigator</span> <span class="nf">nav</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">http://plug.google.com/</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">nav</span><span class="p">.</span><span class="n">GoToPhotosPage</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">http://plus.google.com//u/0/photos</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">nav</span><span class="p">.</span><span class="n">GetCurrentUrl</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>If a test requires logic, move that logic out of the test body into utilities and helper functions
 and write tests for them too.</p>
-
 <h2 id="risk-driven-testing">Risk-Driven Testing</h2>
-
 <p><em>May 30, 2014</em> - <a href="https://testing.googleblog.com/2014/05/testing-on-toilet-risk-driven-testing.html">original
 post</a></p>
-
 <p>Blindly writing tests can lead to a false sense of security or wasted effort. Before writing tests,
 think about testing. Small tests are cheap, larger tests protect core use-cases and integration.
 Manual testing can sometimes be the cheapest, most effective option.</p>
-
 <h2 id="effective-testing">Effective Testing</h2>
-
 <p><em>May 7, 2014</em> - <a href="https://testing.googleblog.com/2014/05/testing-on-toilet-effective-testing.html">original
 post</a></p>
-
 <p>To be effective, a test maximizes three important qualities:</p>
-
 <ul>
 <li><strong>Fidelity</strong> - Sensitive to defects in the code under test.</li>
 <li><strong>Resilience</strong> - Fails only when a breaking change is made to the code under test.</li>
 <li><strong>Precision</strong> - Upon failure reports exactly where the defect lies.</li>
 </ul>
-
 <h2 id="test-behaviors-not-methods">Test Behaviors, Not Methods</h2>
-
 <p>A single method can exhibit many behaviors. Likewise, a single behavior can span multiple methods.</p>
-
 <p>It can be harmful to think that tests and public methods should have a 1:1 relationship.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">TEST_F(TransactionProcessorTest, ProcessTransaction) {
-  User user = NewUserWithBalance(kLowBalanceThreshold + Dollars(2));
-  transaction_processor_.ProcessTransaction(user, Transaction(&quot;Pile of Beanie Babies&quot;, Dollars(3)));
-  EXPECT_THAT(ui_.GetText(), HasSubstr(&quot;You bought a Pile of Beanie Babies&quot;));
-  EXPECT_EQ(user.GetEmails().size(), 1);
-  EXPECT_STREQ(user.GetEmails().at(0).GetSubject(), &quot;Your balance is low&quot;);
-}
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">TransactionProcessorTest</span><span class="p">,</span> <span class="n">ProcessTransaction</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">NewUserWithBalance</span><span class="p">(</span><span class="n">kLowBalanceThreshold</span> <span class="o">+</span> <span class="n">Dollars</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">transaction_processor_</span><span class="p">.</span><span class="n">ProcessTransaction</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Pile of Beanie Babies</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">Dollars</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">ui_</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">HasSubstr</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">You bought a Pile of Beanie Babies</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">GetEmails</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_STREQ</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">GetEmails</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="p">.</span><span class="n">GetSubject</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">Your balance is low</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Each test should verify one behavior. Each method may take several tests to verify.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">TransactionProcessorTest</span><span class="p">,</span> <span class="n">ShouldDisplayNotification</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">transaction_processor_</span><span class="p">.</span><span class="n">ProcessTransaction</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Pile of Beanie Babies</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_THAT</span><span class="p">(</span><span class="n">ui_</span><span class="p">.</span><span class="n">GetText</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">HasSubstr</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">You bought a Pile of Beanie Babies</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">TEST_F(TransactionProcessorTest, ShouldDisplayNotification) {
-  transaction_processor_.ProcessTransaction(User(), Transaction(&quot;Pile of Beanie Babies&quot;));
-  EXPECT_THAT(ui_.GetText(), HasSubstr(&quot;You bought a Pile of Beanie Babies&quot;));
-}
-
-TEST_F(TransactionProcessorTest, ShouldSendEmailWhenBalanceIsLow) {
-  User user = NewUserWithBalance(kLowBalanceThreshold + Dollars(2));
-  transaction_processor_.ProcessTransaction(user, Transaction(Dollars(3)));
-  EXPECT_EQ(user.GetEmails().size(), 1);
-  EXPECT_STREQ(user.GetEmails().at(0).GetSubject(), &quot;Your balance is low&quot;);
-}
-</code></pre>
-</div>
-
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">TransactionProcessorTest</span><span class="p">,</span> <span class="n">ShouldSendEmailWhenBalanceIsLow</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">NewUserWithBalance</span><span class="p">(</span><span class="n">kLowBalanceThreshold</span> <span class="o">+</span> <span class="n">Dollars</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">transaction_processor_</span><span class="p">.</span><span class="n">ProcessTransaction</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">(</span><span class="n">Dollars</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">GetEmails</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_STREQ</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">GetEmails</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="p">.</span><span class="n">GetSubject</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">Your balance is low</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="what-makes-a-good-test">What Makes a Good Test?</h2>
-
 <p>Tests provide more than verification. They also serve as documentation.</p>
-
 <p>As a source of documentation, test should not be distracting or hide information.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">TEST(CalculatorTest, ShouldPerformAddition) {
-  Calculator calculator(RoundingStrategy(),
-    &quot;unused&quot;, kEnableCosinFeature, 0.01, kCalculusEngine, false);
-  int result = calculator.DoComputation(MakeTestComputation());
-  EXPECT_EQ(result, 5);
-}
-</code></pre>
-</div>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">CalculatorTest</span><span class="p">,</span> <span class="n">ShouldPerformAddition</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Calculator</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">RoundingStrategy</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+    <span class="sa"></span><span class="s">&#34;</span><span class="s">unused</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">kEnableCosinFeature</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">kCalculusEngine</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">.</span><span class="n">DoComputation</span><span class="p">(</span><span class="n">MakeTestComputation</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
-
-<div class="notices tip" ><pre><code class="language-cpp">TEST_(CalculatorTest, ShouldPerformAddition) {
-  const int result = calculator_.DoComputation(MakeAdditionComputation(2, 3));
-  EXPECT_EQ(result, 5);
-}
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_</span><span class="p">(</span><span class="n">CalculatorTest</span><span class="p">,</span> <span class="n">ShouldPerformAddition</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">DoComputation</span><span class="p">(</span><span class="n">MakeAdditionComputation</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="test-behavior-not-implementation">Test Behavior, Not Implementation</h2>
-
 <p><em>August 5, 2013</em> - <a href="https://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html">original
 post</a></p>
-
 <p>Except where explicitly intended, tests should work independent of the implementation details being
 tested.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Calculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
 
-<pre><code class="language-cpp">class Calculator {
- public:
-  int Add(int a, int b)  {
-    return a + b;
-  }
-};
+<span class="k">class</span> <span class="nc">Calculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Adder</span> <span class="n">adder</span> <span class="o">=</span> <span class="n">adder_factory_</span><span class="p">.</span><span class="n">CreateAdder</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">ReturnValue</span> <span class="n">return_value</span> <span class="o">=</span> <span class="n">adder</span><span class="p">.</span><span class="n">Compute</span><span class="p">(</span><span class="n">Number</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="p">,</span> <span class="n">Number</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">return_value</span><span class="p">.</span><span class="n">ConvertToInteger</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-class Calculator {
- public:
-  int Add(int a, int b) {
-    Adder adder = adder_factory_.CreateAdder();
-    ReturnValue return_value = adder.Compute(Number(a), Number(b));
-    return return_value.ConvertToInteger();
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">AdderFactory</span> <span class="n">adder_factory_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  AdderFactory adder_factory_;
-};
-
-TEST_F(CalculatorTest, ShouldAddIntegers) {
-  EXPECT_EQ(3, calculator_.Add(2, 1));
-  EXPECT_EQ(2, calculator_.Add(2, 0));
-  EXPECT_EQ(1, calculator_.Add(2, -1));
-}
-</code></pre>
-
-<h2 id="know-your-test-doubles">Know Your Test Doubles</h2>
-
+<span class="n">TEST_F</span><span class="p">(</span><span class="n">CalculatorTest</span><span class="p">,</span> <span class="n">ShouldAddIntegers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="know-your-test-doubles">Know Your Test Doubles</h2>
 <p><em>July 18, 2013</em> - <a href="https://testing.googleblog.com/2013/07/testing-on-toilet-know-your-test-doubles.html">original
 post</a></p>
-
 <p>A test double is an object that can stand in for a real object in test. The most common types of
 test doubles are:</p>
-
 <ul>
-<li><strong>Stub</strong> - Returns a specific values to promote a specific state.</li>
+<li>
+<p><strong>Stub</strong> - Returns a specific values to promote a specific state.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">AccessManager</span> <span class="nf">access_manager</span><span class="p">(</span><span class="n">kStubAuthenticationService</span><span class="p">)</span><span class="p">;</span>
+
+<span class="n">ON_CALL</span><span class="p">(</span><span class="n">kStubAuthenticationService</span><span class="p">,</span> <span class="n">IsAuthenticated</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillByDefault</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">access_manager</span><span class="p">.</span><span class="n">UserHasAccess</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+
+<span class="n">ON_CALL</span><span class="p">(</span><span class="n">kStubAuthenticationService</span><span class="p">,</span> <span class="n">IsAuthenticated</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillByDefault</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">access_manager</span><span class="p">.</span><span class="n">UserHasAccess</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></li>
+<li>
+<p><strong>Mock</strong> - Sets expectations about how other objects should interact with it.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">AccessManager</span> <span class="nf">access_manager</span><span class="p">(</span><span class="n">mockAuthenticationService</span><span class="p">)</span><span class="p">;</span>
+
+<span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mockAuthenticationService</span><span class="p">,</span> <span class="n">IsAuthenticated</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="n">access_manager</span><span class="p">.</span><span class="n">UserHasAccess</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></li>
+<li>
+<p><strong>Fake</strong> - A lightweight implementation when the real implementation is unsuitable for test.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">FakeAuthenticationService</span> <span class="n">fake_authentication_service</span><span class="p">;</span>
+<span class="n">AccessManager</span> <span class="nf">access_manager</span><span class="p">(</span><span class="n">fake_authentication_service</span><span class="p">)</span><span class="p">;</span>
+
+<span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">access_manager</span><span class="p">.</span><span class="n">UserHasAccess</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+
+<span class="n">fake_authentication_service</span><span class="p">.</span><span class="n">AddAuthenticatedUser</span><span class="p">(</span><span class="n">kUser</span><span class="p">)</span><span class="p">;</span>
+<span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">access_manager</span><span class="p">.</span><span class="n">UserHasAccess</span><span class="p">(</span><span class="n">kUserId</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
-
-<pre><code class="language-cpp">  AccessManager access_manager(kStubAuthenticationService);
-
-  ON_CALL(kStubAuthenticationService, IsAuthenticated(kUserId)).WillByDefault(Return(false));
-  EXPECT_FALSE(access_manager.UserHasAccess(kUserId));
-
-  ON_CALL(kStubAuthenticationService, IsAuthenticated(kUserId)).WillByDefault(Return(true));
-  EXPECT_TRUE(access_manager.UserHasAccess(kUserId));
-</code></pre>
-
-<ul>
-<li><strong>Mock</strong> - Sets expectations about how other objects should interact with it.</li>
-</ul>
-
-<pre><code class="language-cpp">  AccessManager access_manager(mockAuthenticationService);
-
-  EXPECT_CALL(mockAuthenticationService, IsAuthenticated(kUserId));
-  access_manager.UserHasAccess(kUserId);
-</code></pre>
-
-<ul>
-<li><strong>Fake</strong> - A lightweight implementation when the real implementation is unsuitable for test.</li>
-</ul>
-
-<pre><code class="language-cpp">  FakeAuthenticationService fake_authentication_service;
-  AccessManager access_manager(fake_authentication_service);
-
-  EXPECT_FALSE(access_manager.UserHasAccess(kUserId));
-
-  fake_authentication_service.AddAuthenticatedUser(kUser);
-  EXPECT_TRUE(access_manager.UserHasAccess(kUserId));
-</code></pre>
-
 <h2 id="fake-your-way-to-better-tests">Fake Your Way To Better Tests</h2>
-
 <p><em>June 28, 2013</em> - <a href="https://testing.googleblog.com/2013/06/testing-on-toilet-fake-your-way-to.html">original
 post</a></p>
-
-<p>Suppose you would like to test your blog platform API, but you don&rsquo;t want your tests talking to a
+<p>Suppose you would like to test your blog platform API, but you don't want your tests talking to a
 remote server.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">DeletePostsWithTag</span><span class="p">(</span><span class="k">const</span> <span class="n">Tag</span><span class="o">&amp;</span> <span class="n">tag</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">Post</span> <span class="nl">post</span> <span class="p">:</span> <span class="n">blog_service_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetAllPosts</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">post</span><span class="p">.</span><span class="n">HasTag</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">blog_service_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">DeletePost</span><span class="p">(</span><span class="n">post</span><span class="p">.</span><span class="n">GetId</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>A fake is a lightweight implementation of an API that behaves like the real implementation, but
+isn't suitable for production.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">FakeBlogService</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BlogService</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">AddPost</span><span class="p">(</span><span class="k">const</span> <span class="n">Post</span><span class="o">&amp;</span> <span class="n">post</span><span class="p">)</span> <span class="p">{</span> <span class="n">posts</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">post</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="nf">DeletePost</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">post</span> <span class="p">:</span> <span class="n">posts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">post</span><span class="p">.</span><span class="n">GetId</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span><span class="o">=</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="n">posts</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">post</span><span class="p">)</span><span class="p">;</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Post</span><span class="o">&gt;</span> <span class="n">GetAllPosts</span><span class="p">(</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">posts</span><span class="p">;</span> <span class="p">}</span>
 
-<pre><code class="language-cpp">void DeletePostsWithTag(const Tag&amp; tag) {
-  for (const Post post : blog_service_-&gt;GetAllPosts()) {
-    if (post.HasTag(tag)) {
-      blog_service_-&gt;DeletePost(post.GetId());
-    }
-  }
-}
-</code></pre>
-
-<p>A fake is a lightweight implementation of an API that behaves like the real implementation, but
-isn&rsquo;t suitable for production.</p>
-
-<pre><code class="language-cpp">class FakeBlogService : public BlogService {
- public:
-  void AddPost(const Post&amp; post) { posts.insert(post); }
-  void DeletePost(const int id) {
-    for (auto&amp; post : posts) {
-      if (post.GetId() == id) { posts.erase(post); return; }
-    }
-  }
-  std::set&lt;Post&gt; GetAllPosts() const { return posts; }
-
- private:
-  std::set&lt;Post&gt; posts;
-};
-</code></pre>
-
-<p>Fakes should be created and maintained by the person or team that owns the real implementation.</p>
-
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Post</span><span class="o">&gt;</span> <span class="n">posts</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div><p>Fakes should be created and maintained by the person or team that owns the real implementation.</p>
 <p>Fakes should have their own tests to make sure they behave like the real implementation.</p>
-
-<h2 id="don-t-overuse-mocks">Don&rsquo;t Overuse Mocks</h2>
-
+<h2 id="dont-overuse-mocks">Don't Overuse Mocks</h2>
 <p><em>May 28, 2013</em> - <a href="https://testing.googleblog.com/2013/05/testing-on-toilet-dont-overuse-mocks.html">original
 post</a></p>
-
 <p>Mocks are powerful, but easy to abuse.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">PaymentProcessorTest</span><span class="p">,</span> <span class="n">ShouldChargeCreditCard</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">PaymentProcessor</span> <span class="nf">payment_processor</span><span class="p">(</span><span class="n">mock_credit_card_server_</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">TEST_F(PaymentProcessorTest, ShouldChargeCreditCard) {
-  PaymentProcessor payment_processor(mock_credit_card_server_);
+  <span class="n">InSequence</span> <span class="n">s</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_credit_card_server_</span><span class="p">,</span> <span class="n">IsServerAvailable</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillOnce</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_credit_card_server_</span><span class="p">,</span> <span class="n">BeginTransaction</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillOnce</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="n">mock_transaction_manager_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_transaction_manager_</span><span class="p">,</span> <span class="n">GetTransaction</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillOnce</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="n">transaction_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_credit_card_server_</span><span class="p">,</span> <span class="n">Pay</span><span class="p">(</span><span class="n">transaction_</span><span class="p">,</span> <span class="n">credit_card_</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillOnce</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="n">mock_payment_</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_payment_</span><span class="p">,</span> <span class="n">IsOverMaxBalance</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillOnce</span><span class="p">(</span><span class="n">Return</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
 
-  InSequence s;
-  EXPECT_CALL(mock_credit_card_server_, IsServerAvailable()).WillOnce(Return(true));
-  EXPECT_CALL(mock_credit_card_server_, BeginTransaction()).WillOnce(Return(mock_transaction_manager_));
-  EXPECT_CALL(mock_transaction_manager_, GetTransaction()).WillOnce(Return(transaction_));
-  EXPECT_CALL(mock_credit_card_server_, Pay(transaction_, credit_card_, 500)).WillOnce(Return(mock_payment_));
-  EXPECT_CALL(mock_payment_, IsOverMaxBalance()).WillOnce(Return(false));
-
-  payment_processor.ProcessPayment(credit_card_, Dollars(500));
-}
-</code></pre>
-</div>
-
+  <span class="n">payment_processor</span><span class="p">.</span><span class="n">ProcessPayment</span><span class="p">(</span><span class="n">credit_card_</span><span class="p">,</span> <span class="n">Dollars</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Overusing mocks makes tests harder to understand, maintain, and provides less insurance that your
 code is working properly.</p>
-
-<p>If you don&rsquo;t need a mock, don&rsquo;t use one. Understanding when to use a mock comes from understanding
+<p>If you don't need a mock, don't use one. Understanding when to use a mock comes from understanding
 what you want to test.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">TEST_F(PaymentProcessorTest, ShouldChargeCreditCard) {
-  PaymentProcessor payment_processor(credit_card_server_);
-  payment_processor.ProcessPayment(credit_card_, Dollars(500));
-  EXPECT_EQ(credit_card_server_.GetMostRecentCharge(credit_card_), 500);
-}
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">PaymentProcessorTest</span><span class="p">,</span> <span class="n">ShouldChargeCreditCard</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">PaymentProcessor</span> <span class="nf">payment_processor</span><span class="p">(</span><span class="n">credit_card_server_</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">payment_processor</span><span class="p">.</span><span class="n">ProcessPayment</span><span class="p">(</span><span class="n">credit_card_</span><span class="p">,</span> <span class="n">Dollars</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">credit_card_server_</span><span class="p">.</span><span class="n">GetMostRecentCharge</span><span class="p">(</span><span class="n">credit_card_</span><span class="p">)</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</h2>
-
 <p><em>March 22, 2013</em> -
 <a href="https://testing.googleblog.com/2013/03/testing-on-toilet-testing-state-vs.html">original post</a></p>
-
 <ul>
-<li><strong>Testing State</strong> - Verifying the code under test returns the correct results.</li>
+<li>
+<p><strong>Testing State</strong> - Verifying the code under test returns the correct results.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">NumberSorterTest</span><span class="p">,</span> <span class="n">ShouldSortIntegers</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">NumberSorter</span> <span class="nf">number_sorter</span><span class="p">(</span><span class="p">{</span><span class="n">quicksort</span><span class="p">,</span> <span class="n">bubblesort</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span><span class="p">,</span> <span class="n">number_sorter</span><span class="p">.</span><span class="n">SortNumbers</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>
+<p><strong>Testing Interaction</strong> - Verifying the code under test calls methods correctly.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">NumberSorterTest</span><span class="p">,</span> <span class="n">ShouldUseQuicksort</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">NumberSorter</span> <span class="nf">number_sorter</span><span class="p">(</span><span class="p">{</span><span class="n">mock_quicksort</span><span class="p">,</span> <span class="n">mock_bubblesort</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_quicksort</span><span class="p">,</span> <span class="n">Sort</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">number_sorter</span><span class="p">.</span><span class="n">SortNumbers</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
-
-<pre><code class="language-cpp">  TEST(NumberSorterTest, ShouldSortIntegers) {
-    NumberSorter number_sorter({quicksort, bubblesort});
-    std::vector&lt;int&gt; numbers = {3, 1, 2};
-    EXPECT_EQ({1, 2, 3}, number_sorter.SortNumbers(numbers));
-  }
-</code></pre>
-
-<ul>
-<li><strong>Testing Interaction</strong> - Verifying the code under test calls methods correctly.</li>
-</ul>
-
-<pre><code class="language-cpp">  TEST(NumberSorterTest, ShouldUseQuicksort) {
-    NumberSorter number_sorter({mock_quicksort, mock_bubblesort});
-    std::vector&lt;int&gt; numbers = {3, 1, 2};
-    EXPECT_CALL(mock_quicksort, Sort(numbers);
-    number_sorter.SortNumbers(numbers);
-  }
-</code></pre>
-
 <p>Most of the time you want to test state. Occasionally interactions need to be tested when the number
 of calls or order of calls matter.</p>
-
 <h2 id="code-coverage-goal-80-and-no-less">Code coverage goal: 80% and no less!</h2>
-
 <p><em>July 20, 2010</em> -
 <a href="https://testing.googleblog.com/2010/07/code-coverage-goal-80-and-no-less.html">original post</a></p>
-
 <p>Early one morning, a young programmer asked the great master, “I am ready to write some unit tests.
 What code coverage should I aim for?”</p>
-
 <p>The great master replied, “Don’t worry about coverage, just write some good tests.”</p>
-
 <p>The young programmer smiled, bowed, and left.</p>
-
 <p>Later that day, a second programmer asked the same question. The great master pointed at a pot of
 boiling water and asked, “How many grains of rice should I put in that pot?”</p>
-
 <p>The programmer, looking puzzled, replied, “How can I possibly tell you? It depends on how many
 people you need to feed, how hungry they are, what other food you are serving, how much rice you
 have available, and so on.”</p>
-
 <p>“Exactly,” said the great master.</p>
-
 <p>The second programmer smiled, bowed, and left.</p>
-
 <p>Toward the end of the day, a third programmer came and asked the same question about code coverage.</p>
-
 <p>“Eighty percent and no less!” Replied the master in a stern voice, pounding his fist on the table.</p>
-
 <p>The third programmer smiled, bowed, and left.</p>
-
 <p>After this last reply, a young apprentice approached the great master, “Great master, today I
 overheard you answer the same question about code coverage with three different answers. Why?”</p>
-
 <p>The great master stood up from his chair. “Come get some fresh tea with me and let’s talk about it.”
 After they filled their cups with smoking hot green tea, the great master began:</p>
-
 <p>“The first programmer is new and just getting started with testing. Right now he has a lot of code
 and no tests. He has a long way to go; focusing on code coverage at this time would be depressing
 and quite useless. He’s better off just getting used to writing and running some tests. He can worry
 about coverage later.</p>
-
 <p>&ldquo;The second programmer, on the other hand, is quite experienced both at programming and testing.
 When I replied by asking her how many grains of rice I should put in a pot, I helped her realize
 that the amount of testing necessary depends on a number of factors, and she knows those factors
 better than I do – it’s her code after all. There is no single, simple, answer, and she’s smart
 enough to handle the truth and work with that.”</p>
-
 <p>“I see,” said the young apprentice, “but if there is no single simple answer, then why did you tell
 the third programmer ‘Eighty percent and no less’?”</p>
-
 <p>The great master laughed so hard and loud that his belly, evidence that he drank more than just
 green tea, flopped up and down. “The third programmer wants only simple answers – even when there
 are no simple answers … and then does not follow them anyway.”</p>
-
 <p>The young apprentice and the grizzled great master finished drinking their tea in contemplative
 silence.</p>
-
 <h2 id="data-driven-traps">Data Driven Traps!</h2>
-
 <p><em>September 4, 2008</em> -
 <a href="https://testing.googleblog.com/2008/09/tott-data-driven-traps.html">original post</a></p>
-
 <p>Data driven tests are efficient, but easy to abuse.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="nc">TestData</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">word</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">bool</span> <span class="n">is_word</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">struct TestData {
-  const std::string word;
-  const bool is_word;
-};
+<span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TestData</span><span class="o">&gt;</span> <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span><span class="sa"></span><span class="s">&#34;</span><span class="s">milk</span><span class="s">&#34;</span><span class="p">,</span> <span class="nb">true</span><span class="p">}</span><span class="p">,</span>
+    <span class="p">{</span><span class="sa"></span><span class="s">&#34;</span><span class="s">centre</span><span class="s">&#34;</span><span class="p">,</span> <span class="nb">false</span><span class="p">}</span><span class="p">,</span>
+    <span class="p">{</span><span class="sa"></span><span class="s">&#34;</span><span class="s">jklm</span><span class="s">&#34;</span><span class="p">,</span> <span class="nb">false</span><span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">;</span>
 
-const std::vector&lt;TestData&gt; test_data = {
-    {&quot;milk&quot;, true},
-    {&quot;centre&quot;, false},
-    {&quot;jklm&quot;, false},
-};
-
-TEST(IsWordTest, TestEverything) {
-  for (const auto&amp; entry : test_data) {
-    EXPECT_EQ(IsWord(entry.word), entry.is_word);
-  }
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">IsWordTest</span><span class="p">,</span> <span class="n">TestEverything</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">entry</span> <span class="p">:</span> <span class="n">test_data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">IsWord</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">word</span><span class="p">)</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">is_word</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Data-driven tests make debugging and understanding failures, let alone false positives, more
 difficult.</p>
-
 <p>As the code grows in complexity, data tends to grow even faster. It quickly becomes impossible to
 discern what behavior each piece of data is meant to test.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Locale</span><span class="o">&gt;</span> <span class="n">locales</span> <span class="o">=</span> <span class="p">{</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">US</span><span class="p">,</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">UK</span><span class="p">,</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">France</span><span class="p">,</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span> <span class="p">}</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">const std::vector&lt;Locale&gt; locales = { Word::US, Word::UK, Word::France, ... };
+<span class="k">struct</span> <span class="nc">TestData</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">word</span><span class="p">;</span>
+  <span class="kt">bool</span><span class="p">[</span><span class="n">kNumLocales</span><span class="p">]</span> <span class="n">is_word</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-struct TestData {
-  std::string word;
-  bool[kNumLocales] is_word;
-};
+<span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TestData</span><span class="o">&gt;</span> <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span><span class="sa"></span><span class="s">&#34;</span><span class="s">milk</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">}</span><span class="p">,</span>
+    <span class="p">{</span><span class="sa"></span><span class="s">&#34;</span><span class="s">centre</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">}</span><span class="p">}</span><span class="p">,</span>
+    <span class="p">{</span><span class="sa"></span><span class="s">&#34;</span><span class="s">jklm</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">{</span><span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="p">.</span><span class="p">.</span><span class="p">.</span><span class="p">}</span><span class="p">}</span><span class="p">,</span>
+<span class="p">}</span><span class="p">;</span>
 
-const std::vector&lt;TestData&gt; test_data = {
-    {&quot;milk&quot;, {true, true, false, ...},
-    {&quot;centre&quot;, {false, true, true, ...}},
-    {&quot;jklm&quot;, {false, false, false, ...}},
-};
-
-TEST(IsWordTest, TestEverything) {
-  for (const auto&amp; entry : test_data) {
-    for (const auto* locale: locales) {
-      EXPECT_EQ(IsWord(entry.word, locale), entry.is_word);
-    }
-  }
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">IsWordTest</span><span class="p">,</span> <span class="n">TestEverything</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">entry</span> <span class="p">:</span> <span class="n">test_data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="nl">locale</span><span class="p">:</span> <span class="n">locales</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">IsWord</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">word</span><span class="p">,</span> <span class="n">locale</span><span class="p">)</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">is_word</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Instead, think critically about what behaviors are worth testing.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">IsWordTest</span><span class="p">,</span> <span class="n">ShouldExistInMultipleLocales</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">IsWord</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">milk</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">US</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">IsWord</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">milk</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">UK</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">IsWord</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">milk</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">France</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">TEST(IsWordTest, ShouldExistInMultipleLocales) {
-  EXPECT_TRUE(IsWord(&quot;milk&quot;, Word::US));
-  EXPECT_TRUE(IsWord(&quot;milk&quot;, Word::UK));
-  EXPECT_FALSE(IsWord(&quot;milk&quot;, Word::France));
-}
+<span class="n">TEST</span><span class="p">(</span><span class="n">IsWordTest</span><span class="p">,</span> <span class="n">ShouldNotExist</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// &#34;jklm&#34; test not repeated as it uses the same code path
+</span><span class="c1"></span>  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">IsWord</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">jklm</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">Word</span><span class="o">:</span><span class="o">:</span><span class="n">US</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-TEST(IsWordTest, ShouldNotExist) {
-  // &quot;jklm&quot; test not repeated as it uses the same code path
-  EXPECT_FALSE(IsWord(&quot;jklm&quot;, Word::US));
-}
-</code></pre>
-</div>
-
-
-<h2 id="sleeping-synchronization">Sleeping != Synchronization</h2>
-
+<h2 id="sleeping--synchronization">Sleeping != Synchronization</h2>
 <p><em>August 21, 2008</em> -
 <a href="https://testing.googleblog.com/2008/08/tott-sleeping-synchronization.html">original post</a></p>
-
 <p>Beware of <code>sleep</code>. <code>sleep</code> should never be used for synchronization, or in test.</p>
 
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">CoffeeMaker</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">CoffeeMaker</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">MakeCoffee</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-<div class="notices warning" ><pre><code class="language-cpp">class CoffeeMaker {
- public:
-  virtual ~CoffeeMaker() = default;
-  virtual void MakeCoffee(const std::function&lt;void()&gt; callback) = 0;
-};
+<span class="k">class</span> <span class="nc">Intern</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CoffeeMaker</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">MakeCoffee</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// make coffee, hopefully within 60 seconds.
+</span><span class="c1"></span>    <span class="n">callback</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
 
-class Intern : public CoffeeMaker {
- public:
-  void MakeCoffee(const std::function&lt;void()&gt; callback) {
-    // make coffee, hopefully within 60 seconds.
-    callback();
-  }
-};
+<span class="k">class</span> <span class="nc">Employee</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">DrinkCoffee</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="n">caffeinated_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="nf">IsCaffeinated</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">caffeinated_</span><span class="p">;</span> <span class="p">}</span>
 
-class Employee {
- public:
-  void DrinkCoffee() { caffeinated_ = true; }
-  bool IsCaffeinated() { return caffeinated_; }
+  <span class="kt">void</span> <span class="nf">DemandCoffee</span><span class="p">(</span><span class="n">CoffeeMaker</span><span class="o">&amp;</span> <span class="n">cm</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="kr">thread</span> <span class="n">t</span><span class="p">(</span><span class="o">&amp;</span><span class="n">CoffeeMaker</span><span class="o">:</span><span class="o">:</span><span class="n">MakeCoffee</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cm</span><span class="p">,</span>
+                  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Employee</span><span class="o">:</span><span class="o">:</span><span class="n">DrinkCoffee</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">detach</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  void DemandCoffee(CoffeeMaker&amp; cm) {
-    std::thread t(&amp;CoffeeMaker::MakeCoffee, &amp;cm,
-                  std::bind(&amp;Employee::DrinkCoffee, this));
-    t.detach();
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">caffeinated_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  bool caffeinated_ = false;
-};
-
-TEST(EmployeeTest, ShouldBeCaffeinatedOnlyAfterDrinkingCoffee) {
-  Employee e;
-  Intern i;
-  e.DemandCoffee(i);
-  EXPECT_FALSE(e.IsCaffeinated());
-  std::this_thread::sleep_for(60s);
-  EXPECT_TRUE(e.IsCaffeinated());
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">EmployeeTest</span><span class="p">,</span> <span class="n">ShouldBeCaffeinatedOnlyAfterDrinkingCoffee</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Employee</span> <span class="n">e</span><span class="p">;</span>
+  <span class="n">Intern</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">e</span><span class="p">.</span><span class="n">DemandCoffee</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">IsCaffeinated</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">this_thread</span><span class="o">:</span><span class="o">:</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">60</span><span class="n">s</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">IsCaffeinated</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Code that sleeps can be improved by waiting on a <code>std::future</code> or a <code>std::condition_variable</code>.
 As always, if your waiting on a non-trivial operation, like <code>Intern::MakeCoffee</code>, use a fake.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">FakeIntern</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CoffeeMaker</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">MakeCoffee</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mut_</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">cv_</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ready_</span><span class="p">;</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">class FakeIntern : public CoffeeMaker {
- public:
-  void MakeCoffee(const std::function&lt;void()&gt; callback) {
-    std::unique_lock&lt;std::mutex&gt; lock(mut_);
-    cv_.wait(lock, [this] { return ready_; });
+    <span class="n">callback</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">done_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 
-    callback();
-    done_ = true;
+    <span class="n">lock</span><span class="p">.</span><span class="n">unlock</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">cv_</span><span class="p">.</span><span class="n">notify_one</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-    lock.unlock();
-    cv_.notify_one();
-  }
+  <span class="kt">void</span> <span class="nf">SignalAndWait</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">mut_</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">ready_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">cv_</span><span class="p">.</span><span class="n">notify_one</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
 
-  void SignalAndWait() {
-    std::unique_lock&lt;std::mutex&gt; lock(mut_);
-    ready_ = true;
-    cv_.notify_one();
+    <span class="n">cv_</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">done_</span><span class="p">;</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
 
-    cv_.wait(lock, [this] { return done_; });
-  }
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">ready_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">done_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">condition_variable</span> <span class="n">cv_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">mutex</span> <span class="n">mut_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
- private:
-  bool ready_ = false;
-  bool done_ = false;
-  std::condition_variable cv_;
-  std::mutex mut_;
-};
-
-TEST(EmployeeTest, ShouldBeCaffeinatedOnlyAfterDrinkingCoffee) {
-  Employee e;
-  FakeIntern i;
-  e.DemandCoffee(i);
-  EXPECT_FALSE(e.IsCaffeinated());
-  i.SignalAndWait();
-  EXPECT_TRUE(e.IsCaffeinated());
-}
-</code></pre>
-</div>
-
+<span class="n">TEST</span><span class="p">(</span><span class="n">EmployeeTest</span><span class="p">,</span> <span class="n">ShouldBeCaffeinatedOnlyAfterDrinkingCoffee</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Employee</span> <span class="n">e</span><span class="p">;</span>
+  <span class="n">FakeIntern</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">e</span><span class="p">.</span><span class="n">DemandCoffee</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">IsCaffeinated</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">i</span><span class="p">.</span><span class="n">SignalAndWait</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">IsCaffeinated</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="defeat-static-cling">Defeat &ldquo;Static Cling&rdquo;</h2>
-
 <p><em>June 26, 2008</em> -
 <a href="https://testing.googleblog.com/2008/06/defeat-static-cling.html">original post</a></p>
-
 <p>Static functions, like this singleton <code>GetInstance</code> method, are a sign of tight coupling.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MyObject</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">DoSomething</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">TheirEntity</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetSomething</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div><p>There is a way around this using the Repository Pattern.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TheirEntityRepository</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">TheirEntityRepository</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">TheirEntity</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// Other static methods here
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
 
-<pre><code class="language-cpp">class MyObject {
- public:
-  int DoSomething(int id) {
-    return TheirEntity::GetInstance().GetSomething(id);
-  }
-};
-</code></pre>
+<span class="k">class</span> <span class="nc">TheirEntityStaticRepository</span> <span class="o">:</span> <span class="k">public</span> <span class="n">TheirEntityRepository</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TheirEntity</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">TheirEntity</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
 
-<p>There is a way around this using the Repository Pattern.</p>
+<span class="k">class</span> <span class="nc">MyObject</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">MyObject</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TheirEntityRepository</span><span class="o">&gt;</span> <span class="n">repository</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">repository_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="kt">int</span> <span class="nf">DoSomething</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">repository_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetSomething</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
-<pre><code class="language-cpp">class TheirEntityRepository {
- public:
-  virtual ~TheirEntityRepository() = default;
-  virtual TheirEntity&amp; GetInstance() = 0;
-  // Other static methods here
-};
-
-class TheirEntityStaticRepository : public TheirEntityRepository {
- public:
-  TheirEntity&amp; GetInstance() { return TheirEntity::GetInstance(); }
-};
-
-class MyObject {
- public:
-  explicit MyObject(std::unique_ptr&lt;TheirEntityRepository&gt; repository)
-      : repository_(std::move(repository)) {}
-  int DoSomething(int id) { return repository_-&gt;GetInstance().GetSomething(); }
-
- private:
-  std::unique_ptr&lt;TheirEntityRepository&gt; repository_;
-};
-</code></pre>
-
-<p>All thats left is to derive a <code>MockTheirEntityRepository</code> suitable for your testing needs.</p>
-
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TheirEntityRepository</span><span class="o">&gt;</span> <span class="n">repository_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div><p>All thats left is to derive a <code>MockTheirEntityRepository</code> suitable for your testing needs.</p>
 <h2 id="testable-contracts-make-exceptional-neighbors">Testable Contracts Make Exceptional Neighbors</h2>
-
 <p><em>May 28, 2008</em> -
 <a href="https://testing.googleblog.com/2008/05/tott-testable-contracts-make.html">original post</a></p>
-
 <p>Modify external visible state only after completing all operations which could possibly fail.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
-  objects.clear();
-  for (const auto&amp; object : collection_) {
-    if (object.IsFubarred()) return false;
-    objects.push_back(object);
-  }
-  return true;
-}
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="n">SomeCollection</span><span class="o">:</span><span class="o">:</span><span class="n">GetObjects</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="o">&amp;</span> <span class="n">objects</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">objects</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">object</span> <span class="p">:</span> <span class="n">collection_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">IsFubarred</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">objects</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">object</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>In these situations, the <code>swap</code> trick comes in handy.</p>
 
-
-<div class="notices tip" ><pre><code class="language-cpp">bool SomeCollection::GetObjects(std::vector&lt;Object&gt;&amp; objects) const {
-  std::vector&lt;Object&gt; known_good_objects;
-  for (const auto&amp; object : collection_) {
-    if (object.IsFubarred()) return false;
-    known_good_objects.push_back(object);
-  }
-  objects.swap(known_good_objects);
-  return true;
-}
-</code></pre>
-</div>
-
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="n">SomeCollection</span><span class="o">:</span><span class="o">:</span><span class="n">GetObjects</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="o">&amp;</span> <span class="n">objects</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">known_good_objects</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">object</span> <span class="p">:</span> <span class="n">collection_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">IsFubarred</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">known_good_objects</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">object</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">objects</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">known_good_objects</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>Now, the caller has good objects on success, or unchanged objects on failure.</p>
-
 <h2 id="understanding-your-coverage-data">Understanding Your Coverage Data</h2>
-
 <p><em>March 6, 2008</em> -
 <a href="https://testing.googleblog.com/2008/03/tott-understanding-your-coverage-data.html">original post</a></p>
-
 <p>High test coverage is necessary but not sufficient.</p>
-
 <p>Use your test coverage results to look for unexpected coverage patterns, which usually indicate
 bugs, and add test cases to address them.</p>
-
 <h2 id="too-many-tests">Too Many Tests</h2>
-
 <p><em>February 21, 2008</em> -
 <a href="https://testing.googleblog.com/2008/02/in-movie-amadeus-austrian-emperor.html">original post</a></p>
-
 <p>How many tests? Answering this question requires a good grasp of the context.</p>
-
-<pre><code class="language-cpp">void Decide(int32_t a, int32_t b, int32_t c, int32_t d, int32_t e, int32_t d) {
-  if (a &gt; b || c &gt; d || e &gt; f) {
-    DoOneThing();
-  } else {
-    DoAnother();
-  }
-}
-</code></pre>
-
-<ul>
-<li>Testing every possible input would require 2<sup>192</sup> tests. Thats too many.</li>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">Decide</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">d</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">e</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="o">|</span><span class="o">|</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">d</span> <span class="o">|</span><span class="o">|</span> <span class="n">e</span> <span class="o">&gt;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">DoOneThing</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">DoAnother</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>Testing every possible input would require 2<!-- raw HTML omitted -->192<!-- raw HTML omitted --> tests. Thats too many.</li>
 <li>Testing enough to get full line coverage would require 2 tests. Thats too few.</li>
 <li>Testing each logical expression (e.g <code>a &gt; b</code>, <code>a == b</code>, <code>a &lt; b</code>) independently is 27 tests. Still
 probably too many.</li>
 </ul>
-
 <p>More context can focus the decision.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">Decide</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">d</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">e</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">TallerThan</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">|</span><span class="o">|</span> <span class="n">HarderThan</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">|</span><span class="o">|</span> <span class="n">HeavierThan</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">DoOneThing</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">DoAnother</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-<pre><code class="language-cpp">void Decide(int32_t a, int32_t b, int32_t c, int32_t d, int32_t e, int32_t d) {
-  if (TallerThan(a, b) || HarderThan(c, d) || HeavierThan(e, f)) {
-    DoOneThing();
-  } else {
-    DoAnother();
-  }
-}
-
-bool TallerThan(int32_t a, int32_t b) { return a &gt; b; }
-bool HarderThan(int32_t c, int32_t d) { return d &gt; d; }
-bool HeavierThan(int32_t e, int32_t f) { return e &gt; f; }
-</code></pre>
-
-<p>Testing the cases where each extracted function is true, they all are false, and writing 2 tests for
+<span class="kt">bool</span> <span class="nf">TallerThan</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+<span class="kt">bool</span> <span class="nf">HarderThan</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">c</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">d</span><span class="p">;</span> <span class="p">}</span>
+<span class="kt">bool</span> <span class="nf">HeavierThan</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">e</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">e</span> <span class="o">&gt;</span> <span class="n">f</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div><p>Testing the cases where each extracted function is true, they all are false, and writing 2 tests for
 each of the extracted functions would require 4 + 3*2 = 10 tests. Considering the number of inputs,
 thats just enough tests.</p>
-
 <h2 id="avoiding-friend-twister-in-c">Avoiding Friend Twister in C++</h2>
-
 <p><em>October 30, 2007</em> -
 <a href="https://testing.googleblog.com/2007/10/tott-avoiding-friend-twister-in-c.html">original post</a></p>
-
 <p>&ldquo;Testing private members requires more <code>friend</code> contortions than a game of Twister®.&rdquo;</p>
-
 <p>If you find yourself saying that, theres a better way.</p>
 
-
-<div class="notices warning" ><pre><code class="language-cpp">// include/my_project/dashboard.h
-
-class Dashboard {
- private:
-  // Declaration of functions getResults(), GetResultsFromCache(),
-  // GetResultsFromDatabase(), and CountPassFail()
-
-  std::unique_ptr&lt;Database&gt; database_; // instantiated in constructor
-
-  friend class DashboardTest; // one friend declaration per test fixture
-};
-</code></pre>
-</div>
-
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// include/my_project/dashboard.h
+</span><span class="c1"></span>
+<span class="k">class</span> <span class="nc">Dashboard</span> <span class="p">{</span>
+ <span class="k">private</span><span class="o">:</span>
+  <span class="c1">// Declaration of functions getResults(), GetResultsFromCache(),
+</span><span class="c1"></span>  <span class="c1">// GetResultsFromDatabase(), and CountPassFail()
+</span><span class="c1"></span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Database</span><span class="o">&gt;</span> <span class="n">database_</span><span class="p">;</span> <span class="c1">// instantiated in constructor
+</span><span class="c1"></span>
+  <span class="k">friend</span> <span class="k">class</span> <span class="nc">DashboardTest</span><span class="p">;</span> <span class="c1">// one friend declaration per test fixture
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Instead, make a helper class by extracting a helper class (a variant of the Pimple idiom).</p>
-
 <p>To preserve privacy, the helper class is tucked away in a private implementation directory separate
 from the public API.</p>
 
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// include/my_project/dashboard.h
+</span><span class="c1"></span>
+<span class="k">class</span> <span class="nc">ResultsLog</span><span class="p">;</span> <span class="c1">// Foreword declare extracted helper interface
+</span><span class="c1"></span>
+<span class="k">class</span> <span class="nc">Dashboard</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">Dashboard</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">ResultsLog</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">results_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
 
-<div class="notices tip" ><pre><code class="language-cpp">// include/my_project/dashboard.h
+ <span class="k">private</span><span class="o">:</span>
+   <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">ResultsLog</span><span class="o">&gt;</span> <span class="n">results_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
 
-class ResultsLog; // Foreword declare extracted helper interface
+<span class="c1">// src/results_log.h
+</span><span class="c1"></span>
+<span class="k">class</span> <span class="nc">ResultsLog</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Declaration of functions getResults(), GetResultsFromCache(),
+</span><span class="c1"></span>  <span class="c1">// GetResultsFromDatabase(), and CountPassFail()
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
 
-class Dashboard {
- public:
-  explicit Dashboard(std::unique_ptr&lt;ResultsLog&gt; results)
-      : results_(std::move(results)) {}
-
- private:
-   std::unique_ptr&lt;ResultsLog&gt; results_;
-};
-
-// src/results_log.h
-
-class ResultsLog {
- public:
-  // Declaration of functions getResults(), GetResultsFromCache(),
-  // GetResultsFromDatabase(), and CountPassFail()
-};
-
-// src/live_results_log.h
-
-class LiveResultsLog : public ResultsLog {
- public:
-  explicit LiveResultsLog(std::shared_ptr&lt;Database&gt; database)
-      : database_(std::move(database)) {}
-};
-</code></pre>
-</div>
-
+<span class="c1">// src/live_results_log.h
+</span><span class="c1"></span>
+<span class="k">class</span> <span class="nc">LiveResultsLog</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ResultsLog</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">LiveResultsLog</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Database</span><span class="o">&gt;</span> <span class="n">database</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">database_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">database</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>As an added bonus, now you can inject a <code>MockResultsLog</code> or a <code>FakeDatabase</code> for testing the
 <code>Dashboard</code> class.</p>
-
 <h2 id="refactoring-tests-in-the-red">Refactoring Tests in the Red</h2>
-
 <p><em>April 26, 2007</em> -
 <a href="https://testing.googleblog.com/2007/04/tott-refactoring-tests-in-red.html">original post</a></p>
-
 <p>As your test suite grows, you will find yourself needing to refactor your tests. However,
-your tests don&rsquo;t have tests!</p>
-
+your tests don't have tests!</p>
 <p>One thing you can do is intentionally break the test, refactor the test, and make sure the test
 still fails as expected.</p>
-
 <p>Just remember to revert your code under test!</p>
 
 
@@ -1860,20 +1591,19 @@ still fails as expected.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.min.js?1564259592"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1564259592"></script>
-    <script src="/js/jquery.sticky.js?1564259592"></script>
-    <script src="/js/featherlight.min.js?1564259592"></script>
-    <script src="/js/html5shiv-printshiv.min.js?1564259592"></script>
-    <script src="/js/highlight.pack.js?1564259592"></script>
+    <script src="/js/clipboard.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.min.js?1579407787"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1579407787"></script>
+    <script src="/js/jquery.sticky.js?1579407787"></script>
+    <script src="/js/featherlight.min.js?1579407787"></script>
+    <script src="/js/highlight.pack.js?1579407787"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1564259592"></script>
-    <script src="/js/learn.js?1564259592"></script>
-    <script src="/js/hugo-learn.js?1564259592"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1579407787"></script>
+    <script src="/js/learn.js?1579407787"></script>
+    <script src="/js/hugo-learn.js?1579407787"></script>
 
-    <link href="/mermaid/mermaid.css?1564259592" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1564259592"></script>
+    <link href="/mermaid/mermaid.css?1579407787" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1579407787"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
