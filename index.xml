@@ -11,6 +11,42 @@
     
     
     <item>
+      <title>The Bigger Picture</title>
+      <link>https://ajguerrer.github.io/unit-testing/bigger_picture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/bigger_picture/</guid>
+      <description>What Makes a Good or Bad Test?  Unit testing enables sustainable growth in software projects by acting as a form of insurance against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they prevent. Code is a liability, not an asset, and tests are code too. A test without business value, that raises false alarms, is slow, and is difficult to maintain, does harm to the business.</description>
+    </item>
+    
+    <item>
+      <title>Making your Tests Work for You</title>
+      <link>https://ajguerrer.github.io/unit-testing/making_tests_work/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/making_tests_work/</guid>
+      <description>Four Pillars of a Good Unit Test  Protection against regressions - Ability to indicate the presence of regressions. Resistance to refactoring - Degree to which a test can sustain refactoring without producing a false positive. Fast feedback - Measure of how quickly the test executes. Maintainability - Ability to read and run the test.    Error Types Functionality is Correct Functionality is Broken   Test Passes True negative False negative (protection against regressions)   Test Fails False positive (resistance to refactoring) True positive   $$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</description>
+    </item>
+    
+    <item>
+      <title>Integration Testing</title>
+      <link>https://ajguerrer.github.io/unit-testing/integration_testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/integration_testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unit Testing Anti-Patterns</title>
+      <link>https://ajguerrer.github.io/unit-testing/antipatterns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/antipatterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>General Notes</title>
       <link>https://ajguerrer.github.io/google-testing-blog/general/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -25,7 +61,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/google-testing-blog/testable_code/</guid>
-      <description>Miško Hevery  You may find Miško&#39;s original guide here.
+      <description>Miško Hevery  You may find Miško&amp;rsquo;s original guide here.
 Dependency Injection A testable class is one that can be constructed in isolation or with test double collaborators. Once constructed, they have all the dependencies they need. This is known as Dependency Injection.
 Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage inheritance for creating test double collaborators. This is the primary tool in a testers toolkit and the primary benefit Dependency Injection brings.</description>
     </item>
@@ -36,7 +72,7 @@ Dependencies do not need to be concrete classes. Abstract classes allow testers 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/google-testing-blog/whittaker/</guid>
-      <description>The Seven Plagues of Software Testing  Aimlessness - Do not test for the sake of testing. Every test should have a goal. Document what works and analyze what doesn&#39;t. Then, share with your colleagues.1 Repetitiveness - Running the same test suite over again without finding new bugs does not mean that there are no bugs. Variation is healthy.2 Amnesia - Chances are the problem your are trying to solve has been solved before.</description>
+      <description>The Seven Plagues of Software Testing  Aimlessness - Do not test for the sake of testing. Every test should have a goal. Document what works and analyze what doesn&amp;rsquo;t. Then, share with your colleagues.1 Repetitiveness - Running the same test suite over again without finding new bugs does not mean that there are no bugs. Variation is healthy.2 Amnesia - Chances are the problem your are trying to solve has been solved before.</description>
     </item>
     
     <item>
@@ -47,7 +83,7 @@ Dependencies do not need to be concrete classes. Abstract classes allow testers 
       <guid>https://ajguerrer.github.io/google-testing-blog/tott/</guid>
       <description>This page contains potable bits of testing best-practices that will keep you riveted to your seat.
 Tests Too DRY? Make Them DAMP! December 03, 2019 - original post
-Though the DRY (&amp;ldquo;Don&#39;t Repeat Yourself&amp;rdquo;) principle is great for production code, tests don&#39;t test themselves.
+Though the DRY (&amp;ldquo;Don&amp;rsquo;t Repeat Yourself&amp;rdquo;) principle is great for production code, tests don&amp;rsquo;t test themselves.
 class ForumTest : public ::testing::Test { protected: void SetUp() override { for (auto user : users_) { forum_.Register(user); } } Forum forum_; std::vector&amp;lt;User&amp;gt; users_ = {User(&amp;#34;Alice&amp;#34;), User(&amp;#34;Bob&amp;#34;)}; } TEST_F(ForumTest, CanRegisterMultipleUsers) { for (auto user : users_) { EXPECT_TRUE(forum_.</description>
     </item>
     

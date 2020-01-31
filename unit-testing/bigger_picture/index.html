@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.63.1" />
+    <meta name="theme-color" content="#85ad85">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <title>The Bigger Picture :: Notebook</title>
+
+    
+    <link href="/css/nucleus.css?1580500130" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1580500130" rel="stylesheet">
+    <link href="/css/hybrid.css?1580500130" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1580500130" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1580500130" rel="stylesheet">
+    <link href="/css/auto-complete.css?1580500130" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1580500130" rel="stylesheet">
+    <link href="/css/theme.css?1580500130" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1580500130" rel="stylesheet">
+    
+      <link href="/css/theme-gruvbox.css?1580500130" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1580500130"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <link href="/css/gruvbox-dark.css" rel="stylesheet" />
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body class="" data-url="/unit-testing/bigger_picture/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <div class="logo">
+  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 90.000000 183.000000"
+    preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)" stroke="none">
+      <path d="M437 1690 c-4 -30 -7 -131 -8 -225 -2 -224 -2 -224 -62 -242 -67 -19
+    -147 -97 -147 -141 0 -18 2 -32 4 -32 2 0 15 17 29 38 27 41 104 96 150 107
+    l28 7 -3 -107 -3 -108 -30 -11 c-54 -19 -106 -57 -103 -75 2 -9 35 -32 74 -51
+    l72 -35 7 -68 c8 -84 17 -80 19 8 l1 66 58 24 c32 13 67 31 78 41 17 15 18 19
+    4 34 -8 9 -42 29 -75 45 l-60 29 0 101 c0 56 3 104 6 107 7 8 100 -29 134 -53
+    14 -10 41 -40 60 -68 31 -45 50 -62 50 -46 0 17 -43 85 -72 114 -33 34 -119
+    81 -149 81 -19 0 -24 43 -35 309 -8 182 -17 235 -27 151z m-11 -806 l-7 -33
+    -40 18 c-68 31 -68 38 -8 66 l54 25 3 -21 c2 -12 1 -36 -2 -55z m101 50 c24
+    -9 43 -21 43 -25 0 -12 -40 -36 -72 -44 -27 -7 -28 -6 -28 39 0 25 3 46 7 46
+    4 0 27 -7 50 -16z" />
+      <path d="M92 893 c14 -133 101 -250 231 -311 37 -18 74 -32 81 -32 8 0 17 -4
+20 -8 3 -5 6 -109 7 -231 0 -123 5 -219 9 -214 19 20 30 125 30 278 l0 165 28
+6 c75 17 98 25 133 50 57 39 108 107 139 183 32 77 49 157 31 147 -6 -4 -11
+-12 -11 -17 0 -6 -16 -49 -36 -95 -31 -72 -46 -93 -98 -138 -69 -60 -120 -81
+-176 -72 -22 3 -41 2 -45 -4 -15 -25 -86 1 -173 63 -51 37 -127 151 -148 224
+-9 29 -18 53 -21 53 -3 0 -3 -21 -1 -47z" />
+    </g>
+  </svg>
+  <p>Notebook</p>
+</div>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1580500130"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1580500130"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/ajguerrer.github.io\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1580500130"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/google-testing-blog/" title="Google Testing Blog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/google-testing-blog/">
+          Google Testing Blog
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/general/" title="General Notes" class="dd-item ">
+        <a href="/google-testing-blog/general/">
+        General Notes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/testable_code/" title="Guide to Writing Testable Code" class="dd-item ">
+        <a href="/google-testing-blog/testable_code/">
+        Guide to Writing Testable Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/whittaker/" title="James Whittaker" class="dd-item ">
+        <a href="/google-testing-blog/whittaker/">
+        James Whittaker
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/google-testing-blog/tott/" title="Testing on the Toilet" class="dd-item ">
+        <a href="/google-testing-blog/tott/">
+        Testing on the Toilet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/unit-testing/" title="Unit Testing Principles, Practices, and Patterns" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/unit-testing/">
+          Unit Testing Principles, Practices, and Patterns
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/bigger_picture/" title="The Bigger Picture" class="dd-item active">
+        <a href="/unit-testing/bigger_picture/">
+        The Bigger Picture
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/making_tests_work/" title="Making your Tests Work for You" class="dd-item ">
+        <a href="/unit-testing/making_tests_work/">
+        Making your Tests Work for You
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/integration_testing/" title="Integration Testing" class="dd-item ">
+        <a href="/unit-testing/integration_testing/">
+        Integration Testing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/antipatterns/" title="Unit Testing Anti-Patterns" class="dd-item ">
+        <a href="/unit-testing/antipatterns/">
+        Unit Testing Anti-Patterns
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Notebook</a> > <a href='/unit-testing/'>Unit Testing Principles, Practices, and Patterns</a> > The Bigger Picture
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-makes-a-good-or-bad-test">What Makes a Good or Bad Test?</a></li>
+    <li><a href="#code-coverage-metrics">Code Coverage Metrics</a></li>
+    <li><a href="#what-makes-a-successful-test-suite">What Makes a Successful Test Suite</a></li>
+    <li><a href="#test-dependencies">Test Dependencies</a></li>
+    <li><a href="#test-isolation">Test Isolation</a>
+      <ul>
+        <li><a href="#granularity">Granularity</a></li>
+        <li><a href="#coupling">Coupling</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+      </ul>
+    </li>
+    <li><a href="#test-structure">Test Structure</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              The Bigger Picture
+            </h1>
+          
+
+        
+
+
+
+<h2 id="what-makes-a-good-or-bad-test">What Makes a Good or Bad Test?</h2>
+<ul>
+<li>Unit testing enables <em>sustainable</em> growth in software projects by acting as a form of insurance
+against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they
+prevent.</li>
+<li>Code is a liability, not an asset, and tests are code too. A test without business value,
+that raises false alarms, is slow, and is difficult to maintain, does harm to the business.</li>
+<li>Testability works well as a negative indicator for good code design by pointing out
+<em>tight coupling</em>.  However, the reverse is not true. Too much decoupling can lead to disaster.</li>
+</ul>
+<h2 id="code-coverage-metrics">Code Coverage Metrics</h2>
+<p>Coverage metrics work well as a negative indicator for test quality, but a bad positive one. For
+example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsStringLong</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">IsStringLong</span><span class="p">,</span> <span class="n">ShortString</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="n">result</span> <span class="o">=</span> <span class="n">IsStringLong</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">abc</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>3/4 = 75% of the lines are covered. Only three lines are important, but curly braces count.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsStringLong</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div><p>Refactoring can be used to &ldquo;game&rdquo; coverage. Now, 1/1 = 100% of the lines are covered with no
+change to the test.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsStringLong</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">IsStringLong</span><span class="p">,</span> <span class="n">ShortString</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="n">result1</span> <span class="o">=</span> <span class="n">IsStringLong</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">abc</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">IsStringLong</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">abcdef</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>Even with 100% coverage, that says nothing about the quality of the test.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">Parse</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">atoi</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">c_str</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">IsStringLong</span><span class="p">,</span> <span class="n">ShortString</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">5</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>Coverage metrics do not include external libraries. Though nowhere close to being exhaustive, this
+test has 100% coverage.</p>
+
+<div class="notices tip" ><p><strong>Hospital Analogy</strong> - Temperature is another good negative indicator, but a bad positive indicator.
+Nurses take temperature measurements to see if a patient&rsquo;s body is unwell. But, regulating the
+patient&rsquo;s temperature is never <em>the goal</em>. Otherwise, hospitals would tend towards more &ldquo;effective&rdquo;
+strategies, like dumping patients with fevers into ice baths. Instead, knowing that temperature
+will normalize as a consequence of the patient feeling better, nurses continuously monitor while
+focusing on the root cause of the illness.</p>
+</div>
+
+<h2 id="what-makes-a-successful-test-suite">What Makes a Successful Test Suite</h2>
+<p>A successful test suite has the following properties:</p>
+<ol>
+<li>Integrated into the development cycle.</li>
+<li>Targets only the most important parts of the code base: the business logic.</li>
+<li>Provides maximum value with minimum maintenance costs.</li>
+</ol>
+<p>Enforcing test quality is a tough problem; one that requires personal judgement.</p>
+<h2 id="test-dependencies">Test Dependencies</h2>
+<p>Dependencies may be shared or private; mutable or immutable.</p>
+<ul>
+<li><strong>Private</strong> - Lifetime is managed by the test. Includes local variables.</li>
+<li><strong>Shared</strong> -  Lifetime is not managed by the test. Includes global variables and out-of-process
+state.</li>
+<li><strong>Immutable</strong> - State never changes over the course of the test.</li>
+<li><strong>Mutable</strong> - State may change over the course of the test.</li>
+</ul>
+<h2 id="test-isolation">Test Isolation</h2>
+<p>Varying degrees of isolation can be used when writing tests:</p>
+<ul>
+<li><strong>Heavy Isolation</strong> - Replace all mutable dependencies with test doubles. Developments tends to
+start at the top of the object graph and work it&rsquo;s way down.</li>
+<li><strong>Light Isolation</strong> - Replace all mutable, shared dependencies with test doubles. Development
+tends to start at the bottom of the object graph and work it&rsquo;s way up.</li>
+</ul>
+<h3 id="granularity">Granularity</h3>
+<p>Heavy isolation helps increase granularity. However, it is easy to fall into the trap of testing
+<em>code</em> instead of <em>behavior</em>.</p>
+
+<div class="notices warning" ><pre><code>When I call my dog, he moves his front left leg, followed by his front right leg, the the front 
+right leg, his head turns, and the tail starts wagging.
+</code></pre></div>
+
+<p>Only a programmer with the code in front of them, could tell what the purpose of those movements
+are.</p>
+
+<div class="notices tip" ><pre><code>When I call my dog, he comes right to me.
+</code></pre></div>
+
+<p>A test should tell a story about the problem your code helps to solve, and this story should be
+cohesive and meaningful to a non-programmer.</p>
+<h3 id="coupling">Coupling</h3>
+<p>Heavy isolation can make it easier to test coupled classes. Substituting a classes dependencies with
+test doubles helps to break up coupling in what could be a large graph of dependencies. However,
+dependance on test doubles is a good negative indicator of quality code design.</p>
+<h3 id="feedback">Feedback</h3>
+<p>Heavy isolation can make it easier to narrow down the bug since the test is more isolated.
+Light isolation also tends to produce cascades of failing tests. These issues are mitigated by
+running tests regularly.</p>
+<h2 id="test-structure">Test Structure</h2>
+<ul>
+<li><em>Arrange</em>, <em>Act</em>, then <em>Assert</em> (AAA).</li>
+<li>Watch out for <em>Act</em> and <em>Assert</em> sections larger than one line, which may indicate:
+<ul>
+<li>Test verifies more than one behavior and needs to be split.</li>
+<li>Multiple outcomes need checking, a.k.a <em>invariant violation</em>.</li>
+</ul>
+</li>
+<li><em>Arrange</em> sections should not be placed inside test fixtures. Doing so:
+<ul>
+<li>Introduces coupling between tests.</li>
+<li>Decreases readability.</li>
+</ul>
+</li>
+<li>Simplify tedious <em>Arrange</em> sections with the factory pattern.</li>
+<li>Avoid using conditional logic, including loop conditions.</li>
+<li>Name tests using plain english, describing behavior from the perspective of a business expert.</li>
+<li>Tests that verify the same behavior with different values may be parameterized, but never at the
+expense of readability.</li>
+<li>Consider an assertion library that reads fluently.</li>
+</ul>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/unit-testing/" title="Unit Testing Principles, Practices, and Patterns"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/unit-testing/making_tests_work/" title="Making your Tests Work for You" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1580500130"></script>
+    <script src="/js/perfect-scrollbar.min.js?1580500130"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1580500130"></script>
+    <script src="/js/jquery.sticky.js?1580500130"></script>
+    <script src="/js/featherlight.min.js?1580500130"></script>
+    <script src="/js/highlight.pack.js?1580500130"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1580500130"></script>
+    <script src="/js/learn.js?1580500130"></script>
+    <script src="/js/hugo-learn.js?1580500130"></script>
+
+    <link href="/mermaid/mermaid.css?1580500130" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1580500130"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

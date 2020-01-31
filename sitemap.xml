@@ -3,7 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ajguerrer.github.io/unit-testing/bigger_picture/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ajguerrer.github.io/unit-testing/making_tests_work/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ajguerrer.github.io/unit-testing/integration_testing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ajguerrer.github.io/unit-testing/antipatterns/</loc>
+  </url>
+  
+  <url>
     <loc>https://ajguerrer.github.io/google-testing-blog/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ajguerrer.github.io/unit-testing/</loc>
   </url>
   
   <url>

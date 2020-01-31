@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.62.2" />
+    <meta name="generator" content="Hugo 0.63.1" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Testing on the Toilet :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1579407787" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1579407787" rel="stylesheet">
-    <link href="/css/hybrid.css?1579407787" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1579407787" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1579407787" rel="stylesheet">
-    <link href="/css/auto-complete.css?1579407787" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1579407787" rel="stylesheet">
-    <link href="/css/theme.css?1579407787" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1579407787" rel="stylesheet">
+    <link href="/css/nucleus.css?1580500130" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1580500130" rel="stylesheet">
+    <link href="/css/hybrid.css?1580500130" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1580500130" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1580500130" rel="stylesheet">
+    <link href="/css/auto-complete.css?1580500130" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1580500130" rel="stylesheet">
+    <link href="/css/theme.css?1580500130" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1580500130" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1579407787" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1580500130" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1579407787"></script>
+    <script src="/js/jquery-3.3.1.min.js?1580500130"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -32,7 +32,9 @@
       }
       
     </style>
-    <link href="/css/gruvbox-dark.css" rel="stylesheet"/>
+    <link href="/css/gruvbox-dark.css" rel="stylesheet" />
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body class="" data-url="/google-testing-blog/tott/">
     <nav id="sidebar" class="">
@@ -73,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1579407787"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1579407787"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1580500130"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1580500130"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1579407787"></script>
+<script type="text/javascript" src="/js/search.js?1580500130"></script>
 
     
   </div>
@@ -198,6 +200,114 @@
  
 
           
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/unit-testing/" title="Unit Testing Principles, Practices, and Patterns" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/unit-testing/">
+          Unit Testing Principles, Practices, and Patterns
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/bigger_picture/" title="The Bigger Picture" class="dd-item ">
+        <a href="/unit-testing/bigger_picture/">
+        The Bigger Picture
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/making_tests_work/" title="Making your Tests Work for You" class="dd-item ">
+        <a href="/unit-testing/making_tests_work/">
+        Making your Tests Work for You
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/integration_testing/" title="Integration Testing" class="dd-item ">
+        <a href="/unit-testing/integration_testing/">
+        Integration Testing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/antipatterns/" title="Unit Testing Anti-Patterns" class="dd-item ">
+        <a href="/unit-testing/antipatterns/">
+        Unit Testing Anti-Patterns
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
          
     </ul>
 
@@ -280,7 +390,7 @@
     <li><a href="#change-detector-tests-considered-harmful">Change-Detector Tests Considered Harmful</a></li>
     <li><a href="#prefer-testing-public-apis-over-implementation-detail-classes">Prefer Testing Public APIs Over Implementation-Detail Classes</a></li>
     <li><a href="#writing-descriptive-test-names">Writing Descriptive Test Names</a></li>
-    <li><a href="#dont-put-logic-in-tests">Don't Put Logic in Tests</a></li>
+    <li><a href="#dont-put-logic-in-tests">Don&rsquo;t Put Logic in Tests</a></li>
     <li><a href="#risk-driven-testing">Risk-Driven Testing</a></li>
     <li><a href="#effective-testing">Effective Testing</a></li>
     <li><a href="#test-behaviors-not-methods">Test Behaviors, Not Methods</a></li>
@@ -288,7 +398,7 @@
     <li><a href="#test-behavior-not-implementation">Test Behavior, Not Implementation</a></li>
     <li><a href="#know-your-test-doubles">Know Your Test Doubles</a></li>
     <li><a href="#fake-your-way-to-better-tests">Fake Your Way To Better Tests</a></li>
-    <li><a href="#dont-overuse-mocks">Don't Overuse Mocks</a></li>
+    <li><a href="#dont-overuse-mocks">Don&rsquo;t Overuse Mocks</a></li>
     <li><a href="#testing-state-vs-testing-interactions">Testing State vs. Testing Interactions</a></li>
     <li><a href="#code-coverage-goal-80-and-no-less">Code coverage goal: 80% and no less!</a></li>
     <li><a href="#data-driven-traps">Data Driven Traps!</a></li>
@@ -329,7 +439,7 @@ your seat.</p>
 <h2 id="tests-too-dry-make-them-damp">Tests Too DRY? Make Them DAMP!</h2>
 <p><em>December 03, 2019</em> -
 <a href="https://testing.googleblog.com/2019/12/testing-on-toilet-tests-too-dry-make.html">original post</a></p>
-<p>Though the DRY (&ldquo;Don't Repeat Yourself&rdquo;) principle is great for production code, tests don't test
+<p>Though the DRY (&ldquo;Don&rsquo;t Repeat Yourself&rdquo;) principle is great for production code, tests don&rsquo;t test
 themselves.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">ForumTest</span> <span class="o">:</span> <span class="k">public</span> <span class="o">:</span><span class="o">:</span><span class="n">testing</span><span class="o">:</span><span class="o">:</span><span class="n">Test</span> <span class="p">{</span>
@@ -374,7 +484,7 @@ instead of mocking it out. Some service owners provide a fake. Otherwise, use a 
 <h2 id="make-interfaces-hard-to-misuse">Make Interfaces Hard to Misuse</h2>
 <p><em>July 25, 2018</em> -
 <a href="https://testing.googleblog.com/2018/07/code-health-make-interfaces-hard-to.html">original post</a></p>
-<p>Don't push the responsibility of maintaining invariants on the caller.</p>
+<p>Don&rsquo;t push the responsibility of maintaining invariants on the caller.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Vector</span> <span class="p">{</span>
   <span class="k">explicit</span> <span class="nf">Vector</span><span class="p">(</span><span class="kt">int</span> <span class="n">num_slots</span><span class="p">)</span><span class="p">;</span>
@@ -400,7 +510,7 @@ instead of mocking it out. Some service owners provide a fake. Otherwise, use a 
 <li>Allowing partially created objects.</li>
 <li>Parameters that can have invalid values.</li>
 </ul>
-<p>Sometimes it's not practical to have a foolproof interface. In those cases rely on static analysis
+<p>Sometimes it&rsquo;s not practical to have a foolproof interface. In those cases rely on static analysis
 or documentation.</p>
 <h2 id="only-verify-relevant-method-arguments">Only Verify Relevant Method Arguments</h2>
 <p><em>June 26, 2018</em> -
@@ -476,7 +586,7 @@ failure.</p>
 <h2 id="understanding-code-in-review">Understanding Code in Review</h2>
 <p><em>May 1, 2018</em> - <a href="https://testing.googleblog.com/2018/05/code-health-understanding-code-in-review.html">original
 post</a></p>
-<p>If you find yourself reviewing code that is difficult to understand, don't waste time reviewing it.</p>
+<p>If you find yourself reviewing code that is difficult to understand, don&rsquo;t waste time reviewing it.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsOkay</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
   <span class="kt">bool</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -501,7 +611,7 @@ post</a></p>
 <h2 id="cleanly-create-test-data">Cleanly Create Test Data</h2>
 <p><em>February 20, 2018</em> - <a href="https://testing.googleblog.com/2018/02/testing-on-toilet-cleanly-create-test.html">original
 post</a></p>
-<p>Helper methods make it easier to create test data, but they don't age well.</p>
+<p>Helper methods make it easier to create test data, but they don&rsquo;t age well.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Starts simple
 </span><span class="c1"></span><span class="n">Company</span> <span class="n">company</span> <span class="o">=</span> <span class="n">NewCompany</span><span class="p">(</span><span class="n">kPublic</span><span class="p">)</span><span class="p">;</span>
@@ -544,7 +654,7 @@ post</a></p>
 <h2 id="only-expect-state-changing-method-calls">Only Expect State-Changing Method Calls</h2>
 <p><em>December 11, 2017</em> - <a href="https://testing.googleblog.com/2017/12/testing-on-toilet-only-verify-state.html">original
 post</a></p>
-<p>Expecting calls to methods that don't change state can make a test brittle, less readable, and
+<p>Expecting calls to methods that don&rsquo;t change state can make a test brittle, less readable, and
 provide a false sense of security.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">UserAuthorizer</span><span class="p">,</span> <span class="n">AddPermissionToDatabase</span><span class="p">)</span> <span class="p">{</span>
@@ -596,7 +706,7 @@ understand and maintain.</p>
 <span class="kt">int</span> <span class="n">area</span> <span class="o">=</span> <span class="n">polygon</span><span class="p">.</span><span class="n">GetBoundingBox</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetArea</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>This advice doesn't just apply to primitives and The STL. It's possible for any type to be too
+<p>This advice doesn&rsquo;t just apply to primitives and The STL. It&rsquo;s possible for any type to be too
 primitive for the job.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Polygon</span> <span class="n">polygon</span> <span class="o">=</span> <span class="n">IsoscelesRightTriangle</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="p">;</span>
@@ -607,7 +717,7 @@ primitive for the job.</p>
 <p><em>October 23, 2017</em> - <a href="https://testing.googleblog.com/2017/10/code-health-identifiernamingpostforworl.html">original
 post</a></p>
 <p>Names should be clear and precise.</p>
-<p>Don't mention the type in the variable name. It's OK for the name and the type match.</p>
+<p>Don&rsquo;t mention the type in the variable name. It&rsquo;s OK for the name and the type match.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name_string</span><span class="p">;</span>
 <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">time_t</span><span class="o">&gt;</span> <span class="n">holiday_date_list</span><span class="p">;</span>
@@ -619,7 +729,7 @@ post</a></p>
 <span class="n">Payments</span> <span class="n">payments</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>Don't use overly specific names. Get more specific if there is a need for disambiguation.</p>
+<p>Don&rsquo;t use overly specific names. Get more specific if there is a need for disambiguation.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">Monster</span> <span class="n">final_battle_most_dangerous_boss_monster</span><span class="p">;</span>
 <span class="n">Payments</span> <span class="n">non_typical_monthly_payments</span><span class="p">;</span>
@@ -663,7 +773,7 @@ post</a></p>
 </span><span class="c1"></span><span class="k">return</span> <span class="n">width</span> <span class="o">/</span> <span class="n">height</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>It's often better to make your code self-explanatory.</p>
+<p>It&rsquo;s often better to make your code self-explanatory.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">price</span> <span class="o">=</span> <span class="n">num_items</span> <span class="o">*</span> <span class="n">item_price</span><span class="p">;</span>
 <span class="n">discount</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">min</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_items</span><span class="p">)</span> <span class="o">*</span> <span class="n">item_price</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">;</span>
@@ -750,7 +860,7 @@ post</a></p>
 <h2 id="keep-cause-and-effect-clear">Keep Cause and Effect Clear</h2>
 <p><em>January 31, 2017</em> - <a href="https://testing.googleblog.com/2017/01/testing-on-toilet-keep-cause-and-effect.html">original
 post</a></p>
-<p>It's difficult to reason about a test when the cause is hidden far away from the effect.</p>
+<p>It&rsquo;s difficult to reason about a test when the cause is hidden far away from the effect.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TallyTest</span> <span class="o">:</span> <span class="k">public</span> <span class="o">:</span><span class="o">:</span><span class="n">testing</span><span class="o">:</span><span class="o">:</span><span class="n">Test</span> <span class="p">{</span>
 <span class="k">protected</span><span class="o">:</span>
@@ -795,7 +905,7 @@ post</a></p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>It may require a bit more code, but it's easier to read and maintain.</p>
+<p>It may require a bit more code, but it&rsquo;s easier to read and maintain.</p>
 <h2 id="what-makes-a-good-end-to-end-test">What Makes a Good End-to-End Test?</h2>
 <p><em>September, 2016</em> - <a href="https://testing.googleblog.com/2016/09/testing-on-toilet-what-makes-good-end.html">original
 post</a></p>
@@ -840,7 +950,7 @@ tested by association.</p>
 <li>Unlike public APIs, implementation details are vulnerable to refactoring. Tests for implementation
 details can fail even though the behavior from the public API is fine.</li>
 <li>Testing implementation details can give false confidence. Even if an implementation detail is well
-tested, that doesn't mean the pubic API behaves properly.</li>
+tested, that doesn&rsquo;t mean the pubic API behaves properly.</li>
 </ul>
 <h2 id="writing-descriptive-test-names">Writing Descriptive Test Names</h2>
 <p><em>October 16, 2014</em> - <a href="https://testing.googleblog.com/2014/10/testing-on-toilet-writing-descriptive.html">original
@@ -867,9 +977,9 @@ the length of a good test name helps indicate when a test needs to be split apar
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></div></div>
 
-<p>A test's name should be all you need to know to understand the behavior being tested. Make sure
+<p>A test&rsquo;s name should be all you need to know to understand the behavior being tested. Make sure
 the name contains both the scenario being tested and the expected outcome.</p>
-<h2 id="dont-put-logic-in-tests">Don't Put Logic in Tests</h2>
+<h2 id="dont-put-logic-in-tests">Don&rsquo;t Put Logic in Tests</h2>
 <p><em>July 31, 2014</em> - <a href="https://testing.googleblog.com/2014/07/testing-on-toilet-dont-put-logic-in.html">original
 post</a></p>
 <p>Tests should be simple by stating I/O directly rather than computing them.</p>
@@ -1021,7 +1131,7 @@ test doubles are:</p>
 <h2 id="fake-your-way-to-better-tests">Fake Your Way To Better Tests</h2>
 <p><em>June 28, 2013</em> - <a href="https://testing.googleblog.com/2013/06/testing-on-toilet-fake-your-way-to.html">original
 post</a></p>
-<p>Suppose you would like to test your blog platform API, but you don't want your tests talking to a
+<p>Suppose you would like to test your blog platform API, but you don&rsquo;t want your tests talking to a
 remote server.</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">DeletePostsWithTag</span><span class="p">(</span><span class="k">const</span> <span class="n">Tag</span><span class="o">&amp;</span> <span class="n">tag</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">Post</span> <span class="nl">post</span> <span class="p">:</span> <span class="n">blog_service_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetAllPosts</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
@@ -1031,7 +1141,7 @@ remote server.</p>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><p>A fake is a lightweight implementation of an API that behaves like the real implementation, but
-isn't suitable for production.</p>
+isn&rsquo;t suitable for production.</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">FakeBlogService</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BlogService</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
   <span class="kt">void</span> <span class="n">AddPost</span><span class="p">(</span><span class="k">const</span> <span class="n">Post</span><span class="o">&amp;</span> <span class="n">post</span><span class="p">)</span> <span class="p">{</span> <span class="n">posts</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">post</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
@@ -1047,7 +1157,7 @@ isn't suitable for production.</p>
 <span class="p">}</span><span class="p">;</span>
 </code></pre></div><p>Fakes should be created and maintained by the person or team that owns the real implementation.</p>
 <p>Fakes should have their own tests to make sure they behave like the real implementation.</p>
-<h2 id="dont-overuse-mocks">Don't Overuse Mocks</h2>
+<h2 id="dont-overuse-mocks">Don&rsquo;t Overuse Mocks</h2>
 <p><em>May 28, 2013</em> - <a href="https://testing.googleblog.com/2013/05/testing-on-toilet-dont-overuse-mocks.html">original
 post</a></p>
 <p>Mocks are powerful, but easy to abuse.</p>
@@ -1068,7 +1178,7 @@ post</a></p>
 
 <p>Overusing mocks makes tests harder to understand, maintain, and provides less insurance that your
 code is working properly.</p>
-<p>If you don't need a mock, don't use one. Understanding when to use a mock comes from understanding
+<p>If you don&rsquo;t need a mock, don&rsquo;t use one. Understanding when to use a mock comes from understanding
 what you want to test.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST_F</span><span class="p">(</span><span class="n">PaymentProcessorTest</span><span class="p">,</span> <span class="n">ShouldChargeCreditCard</span><span class="p">)</span> <span class="p">{</span>
@@ -1368,7 +1478,7 @@ bugs, and add test cases to address them.</p>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li>Testing every possible input would require 2<!-- raw HTML omitted -->192<!-- raw HTML omitted --> tests. Thats too many.</li>
+<li>Testing every possible input would require 2<sup>192</sup> tests. Thats too many.</li>
 <li>Testing enough to get full line coverage would require 2 tests. Thats too few.</li>
 <li>Testing each logical expression (e.g <code>a &gt; b</code>, <code>a == b</code>, <code>a &lt; b</code>) independently is 27 tests. Still
 probably too many.</li>
@@ -1447,7 +1557,7 @@ from the public API.</p>
 <p><em>April 26, 2007</em> -
 <a href="https://testing.googleblog.com/2007/04/tott-refactoring-tests-in-red.html">original post</a></p>
 <p>As your test suite grows, you will find yourself needing to refactor your tests. However,
-your tests don't have tests!</p>
+your tests don&rsquo;t have tests!</p>
 <p>One thing you can do is intentionally break the test, refactor the test, and make sure the test
 still fails as expected.</p>
 <p>Just remember to revert your code under test!</p>
@@ -1569,6 +1679,89 @@ still fails as expected.</p>
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -1581,7 +1774,7 @@ still fails as expected.</p>
 			<a class="nav nav-prev" href="/google-testing-blog/whittaker/" title="James Whittaker"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/google-testing-blog/general/" title="General Notes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/unit-testing/" title="Unit Testing Principles, Practices, and Patterns" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1591,19 +1784,19 @@ still fails as expected.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1579407787"></script>
-    <script src="/js/perfect-scrollbar.min.js?1579407787"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1579407787"></script>
-    <script src="/js/jquery.sticky.js?1579407787"></script>
-    <script src="/js/featherlight.min.js?1579407787"></script>
-    <script src="/js/highlight.pack.js?1579407787"></script>
+    <script src="/js/clipboard.min.js?1580500130"></script>
+    <script src="/js/perfect-scrollbar.min.js?1580500130"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1580500130"></script>
+    <script src="/js/jquery.sticky.js?1580500130"></script>
+    <script src="/js/featherlight.min.js?1580500130"></script>
+    <script src="/js/highlight.pack.js?1580500130"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1579407787"></script>
-    <script src="/js/learn.js?1579407787"></script>
-    <script src="/js/hugo-learn.js?1579407787"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1580500130"></script>
+    <script src="/js/learn.js?1580500130"></script>
+    <script src="/js/hugo-learn.js?1580500130"></script>
 
-    <link href="/mermaid/mermaid.css?1579407787" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1579407787"></script>
+    <link href="/mermaid/mermaid.css?1580500130" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1580500130"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

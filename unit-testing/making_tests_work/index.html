@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-    <title>Tags :: Notebook</title>
+    <title>Making your Tests Work for You :: Notebook</title>
 
     
     <link href="/css/nucleus.css?1580500130" rel="stylesheet">
@@ -36,7 +36,7 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
-  <body class="" data-url="/tags/">
+  <body class="" data-url="/unit-testing/making_tests_work/">
     <nav id="sidebar" class="">
 
 
@@ -207,7 +207,7 @@
   
     
     <li data-nav-id="/unit-testing/" title="Unit Testing Principles, Practices, and Patterns" class="dd-item 
-        
+        parent
         
         
         ">
@@ -250,7 +250,7 @@
  
   
     
-      <li data-nav-id="/unit-testing/making_tests_work/" title="Making your Tests Work for You" class="dd-item ">
+      <li data-nav-id="/unit-testing/making_tests_work/" title="Making your Tests Work for You" class="dd-item active">
         <a href="/unit-testing/making_tests_work/">
         Making your Tests Work for You
         
@@ -353,7 +353,13 @@
             
           
           
-            <a href='/'>Notebook</a> > Tags
+            
+            
+          
+          
+            <a href='/'>Notebook</a> > <a href='/unit-testing/'>Unit Testing Principles, Practices, and Patterns</a> > Making your Tests Work for You
+          
+         
           
          
           
@@ -364,7 +370,13 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#four-pillars-of-a-good-unit-test">Four Pillars of a Good Unit Test</a></li>
+    <li><a href="#the-ideal-test">The Ideal Test</a></li>
+    <li><a href="#preventing-false-positives">Preventing False Positives</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -380,7 +392,7 @@
           
             <h1>
               
-              Tags
+              Making your Tests Work for You
             </h1>
           
 
@@ -388,17 +400,92 @@
 
 
 
-
-
-
+<h2 id="four-pillars-of-a-good-unit-test">Four Pillars of a Good Unit Test</h2>
 <ul>
-	
+<li><strong>Protection against regressions</strong> - Ability to indicate the presence of regressions.</li>
+<li><strong>Resistance to refactoring</strong> - Degree to which a test can sustain refactoring without producing
+a false positive.</li>
+<li><strong>Fast feedback</strong> - Measure of how quickly the test executes.</li>
+<li><strong>Maintainability</strong> - Ability to read and run the test.</li>
 </ul>
+<table>
+  <tr>
+    <th>Error Types</th>
+    <th>Functionality is Correct</th>
+    <th>Functionality is Broken</th>
+  </tr>
+  <tr>
+    <th>Test Passes</th>
+    <td>True negative</td>
+    <td>False negative (protection against regressions)</td>
+  </tr>
+  <tr>
+    <th>Test Fails</th>
+    <td>False positive (resistance to refactoring)</td>
+    <td>True positive</td>
+  </tr>
+</table>
+<p>$$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</p>
+<h2 id="the-ideal-test">The Ideal Test</h2>
+<p><img src="/images/ideal_test.png" alt="Ideal test"></p>
+<p>{Protection against regressions, Resistance to refactoring, Fast feedback} - Choose two. Always
+maximize resistance to refactoring. Once resistance against refactoring is maximized, test size
+becomes a slider between protection against regressions and fast feedback.</p>
+<p><img src="/images/test_triangle.png" alt="Test triangle"></p>
+<h2 id="preventing-false-positives">Preventing False Positives</h2>
+<p>When tests fail for the wrong reasons, developers quickly loose trust in their tests. But without
+trustworthy tests, refactoring is risky. Caught in a catch-22, eventually real bugs will start to
+slip through.</p>
+<p>Fast positives are formed from coupling between the test and implementation details:</p>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">Render</span><span class="p">,</span> <span class="n">IsCorrect</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">ifstream</span> <span class="n">in</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">message_renderer.cc</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">stringstream</span> <span class="n">sstr</span><span class="p">;</span>
+  <span class="n">sstr</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">in</span><span class="p">.</span><span class="n">rdbuf</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">sstr</span><span class="p">.</span><span class="n">str</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">R</span><span class="sa"></span><span class="s">&#34;</span><span class="s">(#include </span><span class="s">&#34;</span><span class="n">message_renderer</span><span class="p">.</span><span class="n">h</span><span class="sa"></span><span class="s">&#34;</span>
+<span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;body_renderer.h&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;title_renderer.h&#34;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;footer_renderer.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="n">MessageRenderer</span><span class="o">:</span><span class="o">:</span><span class="n">MessageRenderer</span><span class="p">(</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">sub_renderers_</span><span class="p">(</span><span class="p">{</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">TitleRenderer</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+                      <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">BodyRenderer</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+                      <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FooterRenderer</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">}</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+
+<span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">MessageRenderer</span><span class="o">:</span><span class="o">:</span><span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">accumulate</span><span class="p">(</span><span class="n">sub_renderers_</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">sub_renderers_</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
+                         <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="p">{</span><span class="p">}</span><span class="p">,</span>
+                         <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">m</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+                           <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span><span class="o">-</span><span class="o">&gt;</span><span class="n">Render</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="p">;</span>
+                         <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="sa"></span><span class="s">&#34;</span><span class="s">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Instead of testing the code, test the behavior.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">Render</span><span class="p">,</span> <span class="n">BasicMessage</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MessageRenderer</span> <span class="n">renderer</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">Message</span> <span class="n">message</span><span class="p">{</span><span class="nl">title</span> <span class="p">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">a</span><span class="s">&#34;</span><span class="p">,</span> <span class="nl">body</span> <span class="p">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">b</span><span class="s">&#34;</span><span class="p">,</span> <span class="nl">footer</span> <span class="p">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">c</span><span class="s">&#34;</span><span class="p">}</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">html</span> <span class="o">=</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="p">;</span>
+
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">html</span><span class="p">,</span>
+            <span class="sa"></span><span class="s">&#34;</span><span class="s">&lt;head&gt;&lt;title&gt;a&lt;/title&gt;&lt;/head&gt;&lt;body&gt;b&lt;/body&gt;&lt;footer&gt;c&lt;/footer&gt;</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -514,6 +601,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -526,6 +614,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -543,6 +634,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -558,6 +650,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -598,8 +693,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/unit-testing/bigger_picture/" title="The Bigger Picture"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/google-testing-blog/" title="Google Testing Blog" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/unit-testing/integration_testing/" title="Integration Testing" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -629,3 +726,4 @@
 
   </body>
 </html>
+

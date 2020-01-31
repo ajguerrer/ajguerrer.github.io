@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unit Testing Principles, Practices, and Patterns on Notebook</title>
+    <link>https://ajguerrer.github.io/unit-testing/</link>
+    <description>Recent content in Unit Testing Principles, Practices, and Patterns on Notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://ajguerrer.github.io/unit-testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Bigger Picture</title>
+      <link>https://ajguerrer.github.io/unit-testing/bigger_picture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/bigger_picture/</guid>
+      <description>What Makes a Good or Bad Test?  Unit testing enables sustainable growth in software projects by acting as a form of insurance against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they prevent. Code is a liability, not an asset, and tests are code too. A test without business value, that raises false alarms, is slow, and is difficult to maintain, does harm to the business.</description>
+    </item>
+    
+    <item>
+      <title>Making your Tests Work for You</title>
+      <link>https://ajguerrer.github.io/unit-testing/making_tests_work/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/making_tests_work/</guid>
+      <description>Four Pillars of a Good Unit Test  Protection against regressions - Ability to indicate the presence of regressions. Resistance to refactoring - Degree to which a test can sustain refactoring without producing a false positive. Fast feedback - Measure of how quickly the test executes. Maintainability - Ability to read and run the test.    Error Types Functionality is Correct Functionality is Broken   Test Passes True negative False negative (protection against regressions)   Test Fails False positive (resistance to refactoring) True positive   $$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</description>
+    </item>
+    
+    <item>
+      <title>Integration Testing</title>
+      <link>https://ajguerrer.github.io/unit-testing/integration_testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/integration_testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unit Testing Anti-Patterns</title>
+      <link>https://ajguerrer.github.io/unit-testing/antipatterns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ajguerrer.github.io/unit-testing/antipatterns/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

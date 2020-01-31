@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.62.2" />
+    <meta name="generator" content="Hugo 0.63.1" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Guide to Writing Testable Code :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1579407787" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1579407787" rel="stylesheet">
-    <link href="/css/hybrid.css?1579407787" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1579407787" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1579407787" rel="stylesheet">
-    <link href="/css/auto-complete.css?1579407787" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1579407787" rel="stylesheet">
-    <link href="/css/theme.css?1579407787" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1579407787" rel="stylesheet">
+    <link href="/css/nucleus.css?1580500130" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1580500130" rel="stylesheet">
+    <link href="/css/hybrid.css?1580500130" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1580500130" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1580500130" rel="stylesheet">
+    <link href="/css/auto-complete.css?1580500130" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1580500130" rel="stylesheet">
+    <link href="/css/theme.css?1580500130" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1580500130" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1579407787" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1580500130" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1579407787"></script>
+    <script src="/js/jquery-3.3.1.min.js?1580500130"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -32,7 +32,9 @@
       }
       
     </style>
-    <link href="/css/gruvbox-dark.css" rel="stylesheet"/>
+    <link href="/css/gruvbox-dark.css" rel="stylesheet" />
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body class="" data-url="/google-testing-blog/testable_code/">
     <nav id="sidebar" class="">
@@ -73,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1579407787"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1579407787"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1580500130"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1580500130"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1579407787"></script>
+<script type="text/javascript" src="/js/search.js?1580500130"></script>
 
     
   </div>
@@ -181,6 +183,114 @@
       <li data-nav-id="/google-testing-blog/tott/" title="Testing on the Toilet" class="dd-item ">
         <a href="/google-testing-blog/tott/">
         Testing on the Toilet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/unit-testing/" title="Unit Testing Principles, Practices, and Patterns" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/unit-testing/">
+          Unit Testing Principles, Practices, and Patterns
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/bigger_picture/" title="The Bigger Picture" class="dd-item ">
+        <a href="/unit-testing/bigger_picture/">
+        The Bigger Picture
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/making_tests_work/" title="Making your Tests Work for You" class="dd-item ">
+        <a href="/unit-testing/making_tests_work/">
+        Making your Tests Work for You
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/integration_testing/" title="Integration Testing" class="dd-item ">
+        <a href="/unit-testing/integration_testing/">
+        Integration Testing
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/unit-testing/antipatterns/" title="Unit Testing Anti-Patterns" class="dd-item ">
+        <a href="/unit-testing/antipatterns/">
+        Unit Testing Anti-Patterns
         
         </a>
     </li>
@@ -310,7 +420,7 @@
 <div style="text-align:center">
     <h3>Miško Hevery</h3>
 </div>
-<p>You may find Miško's original guide <a href="http://misko.hevery.com/code-reviewers-guide/">here</a>.</p>
+<p>You may find Miško&rsquo;s original guide <a href="http://misko.hevery.com/code-reviewers-guide/">here</a>.</p>
 <h2 id="dependency-injection">Dependency Injection</h2>
 <p>A testable class is one that can be constructed in isolation or with test double collaborators. Once
 constructed, they have all the dependencies they need. This is known as Dependency Injection.</p>
@@ -481,7 +591,7 @@ and the primary benefit Dependency Injection brings.</p>
 </code></pre></div></div>
 </p>
 <h2 id="law-of-demeter">Law of Demeter</h2>
-<p>A class becomes difficult to test if it gets its dependencies from anywhere besides it's interface.
+<p>A class becomes difficult to test if it gets its dependencies from anywhere besides it&rsquo;s interface.
 For example, a class may get a dependency by asking one of it dependencies, breaking the Law of Demeter.</p>
 <p>Violations of the Law of Demeter are a sign of bad Dependency Injection, for passing in the wrong
 dependency, and bad encapsulation, for exposing secondary dependencies in the first place.</p>
@@ -699,10 +809,10 @@ and encapsulation.</p>
 
 <h2 id="global-state">Global State</h2>
 <p>Global state is difficult to understand. Ideally, the interface of an object should fully describe
-it's dependencies. Global state ruins this ideal because it can be used anywhere without warning.
-Such flexibility may seem convenient to the original developer, but to others it's confusing.
+it&rsquo;s dependencies. Global state ruins this ideal because it can be used anywhere without warning.
+Such flexibility may seem convenient to the original developer, but to others it&rsquo;s confusing.
 Especially in large code bases, it can be difficult to realize that some global state exists and
-reason about the circumstances in which it should or shouldn't be used.</p>
+reason about the circumstances in which it should or shouldn&rsquo;t be used.</p>
 <p>Global state is the enemy of testing. It strongly couples itself to the code that uses it. Global
 scope encourages widespread usage, further compounding coupling issues. Coupling to concrete types
 makes it impossible to write test doubles and global state must be concrete because it uses the
@@ -910,10 +1020,10 @@ altogether.</p>
 </ul>
 <p>Then, that class is likely violating the Single Responsibility Principle. Such classes hide points
 of flexibility and encapsulate interaction instead of encapsulating behavior. Poor flexibility and
-encapsulation creates brittle design and strong coupling. The result is a class that's hard to test.</p>
+encapsulation creates brittle design and strong coupling. The result is a class that&rsquo;s hard to test.</p>
 <h3 id="fixing-violations-3">Fixing violations</h3>
 <p>Opportunity to fix a violation of the Single Responsibility Principle is either proactive or
-reactive, depending on whether the violation is caught before or after it's committed to the
+reactive, depending on whether the violation is caught before or after it&rsquo;s committed to the
 codebase.</p>
 <p>It should go without saying that the proactive approach is less work.</p>
 <h4 id="proactive">Proactive</h4>
@@ -1054,6 +1164,86 @@ takes.</p>
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
         
@@ -1076,19 +1266,19 @@ takes.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1579407787"></script>
-    <script src="/js/perfect-scrollbar.min.js?1579407787"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1579407787"></script>
-    <script src="/js/jquery.sticky.js?1579407787"></script>
-    <script src="/js/featherlight.min.js?1579407787"></script>
-    <script src="/js/highlight.pack.js?1579407787"></script>
+    <script src="/js/clipboard.min.js?1580500130"></script>
+    <script src="/js/perfect-scrollbar.min.js?1580500130"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1580500130"></script>
+    <script src="/js/jquery.sticky.js?1580500130"></script>
+    <script src="/js/featherlight.min.js?1580500130"></script>
+    <script src="/js/highlight.pack.js?1580500130"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1579407787"></script>
-    <script src="/js/learn.js?1579407787"></script>
-    <script src="/js/hugo-learn.js?1579407787"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1580500130"></script>
+    <script src="/js/learn.js?1580500130"></script>
+    <script src="/js/hugo-learn.js?1580500130"></script>
 
-    <link href="/mermaid/mermaid.css?1579407787" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1579407787"></script>
+    <link href="/mermaid/mermaid.css?1580500130" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1580500130"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
