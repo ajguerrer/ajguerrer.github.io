@@ -11,20 +11,20 @@
     <title>Making your Tests Work for You :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1580500130" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1580500130" rel="stylesheet">
-    <link href="/css/hybrid.css?1580500130" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1580500130" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1580500130" rel="stylesheet">
-    <link href="/css/auto-complete.css?1580500130" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1580500130" rel="stylesheet">
-    <link href="/css/theme.css?1580500130" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1580500130" rel="stylesheet">
+    <link href="/css/nucleus.css?1580502787" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1580502787" rel="stylesheet">
+    <link href="/css/hybrid.css?1580502787" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1580502787" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1580502787" rel="stylesheet">
+    <link href="/css/auto-complete.css?1580502787" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1580502787" rel="stylesheet">
+    <link href="/css/theme.css?1580502787" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1580502787" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1580500130" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1580502787" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1580500130"></script>
+    <script src="/js/jquery-3.3.1.min.js?1580502787"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1580500130"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1580500130"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1580502787"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1580502787"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1580500130"></script>
+<script type="text/javascript" src="/js/search.js?1580502787"></script>
 
     
   </div>
@@ -427,11 +427,14 @@ a false positive.</li>
 </table>
 <p>$$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</p>
 <h2 id="the-ideal-test">The Ideal Test</h2>
+<p>{<em>Protection against regressions</em>, <em>Resistance to refactoring</em>, <em>Fast feedback</em>} - Choose two.</p>
 <p><img src="/images/ideal_test.png" alt="Ideal test"></p>
-<p>{Protection against regressions, Resistance to refactoring, Fast feedback} - Choose two. Always
-maximize resistance to refactoring. Once resistance against refactoring is maximized, test size
-becomes a slider between protection against regressions and fast feedback.</p>
+<p>Always maximize <em>resistance to refactoring</em>. Once resistance against refactoring is maximized, test
+size becomes a slider between <em>protection against regressions</em> and <em>fast feedback</em>.</p>
 <p><img src="/images/test_triangle.png" alt="Test triangle"></p>
+<p>A good amount of <em>protection against regressions</em> and <em>fast feedback</em> requires a diverse ratio of
+test sizes. As a general rule of thumb, prefer a 7:2:1 ratio of small, medium, and large tests.</p>
+<p><img src="/images/test_pyramid.png" alt="Test pyramid"></p>
 <h2 id="preventing-false-positives">Preventing False Positives</h2>
 <p>When tests fail for the wrong reasons, developers quickly loose trust in their tests. But without
 trustworthy tests, refactoring is risky. Caught in a catch-22, eventually real bugs will start to
@@ -706,19 +709,19 @@ slip through.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1580500130"></script>
-    <script src="/js/perfect-scrollbar.min.js?1580500130"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1580500130"></script>
-    <script src="/js/jquery.sticky.js?1580500130"></script>
-    <script src="/js/featherlight.min.js?1580500130"></script>
-    <script src="/js/highlight.pack.js?1580500130"></script>
+    <script src="/js/clipboard.min.js?1580502787"></script>
+    <script src="/js/perfect-scrollbar.min.js?1580502787"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1580502787"></script>
+    <script src="/js/jquery.sticky.js?1580502787"></script>
+    <script src="/js/featherlight.min.js?1580502787"></script>
+    <script src="/js/highlight.pack.js?1580502787"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1580500130"></script>
-    <script src="/js/learn.js?1580500130"></script>
-    <script src="/js/hugo-learn.js?1580500130"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1580502787"></script>
+    <script src="/js/learn.js?1580502787"></script>
+    <script src="/js/hugo-learn.js?1580502787"></script>
 
-    <link href="/mermaid/mermaid.css?1580500130" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1580500130"></script>
+    <link href="/mermaid/mermaid.css?1580502787" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1580502787"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
