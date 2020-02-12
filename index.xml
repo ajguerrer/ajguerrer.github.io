@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/bigger_picture/</guid>
-      <description>What Makes a Good or Bad Test?  Unit testing enables sustainable growth in software projects by acting as a form of insurance against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they prevent. Code is a liability, not an asset, and tests are code too. A test without business value, that raises false alarms, is slow, and is difficult to maintain, does harm to the business.</description>
+      <description>What Makes a Good or Bad Test?  Unit testing enables sustainable growth in software projects by acting as a form of insurance against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they prevent. Code is a liability, not an asset, and tests are code too. Tests that don&amp;rsquo;t verify business value, raise false alarms, run slow, and are difficult to maintain, do more harm than good.</description>
     </item>
     
     <item>
@@ -25,7 +25,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/making_tests_work/</guid>
-      <description>Four Pillars of a Good Unit Test  Protection against regressions - Ability to indicate the presence of regressions. Resistance to refactoring - Degree to which a test can sustain refactoring without producing a false positive. Fast feedback - Measure of how quickly the test executes. Maintainability - Ability to read and run the test.    Error Types Functionality is Correct Functionality is Broken   Test Passes True negative False negative (protection against regressions)   Test Fails False positive (resistance to refactoring) True positive   $$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</description>
+      <description>Four Pillars of a Good Unit Test  Protection against regressions - Ability to indicate the presence of regressions. Resistance to refactoring - Degree to which a test can sustain refactoring without producing a false positive. Fast feedback - Measure of how quickly the test executes. Maintainability - Ability to read and run the test.    Error Types Functionality is Correct Functionality is Broken   Test Passes True negative False negative (indicates poor protection against regressions)   Test Fails False positive (indicates poor resistance to refactoring) True positive   $$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</description>
     </item>
     
     <item>

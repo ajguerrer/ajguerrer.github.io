@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.63.1" />
+    <meta name="generator" content="Hugo 0.63.2" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Making your Tests Work for You :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1580502787" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1580502787" rel="stylesheet">
-    <link href="/css/hybrid.css?1580502787" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1580502787" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1580502787" rel="stylesheet">
-    <link href="/css/auto-complete.css?1580502787" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1580502787" rel="stylesheet">
-    <link href="/css/theme.css?1580502787" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1580502787" rel="stylesheet">
+    <link href="/css/nucleus.css?1581471760" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1581471760" rel="stylesheet">
+    <link href="/css/hybrid.css?1581471760" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1581471760" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1581471760" rel="stylesheet">
+    <link href="/css/auto-complete.css?1581471760" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1581471760" rel="stylesheet">
+    <link href="/css/theme.css?1581471760" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1581471760" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1580502787" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1581471760" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1580502787"></script>
+    <script src="/js/jquery-3.3.1.min.js?1581471760"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1580502787"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1580502787"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1581471760"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1581471760"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1580502787"></script>
+<script type="text/javascript" src="/js/search.js?1581471760"></script>
 
     
   </div>
@@ -375,6 +375,17 @@
     <li><a href="#four-pillars-of-a-good-unit-test">Four Pillars of a Good Unit Test</a></li>
     <li><a href="#the-ideal-test">The Ideal Test</a></li>
     <li><a href="#preventing-false-positives">Preventing False Positives</a></li>
+    <li><a href="#types-of-test-doubles">Types of Test Doubles</a></li>
+    <li><a href="#encapsulation">Encapsulation</a>
+      <ul>
+        <li><a href="#invariant-violation">Invariant violation</a></li>
+        <li><a href="#leaking-state">Leaking state</a></li>
+      </ul>
+    </li>
+    <li><a href="#styles-of-unit-testing">Styles of Unit Testing</a></li>
+    <li><a href="#hexagonal-architecture">Hexagonal Architecture</a></li>
+    <li><a href="#functional-architecture">Functional Architecture</a></li>
+    <li><a href="#controller-orchestration">Controller Orchestration</a></li>
   </ul>
 </nav>
     </div>
@@ -401,13 +412,13 @@
 
 
 <h2 id="four-pillars-of-a-good-unit-test">Four Pillars of a Good Unit Test</h2>
-<ul>
+<ol>
 <li><strong>Protection against regressions</strong> - Ability to indicate the presence of regressions.</li>
 <li><strong>Resistance to refactoring</strong> - Degree to which a test can sustain refactoring without producing
 a false positive.</li>
 <li><strong>Fast feedback</strong> - Measure of how quickly the test executes.</li>
 <li><strong>Maintainability</strong> - Ability to read and run the test.</li>
-</ul>
+</ol>
 <table>
   <tr>
     <th>Error Types</th>
@@ -417,11 +428,11 @@ a false positive.</li>
   <tr>
     <th>Test Passes</th>
     <td>True negative</td>
-    <td>False negative (protection against regressions)</td>
+    <td>False negative (indicates poor protection against regressions)</td>
   </tr>
   <tr>
     <th>Test Fails</th>
-    <td>False positive (resistance to refactoring)</td>
+    <td>False positive (indicates poor resistance to refactoring)</td>
     <td>True positive</td>
   </tr>
 </table>
@@ -429,16 +440,15 @@ a false positive.</li>
 <h2 id="the-ideal-test">The Ideal Test</h2>
 <p>{<em>Protection against regressions</em>, <em>Resistance to refactoring</em>, <em>Fast feedback</em>} - Choose two.</p>
 <p><img src="/images/ideal_test.png" alt="Ideal test"></p>
-<p>Always maximize <em>resistance to refactoring</em>. Once resistance against refactoring is maximized, test
-size becomes a slider between <em>protection against regressions</em> and <em>fast feedback</em>.</p>
+<p>Always chose to maximize <em>resistance to refactoring</em>. Then, test size becomes a slider between
+<em>protection against regressions</em> and <em>fast feedback</em>.</p>
 <p><img src="/images/test_triangle.png" alt="Test triangle"></p>
-<p>A good amount of <em>protection against regressions</em> and <em>fast feedback</em> requires a diverse ratio of
-test sizes. As a general rule of thumb, prefer a 7:2:1 ratio of small, medium, and large tests.</p>
+<p>A diverse ratio of test sizes provides an ideal amount of both <em>protection against regressions</em> and
+<em>fast feedback</em>. As a general rule of thumb, prefer a 7:2:1 ratio of small, medium, and large tests.</p>
 <p><img src="/images/test_pyramid.png" alt="Test pyramid"></p>
 <h2 id="preventing-false-positives">Preventing False Positives</h2>
-<p>When tests fail for the wrong reasons, developers quickly loose trust in their tests. But without
-trustworthy tests, refactoring is risky. Caught in a catch-22, eventually real bugs will start to
-slip through.</p>
+<p>When tests fail for the wrong reasons, developers quickly loose trust in their tests. However,
+without trustworthy tests, refactoring is risky. This trap leads to real bugs slipping through.</p>
 <p>Fast positives are formed from coupling between the test and implementation details:</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">Render</span><span class="p">,</span> <span class="n">IsCorrect</span><span class="p">)</span> <span class="p">{</span>
@@ -482,6 +492,183 @@ slip through.</p>
             <span class="sa"></span><span class="s">&#34;</span><span class="s">&lt;head&gt;&lt;title&gt;a&lt;/title&gt;&lt;/head&gt;&lt;body&gt;b&lt;/body&gt;&lt;footer&gt;c&lt;/footer&gt;</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
+<h2 id="types-of-test-doubles">Types of Test Doubles</h2>
+<ul>
+<li><strong>Mock</strong> <em>(mock, spy)</em> - Emulate and assert <em>outgoing</em> interactions from the SUT.</li>
+<li><strong>Stub</strong> <em>(stub, dummy, fake)</em> - Emulate <em>incoming</em> interactions to the SUT.</li>
+</ul>
+
+<div class="notices note" ><p>The term <em>mock</em> can also refer to the mocking framework itself. Mocking frameworks are also
+generally responsible for creating stubs which can be confusing.</p>
+</div>
+
+<p>Mocks are stubs, but stubs aren&rsquo;t mocks. Asserting interactions with stubs is a common anti-pattern
+called <em>over-specification</em>.</p>
+<h2 id="encapsulation">Encapsulation</h2>
+<p>A well-designed API hides all implementation details behind a private API, leaving only the
+observable behavior in the public API. Implementation details should not <em>leak</em> into the public API.</p>
+<h3 id="invariant-violation">Invariant violation</h3>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">SetName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name_</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="p">(</span><span class="n">absl</span><span class="o">:</span><span class="o">:</span><span class="n">StripAsciiWhitespace</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
+
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">normalized_name</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">NormalizeName</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span><span class="p">;</span>
+<span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">normalized_name</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>As a rule of thumb, a client should be able to achieve any individual goal atomically. Otherwise,
+the client is at risk of a <em>invariant violation</em>.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">SetName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name_</span> <span class="o">=</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="p">(</span><span class="n">absl</span><span class="o">:</span><span class="o">:</span><span class="n">StripAsciiWhitespace</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
+
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="leaking-state">Leaking state</h3>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">GetSubRenderers</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">sub_renderers_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span><span class="p">;</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Clients shouldn&rsquo;t need direct access to internally managed state. Use dependency injection and
+tell instead of asking.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span><span class="p">;</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
+<span class="p">}</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="styles-of-unit-testing">Styles of Unit Testing</h2>
+<ul>
+<li><strong>Output-based</strong> - Verify output with a given input. Requires
+<a href="#functional-architecture">pure functions</a>.</li>
+<li><strong>State-based</strong> - Perform operation, then verify state of SUT and collaborators.</li>
+<li><strong>Communication-based</strong> - Perform operation, then verify communication with collaborators.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Style</th>
+<th>Output-based</th>
+<th>State-based</th>
+<th>Communication-based</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resistance to refactoring</td>
+<td>High</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Maintainability</td>
+<td>High</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hexagonal-architecture">Hexagonal Architecture</h2>
+<p>Hexagonal Architecture, proposed by Alistair Cockburn, breaks applications into two parts:</p>
+<ul>
+<li><strong>Business logic</strong> - Algorithms and domain models essential to the business.</li>
+<li><strong>Controllers</strong> - All other responsibilities of the application.</li>
+</ul>
+<p>Interaction between <em>business logic</em> and <em>controllers</em> follow three guidelines:</p>
+<ol>
+<li>Business logic is isolated from controllers.</li>
+<li>Business logic may not depend on controllers, but controllers may depend on business logic.</li>
+<li>Communication with external applications is handled by controllers, not business logic.</li>
+</ol>
+<p><img src="/images/hexagonal_architecture.png" alt="hexagonal architecture"></p>
+
+<div class="notices tip" ><p>Business logic has high cyclomatic complexity and domain significance; controllers have a large
+number of collaborators. Code that is both complex and involves many collaborators is
+overcomplicated and what hexagonal architecture aims to dissolve.</p>
+</div>
+
+<p>Communication can be divided into two different types:</p>
+<ul>
+<li><strong>Intra-system</strong> - Communication within the application; implementation details.</li>
+<li><strong>Inter-system</strong> - Communication with other applications; observable behavior.</li>
+</ul>
+<p>Mocks are necessary for emulating external applications and verifying inter-system communication
+patterns. However, mocks couple tests to implementation details, reducing their resistance to
+refactoring. For this reason, the use of mocks should be avoided when dealing with intra-system
+communication. Out-of-process dependencies only accessible by the application, are implementation
+details too, and should not be mocked either.</p>
+<h2 id="functional-architecture">Functional Architecture</h2>
+<p>Functional architecture builds off of hexagonal architecture with an added guideline that business
+logic is written in a functional paradigm. The architecture generally flows in a three step process:</p>
+<ol>
+<li>Application services gather and prepare input.</li>
+<li>Business logic makes decisions based on prepared input.</li>
+<li>Application services converts decisions into side effects.</li>
+</ol>
+<p><img src="/images/functional_architecture.png" alt="functional architecture"></p>
+<blockquote>
+<p>Object-oriented programming makes code understandable by encapsulating moving parts. Functional
+programming makes code understandable by minimizing moving parts. <em>&ndash;Michael Feathers</em></p>
+</blockquote>
+<p>Functional architectures trade maintainability for performance; pure functions tend to eagerly load
+data when they could have been lazy.</p>
+<h2 id="controller-orchestration">Controller Orchestration</h2>
+<p>Functional architecture assumes a clearcut pipeline of inputs, decisions, and side effects. However,
+production applications are rarely that simple. What if those decisions lead to gathering more input
+and making more decisions? There are three strategies to consider:</p>
+<ol>
+<li><em>Eagerly gather all the input</em> - Preserve controller simplicity and isolated business logic,
+but concede performance.</li>
+<li><em>Inject dependencies into business logic</em> - Preserve controller simplicity and performance, but
+concede isolated business logic.</li>
+<li><em>Allow controller orchestration</em> - Preserve isolated business logic and performance, but concede
+controller simplicity.</li>
+</ol>
+<p>Isolated business logic is an attribute that should always be maximized because it has a huge impact
+on <em>maintainability</em> and <em>resistance to refactoring</em>. In cases where performance is not critical,
+feel free to stick to a functional architecture. Otherwise, controllers will need to orchestrate
+gathering input as a side effect of business logic decisions.</p>
+
+<div class="notices tip" ><p>Controller orchestration will make controllers more complex, but complexity can be mitigated with
+familiar patterns like switching on a result or listening for events.</p>
+</div>
 
 
 
@@ -709,19 +896,19 @@ slip through.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1580502787"></script>
-    <script src="/js/perfect-scrollbar.min.js?1580502787"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1580502787"></script>
-    <script src="/js/jquery.sticky.js?1580502787"></script>
-    <script src="/js/featherlight.min.js?1580502787"></script>
-    <script src="/js/highlight.pack.js?1580502787"></script>
+    <script src="/js/clipboard.min.js?1581471760"></script>
+    <script src="/js/perfect-scrollbar.min.js?1581471760"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1581471760"></script>
+    <script src="/js/jquery.sticky.js?1581471760"></script>
+    <script src="/js/featherlight.min.js?1581471760"></script>
+    <script src="/js/highlight.pack.js?1581471760"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1580502787"></script>
-    <script src="/js/learn.js?1580502787"></script>
-    <script src="/js/hugo-learn.js?1580502787"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1581471760"></script>
+    <script src="/js/learn.js?1581471760"></script>
+    <script src="/js/hugo-learn.js?1581471760"></script>
 
-    <link href="/mermaid/mermaid.css?1580502787" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1580502787"></script>
+    <link href="/mermaid/mermaid.css?1581471760" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1581471760"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

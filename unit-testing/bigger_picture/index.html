@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.63.1" />
+    <meta name="generator" content="Hugo 0.63.2" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>The Bigger Picture :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1580502787" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1580502787" rel="stylesheet">
-    <link href="/css/hybrid.css?1580502787" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1580502787" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1580502787" rel="stylesheet">
-    <link href="/css/auto-complete.css?1580502787" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1580502787" rel="stylesheet">
-    <link href="/css/theme.css?1580502787" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1580502787" rel="stylesheet">
+    <link href="/css/nucleus.css?1581471760" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1581471760" rel="stylesheet">
+    <link href="/css/hybrid.css?1581471760" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1581471760" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1581471760" rel="stylesheet">
+    <link href="/css/auto-complete.css?1581471760" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1581471760" rel="stylesheet">
+    <link href="/css/theme.css?1581471760" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1581471760" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1580502787" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1581471760" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1580502787"></script>
+    <script src="/js/jquery-3.3.1.min.js?1581471760"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1580502787"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1580502787"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1581471760"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1581471760"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1580502787"></script>
+<script type="text/javascript" src="/js/search.js?1581471760"></script>
 
     
   </div>
@@ -373,14 +373,16 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#what-makes-a-good-or-bad-test">What Makes a Good or Bad Test?</a></li>
-    <li><a href="#code-coverage-metrics">Code Coverage Metrics</a></li>
+    <li><a href="#code-coverage-metrics">Code Coverage Metrics</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
     <li><a href="#what-makes-a-successful-test-suite">What Makes a Successful Test Suite</a></li>
     <li><a href="#test-dependencies">Test Dependencies</a></li>
     <li><a href="#test-isolation">Test Isolation</a>
       <ul>
-        <li><a href="#granularity">Granularity</a></li>
-        <li><a href="#coupling">Coupling</a></li>
-        <li><a href="#feedback">Feedback</a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#test-structure">Test Structure</a></li>
@@ -414,14 +416,13 @@
 <li>Unit testing enables <em>sustainable</em> growth in software projects by acting as a form of insurance
 against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they
 prevent.</li>
-<li>Code is a liability, not an asset, and tests are code too. A test without business value,
-that raises false alarms, is slow, and is difficult to maintain, does harm to the business.</li>
-<li>Testability works well as a negative indicator for good code design by pointing out
-<em>tight coupling</em>.  However, the reverse is not true. Too much decoupling can lead to disaster.</li>
+<li>Code is a liability, not an asset, and tests are code too. Tests that don&rsquo;t verify business value,
+raise false alarms, run slow, and are difficult to maintain, do more harm than good.</li>
 </ul>
 <h2 id="code-coverage-metrics">Code Coverage Metrics</h2>
-<p>Coverage metrics work well as a negative indicator for test quality, but a bad positive one. For
-example:</p>
+<p>Coverage metrics work well as a negative indicator for test quality, but a bad positive one.</p>
+<h4 id="curly-braces">Curly Braces</h4>
+<p>Curly braces count. 75% of 4 lines covered.</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsStringLong</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
@@ -434,10 +435,12 @@ example:</p>
   <span class="kt">bool</span> <span class="n">result</span> <span class="o">=</span> <span class="n">IsStringLong</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">abc</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
   <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div><p>3/4 = 75% of the lines are covered. Only three lines are important, but curly braces count.</p>
+</code></pre></div><h4 id="refactoring">Refactoring</h4>
+<p>Refactoring can be used to &ldquo;game&rdquo; coverage by condensing the code. 100% of 1 line is covered, with
+no change to behavior.</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsStringLong</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></div><p>Refactoring can be used to &ldquo;game&rdquo; coverage. Now, 1/1 = 100% of the lines are covered with no
-change to the test.</p>
+</code></pre></div><h4 id="test-quality">Test Quality</h4>
+<p>100% of 4 lines are covered, for what?</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">IsStringLong</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
@@ -450,22 +453,21 @@ change to the test.</p>
   <span class="kt">bool</span> <span class="n">result1</span> <span class="o">=</span> <span class="n">IsStringLong</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">abc</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
   <span class="kt">bool</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">IsStringLong</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">abcdef</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div><p>Even with 100% coverage, that says nothing about the quality of the test.</p>
+</code></pre></div><h4 id="external-dependencies">External Dependencies</h4>
+<p>Coverage metrics do not include external libraries. Though nowhere close to being exhaustive, 100%
+of 1 line is covered.</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">Parse</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">atoi</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">c_str</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">IsStringLong</span><span class="p">,</span> <span class="n">ShortString</span><span class="p">)</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Parse</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">5</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
   <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div><p>Coverage metrics do not include external libraries. Though nowhere close to being exhaustive, this
-test has 100% coverage.</p>
-
+</code></pre></div>
 <div class="notices tip" ><p><strong>Hospital Analogy</strong> - Temperature is another good negative indicator, but a bad positive indicator.
 Nurses take temperature measurements to see if a patient&rsquo;s body is unwell. But, regulating the
 patient&rsquo;s temperature is never <em>the goal</em>. Otherwise, hospitals would tend towards more &ldquo;effective&rdquo;
-strategies, like dumping patients with fevers into ice baths. Instead, knowing that temperature
-will normalize as a consequence of the patient feeling better, nurses continuously monitor while
-focusing on the root cause of the illness.</p>
+strategies, like dumping patients with fevers into ice baths. Instead, nurses continuously monitor
+a patients temperature while focusing on the root cause of the illness.</p>
 </div>
 
 <h2 id="what-makes-a-successful-test-suite">What Makes a Successful Test Suite</h2>
@@ -477,10 +479,10 @@ focusing on the root cause of the illness.</p>
 </ol>
 <p>Enforcing test quality is a tough problem; one that requires personal judgement.</p>
 <h2 id="test-dependencies">Test Dependencies</h2>
-<p>Dependencies may be shared or private; mutable or immutable.</p>
+<p>Dependencies may be shared or private, and mutable or immutable.</p>
 <ul>
-<li><strong>Private</strong> - Lifetime is managed by the test. Includes local variables.</li>
-<li><strong>Shared</strong> -  Lifetime is not managed by the test. Includes global variables and out-of-process
+<li><strong>Private</strong> - Lifetime is managed by the test; includes local variables.</li>
+<li><strong>Shared</strong> -  Lifetime is not managed by the test; includes global variables and out-of-process
 state.</li>
 <li><strong>Immutable</strong> - State never changes over the course of the test.</li>
 <li><strong>Mutable</strong> - State may change over the course of the test.</li>
@@ -488,35 +490,33 @@ state.</li>
 <h2 id="test-isolation">Test Isolation</h2>
 <p>Varying degrees of isolation can be used when writing tests:</p>
 <ul>
-<li><strong>Heavy Isolation</strong> - Replace all mutable dependencies with test doubles. Developments tends to
+<li><strong>Heavy Isolation</strong> - Replace all mutable dependencies with test doubles. Development tends to
 start at the top of the object graph and work it&rsquo;s way down.</li>
 <li><strong>Light Isolation</strong> - Replace all mutable, shared dependencies with test doubles. Development
 tends to start at the bottom of the object graph and work it&rsquo;s way up.</li>
 </ul>
-<h3 id="granularity">Granularity</h3>
+<h4 id="granularity">Granularity</h4>
 <p>Heavy isolation helps increase granularity. However, it is easy to fall into the trap of testing
 <em>code</em> instead of <em>behavior</em>.</p>
 
-<div class="notices warning" ><pre><code>When I call my dog, he moves his front left leg, followed by his front right leg, the the front 
+<div class="notices warning" ><pre><code>When I call my dog, he moves his front left leg, followed by his front right leg, then the back 
 right leg, his head turns, and the tail starts wagging.
 </code></pre></div>
 
-<p>Only a programmer with the code in front of them, could tell what the purpose of those movements
-are.</p>
+<p>What is the purpose of those movements?</p>
 
 <div class="notices tip" ><pre><code>When I call my dog, he comes right to me.
 </code></pre></div>
 
 <p>A test should tell a story about the problem your code helps to solve, and this story should be
-cohesive and meaningful to a non-programmer.</p>
-<h3 id="coupling">Coupling</h3>
+cohesive and meaningful to a business expert.</p>
+<h4 id="coupling">Coupling</h4>
 <p>Heavy isolation can make it easier to test coupled classes. Substituting a classes dependencies with
-test doubles helps to break up coupling in what could be a large graph of dependencies. However,
-dependance on test doubles is a good negative indicator of quality code design.</p>
-<h3 id="feedback">Feedback</h3>
-<p>Heavy isolation can make it easier to narrow down the bug since the test is more isolated.
-Light isolation also tends to produce cascades of failing tests. These issues are mitigated by
-running tests regularly.</p>
+test doubles can help break up coupling in a large graph of dependencies. However, dependance on
+test doubles is a good negative indicator of quality code design.</p>
+<h4 id="feedback">Feedback</h4>
+<p>Heavy isolation makes it easier to narrow down bugs, while light isolation tends to produce
+cascades of failing tests. However, this issue can be mitigated by running tests regularly.</p>
 <h2 id="test-structure">Test Structure</h2>
 <ul>
 <li><em>Arrange</em>, <em>Act</em>, then <em>Assert</em> (AAA).</li>
@@ -762,19 +762,19 @@ expense of readability.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1580502787"></script>
-    <script src="/js/perfect-scrollbar.min.js?1580502787"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1580502787"></script>
-    <script src="/js/jquery.sticky.js?1580502787"></script>
-    <script src="/js/featherlight.min.js?1580502787"></script>
-    <script src="/js/highlight.pack.js?1580502787"></script>
+    <script src="/js/clipboard.min.js?1581471760"></script>
+    <script src="/js/perfect-scrollbar.min.js?1581471760"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1581471760"></script>
+    <script src="/js/jquery.sticky.js?1581471760"></script>
+    <script src="/js/featherlight.min.js?1581471760"></script>
+    <script src="/js/highlight.pack.js?1581471760"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1580502787"></script>
-    <script src="/js/learn.js?1580502787"></script>
-    <script src="/js/hugo-learn.js?1580502787"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1581471760"></script>
+    <script src="/js/learn.js?1581471760"></script>
+    <script src="/js/hugo-learn.js?1581471760"></script>
 
-    <link href="/mermaid/mermaid.css?1580502787" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1580502787"></script>
+    <link href="/mermaid/mermaid.css?1581471760" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1581471760"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
