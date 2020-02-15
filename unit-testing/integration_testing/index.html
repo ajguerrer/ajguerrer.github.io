@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.64.0" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Integration Testing :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1581471760" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1581471760" rel="stylesheet">
-    <link href="/css/hybrid.css?1581471760" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1581471760" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1581471760" rel="stylesheet">
-    <link href="/css/auto-complete.css?1581471760" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1581471760" rel="stylesheet">
-    <link href="/css/theme.css?1581471760" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1581471760" rel="stylesheet">
+    <link href="/css/nucleus.css?1581797907" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1581797907" rel="stylesheet">
+    <link href="/css/hybrid.css?1581797907" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1581797907" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1581797907" rel="stylesheet">
+    <link href="/css/auto-complete.css?1581797907" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1581797907" rel="stylesheet">
+    <link href="/css/theme.css?1581797907" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1581797907" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1581471760" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1581797907" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1581471760"></script>
+    <script src="/js/jquery-3.3.1.min.js?1581797907"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1581471760"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1581471760"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1581797907"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1581797907"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1581471760"></script>
+<script type="text/javascript" src="/js/search.js?1581797907"></script>
 
     
   </div>
@@ -370,7 +370,18 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#role-of-integration-tests">Role of Integration Tests</a>
+      <ul>
+        <li><a href="#mocking">Mocking</a></li>
+        <li><a href="#interfaces">Interfaces</a></li>
+        <li><a href="#layering">Layering</a></li>
+        <li><a href="#logging">Logging</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -394,6 +405,69 @@
 
 
 
+<h2 id="role-of-integration-tests">Role of Integration Tests</h2>
+<p>While unit tests are great for testing domain logic, integration tests are great for testing
+controllers.</p>
+<p>Integration tests are used to verify:</p>
+<ul>
+<li>Interactions with out-of-process dependencies.</li>
+<li>Edge cases unsuitable for a unit tests.</li>
+</ul>
+<p>Each integration test should choose a happy path route that tests the most out-of-process
+dependencies while still testing a single use case. If a single integration test won&rsquo;t do, write
+more until all out-of-process dependencies are covered.</p>
+
+<div class="notices tip" ><p>To keep maintenance costs low, check as many edge cases as possible with unit tests before resorting
+to an integration test.</p>
+</div>
+
+
+<div class="notices tip" ><p>Edge cases that immediately stop the current operation without changing state adhere to the
+<em>Fail Fast principle</em> and can save you an integration test.</p>
+</div>
+
+<h3 id="mocking">Mocking</h3>
+<p>Mocking works the same in integration tests as the do in unit tests:</p>
+<ul>
+<li>Private out-of-process dependencies are implementation details and should not be mocked.</li>
+<li>Shared out-of-process dependencies should be mocked.</li>
+<li>Relational databases are more granular: private tables don&rsquo;t need to be mocked; shared tables do.</li>
+</ul>
+
+<div class="notices note" ><p>When the real version of a managed dependency is too difficult to setup or prohibitive, don&rsquo;t mock
+it. It the dependency cannot be tested as-is, don&rsquo;t write an integration test at all.</p>
+</div>
+
+<h3 id="interfaces">Interfaces</h3>
+<p>Genuine abstractions are <em>discovered</em>, not <em>invented</em>. For an interface to be genuine, it must have
+at least two abstractions. Otherwise, the cost to the reader and the writer isn&rsquo;t worth it.</p>
+<p>Interfaces enable mocking. Write an interface to mock shared out-of-process dependencies.
+However, private out-of-process dependencies aren&rsquo;t mocked, and by extension, don&rsquo;t benefit from an
+interface, unless they can be swapped for another implementation.</p>
+<h3 id="layering">Layering</h3>
+<p>Adding layers of indirection where they are not appropriate makes code hard to reason with. Aim
+to have as few layers as possible. Most applications only need three layers: Domain, Controller, and
+Infrastructure. The Domain and Controller Laters are already familiar. The Infrastructure Layer
+provides utility and protocol libraries.</p>
+<p><img src="/images/layering.png" alt="Layering"></p>
+<h3 id="logging">Logging</h3>
+<p>Logging falls under two categories:</p>
+<ul>
+<li><strong>Support logging</strong> - messages are intended to be consumed by support staff and system admins;
+observable behavior.</li>
+<li><strong>Diagnostic logging</strong> - messages are intended to be consumed by developers; implementation
+detail.</li>
+</ul>
+<p>Since <em>Support</em> logging is observable behavior, it is worth the testing effort. <em>Diagnostic</em>
+logging, however, is an implementation detail and isn&rsquo;t worth testing.</p>
+
+<div class="notices note" ><p>The Domain layer should not have dependencies and the same is true for loggers. To log in the
+Domain layer, either the Controller layer injects a logger, or the Domain layer emits a log event.</p>
+</div>
+
+<p>Effective logging maximizes the signal to noise ratio. <em>Support</em> logging cannot be controlled
+because its a business requirement, but <em>Diagnostic</em> logging can. Minimize diagnostic logging
+in the Domain layer, only adding it for debugging and the subsequently removing it once finished.</p>
 
 
 <footer class=" footline" >
@@ -620,19 +694,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1581471760"></script>
-    <script src="/js/perfect-scrollbar.min.js?1581471760"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1581471760"></script>
-    <script src="/js/jquery.sticky.js?1581471760"></script>
-    <script src="/js/featherlight.min.js?1581471760"></script>
-    <script src="/js/highlight.pack.js?1581471760"></script>
+    <script src="/js/clipboard.min.js?1581797907"></script>
+    <script src="/js/perfect-scrollbar.min.js?1581797907"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1581797907"></script>
+    <script src="/js/jquery.sticky.js?1581797907"></script>
+    <script src="/js/featherlight.min.js?1581797907"></script>
+    <script src="/js/highlight.pack.js?1581797907"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1581471760"></script>
-    <script src="/js/learn.js?1581471760"></script>
-    <script src="/js/hugo-learn.js?1581471760"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1581797907"></script>
+    <script src="/js/learn.js?1581797907"></script>
+    <script src="/js/hugo-learn.js?1581797907"></script>
 
-    <link href="/mermaid/mermaid.css?1581471760" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1581471760"></script>
+    <link href="/mermaid/mermaid.css?1581797907" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1581797907"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.64.0" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Making your Tests Work for You :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1581471760" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1581471760" rel="stylesheet">
-    <link href="/css/hybrid.css?1581471760" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1581471760" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1581471760" rel="stylesheet">
-    <link href="/css/auto-complete.css?1581471760" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1581471760" rel="stylesheet">
-    <link href="/css/theme.css?1581471760" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1581471760" rel="stylesheet">
+    <link href="/css/nucleus.css?1581797907" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1581797907" rel="stylesheet">
+    <link href="/css/hybrid.css?1581797907" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1581797907" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1581797907" rel="stylesheet">
+    <link href="/css/auto-complete.css?1581797907" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1581797907" rel="stylesheet">
+    <link href="/css/theme.css?1581797907" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1581797907" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1581471760" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1581797907" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1581471760"></script>
+    <script src="/js/jquery-3.3.1.min.js?1581797907"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1581471760"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1581471760"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1581797907"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1581797907"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1581471760"></script>
+<script type="text/javascript" src="/js/search.js?1581797907"></script>
 
     
   </div>
@@ -444,7 +444,8 @@ a false positive.</li>
 <em>protection against regressions</em> and <em>fast feedback</em>.</p>
 <p><img src="/images/test_triangle.png" alt="Test triangle"></p>
 <p>A diverse ratio of test sizes provides an ideal amount of both <em>protection against regressions</em> and
-<em>fast feedback</em>. As a general rule of thumb, prefer a 7:2:1 ratio of small, medium, and large tests.</p>
+<em>fast feedback</em>. For any non-trivial production system, test counts should form a pyramid where the
+test count shrinks as test size grows.</p>
 <p><img src="/images/test_pyramid.png" alt="Test pyramid"></p>
 <h2 id="preventing-false-positives">Preventing False Positives</h2>
 <p>When tests fail for the wrong reasons, developers quickly loose trust in their tests. However,
@@ -606,22 +607,24 @@ tell instead of asking.</p>
 </tbody>
 </table>
 <h2 id="hexagonal-architecture">Hexagonal Architecture</h2>
-<p>Hexagonal Architecture, proposed by Alistair Cockburn, breaks applications into two parts:</p>
+<p>Hexagonal Architecture, proposed by Alistair Cockburn, breaks applications into two layers:</p>
 <ul>
-<li><strong>Business logic</strong> - Algorithms and domain models essential to the business.</li>
-<li><strong>Controllers</strong> - All other responsibilities of the application.</li>
+<li><strong>Domain layer</strong> - Algorithms and domain models essential to the business.</li>
+<li><strong>Controller layer</strong> - All other responsibilities of the application.</li>
 </ul>
-<p>Interaction between <em>business logic</em> and <em>controllers</em> follow three guidelines:</p>
+<p>Interaction between the Domain layer and the Controller layer follow three guidelines:</p>
 <ol>
-<li>Business logic is isolated from controllers.</li>
-<li>Business logic may not depend on controllers, but controllers may depend on business logic.</li>
-<li>Communication with external applications is handled by controllers, not business logic.</li>
+<li>The Domain layer is isolated from the Controller layer.</li>
+<li>The Domain layer may not depend on the Controller layer, but the Controller layer may
+depend on the Domain layer.</li>
+<li>Communication with external applications is handled by the Controller layer, not the
+Domain layer.</li>
 </ol>
-<p><img src="/images/hexagonal_architecture.png" alt="hexagonal architecture"></p>
+<p><img src="/images/hexagonal_architecture.png" alt="Hexagonal Architecture"></p>
 
-<div class="notices tip" ><p>Business logic has high cyclomatic complexity and domain significance; controllers have a large
-number of collaborators. Code that is both complex and involves many collaborators is
-overcomplicated and what hexagonal architecture aims to dissolve.</p>
+<div class="notices tip" ><p>The Domain layer has high cyclomatic complexity and domain significance, while the Controller layer
+has a large number of collaborators. Code that is both complex and involves many collaborators is
+overcomplicated and what Hexagonal Architecture aims to dissolve.</p>
 </div>
 
 <p>Communication can be divided into two different types:</p>
@@ -635,14 +638,14 @@ refactoring. For this reason, the use of mocks should be avoided when dealing wi
 communication. Out-of-process dependencies only accessible by the application, are implementation
 details too, and should not be mocked either.</p>
 <h2 id="functional-architecture">Functional Architecture</h2>
-<p>Functional architecture builds off of hexagonal architecture with an added guideline that business
+<p>Functional architecture builds off of Hexagonal Architecture with an added guideline that business
 logic is written in a functional paradigm. The architecture generally flows in a three step process:</p>
 <ol>
-<li>Application services gather and prepare input.</li>
-<li>Business logic makes decisions based on prepared input.</li>
-<li>Application services converts decisions into side effects.</li>
+<li>The Controller layer gathers and prepare input.</li>
+<li>The Domain layer makes decisions based on prepared input.</li>
+<li>The Controller layer converts decisions into side effects.</li>
 </ol>
-<p><img src="/images/functional_architecture.png" alt="functional architecture"></p>
+<p><img src="/images/functional_architecture.png" alt="Functional Architecture"></p>
 <blockquote>
 <p>Object-oriented programming makes code understandable by encapsulating moving parts. Functional
 programming makes code understandable by minimizing moving parts. <em>&ndash;Michael Feathers</em></p>
@@ -654,17 +657,17 @@ data when they could have been lazy.</p>
 production applications are rarely that simple. What if those decisions lead to gathering more input
 and making more decisions? There are three strategies to consider:</p>
 <ol>
-<li><em>Eagerly gather all the input</em> - Preserve controller simplicity and isolated business logic,
+<li><em>Eagerly gather all the input</em> - Preserve controller simplicity and isolated domain logic,
 but concede performance.</li>
-<li><em>Inject dependencies into business logic</em> - Preserve controller simplicity and performance, but
-concede isolated business logic.</li>
-<li><em>Allow controller orchestration</em> - Preserve isolated business logic and performance, but concede
+<li><em>Inject dependencies into the Domain layer</em> - Preserve controller simplicity and performance, but
+concede isolated domain logic.</li>
+<li><em>Allow controller orchestration</em> - Preserve isolated domain logic and performance, but concede
 controller simplicity.</li>
 </ol>
-<p>Isolated business logic is an attribute that should always be maximized because it has a huge impact
+<p>Isolated domain logic is an attribute that should always be maximized because it has a huge impact
 on <em>maintainability</em> and <em>resistance to refactoring</em>. In cases where performance is not critical,
-feel free to stick to a functional architecture. Otherwise, controllers will need to orchestrate
-gathering input as a side effect of business logic decisions.</p>
+feel free to stick to a Functional Architecture. Otherwise, controllers will need to orchestrate
+gathering input as a side effect of decisions from the Domain layer.</p>
 
 <div class="notices tip" ><p>Controller orchestration will make controllers more complex, but complexity can be mitigated with
 familiar patterns like switching on a result or listening for events.</p>
@@ -896,19 +899,19 @@ familiar patterns like switching on a result or listening for events.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1581471760"></script>
-    <script src="/js/perfect-scrollbar.min.js?1581471760"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1581471760"></script>
-    <script src="/js/jquery.sticky.js?1581471760"></script>
-    <script src="/js/featherlight.min.js?1581471760"></script>
-    <script src="/js/highlight.pack.js?1581471760"></script>
+    <script src="/js/clipboard.min.js?1581797907"></script>
+    <script src="/js/perfect-scrollbar.min.js?1581797907"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1581797907"></script>
+    <script src="/js/jquery.sticky.js?1581797907"></script>
+    <script src="/js/featherlight.min.js?1581797907"></script>
+    <script src="/js/highlight.pack.js?1581797907"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1581471760"></script>
-    <script src="/js/learn.js?1581471760"></script>
-    <script src="/js/hugo-learn.js?1581471760"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1581797907"></script>
+    <script src="/js/learn.js?1581797907"></script>
+    <script src="/js/hugo-learn.js?1581797907"></script>
 
-    <link href="/mermaid/mermaid.css?1581471760" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1581471760"></script>
+    <link href="/mermaid/mermaid.css?1581797907" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1581797907"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

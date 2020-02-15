@@ -34,7 +34,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/integration_testing/</guid>
-      <description></description>
+      <description>Role of Integration Tests While unit tests are great for testing domain logic, integration tests are great for testing controllers.
+Integration tests are used to verify:
+ Interactions with out-of-process dependencies. Edge cases unsuitable for a unit tests.  Each integration test should choose a happy path route that tests the most out-of-process dependencies while still testing a single use case. If a single integration test won&amp;rsquo;t do, write more until all out-of-process dependencies are covered.</description>
     </item>
     
     <item>
