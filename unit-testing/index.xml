@@ -25,7 +25,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/making_tests_work/</guid>
-      <description>Four Pillars of a Good Unit Test  Protection against regressions - Ability to indicate the presence of regressions. Resistance to refactoring - Degree to which a test can sustain refactoring without producing a false positive. Fast feedback - Measure of how quickly the test executes. Maintainability - Ability to read and run the test.    Error Types Functionality is Correct Functionality is Broken   Test Passes True negative False negative (indicates poor protection against regressions)   Test Fails False positive (indicates poor resistance to refactoring) True positive   $$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</description>
+      <description>Four Pillars of a Good Test  Protection against regressions - Ability to indicate the presence of regressions. Resistance to refactoring - Degree to which a test can sustain refactoring without producing a false positive. Fast feedback - Measure of how quickly the test executes. Maintainability - Ability to read and run the test.    Error Types Functionality is Correct Functionality is Broken   Test Passes True negative False negative (indicates poor protection against regressions)   Test Fails False positive (indicates poor resistance to refactoring) True positive   $$Test\ accuracy = {Signal\ (True\ positives) \over Noise\ (False\ positives)}$$</description>
     </item>
     
     <item>
@@ -34,9 +34,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/integration_testing/</guid>
-      <description>Role of Integration Tests While unit tests are great for testing domain logic, integration tests are great for testing controllers.
-Integration tests are used to verify:
- Interactions with out-of-process dependencies. Edge cases unsuitable for a unit tests.  Each integration test should choose a happy path route that tests the most out-of-process dependencies while still testing a single use case. If a single integration test won&amp;rsquo;t do, write more until all out-of-process dependencies are covered.</description>
+      <description>Role of Integration Tests Integration tests verify:
+ Interactions with out-of-process dependencies. Edge cases unsuitable for a unit tests.  Each integration test should choose a happy path route that tests the most out-of-process dependencies while still testing a single use case. If a single integration test won&amp;rsquo;t do, write more until all out-of-process dependencies are covered.
+To keep maintenance costs low, check as many edge cases as possible with unit tests before resorting to an integration test.</description>
     </item>
     
     <item>

@@ -11,20 +11,20 @@
     <title>Making your Tests Work for You :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1582391604" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1582391604" rel="stylesheet">
-    <link href="/css/hybrid.css?1582391604" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1582391604" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1582391604" rel="stylesheet">
-    <link href="/css/auto-complete.css?1582391604" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1582391604" rel="stylesheet">
-    <link href="/css/theme.css?1582391604" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1582391604" rel="stylesheet">
+    <link href="/css/nucleus.css?1582487774" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1582487774" rel="stylesheet">
+    <link href="/css/hybrid.css?1582487774" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1582487774" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1582487774" rel="stylesheet">
+    <link href="/css/auto-complete.css?1582487774" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1582487774" rel="stylesheet">
+    <link href="/css/theme.css?1582487774" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1582487774" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1582391604" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1582487774" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1582391604"></script>
+    <script src="/js/jquery-3.3.1.min.js?1582487774"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1582391604"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1582391604"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1582487774"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1582487774"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1582391604"></script>
+<script type="text/javascript" src="/js/search.js?1582487774"></script>
 
     
   </div>
@@ -372,14 +372,13 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#four-pillars-of-a-good-unit-test">Four Pillars of a Good Unit Test</a></li>
+    <li><a href="#four-pillars-of-a-good-test">Four Pillars of a Good Test</a></li>
     <li><a href="#the-ideal-test">The Ideal Test</a></li>
     <li><a href="#preventing-false-positives">Preventing False Positives</a></li>
     <li><a href="#types-of-test-doubles">Types of Test Doubles</a></li>
     <li><a href="#encapsulation">Encapsulation</a>
       <ul>
-        <li><a href="#invariant-violation">Invariant violation</a></li>
-        <li><a href="#leaking-state">Leaking state</a></li>
+        <li></li>
       </ul>
     </li>
     <li><a href="#styles-of-unit-testing">Styles of Unit Testing</a></li>
@@ -411,7 +410,7 @@
 
 
 
-<h2 id="four-pillars-of-a-good-unit-test">Four Pillars of a Good Unit Test</h2>
+<h2 id="four-pillars-of-a-good-test">Four Pillars of a Good Test</h2>
 <ol>
 <li><strong>Protection against regressions</strong> - Ability to indicate the presence of regressions.</li>
 <li><strong>Resistance to refactoring</strong> - Degree to which a test can sustain refactoring without producing
@@ -509,7 +508,7 @@ called <em>over-specification</em>.</p>
 <h2 id="encapsulation">Encapsulation</h2>
 <p>A well-designed API hides all implementation details behind a private API, leaving only the
 observable behavior in the public API. Implementation details should not <em>leak</em> into the public API.</p>
-<h3 id="invariant-violation">Invariant violation</h3>
+<h4 id="invariant-violation">Invariant violation</h4>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
@@ -549,7 +548,7 @@ the client is at risk of a <em>invariant violation</em>.</p>
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h3 id="leaking-state">Leaking state</h3>
+<h4 id="leaking-state">Leaking state</h4>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
@@ -657,11 +656,11 @@ data when they could have been lazy.</p>
 production applications are rarely that simple. What if those decisions lead to gathering more input
 and making more decisions? There are three strategies to consider:</p>
 <ol>
-<li><em>Eagerly gather all the input</em> - Preserve controller simplicity and isolated domain logic,
+<li><strong>Eagerly gather all the input</strong> - Preserve controller simplicity and isolated domain logic,
 but concede performance.</li>
-<li><em>Inject dependencies into the Domain layer</em> - Preserve controller simplicity and performance, but
+<li><strong>Inject dependencies into the Domain layer</strong> - Preserve controller simplicity and performance, but
 concede isolated domain logic.</li>
-<li><em>Allow controller orchestration</em> - Preserve isolated domain logic and performance, but concede
+<li><strong>Allow controller orchestration</strong> - Preserve isolated domain logic and performance, but concede
 controller simplicity.</li>
 </ol>
 <p>Isolated domain logic is an attribute that should always be maximized because it has a huge impact
@@ -899,19 +898,19 @@ familiar patterns like switching on a result or listening for events.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1582391604"></script>
-    <script src="/js/perfect-scrollbar.min.js?1582391604"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1582391604"></script>
-    <script src="/js/jquery.sticky.js?1582391604"></script>
-    <script src="/js/featherlight.min.js?1582391604"></script>
-    <script src="/js/highlight.pack.js?1582391604"></script>
+    <script src="/js/clipboard.min.js?1582487774"></script>
+    <script src="/js/perfect-scrollbar.min.js?1582487774"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1582487774"></script>
+    <script src="/js/jquery.sticky.js?1582487774"></script>
+    <script src="/js/featherlight.min.js?1582487774"></script>
+    <script src="/js/highlight.pack.js?1582487774"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1582391604"></script>
-    <script src="/js/learn.js?1582391604"></script>
-    <script src="/js/hugo-learn.js?1582391604"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1582487774"></script>
+    <script src="/js/learn.js?1582487774"></script>
+    <script src="/js/hugo-learn.js?1582487774"></script>
 
-    <link href="/mermaid/mermaid.css?1582391604" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1582391604"></script>
+    <link href="/mermaid/mermaid.css?1582487774" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1582487774"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
