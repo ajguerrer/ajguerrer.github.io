@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.64.0" />
+    <meta name="generator" content="Hugo 0.65.3" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Guide to Writing Testable Code :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1582487774" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1582487774" rel="stylesheet">
-    <link href="/css/hybrid.css?1582487774" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1582487774" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1582487774" rel="stylesheet">
-    <link href="/css/auto-complete.css?1582487774" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1582487774" rel="stylesheet">
-    <link href="/css/theme.css?1582487774" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1582487774" rel="stylesheet">
+    <link href="/css/nucleus.css?1583002918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583002918" rel="stylesheet">
+    <link href="/css/hybrid.css?1583002918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583002918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583002918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583002918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583002918" rel="stylesheet">
+    <link href="/css/theme.css?1583002918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583002918" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1582487774" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583002918" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1582487774"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583002918"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1582487774"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1582487774"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583002918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583002918"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1582487774"></script>
+<script type="text/javascript" src="/js/search.js?1583002918"></script>
 
     
   </div>
@@ -433,7 +433,7 @@ and the primary benefit Dependency Injection brings.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AccountView</span> <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
-  <span class="n">AccountView</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="n">user_</span> <span class="o">=</span> <span class="n">RPCClient</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">GetUser</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">AccountView</span><span class="p">()</span> <span class="p">{</span> <span class="n">user_</span> <span class="o">=</span> <span class="n">RPCClient</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">().</span><span class="n">GetUser</span><span class="p">();</span> <span class="p">}</span>
 
   <span class="k">private</span><span class="o">:</span>
   <span class="n">User</span> <span class="n">user_</span><span class="p">;</span>
@@ -442,22 +442,22 @@ and the primary benefit Dependency Injection brings.</p>
 <span class="n">TEST</span><span class="p">(</span><span class="n">AccountViewTest</span><span class="p">,</span> <span class="n">SlowAndFlakyTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Unit test is slow and requires working network connection.
 </span><span class="c1"></span>  <span class="n">AccountView</span> <span class="n">view</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">AccountView</span> <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
-  <span class="k">explicit</span> <span class="n">AccountView</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span><span class="o">:</span> <span class="n">user_</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">AccountView</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span><span class="o">:</span> <span class="n">user_</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="k">private</span><span class="o">:</span>
   <span class="n">User</span> <span class="n">user_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">AccountViewTest</span><span class="p">,</span> <span class="n">FastAndReliableTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// User does not need to be retrieved over the network.
 </span><span class="c1"></span>  <span class="n">MockUser</span> <span class="n">user</span><span class="p">;</span>
-  <span class="n">AccountView</span> <span class="nf">view</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">AccountView</span> <span class="nf">view</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -468,44 +468,44 @@ and the primary benefit Dependency Injection brings.</p>
   <span class="k">explicit</span> <span class="n">Car</span><span class="p">(</span><span class="n">CarType</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">type</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">case</span> <span class="nl">kCoupe</span><span class="p">:</span> <span class="p">{</span>
-        <span class="n">engine_</span> <span class="o">=</span> <span class="n">FastEngine</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-        <span class="n">tires_</span> <span class="o">=</span> <span class="n">SmoothTires</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="n">engine_</span> <span class="o">=</span> <span class="n">FastEngine</span><span class="p">();</span>
+        <span class="n">tires_</span> <span class="o">=</span> <span class="n">SmoothTires</span><span class="p">();</span>
         <span class="k">break</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="k">case</span> <span class="nl">kTruck</span><span class="p">:</span> <span class="p">{</span>
-        <span class="n">engine_</span> <span class="o">=</span> <span class="n">StrongEngine</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-        <span class="n">tires_</span> <span class="o">=</span> <span class="n">KnobbyTires</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+        <span class="n">engine_</span> <span class="o">=</span> <span class="n">StrongEngine</span><span class="p">();</span>
+        <span class="n">tires_</span> <span class="o">=</span> <span class="n">KnobbyTires</span><span class="p">();</span>
       <span class="p">}</span>
       <span class="k">default</span><span class="o">:</span>
-        <span class="n">assert</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="p">;</span>
+        <span class="n">assert</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
   <span class="n">Engine</span> <span class="n">engine_</span><span class="p">;</span>
   <span class="n">Tires</span> <span class="n">tires_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">CarTest</span><span class="p">,</span> <span class="n">HardToTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Want a car with fake engine and tires but can only make real ones.
-</span><span class="c1"></span>  <span class="n">Car</span> <span class="nf">car</span><span class="p">(</span><span class="n">kCoupe</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">Car</span> <span class="nf">car</span><span class="p">(</span><span class="n">kCoupe</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Car</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">Car</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Engine</span><span class="o">&gt;</span> <span class="n">engine</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Tires</span><span class="o">&gt;</span> <span class="n">tires</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">engine_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">tires_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">tires</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">Car</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Engine</span><span class="o">&gt;</span> <span class="n">engine</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Tires</span><span class="o">&gt;</span> <span class="n">tires</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">engine_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">engine</span><span class="p">)),</span> <span class="n">tires_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">tires</span><span class="p">))</span> <span class="p">{}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Engine</span><span class="o">&gt;</span> <span class="n">engine_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Tires</span><span class="o">&gt;</span> <span class="n">tires_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Engine</span><span class="o">&gt;</span> <span class="n">engine_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Tires</span><span class="o">&gt;</span> <span class="n">tires_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">CarTest</span><span class="p">,</span> <span class="n">EasyToTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Car is fully configurable
-</span><span class="c1"></span>  <span class="n">Car</span> <span class="nf">car</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FakeEngine</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FakeTires</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">Car</span> <span class="nf">car</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FakeEngine</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FakeTires</span><span class="o">&gt;</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -513,13 +513,13 @@ and the primary benefit Dependency Injection brings.</p>
 <p>
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">House</span> <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
-  <span class="n">House</span><span class="p">(</span><span class="p">)</span> <span class="o">:</span> <span class="n">kitchen_</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">bedroom_</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">House</span><span class="p">()</span> <span class="o">:</span> <span class="n">kitchen_</span><span class="p">(),</span> <span class="n">bedroom_</span><span class="p">()</span> <span class="p">{}</span>
   <span class="c1">// ...
 </span><span class="c1"></span>
   <span class="k">private</span><span class="o">:</span>
   <span class="n">Kitchen</span> <span class="n">kitchen_</span><span class="p">;</span>
   <span class="n">Bedroom</span> <span class="n">bedroom_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">HouseTest</span><span class="p">,</span> <span class="n">HardToTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// house is stuck with Kitchen and Bedroom objects
@@ -530,19 +530,19 @@ and the primary benefit Dependency Injection brings.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">House</span> <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
-  <span class="n">House</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kitchen</span><span class="o">&gt;</span> <span class="n">kitchen</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Bedroom</span><span class="o">&gt;</span> <span class="n">bedroom</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">kitchen_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">kitchen</span><span class="p">)</span><span class="p">)</span><span class="p">,</span> <span class="n">bedroom_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">bedroom</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">House</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kitchen</span><span class="o">&gt;</span> <span class="n">kitchen</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Bedroom</span><span class="o">&gt;</span> <span class="n">bedroom</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">kitchen_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">kitchen</span><span class="p">)),</span> <span class="n">bedroom_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">bedroom</span><span class="p">))</span> <span class="p">{}</span>
   <span class="c1">// ...
 </span><span class="c1"></span>
   <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kitchen</span><span class="o">&gt;</span> <span class="n">kitchen_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Bedroom</span><span class="o">&gt;</span> <span class="n">bedroom_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Kitchen</span><span class="o">&gt;</span> <span class="n">kitchen_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Bedroom</span><span class="o">&gt;</span> <span class="n">bedroom_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">HouseTest</span><span class="p">,</span> <span class="n">EasyToTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// house uses lightweight test doubles
-</span><span class="c1"></span>  <span class="n">House</span> <span class="nf">house</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockKitchen</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
-              <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockBedroom</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">House</span> <span class="nf">house</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockKitchen</span><span class="o">&gt;</span><span class="p">(),</span>
+              <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockBedroom</span><span class="o">&gt;</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 </p>
@@ -552,41 +552,41 @@ and the primary benefit Dependency Injection brings.</p>
   <span class="k">public</span><span class="o">:</span>
   <span class="c1">// Constructs a partially initialized VisualVoicemail.
 </span><span class="c1"></span>  <span class="c1">// Don&#39;t forget to call Initialize in production, or SetCalls in test!
-</span><span class="c1"></span>  <span class="k">explicit</span> <span class="n">VisualVoicemail</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="o">:</span> <span class="n">user_</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+</span><span class="c1"></span>  <span class="k">explicit</span> <span class="n">VisualVoicemail</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="o">:</span> <span class="n">user_</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">{}</span>
 
-  <span class="kt">void</span> <span class="nf">Initialize</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">calls_</span> <span class="o">=</span> <span class="n">Server</span><span class="o">:</span><span class="o">:</span><span class="n">GetCallsFor</span><span class="p">(</span><span class="n">user_</span><span class="p">)</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">Initialize</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">calls_</span> <span class="o">=</span> <span class="n">Server</span><span class="o">::</span><span class="n">GetCallsFor</span><span class="p">(</span><span class="n">user_</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">private</span><span class="o">:</span>
   <span class="c1">// Hack to allow test access to private methods.
 </span><span class="c1"></span>  <span class="c1">// Making this function public is not a better idea.
 </span><span class="c1"></span>  <span class="k">friend</span> <span class="k">class</span> <span class="nc">VisualVoicemailTest_BrittleDesign_Test</span><span class="p">;</span>
-  <span class="kt">void</span> <span class="nf">SetCalls</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span><span class="o">&amp;</span> <span class="n">calls</span><span class="p">)</span> <span class="p">{</span> <span class="n">calls_</span> <span class="o">=</span> <span class="n">calls</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="nf">SetCalls</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;&amp;</span> <span class="n">calls</span><span class="p">)</span> <span class="p">{</span> <span class="n">calls_</span> <span class="o">=</span> <span class="n">calls</span><span class="p">;</span> <span class="p">}</span>
 
   <span class="n">User</span> <span class="n">user_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">VisualVoicemailTest</span><span class="p">,</span> <span class="n">BrittleTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">DummyUser</span> <span class="n">user</span><span class="p">;</span>
-  <span class="n">VisualVoicemail</span> <span class="nf">voicemail</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls</span> <span class="o">=</span> <span class="n">BuildListOfTestCalls</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">voicemail</span><span class="p">.</span><span class="n">SetCalls</span><span class="p">(</span><span class="n">calls</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">VisualVoicemail</span> <span class="nf">voicemail</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls</span> <span class="o">=</span> <span class="n">BuildListOfTestCalls</span><span class="p">();</span>
+  <span class="n">voicemail</span><span class="p">.</span><span class="n">SetCalls</span><span class="p">(</span><span class="n">calls</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">VisualVoicemail</span> <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
-  <span class="k">explicit</span> <span class="n">VisualVoicemail</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span><span class="o">&amp;</span> <span class="n">calls</span><span class="p">)</span> <span class="o">:</span> <span class="n">calls_</span><span class="p">(</span><span class="n">calls</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">VisualVoicemail</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;&amp;</span> <span class="n">calls</span><span class="p">)</span> <span class="o">:</span> <span class="n">calls_</span><span class="p">(</span><span class="n">calls</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Call</span><span class="o">&gt;</span> <span class="n">calls_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">VisualVoicemailTest</span><span class="p">,</span> <span class="n">FlexibleTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">VisualVoicemail</span> <span class="nf">voicemail</span><span class="p">(</span><span class="n">BuildListOfTestCalls</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">VisualVoicemail</span> <span class="nf">voicemail</span><span class="p">(</span><span class="n">BuildListOfTestCalls</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 </p>
@@ -602,14 +602,14 @@ and encapsulation.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">SalesTaxCalculator</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">SalesTaxCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">TaxTable</span><span class="o">&amp;</span> <span class="n">taxTable</span><span class="p">)</span> <span class="o">:</span> <span class="n">taxTable_</span><span class="p">(</span><span class="n">taxTable</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">SalesTaxCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">TaxTable</span><span class="o">&amp;</span> <span class="n">taxTable</span><span class="p">)</span> <span class="o">:</span> <span class="n">taxTable_</span><span class="p">(</span><span class="n">taxTable</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="kt">float</span> <span class="nf">ComputeSalesTax</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">,</span> <span class="k">const</span> <span class="n">Invoice</span><span class="o">&amp;</span> <span class="n">invoice</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Get the correct dependencies first.
-</span><span class="c1"></span>    <span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">GetAddress</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">amount</span> <span class="o">=</span> <span class="n">invoice</span><span class="p">.</span><span class="n">GetSubTotal</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="n">Address</span> <span class="n">address</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">GetAddress</span><span class="p">();</span>
+    <span class="kt">float</span> <span class="n">amount</span> <span class="o">=</span> <span class="n">invoice</span><span class="p">.</span><span class="n">GetSubTotal</span><span class="p">();</span>
     <span class="c1">// Then, do the calculation.
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">taxTable_</span><span class="p">.</span><span class="n">GetTaxRate</span><span class="p">(</span><span class="n">address</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">taxTable_</span><span class="p">.</span><span class="n">GetTaxRate</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
   <span class="p">}</span>
 
  <span class="k">public</span><span class="o">:</span>
@@ -617,22 +617,22 @@ and encapsulation.</p>
 <span class="p">}</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">SalesTaxCalculatorTest</span><span class="p">,</span> <span class="n">ComplexTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">SalesTaxCalculator</span> <span class="nf">calc</span><span class="p">(</span><span class="n">TaxTable</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="n">Address</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">1600 Amphitheater Parkway...</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">Invoice</span> <span class="nf">invoice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ProductX</span><span class="p">(</span><span class="mf">95.00</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">SalesTaxCalculator</span> <span class="nf">calc</span><span class="p">(</span><span class="n">TaxTable</span><span class="p">());</span>
+  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="n">Address</span><span class="p">(</span><span class="s">&#34;1600 Amphitheater Parkway...&#34;</span><span class="p">));</span>
+  <span class="n">Invoice</span> <span class="nf">invoice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ProductX</span><span class="p">(</span><span class="mf">95.00</span><span class="p">));</span>
   <span class="c1">// ...
-</span><span class="c1"></span>  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">ComputeSalesTax</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">invoice</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">ComputeSalesTax</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">invoice</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">SalesTaxCalculator</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">SalesTaxCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">TaxTable</span><span class="o">&amp;</span> <span class="n">taxTable</span><span class="p">)</span> <span class="o">:</span> <span class="n">taxTable_</span><span class="p">(</span><span class="n">taxTable</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">SalesTaxCalculator</span><span class="p">(</span><span class="k">const</span> <span class="n">TaxTable</span><span class="o">&amp;</span> <span class="n">taxTable</span><span class="p">)</span> <span class="o">:</span> <span class="n">taxTable_</span><span class="p">(</span><span class="n">taxTable</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="kt">float</span> <span class="nf">ComputeSalesTax</span><span class="p">(</span><span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Already have the correct dependencies; do the calculation.
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">taxTable_</span><span class="p">.</span><span class="n">GetTaxRate</span><span class="p">(</span><span class="n">address</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">taxTable_</span><span class="p">.</span><span class="n">GetTaxRate</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
   <span class="p">}</span>
 
  <span class="k">public</span><span class="o">:</span>
@@ -640,10 +640,10 @@ and encapsulation.</p>
 <span class="p">}</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">SalesTaxCalculatorTest</span><span class="p">,</span> <span class="n">StraightforwardTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">SalesTaxCalculator</span> <span class="nf">calc</span><span class="p">(</span><span class="n">TaxTable</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">Address</span> <span class="nf">address</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">1600 Amphitheater Parkway...</span><span class="s">&#34;</span><span class="p">)</span>
+  <span class="n">SalesTaxCalculator</span> <span class="nf">calc</span><span class="p">(</span><span class="n">TaxTable</span><span class="p">());</span>
+  <span class="n">Address</span> <span class="nf">address</span><span class="p">(</span><span class="s">&#34;1600 Amphitheater Parkway...&#34;</span><span class="p">)</span>
   <span class="c1">// ...
-</span><span class="c1"></span>  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">ComputeSalesTax</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mf">95.00</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">ComputeSalesTax</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mf">95.00</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -651,51 +651,51 @@ and encapsulation.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginPage</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">LoginPage</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RPCClient</span><span class="o">&gt;</span> <span class="n">client</span><span class="p">,</span> <span class="k">const</span> <span class="n">HttpRequest</span><span class="o">&amp;</span> <span class="n">request</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">client_</span><span class="p">(</span><span class="n">client</span><span class="p">)</span><span class="p">,</span> <span class="n">request_</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">LoginPage</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RPCClient</span><span class="o">&gt;</span> <span class="n">client</span><span class="p">,</span> <span class="k">const</span> <span class="n">HttpRequest</span><span class="o">&amp;</span> <span class="n">request</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">client_</span><span class="p">(</span><span class="n">client</span><span class="p">),</span> <span class="n">request_</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">{}</span>
 
-  <span class="kt">bool</span> <span class="nf">Login</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="nf">Login</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Even using member access access operator once is one more time than it
 </span><span class="c1"></span>    <span class="c1">// needs to be.
-</span><span class="c1"></span>    <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">cookie</span> <span class="o">=</span> <span class="n">request_</span><span class="p">.</span><span class="n">GetCookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cookie</span> <span class="o">=</span> <span class="n">request_</span><span class="p">.</span><span class="n">GetCookie</span><span class="p">(</span><span class="s">&#34;g&#34;</span><span class="p">);</span>
     <span class="c1">// Using a member access operator twice in one statement is right out!
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">client_</span><span class="p">.</span><span class="n">GetAuthenticator</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">client_</span><span class="p">.</span><span class="n">GetAuthenticator</span><span class="p">().</span><span class="n">Authenticate</span><span class="p">();</span>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RPCClient</span><span class="o">&gt;</span> <span class="n">client_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RPCClient</span><span class="o">&gt;</span> <span class="n">client_</span><span class="p">;</span>
   <span class="n">HttpRequest</span> <span class="n">request_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">LoginPageTest</span><span class="p">,</span> <span class="n">ComplexBrittleTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">MockRPCClient</span> <span class="nf">mock_client</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeAuthenticator</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">Cookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">xyz123</span><span class="s">&#34;</span><span class="p">)</span><span class="p">}</span><span class="p">;</span>
-  <span class="n">MockHttpRequest</span> <span class="nf">mock_request</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">LoginPage</span> <span class="nf">page</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">MockRPCClient</span> <span class="nf">mock_client</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeAuthenticator</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">Cookie</span><span class="p">(</span><span class="s">&#34;g&#34;</span><span class="p">,</span> <span class="s">&#34;xyz123&#34;</span><span class="p">)};</span>
+  <span class="n">MockHttpRequest</span> <span class="nf">mock_request</span><span class="p">(</span><span class="n">cookies</span><span class="p">);</span>
+  <span class="n">LoginPage</span> <span class="nf">page</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">request</span><span class="p">);</span>
 
-  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_client</span><span class="p">,</span> <span class="n">GetAuthenticator</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_request</span><span class="p">,</span> <span class="n">GetCookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_client</span><span class="p">,</span> <span class="n">GetAuthenticator</span><span class="p">());</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_request</span><span class="p">,</span> <span class="n">GetCookie</span><span class="p">(</span><span class="s">&#34;g&#34;</span><span class="p">));</span>
 
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">Login</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">Login</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginPage</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">LoginPage</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Authenticator</span><span class="o">&gt;</span> <span class="n">authenticator</span><span class="p">,</span> <span class="k">const</span> <span class="n">Cookie</span><span class="o">&amp;</span> <span class="n">cookie</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">authenticator_</span><span class="p">(</span><span class="n">authenticator</span><span class="p">)</span><span class="p">,</span> <span class="n">cookie_</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">LoginPage</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Authenticator</span><span class="o">&gt;</span> <span class="n">authenticator</span><span class="p">,</span> <span class="k">const</span> <span class="n">Cookie</span><span class="o">&amp;</span> <span class="n">cookie</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">authenticator_</span><span class="p">(</span><span class="n">authenticator</span><span class="p">),</span> <span class="n">cookie_</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span> <span class="p">{}</span>
 
-  <span class="kt">bool</span> <span class="nf">Login</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">authenticator_</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="n">cookie_</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="nf">Login</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">authenticator_</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="n">cookie_</span><span class="p">);</span> <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Authenticator</span><span class="o">&gt;</span> <span class="n">authenticator_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Authenticator</span><span class="o">&gt;</span> <span class="n">authenticator_</span><span class="p">;</span>
   <span class="n">Cookie</span> <span class="n">cookie_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">LoginPageTest</span><span class="p">,</span> <span class="n">SimpleFlexibleTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">LoginPage</span> <span class="nf">page</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeAuthenticator</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">Cookie</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">g</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">xyz123</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">Login</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">LoginPage</span> <span class="nf">page</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeAuthenticator</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">Cookie</span><span class="p">(</span><span class="s">&#34;g&#34;</span><span class="p">,</span> <span class="s">&#34;xyz123&#34;</span><span class="p">));</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">Login</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -703,60 +703,60 @@ and encapsulation.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">UpdateBug</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">explicit</span> <span class="n">UpdateBug</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db</span><span class="p">)</span> <span class="o">:</span> <span class="n">db_</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">UpdateBug</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db</span><span class="p">)</span> <span class="o">:</span> <span class="n">db_</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="p">{}</span>
   <span class="kt">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">const</span> <span class="n">Bug</span><span class="o">&amp;</span> <span class="n">bug</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Impose internal lock management on client.
-</span><span class="c1"></span>    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetLock</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">Lock</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">Save</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetLock</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">Unlock</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="n">db_</span><span class="o">-&gt;</span><span class="n">GetLock</span><span class="p">().</span><span class="n">Lock</span><span class="p">();</span>
+    <span class="n">db_</span><span class="o">-&gt;</span><span class="n">Save</span><span class="p">(</span><span class="n">bug</span><span class="p">);</span>
+    <span class="n">db_</span><span class="o">-&gt;</span><span class="n">GetLock</span><span class="p">().</span><span class="n">Unlock</span><span class="p">();</span>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="c1">// This test shouldn&#39;t be needed, but we must enforce Lock/Unlock is called
-</span><span class="c1"></span><span class="c1">// around Save.
+</span><span class="c1">// around Save.
 </span><span class="c1"></span><span class="n">TEST</span><span class="p">(</span><span class="n">UpdateBugTest</span><span class="p">,</span> <span class="n">HardToTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">MockLock</span> <span class="n">mock_lock</span><span class="p">;</span>
-  <span class="k">auto</span> <span class="n">mock_db</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MockDatabase</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">Bug</span> <span class="nf">bug</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">description</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">UpdateBug</span> <span class="nf">updateBug</span><span class="p">(</span><span class="n">mock_db</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">mock_db</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MockDatabase</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">Bug</span> <span class="nf">bug</span><span class="p">(</span><span class="s">&#34;description&#34;</span><span class="p">);</span>
+  <span class="n">UpdateBug</span> <span class="nf">updateBug</span><span class="p">(</span><span class="n">mock_db</span><span class="p">);</span>
 
-  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="o">*</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">GetLock</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">WillRepeatedly</span><span class="p">(</span><span class="n">ReturnRef</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="o">*</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">GetLock</span><span class="p">()).</span><span class="n">WillRepeatedly</span><span class="p">(</span><span class="n">ReturnRef</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">));</span>
   <span class="p">{</span>
     <span class="n">InSequence</span> <span class="n">dummy</span><span class="p">;</span>
-    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">,</span> <span class="n">Lock</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="o">*</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">Save</span><span class="p">(</span><span class="n">Ref</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">,</span> <span class="n">Unlock</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">,</span> <span class="n">Lock</span><span class="p">());</span>
+    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="o">*</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">Save</span><span class="p">(</span><span class="n">Ref</span><span class="p">(</span><span class="n">bug</span><span class="p">)));</span>
+    <span class="n">EXPECT_CALL</span><span class="p">(</span><span class="n">mock_lock</span><span class="p">,</span> <span class="n">Unlock</span><span class="p">());</span>
   <span class="p">}</span>
 
-  <span class="n">updateBug</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">updateBug</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">bug</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">UpdateBug</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">explicit</span> <span class="n">UpdateBug</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db</span><span class="p">)</span> <span class="o">:</span> <span class="n">db_</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">UpdateBug</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db</span><span class="p">)</span> <span class="o">:</span> <span class="n">db_</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="p">{}</span>
   <span class="kt">void</span> <span class="nf">Execute</span><span class="p">(</span><span class="k">const</span> <span class="n">Bug</span><span class="o">&amp;</span> <span class="n">bug</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Save calls Lock/Unlock internally
-</span><span class="c1"></span>    <span class="n">db_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">Save</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="n">db_</span><span class="o">-&gt;</span><span class="n">Save</span><span class="p">(</span><span class="n">bug</span><span class="p">);</span>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">DatabaseInterface</span><span class="o">&gt;</span> <span class="n">db_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="c1">// Go strait to testing state. No need for mock test since locking interaction
-</span><span class="c1"></span><span class="c1">// is encapsulated in the database.
+</span><span class="c1">// is encapsulated in the database.
 </span><span class="c1"></span><span class="n">TEST</span><span class="p">(</span><span class="n">UpdateBugTest</span><span class="p">,</span> <span class="n">EasyTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">auto</span> <span class="n">db</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeDatabase</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">UpdateBug</span> <span class="nf">updateBug</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">Bug</span> <span class="nf">bug</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">description</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">updateBug</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">bug</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">db</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FakeDatabase</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">UpdateBug</span> <span class="nf">updateBug</span><span class="p">();</span>
+  <span class="n">Bug</span> <span class="nf">bug</span><span class="p">(</span><span class="s">&#34;description&#34;</span><span class="p">);</span>
+  <span class="n">updateBug</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">bug</span><span class="p">);</span>
 
-  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">bug</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">GetLastSaved</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">bug</span><span class="p">,</span> <span class="n">db</span><span class="p">.</span><span class="n">GetLastSaved</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -766,22 +766,22 @@ and encapsulation.</p>
   <span class="c1">// ...
 </span><span class="c1"></span> <span class="k">public</span><span class="o">:</span>
   <span class="kt">void</span> <span class="n">ProcessOrder</span><span class="p">(</span><span class="n">UserContext</span><span class="o">&amp;</span> <span class="n">userContext</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetUser</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">PlanLevel</span> <span class="n">level</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetLevel</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetOrder</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetUser</span><span class="p">();</span>
+    <span class="n">PlanLevel</span> <span class="n">level</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetLevel</span><span class="p">();</span>
+    <span class="n">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">userContext</span><span class="p">.</span><span class="n">GetOrder</span><span class="p">();</span>
 
     <span class="c1">// process...
 </span><span class="c1"></span>  <span class="p">}</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">MembershipPlanTest</span><span class="p">,</span> <span class="n">BrittleUnreadableTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">MembershipPlan</span> <span class="n">plan</span><span class="p">;</span>
   <span class="n">UserContext</span> <span class="n">userContext</span><span class="p">;</span>
-  <span class="n">userContext</span><span class="p">.</span><span class="n">SetUser</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Kim</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">userContext</span><span class="p">.</span><span class="n">SetLevel</span><span class="p">(</span><span class="n">PlanLevel</span><span class="p">(</span><span class="mi">143</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">yearly</span><span class="s">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">userContext</span><span class="p">.</span><span class="n">SetOrder</span><span class="p">(</span><span class="n">Order</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">SuperDeluxe</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">userContext</span><span class="p">.</span><span class="n">SetUser</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Kim&#34;</span><span class="p">));</span>
+  <span class="n">userContext</span><span class="p">.</span><span class="n">SetLevel</span><span class="p">(</span><span class="n">PlanLevel</span><span class="p">(</span><span class="mi">143</span><span class="p">,</span> <span class="s">&#34;yearly&#34;</span><span class="p">));</span>
+  <span class="n">userContext</span><span class="p">.</span><span class="n">SetOrder</span><span class="p">(</span><span class="n">Order</span><span class="p">(</span><span class="s">&#34;SuperDeluxe&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">true</span><span class="p">));</span>
   <span class="c1">// Hopefully this is all the setup the userContext needs to call ProcessOrder
-</span><span class="c1"></span>  <span class="n">plan</span><span class="p">.</span><span class="n">ProcessOrder</span><span class="p">(</span><span class="n">userContext</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">plan</span><span class="p">.</span><span class="n">ProcessOrder</span><span class="p">(</span><span class="n">userContext</span><span class="p">);</span>
 
   <span class="c1">// Make assertions against userContext and plan...
 </span><span class="c1"></span><span class="p">}</span>
@@ -794,14 +794,14 @@ and encapsulation.</p>
   <span class="kt">void</span> <span class="n">ProcessOrder</span><span class="p">(</span><span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">,</span> <span class="n">Order</span><span class="o">&amp;</span> <span class="n">order</span><span class="p">,</span> <span class="k">const</span> <span class="n">PlanLevel</span><span class="o">&amp;</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// process...
 </span><span class="c1"></span>  <span class="p">}</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">MembershipPlanTest</span><span class="p">,</span> <span class="n">FlexibleSimpleTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">MembershipPlan</span> <span class="n">plan</span><span class="p">;</span>
-  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">Kim</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">Order</span> <span class="nf">order</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">SuperDeluxe</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span><span class="p">;</span>
-  <span class="k">const</span> <span class="n">PlanLevel</span> <span class="nf">level</span><span class="p">(</span><span class="mi">143</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">yearly</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">plan</span><span class="p">.</span><span class="n">ProcessOrder</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="s">&#34;Kim&#34;</span><span class="p">);</span>
+  <span class="n">Order</span> <span class="nf">order</span><span class="p">(</span><span class="s">&#34;SuperDeluxe&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">PlanLevel</span> <span class="nf">level</span><span class="p">(</span><span class="mi">143</span><span class="p">,</span> <span class="s">&#34;yearly&#34;</span><span class="p">);</span>
+  <span class="n">plan</span><span class="p">.</span><span class="n">ProcessOrder</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">level</span><span class="p">);</span>
 
   <span class="c1">// Make assertions against user, order and plan...
 </span><span class="c1"></span><span class="p">}</span>
@@ -829,52 +829,52 @@ altogether.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginService</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">static</span> <span class="n">LoginService</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="n">LoginService</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">static</span> <span class="n">LoginService</span> <span class="n">instance</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="c1">// ...
-</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
+</span><span class="c1"></span><span class="p">};</span>
 
 <span class="k">class</span> <span class="nc">AdminDashboard</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
   <span class="kt">bool</span> <span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">LoginService</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">LoginService</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">().</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="c1">// ...
-</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
+</span><span class="c1"></span><span class="p">};</span>
 
 <span class="n">TEST_F</span><span class="p">(</span><span class="n">AdminDashboardTest</span><span class="p">,</span> <span class="n">FlakeySlowAndBrittleTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Forced to use the real LoginService singleton.
-</span><span class="c1"></span>  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">username</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">password</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">adminDashboard_</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">,</span> <span class="s">&#34;password&#34;</span><span class="p">);</span>
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">adminDashboard_</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LoginServiceRepository</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">virtual</span> <span class="o">~</span><span class="n">LoginServiceRepository</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-  <span class="k">virtual</span> <span class="n">LoginService</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">LoginServiceRepository</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">LoginService</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="k">class</span> <span class="nc">AdminDashboard</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">explicit</span> <span class="n">AdminDashboard</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">LoginServiceRepository</span><span class="o">&gt;</span> <span class="n">loginService</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">loginService_</span><span class="p">(</span><span class="n">loginService</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">AdminDashboard</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">LoginServiceRepository</span><span class="o">&gt;</span> <span class="n">loginService</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">loginService_</span><span class="p">(</span><span class="n">loginService</span><span class="p">)</span> <span class="p">{}</span>
   <span class="kt">bool</span> <span class="nf">IsAuthenticatedAdmin</span><span class="p">(</span><span class="k">const</span> <span class="n">User</span><span class="o">&amp;</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">loginService_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">loginService_</span><span class="o">-&gt;</span><span class="n">GetInstance</span><span class="p">().</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">LoginServiceRepository</span><span class="o">&gt;</span> <span class="n">loginService_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">LoginServiceRepository</span><span class="o">&gt;</span> <span class="n">loginService_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">AdminDashboardTest</span><span class="p">,</span> <span class="n">ReliableFastAndFlexibleTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Can now use test doubles for the LoginService singleton.
-</span><span class="c1"></span>  <span class="n">AdminDashboard</span> <span class="nf">adminDashboard</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MockLoginService</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">username</span><span class="s">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">password</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">adminDashboard</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">AdminDashboard</span> <span class="nf">adminDashboard</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MockLoginService</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="n">User</span> <span class="nf">user</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">,</span> <span class="s">&#34;password&#34;</span><span class="p">);</span>
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">adminDashboard</span><span class="p">.</span><span class="n">IsAuthenticatedAdmin</span><span class="p">(</span><span class="n">user</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -884,64 +884,64 @@ altogether.</p>
 
 <span class="k">class</span> <span class="nc">RpcClient</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">static</span> <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">GetInstance</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">static</span> <span class="n">RpcClient</span> <span class="n">instance</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
   <span class="p">}</span>
 
-  <span class="kt">bool</span> <span class="nf">IsReal</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="nf">IsReal</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-&gt;</span><span class="n">IsReal</span><span class="p">();</span> <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">RpcClient</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">RpcClient</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">kFlagUseRealBackend</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">backend_</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">RealBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="n">backend_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">RealBackend</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">backend_</span> <span class="o">=</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">DummyBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+      <span class="n">backend_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">DummyBackend</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>
   <span class="c1">//...
 </span><span class="c1"></span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="c1">// The 2nd test to run will fail if both tests are run together
-</span><span class="c1"></span><span class="c1">// because the RpcClient is static.
+</span><span class="c1">// because the RpcClient is static.
 </span><span class="c1"></span>
 <span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">SmallComplexAndFlakeyTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">kFlagUseRealBackend</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">());</span>
 <span class="p">}</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">LargeComplexAndFlakeyTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">kFlagUseRealBackend</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="o">:</span><span class="o">:</span><span class="n">GetInstance</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">RpcClient</span><span class="o">&amp;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">RpcClient</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">explicit</span> <span class="n">RpcClient</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">backend_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">RpcClient</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">backend_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">backend</span><span class="p">))</span> <span class="p">{}</span>
 
-  <span class="kt">bool</span> <span class="nf">IsReal</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="nf">IsReal</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-&gt;</span><span class="n">IsReal</span><span class="p">();</span> <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="c1">// Now, both tests pass.
 </span><span class="c1"></span>
 <span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">SmallSimpleAndReliableTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">RpcClient</span> <span class="nf">client</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">DummyBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">RpcClient</span> <span class="nf">client</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">DummyBackend</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="n">EXPECT_FALSE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">());</span>
 <span class="p">}</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">RpcClientTest</span><span class="p">,</span> <span class="n">LargeSimpleAndReliableTest</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">RpcClient</span> <span class="nf">client</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">RealBackend</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">RpcClient</span> <span class="nf">client</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">RealBackend</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">IsReal</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -949,10 +949,10 @@ altogether.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TrainSchedule</span> <span class="p">{</span>
   <span class="c1">// ...
-</span><span class="c1"></span>  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;</span> <span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;</span> <span class="n">FindNextTrain</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...
 </span><span class="c1"></span>    <span class="c1">// Slow third party service
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">TrackStatus</span><span class="o">:</span><span class="o">:</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">TrackStatus</span><span class="o">::</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">))</span> <span class="p">{</span>
       <span class="c1">// ...
 </span><span class="c1"></span>    <span class="p">}</span>
     <span class="c1">// ...
@@ -962,33 +962,33 @@ altogether.</p>
 
 <span class="n">TEST_F</span><span class="p">(</span><span class="n">TrainScheduleTest</span><span class="p">,</span> <span class="n">FlakeySlowAndBrittleTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Forces third party TrackStatus to get called
-</span><span class="c1"></span>  <span class="n">ASSERT_NE</span><span class="p">(</span><span class="n">trainSchedule_</span><span class="p">.</span><span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">ASSERT_NE</span><span class="p">(</span><span class="n">trainSchedule_</span><span class="p">.</span><span class="n">FindNextTrain</span><span class="p">(),</span> <span class="k">nullptr</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">TrackStatusRepository</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">virtual</span> <span class="o">~</span><span class="n">TrackStatusRepository</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">TrackStatusRepository</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
   <span class="k">virtual</span> <span class="kt">bool</span> <span class="nf">IsClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">Track</span><span class="o">&amp;</span> <span class="n">track</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="k">class</span> <span class="nc">RealTrackStatusRepository</span> <span class="o">:</span> <span class="k">public</span> <span class="n">TrackStatusRepository</span> <span class="p">{</span>
   <span class="k">public</span><span class="o">:</span>
     <span class="c1">// ... Wrap each of the third party library&#39;s methods.
 </span><span class="c1"></span>    <span class="kt">bool</span> <span class="n">IsClosed</span><span class="p">(</span><span class="k">const</span> <span class="n">Track</span><span class="o">&amp;</span> <span class="n">track</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="n">TrackStatus</span><span class="o">:</span><span class="o">:</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">)</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">TrackStatus</span><span class="o">::</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="k">class</span> <span class="nc">TrainSchedule</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">TrainSchedule</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TrackStatusRepository</span><span class="o">&gt;</span> <span class="n">trackStatus</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">trackStatus_</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">trackStatus</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+  <span class="n">TrainSchedule</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TrackStatusRepository</span><span class="o">&gt;</span> <span class="n">trackStatus</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">trackStatus_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">trackStatus</span><span class="p">))</span> <span class="p">{}</span>
   <span class="c1">// ...
-</span><span class="c1"></span>  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;</span> <span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Schedule</span><span class="o">&gt;</span> <span class="n">FindNextTrain</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">trackStatus_</span><span class="o">-</span><span class="o">&gt;</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">trackStatus_</span><span class="o">-&gt;</span><span class="n">IsClosed</span><span class="p">(</span><span class="n">track</span><span class="p">))</span> <span class="p">{</span>
       <span class="c1">// ...
 </span><span class="c1"></span>    <span class="p">}</span>
     <span class="c1">// ...
@@ -996,13 +996,13 @@ altogether.</p>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TrackStatusRepository</span><span class="o">&gt;</span> <span class="n">trackStatus_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">TrackStatusRepository</span><span class="o">&gt;</span> <span class="n">trackStatus_</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">TrainScheduleTest</span><span class="p">,</span> <span class="n">ReliableFastAndFlexibleTest</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Now TrainSchedule can be tested in isolation.
-</span><span class="c1"></span>  <span class="n">TrainSchedule</span> <span class="nf">trainSchedule</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">StubTrackStatusRepository</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">ASSERT_NE</span><span class="p">(</span><span class="n">trainSchedule</span><span class="p">.</span><span class="n">FindNextTrain</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span>  <span class="n">TrainSchedule</span> <span class="nf">trainSchedule</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">StubTrackStatusRepository</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="n">ASSERT_NE</span><span class="p">(</span><span class="n">trainSchedule</span><span class="p">.</span><span class="n">FindNextTrain</span><span class="p">(),</span> <span class="k">nullptr</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -1266,19 +1266,19 @@ takes.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1582487774"></script>
-    <script src="/js/jquery.sticky.js?1582487774"></script>
-    <script src="/js/featherlight.min.js?1582487774"></script>
-    <script src="/js/highlight.pack.js?1582487774"></script>
+    <script src="/js/clipboard.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583002918"></script>
+    <script src="/js/jquery.sticky.js?1583002918"></script>
+    <script src="/js/featherlight.min.js?1583002918"></script>
+    <script src="/js/highlight.pack.js?1583002918"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1582487774"></script>
-    <script src="/js/learn.js?1582487774"></script>
-    <script src="/js/hugo-learn.js?1582487774"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583002918"></script>
+    <script src="/js/learn.js?1583002918"></script>
+    <script src="/js/hugo-learn.js?1583002918"></script>
 
-    <link href="/mermaid/mermaid.css?1582487774" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1582487774"></script>
+    <link href="/mermaid/mermaid.css?1583002918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583002918"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

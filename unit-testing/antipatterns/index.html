@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.64.0" />
+    <meta name="generator" content="Hugo 0.65.3" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Unit Testing Anti-Patterns :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1582487774" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1582487774" rel="stylesheet">
-    <link href="/css/hybrid.css?1582487774" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1582487774" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1582487774" rel="stylesheet">
-    <link href="/css/auto-complete.css?1582487774" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1582487774" rel="stylesheet">
-    <link href="/css/theme.css?1582487774" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1582487774" rel="stylesheet">
+    <link href="/css/nucleus.css?1583002918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583002918" rel="stylesheet">
+    <link href="/css/hybrid.css?1583002918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583002918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583002918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583002918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583002918" rel="stylesheet">
+    <link href="/css/theme.css?1583002918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583002918" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1582487774" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583002918" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1582487774"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583002918"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1582487774"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1582487774"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583002918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583002918"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1582487774"></script>
+<script type="text/javascript" src="/js/search.js?1583002918"></script>
 
     
   </div>
@@ -370,7 +370,20 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#dont-test-private-methods-directly">Don&rsquo;t test private methods directly</a></li>
+        <li><a href="#dont-expose-private-state">Don&rsquo;t expose private state</a></li>
+        <li><a href="#dont-leak-domain-knowledge-to-tests">Don&rsquo;t leak domain knowledge to tests</a></li>
+        <li><a href="#dont-add-production-code-for-tests-only">Don&rsquo;t add production code for tests only</a></li>
+        <li><a href="#dont-mock-concrete-classes">Don&rsquo;t mock concrete classes</a></li>
+      </ul>
+    </li>
+    <li><a href="#dont-use-time-as-an-ambient-context">Don&rsquo;t use time as an ambient context</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -393,6 +406,336 @@
         
 
 
+
+<h3 id="dont-test-private-methods-directly">Don&rsquo;t test private methods directly</h3>
+<p>Only test observable behavior. Coupling a test to implementation details will reduce the tests
+resistance to refactoring.</p>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Order</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">GenerateDescription</span><span class="p">();</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">float</span> <span class="n">GetPrice</span><span class="p">();</span>
+
+  <span class="n">Customer</span> <span class="n">customer_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span> <span class="n">products_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Order</span><span class="o">::</span><span class="n">GenerateDescription</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">absl</span><span class="o">::</span><span class="n">StrCat</span><span class="p">(</span><span class="s">&#34;Customer name: &#34;</span><span class="p">,</span> <span class="n">customer_</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+                      <span class="s">&#34;, total number of products: &#34;</span><span class="p">,</span> <span class="n">products_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
+                      <span class="s">&#34;, total price: &#34;</span><span class="p">,</span> <span class="n">GetPrice</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="n">Order</span><span class="o">::</span><span class="n">GetPrice</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">basePrice</span> <span class="o">=</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">products_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">products_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">sum_base_prices</span><span class="p">);</span>
+  <span class="kt">float</span> <span class="n">discount</span> <span class="o">=</span> <span class="n">customer_</span><span class="p">.</span><span class="n">discount</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">taxes</span> <span class="o">=</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">products_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">products_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">sum_taxes</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="n">discount</span> <span class="o">+</span> <span class="n">taxes</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If a private method is hard to test indirectly, then it either has dead code or is in need of an
+abstraction.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Order</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">GenerateDescription</span><span class="p">();</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">Customer</span> <span class="n">customer_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span> <span class="n">products_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">PriceCalculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">float</span> <span class="n">Calculate</span><span class="p">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span> <span class="n">products</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Order</span><span class="o">::</span><span class="n">GenerateDescription</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">PriceCalculator</span> <span class="n">calc</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">absl</span><span class="o">::</span><span class="n">StrCat</span><span class="p">(</span><span class="s">&#34;Customer name: &#34;</span><span class="p">,</span> <span class="n">customer_</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+                      <span class="s">&#34;, total number of products: &#34;</span><span class="p">,</span> <span class="n">products_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
+                      <span class="s">&#34;, total price: &#34;</span><span class="p">,</span> <span class="n">calc</span><span class="p">.</span><span class="n">Calculate</span><span class="p">(</span><span class="n">customer_</span><span class="p">,</span> <span class="n">products_</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="n">PriceCalculator</span><span class="o">::</span><span class="n">Calculate</span><span class="p">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="p">,</span>
+                                 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Product</span><span class="o">&gt;</span> <span class="n">products</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">basePrice</span> <span class="o">=</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">products</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">products</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">sum_base_prices</span><span class="p">);</span>
+  <span class="kt">float</span> <span class="n">discount</span> <span class="o">=</span> <span class="n">customer</span><span class="p">.</span><span class="n">discount</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">taxes</span> <span class="o">=</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">products</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">products</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">sum_taxes</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">basePrice</span> <span class="o">*</span> <span class="n">discount</span> <span class="o">+</span> <span class="n">taxes</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="dont-expose-private-state">Don&rsquo;t expose private state</h3>
+<p>Its tempting to add a way to access internal state for the sake of testing.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="k">class</span> <span class="nc">CustomerStatus</span> <span class="p">{</span>
+  <span class="n">kRegular</span><span class="p">,</span>
+  <span class="n">kPreferred</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Customer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">Promote</span><span class="p">()</span> <span class="p">{</span> <span class="n">status_</span> <span class="o">=</span> <span class="n">CustomerStatus</span><span class="o">::</span><span class="n">kPreferred</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">float</span> <span class="nf">GetDiscount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">status_</span> <span class="o">==</span> <span class="n">CustomerStatus</span><span class="o">::</span><span class="n">kPreferred</span><span class="p">)</span> <span class="o">?</span> <span class="mf">0.95</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">CustomerStatus</span> <span class="n">status_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><p>However exposing state will leak implementation details. Instead, look at how the production code
+uses the class.</p>
+<h3 id="dont-leak-domain-knowledge-to-tests">Don&rsquo;t leak domain knowledge to tests</h3>
+<p>Don&rsquo;t base expectations off of implementation details.</p>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Calculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">Calculator</span><span class="p">,</span> <span class="n">Add</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Calculator</span> <span class="n">calc</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">expected</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>While it may sound counterintuitive at first, using hardcoded values in your tests is a good thing.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">Calculator</span><span class="p">,</span> <span class="n">Add</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Calculator</span> <span class="n">calc</span><span class="p">;</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">calc</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="dont-add-production-code-for-tests-only">Don&rsquo;t add production code for tests only</h3>
+<p>Mixing testing code with production code only adds to maintenance costs.</p>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Logger</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">Logger</span><span class="p">(</span><span class="kt">bool</span> <span class="n">is_test_environment</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">is_test_environment_</span><span class="p">(</span><span class="n">is_test_environment</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="nf">Log</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_test_environment_</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">is_test_environment_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Instead, write two distinct implementations that share a common interface.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Logger</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Log</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">ProductionLogger</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Logger</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">Log</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">FakeLogger</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Logger</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">Log</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span> <span class="k">const</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Controller</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">SomeMethod</span><span class="p">(</span><span class="k">const</span> <span class="n">Logger</span><span class="o">&amp;</span> <span class="n">logger</span><span class="p">)</span> <span class="p">{</span> <span class="n">logger</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;SomeMethod was called&#34;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="dont-mock-concrete-classes">Don&rsquo;t mock concrete classes</h3>
+<p>Treat urges to mock a concrete class as a warning flag for violating the Single Responsibility
+Principle.</p>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">StatisticsCalculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">GetDeliveries</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">);</span>
+  <span class="n">Statistic</span> <span class="nf">Calculate</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CustomerController</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">CustomerController</span><span class="p">(</span><span class="k">const</span> <span class="n">StatisticsCalculator</span><span class="o">&amp;</span> <span class="n">calculator</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">calculator_</span><span class="p">(</span><span class="n">calculator</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">GetStatistics</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">);</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">StatisticsCalculator</span> <span class="n">calculator_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">StatisticsCalculator</span><span class="o">::</span><span class="n">GetDeliveries</span><span class="p">(</span>
+    <span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* Call an out-of-process dependency to get the list of deliveries */</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span><span class="p">{};</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">CustomerController</span><span class="o">::</span><span class="n">GetStatistics</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Statistic</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">Calculate</span><span class="p">(</span><span class="n">customer_id</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">absl</span><span class="o">::</span><span class="n">StrCat</span><span class="p">(</span><span class="s">&#34;Total weight delivered: &#34;</span><span class="p">,</span> <span class="n">stat</span><span class="p">.</span><span class="n">totalWeight</span><span class="p">,</span>
+                      <span class="s">&#34;. Total cost: &#34;</span><span class="p">,</span> <span class="n">stat</span><span class="p">.</span><span class="n">totalCost</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MockStatisticsCalculator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">StatisticsCalculator</span> <span class="p">{</span>
+  <span class="n">MOCK_METHOD</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">GetDeliveries</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">),</span>
+              <span class="p">(</span><span class="k">override</span><span class="p">));</span>
+<span class="p">};</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">CustomerController</span><span class="p">,</span> <span class="n">CustomerWithNoDeliveries</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">MockStatisticsCalculator</span> <span class="n">calc</span><span class="p">;</span>
+  <span class="n">CustomerController</span> <span class="nf">controller</span><span class="p">(</span><span class="n">calc</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="p">.</span><span class="n">GetStatistics</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="s">&#34;Total weight delivered: 0. Total cost: 0&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Separate unrelated responsibilities into two different classes, plus an interface for the shared
+dependencies.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">DeliveryGateway</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">DeliveryGateway</span><span class="p">(){};</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">GetDeliveries</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">ConcreteDeliveryGateway</span> <span class="o">:</span> <span class="k">public</span> <span class="n">DeliveryGateway</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">GetDeliveries</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">StatisticsCalculator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Statistic</span> <span class="n">Calculate</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;&amp;</span> <span class="n">records</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CustomerController</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">CustomerController</span><span class="p">(</span><span class="k">const</span> <span class="n">StatisticsCalculator</span><span class="o">&amp;</span> <span class="n">calculator</span><span class="p">,</span>
+                     <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DeliveryGateway</span><span class="o">&gt;</span> <span class="n">gateway</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">calculator_</span><span class="p">(</span><span class="n">calculator</span><span class="p">),</span> <span class="n">gateway_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">gateway</span><span class="p">))</span> <span class="p">{}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">GetStatistics</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">);</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">StatisticsCalculator</span> <span class="n">calculator_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DeliveryGateway</span><span class="o">&gt;</span> <span class="n">gateway_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">CustomerController</span><span class="o">::</span><span class="n">GetStatistics</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">records</span> <span class="o">=</span>
+      <span class="n">gateway_</span><span class="o">-&gt;</span><span class="n">GetDeliveries</span><span class="p">(</span><span class="n">customer_id</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">Statistic</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">Calculate</span><span class="p">(</span><span class="n">records</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">absl</span><span class="o">::</span><span class="n">StrCat</span><span class="p">(</span><span class="s">&#34;Total weight delivered: &#34;</span><span class="p">,</span> <span class="n">stat</span><span class="p">.</span><span class="n">totalWeight</span><span class="p">,</span>
+                      <span class="s">&#34;. Total cost: &#34;</span><span class="p">,</span> <span class="n">stat</span><span class="p">.</span><span class="n">totalCost</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">CustomerController</span><span class="p">,</span> <span class="n">CustomerWithNoDeliveries</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">StatisticsCalculator</span> <span class="n">calc</span><span class="p">;</span>
+  <span class="n">CustomerController</span> <span class="nf">controller</span><span class="p">(</span><span class="n">calc</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">MockDeliveryGateway</span><span class="o">&gt;</span><span class="p">());</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">result</span> <span class="o">=</span> <span class="n">controller</span><span class="p">.</span><span class="n">GetStatistics</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="s">&#34;Total weight delivered: 0. Total cost: 0&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="dont-use-time-as-an-ambient-context">Don&rsquo;t use time as an ambient context</h2>
+<p>Using time as an ambient context adds unnecessary shared dependencies, making testing difficult.</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">system_clock</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">time_point</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">system_clock</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre></div>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">DateTimeServer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">DateTimeServer</span><span class="p">()</span> <span class="o">:</span> <span class="n">now_func_</span><span class="p">(</span><span class="o">&amp;</span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="kt">void</span> <span class="nf">Init</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">time_point</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">now_func</span><span class="p">)</span> <span class="p">{</span> <span class="n">now_func_</span> <span class="o">=</span> <span class="n">now_func</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">time_point</span> <span class="nf">Now</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">now_func_</span><span class="p">();</span> <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">time_point</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">now_func_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">DateTimeServer</span> <span class="n">server</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">time_t</span> <span class="n">time</span> <span class="o">=</span> <span class="n">system_clock</span><span class="o">::</span><span class="n">to_time_t</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">Now</span><span class="p">());</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">ctime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">time</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">time_point</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">now</span><span class="p">([]</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">tm</span> <span class="n">time</span><span class="p">{</span><span class="nl">tm_mday</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nl">tm_mon</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nl">tm_year</span> <span class="p">:</span> <span class="mi">120</span><span class="p">};</span>
+  <span class="k">return</span> <span class="n">system_clock</span><span class="o">::</span><span class="n">from_time_t</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">mktime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">time</span><span class="p">));</span>
+<span class="p">});</span>
+<span class="n">server</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">now</span><span class="p">);</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">system_clock</span><span class="o">::</span><span class="n">to_time_t</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">Now</span><span class="p">());</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">ctime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">time</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Instead, inject the time dependency explicitly either as a value or a service.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">DateTimeServer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">DateTimeServer</span><span class="p">(){};</span>
+  <span class="k">virtual</span> <span class="n">time_point</span> <span class="nf">Now</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">ConcreteDateTimeServer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">DateTimeServer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">time_point</span> <span class="n">Now</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">InquiryController</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">InquiryController</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DateTimeServer</span><span class="o">&gt;</span> <span class="n">server</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">date_time_server_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">server</span><span class="p">))</span> <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="nf">ApproveInquiry</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DateTimeServer</span><span class="o">&gt;</span> <span class="n">date_time_server_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="n">InquiryController</span><span class="o">::</span><span class="n">ApproveInquiry</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Inquiry</span> <span class="n">inquiry</span> <span class="o">=</span> <span class="n">GetById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="n">inquiry</span><span class="p">.</span><span class="n">Approve</span><span class="p">(</span><span class="n">date_time_server_</span><span class="o">-&gt;</span><span class="n">Now</span><span class="p">());</span>
+  <span class="n">SaveInquiry</span><span class="p">(</span><span class="n">inquiry</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Prefer injecting values over injecting services.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="n">InquiryController</span><span class="o">::</span><span class="n">ApproveInquiry</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">time_point</span> <span class="n">date_time</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Inquiry</span> <span class="n">inquiry</span> <span class="o">=</span> <span class="n">GetById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="n">inquiry</span><span class="p">.</span><span class="n">Approve</span><span class="p">(</span><span class="n">date_time</span><span class="p">);</span>
+  <span class="n">SaveInquiry</span><span class="p">(</span><span class="n">inquiry</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 
 
@@ -617,19 +960,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1582487774"></script>
-    <script src="/js/jquery.sticky.js?1582487774"></script>
-    <script src="/js/featherlight.min.js?1582487774"></script>
-    <script src="/js/highlight.pack.js?1582487774"></script>
+    <script src="/js/clipboard.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583002918"></script>
+    <script src="/js/jquery.sticky.js?1583002918"></script>
+    <script src="/js/featherlight.min.js?1583002918"></script>
+    <script src="/js/highlight.pack.js?1583002918"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1582487774"></script>
-    <script src="/js/learn.js?1582487774"></script>
-    <script src="/js/hugo-learn.js?1582487774"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583002918"></script>
+    <script src="/js/learn.js?1583002918"></script>
+    <script src="/js/hugo-learn.js?1583002918"></script>
 
-    <link href="/mermaid/mermaid.css?1582487774" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1582487774"></script>
+    <link href="/mermaid/mermaid.css?1583002918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583002918"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

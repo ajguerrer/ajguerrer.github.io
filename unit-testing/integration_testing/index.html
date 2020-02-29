@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.64.0" />
+    <meta name="generator" content="Hugo 0.65.3" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Integration Testing :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1582487774" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1582487774" rel="stylesheet">
-    <link href="/css/hybrid.css?1582487774" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1582487774" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1582487774" rel="stylesheet">
-    <link href="/css/auto-complete.css?1582487774" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1582487774" rel="stylesheet">
-    <link href="/css/theme.css?1582487774" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1582487774" rel="stylesheet">
+    <link href="/css/nucleus.css?1583002918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583002918" rel="stylesheet">
+    <link href="/css/hybrid.css?1583002918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583002918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583002918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583002918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583002918" rel="stylesheet">
+    <link href="/css/theme.css?1583002918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583002918" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1582487774" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583002918" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1582487774"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583002918"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1582487774"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1582487774"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583002918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583002918"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1582487774"></script>
+<script type="text/javascript" src="/js/search.js?1583002918"></script>
 
     
   </div>
@@ -493,15 +493,15 @@ run the database in production.</p>
 by the application.</p>
 </div>
 
-<p>migration scripts are used in testing and production. Once committed to source control,
+<p>Migration scripts should be used in both testing and production. Once committed to source control,
 don&rsquo;t modify them. Make a new migration script instead of fixing the old one, unless fixing the old
 one prevents data loss.</p>
 <h4 id="transactions">Transactions</h4>
 <p>Transactions are capable of updating sets of data within the same business operation atomically.
 When transactions are involved, applications make two separate types of decisions:</p>
 <ol>
-<li>What data gets updated</li>
-<li>Should a set of updates be kept or rolled back</li>
+<li>Which data gets updated to what?</li>
+<li>Should a set of updates be kept or rolled back?</li>
 </ol>
 <p>These decisions should be separated into two different responsibilities:</p>
 <ul>
@@ -519,24 +519,21 @@ data should be placed in the same document so that updates don&rsquo;t span more
 <h4 id="cleanup">Cleanup</h4>
 <p>There are many ways to cleanup a database between tests:</p>
 <ul>
-<li><strong>Restore a backup database before each test</strong> - Works but is slow.</li>
+<li><strong>Restore a backup database before each test</strong> - Works, but slow.</li>
 <li><strong>Cleanup data at the end of the test</strong> - Might be skipped when test fails.</li>
-<li><strong>Wrap each test in a transaction and then don&rsquo;t commit it</strong> - Makes behavior between
-production and testing inconsistent.</li>
-<li><strong>Cleanup data at the beginning of the test</strong> - Is fast, consistent, and won&rsquo;t get skipped.</li>
+<li><strong>Wrap each test in a transaction and then don&rsquo;t commit</strong> - Makes behavior between production and
+testing inconsistent.</li>
+<li><strong>Cleanup data at the beginning of the test</strong> - Fast, consistent, and won&rsquo;t get skipped.</li>
 </ul>
 <h4 id="best-practices">Best Practices</h4>
 <ul>
-<li><strong>Avoid in-memory databases</strong> - Changing the database introduces behavioral inconsistencies
-between production and testing.</li>
+<li><strong>Avoid in-memory databases</strong> - Makes behavior between production and testing inconsistent.</li>
 <li><strong>Reuse code in test sections</strong> - <em>Arrange</em> with factory or builder pattern, <em>act</em> with decorator
 pattern, and <em>assert</em> with handmade mocks (a.k.a. Spys).</li>
-<li><strong>Skip trivial database read tests</strong> - Write operations are always important because they can lead
-to data corruption, but reads won&rsquo;t corrupt the database. Only test reads that are important or
-complex; disregard the rest.</li>
-<li><strong>Don&rsquo;t test repositories directly</strong> - Repositories belong in the Controller layer, and if
-properly designed, shouldn&rsquo;t be complex. Like any controller, they should be included in the
-overarching integration test.</li>
+<li><strong>Skip trivial database read tests</strong> - Writes are always important because the alter the state of
+the database. Test reads that are important or complex; disregard the rest.</li>
+<li><strong>Don&rsquo;t test repositories directly</strong> - Repositories are a controller, so they shouldn&rsquo;t be
+complex. They should be tested in an integration test like any other controller.</li>
 </ul>
 
 
@@ -764,19 +761,19 @@ overarching integration test.</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1582487774"></script>
-    <script src="/js/jquery.sticky.js?1582487774"></script>
-    <script src="/js/featherlight.min.js?1582487774"></script>
-    <script src="/js/highlight.pack.js?1582487774"></script>
+    <script src="/js/clipboard.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583002918"></script>
+    <script src="/js/jquery.sticky.js?1583002918"></script>
+    <script src="/js/featherlight.min.js?1583002918"></script>
+    <script src="/js/highlight.pack.js?1583002918"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1582487774"></script>
-    <script src="/js/learn.js?1582487774"></script>
-    <script src="/js/hugo-learn.js?1582487774"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583002918"></script>
+    <script src="/js/learn.js?1583002918"></script>
+    <script src="/js/hugo-learn.js?1583002918"></script>
 
-    <link href="/mermaid/mermaid.css?1582487774" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1582487774"></script>
+    <link href="/mermaid/mermaid.css?1583002918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583002918"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

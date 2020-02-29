@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.64.0" />
+    <meta name="generator" content="Hugo 0.65.3" />
     <meta name="theme-color" content="#85ad85">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
@@ -11,20 +11,20 @@
     <title>Making your Tests Work for You :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1582487774" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1582487774" rel="stylesheet">
-    <link href="/css/hybrid.css?1582487774" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1582487774" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1582487774" rel="stylesheet">
-    <link href="/css/auto-complete.css?1582487774" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1582487774" rel="stylesheet">
-    <link href="/css/theme.css?1582487774" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1582487774" rel="stylesheet">
+    <link href="/css/nucleus.css?1583002918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583002918" rel="stylesheet">
+    <link href="/css/hybrid.css?1583002918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583002918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583002918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583002918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583002918" rel="stylesheet">
+    <link href="/css/theme.css?1583002918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583002918" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1582487774" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583002918" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1582487774"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583002918"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1582487774"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1582487774"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583002918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583002918"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1582487774"></script>
+<script type="text/javascript" src="/js/search.js?1583002918"></script>
 
     
   </div>
@@ -452,31 +452,31 @@ without trustworthy tests, refactoring is risky. This trap leads to real bugs sl
 <p>Fast positives are formed from coupling between the test and implementation details:</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">Render</span><span class="p">,</span> <span class="n">IsCorrect</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">ifstream</span> <span class="n">in</span><span class="p">(</span><span class="sa"></span><span class="s">&#34;</span><span class="s">message_renderer.cc</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">stringstream</span> <span class="n">sstr</span><span class="p">;</span>
-  <span class="n">sstr</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">in</span><span class="p">.</span><span class="n">rdbuf</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">in</span><span class="p">(</span><span class="s">&#34;message_renderer.cc&#34;</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">sstr</span><span class="p">;</span>
+  <span class="n">sstr</span> <span class="o">&lt;&lt;</span> <span class="n">in</span><span class="p">.</span><span class="n">rdbuf</span><span class="p">();</span>
 
-  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">sstr</span><span class="p">.</span><span class="n">str</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">R</span><span class="sa"></span><span class="s">&#34;</span><span class="s">(#include </span><span class="s">&#34;</span><span class="n">message_renderer</span><span class="p">.</span><span class="n">h</span><span class="sa"></span><span class="s">&#34;</span>
-<span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;body_renderer.h&#34;</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;title_renderer.h&#34;</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;footer_renderer.h&#34;</span><span class="cp">
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">sstr</span><span class="p">.</span><span class="n">str</span><span class="p">(),</span> <span class="n">R</span><span class="s">&#34;(#include &#34;</span><span class="n">message_renderer</span><span class="p">.</span><span class="n">h</span><span class="s">&#34;</span>
+<span class="cp">#include</span> <span class="cpf">&#34;body_renderer.h&#34;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;title_renderer.h&#34;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;footer_renderer.h&#34;</span><span class="cp">
 </span><span class="cp"></span>
-<span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
 </span><span class="cp"></span>
-<span class="n">MessageRenderer</span><span class="o">:</span><span class="o">:</span><span class="n">MessageRenderer</span><span class="p">(</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">sub_renderers_</span><span class="p">(</span><span class="p">{</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">TitleRenderer</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
-                      <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">BodyRenderer</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
-                      <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FooterRenderer</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span><span class="p">}</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span>
+<span class="n">MessageRenderer</span><span class="o">::</span><span class="n">MessageRenderer</span><span class="p">()</span>
+    <span class="o">:</span> <span class="n">sub_renderers_</span><span class="p">({</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">TitleRenderer</span><span class="o">&gt;</span><span class="p">(),</span>
+                      <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">BodyRenderer</span><span class="o">&gt;</span><span class="p">(),</span>
+                      <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">FooterRenderer</span><span class="o">&gt;</span><span class="p">()})</span> <span class="p">{}</span>
 
-<span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">MessageRenderer</span><span class="o">:</span><span class="o">:</span><span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">accumulate</span><span class="p">(</span><span class="n">sub_renderers_</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">sub_renderers_</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
-                         <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="p">{</span><span class="p">}</span><span class="p">,</span>
-                         <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="p">(</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">m</span><span class="p">,</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
-                           <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">move</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span><span class="o">-</span><span class="o">&gt;</span><span class="n">Render</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="p">;</span>
-                         <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">)</span><span class="sa"></span><span class="s">&#34;</span><span class="s">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MessageRenderer</span><span class="o">::</span><span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">sub_renderers_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sub_renderers_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+                         <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{},</span>
+                         <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+                           <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">Render</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+                         <span class="p">});</span>
+<span class="p">})</span><span class="s">&#34;);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -484,12 +484,12 @@ without trustworthy tests, refactoring is risky. This trap leads to real bugs sl
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">TEST</span><span class="p">(</span><span class="n">Render</span><span class="p">,</span> <span class="n">BasicMessage</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">MessageRenderer</span> <span class="n">renderer</span><span class="p">;</span>
-  <span class="k">const</span> <span class="n">Message</span> <span class="n">message</span><span class="p">{</span><span class="nl">title</span> <span class="p">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">a</span><span class="s">&#34;</span><span class="p">,</span> <span class="nl">body</span> <span class="p">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">b</span><span class="s">&#34;</span><span class="p">,</span> <span class="nl">footer</span> <span class="p">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">c</span><span class="s">&#34;</span><span class="p">}</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">Message</span> <span class="n">message</span><span class="p">{</span><span class="nl">title</span> <span class="p">:</span> <span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="nl">body</span> <span class="p">:</span> <span class="s">&#34;b&#34;</span><span class="p">,</span> <span class="nl">footer</span> <span class="p">:</span> <span class="s">&#34;c&#34;</span><span class="p">};</span>
 
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">html</span> <span class="o">=</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">html</span> <span class="o">=</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
 
   <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">html</span><span class="p">,</span>
-            <span class="sa"></span><span class="s">&#34;</span><span class="s">&lt;head&gt;&lt;title&gt;a&lt;/title&gt;&lt;/head&gt;&lt;body&gt;b&lt;/body&gt;&lt;footer&gt;c&lt;/footer&gt;</span><span class="s">&#34;</span><span class="p">)</span><span class="p">;</span>
+            <span class="s">&#34;&lt;head&gt;&lt;title&gt;a&lt;/title&gt;&lt;/head&gt;&lt;body&gt;b&lt;/body&gt;&lt;footer&gt;c&lt;/footer&gt;&#34;</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -512,20 +512,20 @@ observable behavior in the public API. Implementation details should not <em>lea
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="kt">void</span> <span class="n">SetName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name_</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">SetName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name_</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span> <span class="p">}</span>
 
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="p">(</span><span class="n">absl</span><span class="o">:</span><span class="o">:</span><span class="n">StripAsciiWhitespace</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">absl</span><span class="o">::</span><span class="n">StripAsciiWhitespace</span><span class="p">(</span><span class="n">name</span><span class="p">)).</span><span class="n">substr</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
   <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name_</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 
-<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">normalized_name</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">NormalizeName</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span><span class="p">;</span>
-<span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">normalized_name</span><span class="p">)</span><span class="p">;</span>
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">normalized_name</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">NormalizeName</span><span class="p">(</span><span class="n">new_name</span><span class="p">);</span>
+<span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">normalized_name</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>As a rule of thumb, a client should be able to achieve any individual goal atomically. Otherwise,
@@ -533,33 +533,33 @@ the client is at risk of a <em>invariant violation</em>.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="kt">void</span> <span class="n">SetName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name_</span> <span class="o">=</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">SetName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name_</span> <span class="o">=</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="n">name</span><span class="p">);</span> <span class="p">}</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span><span class="p">(</span><span class="n">absl</span><span class="o">:</span><span class="o">:</span><span class="n">StripAsciiWhitespace</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="p">)</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">NormalizeName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">absl</span><span class="o">::</span><span class="n">StripAsciiWhitespace</span><span class="p">(</span><span class="n">name</span><span class="p">)).</span><span class="n">substr</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
   <span class="p">}</span>
 
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">name_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name_</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 
-<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span><span class="p">;</span>
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">new_name</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h4 id="leaking-state">Leaking state</h4>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">GetSubRenderers</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;&gt;</span> <span class="n">GetSubRenderers</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">sub_renderers_</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="k">virtual</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">);</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>Clients shouldn&rsquo;t need direct access to internally managed state. Use dependency injection and
@@ -567,11 +567,11 @@ tell instead of asking.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-  <span class="k">virtual</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">);</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="o">&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h2 id="styles-of-unit-testing">Styles of Unit Testing</h2>
@@ -898,19 +898,19 @@ familiar patterns like switching on a result or listening for events.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.min.js?1582487774"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1582487774"></script>
-    <script src="/js/jquery.sticky.js?1582487774"></script>
-    <script src="/js/featherlight.min.js?1582487774"></script>
-    <script src="/js/highlight.pack.js?1582487774"></script>
+    <script src="/js/clipboard.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583002918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583002918"></script>
+    <script src="/js/jquery.sticky.js?1583002918"></script>
+    <script src="/js/featherlight.min.js?1583002918"></script>
+    <script src="/js/highlight.pack.js?1583002918"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1582487774"></script>
-    <script src="/js/learn.js?1582487774"></script>
-    <script src="/js/hugo-learn.js?1582487774"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583002918"></script>
+    <script src="/js/learn.js?1583002918"></script>
+    <script src="/js/hugo-learn.js?1583002918"></script>
 
-    <link href="/mermaid/mermaid.css?1582487774" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1582487774"></script>
+    <link href="/mermaid/mermaid.css?1583002918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583002918"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

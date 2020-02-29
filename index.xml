@@ -45,7 +45,8 @@ To keep maintenance costs low, check as many edge cases as possible with unit te
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/antipatterns/</guid>
-      <description></description>
+      <description>Don&amp;rsquo;t test private methods directly Only test observable behavior. Coupling a test to implementation details will reduce the tests resistance to refactoring.
+class Order { public: std::string GenerateDescription(); private: float GetPrice(); Customer customer_; std::vector&amp;lt;Product&amp;gt; products_; }; std::string Order::GenerateDescription() { return absl::StrCat(&amp;#34;Customer name: &amp;#34;, customer_.name, &amp;#34;, total number of products: &amp;#34;, products_.size(), &amp;#34;, total price: &amp;#34;, GetPrice()); } float Order::GetPrice() { float basePrice = std::accumulate(products_.begin(), products_.end(), 0.0, sum_base_prices); float discount = customer_.</description>
     </item>
     
     <item>
