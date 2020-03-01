@@ -11,20 +11,20 @@
     <title>Making your Tests Work for You :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1583003334" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1583003334" rel="stylesheet">
-    <link href="/css/hybrid.css?1583003334" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1583003334" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1583003334" rel="stylesheet">
-    <link href="/css/auto-complete.css?1583003334" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1583003334" rel="stylesheet">
-    <link href="/css/theme.css?1583003334" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1583003334" rel="stylesheet">
+    <link href="/css/nucleus.css?1583097848" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583097848" rel="stylesheet">
+    <link href="/css/hybrid.css?1583097848" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583097848" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583097848" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583097848" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583097848" rel="stylesheet">
+    <link href="/css/theme.css?1583097848" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583097848" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1583003334" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583097848" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1583003334"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583097848"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1583003334"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1583003334"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583097848"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583097848"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1583003334"></script>
+<script type="text/javascript" src="/js/search.js?1583097848"></script>
 
     
   </div>
@@ -383,6 +383,7 @@
     </li>
     <li><a href="#styles-of-unit-testing">Styles of Unit Testing</a></li>
     <li><a href="#hexagonal-architecture">Hexagonal Architecture</a></li>
+    <li><a href="#communication">Communication</a></li>
     <li><a href="#functional-architecture">Functional Architecture</a></li>
     <li><a href="#controller-orchestration">Controller Orchestration</a></li>
   </ul>
@@ -495,7 +496,7 @@ without trustworthy tests, refactoring is risky. This trap leads to real bugs sl
 
 <h2 id="types-of-test-doubles">Types of Test Doubles</h2>
 <ul>
-<li><strong>Mock</strong> <em>(mock, spy)</em> - Emulate and assert <em>outgoing</em> interactions from the SUT.</li>
+<li><strong>Mock</strong> <em>(mock, spy)</em> - Emulate and verify <em>outgoing</em> interactions from the SUT.</li>
 <li><strong>Stub</strong> <em>(stub, dummy, fake)</em> - Emulate <em>incoming</em> interactions to the SUT.</li>
 </ul>
 
@@ -503,12 +504,13 @@ without trustworthy tests, refactoring is risky. This trap leads to real bugs sl
 generally responsible for creating stubs which can be confusing.</p>
 </div>
 
-<p>Mocks are stubs, but stubs aren&rsquo;t mocks. Asserting interactions with stubs is a common anti-pattern
-called <em>over-specification</em>.</p>
+<p>Mocks can emulate interactions like stubs, but stubs should never assert interactions like mocks.
+Asserting interactions with stubs is <em>over-specification</em>, a common anti-pattern.</p>
 <h2 id="encapsulation">Encapsulation</h2>
-<p>A well-designed API hides all implementation details behind a private API, leaving only the
-observable behavior in the public API. Implementation details should not <em>leak</em> into the public API.</p>
+<p>A well-designed API hides all implementation details behind a private API, leaving only observable
+behavior in the public API. Implementation details should never <em>leak</em> into the public API.</p>
 <h4 id="invariant-violation">Invariant violation</h4>
+<p>API&rsquo;s that require several steps to achieve an individual goal are prone to <em>invariant violation</em>.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
@@ -523,13 +525,13 @@ observable behavior in the public API. Implementation details should not <em>lea
 <span class="p">};</span>
 </code></pre></div></div>
 
+<p>Client must remember to <code>NormalizeName</code> before <code>SetName</code>.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">normalized_name</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="n">NormalizeName</span><span class="p">(</span><span class="n">new_name</span><span class="p">);</span>
 <span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">normalized_name</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>As a rule of thumb, a client should be able to achieve any individual goal atomically. Otherwise,
-the client is at risk of a <em>invariant violation</em>.</p>
+<p>A client should be able to achieve any individual goal atomically.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
@@ -544,11 +546,13 @@ the client is at risk of a <em>invariant violation</em>.</p>
 <span class="p">};</span>
 </code></pre></div></div>
 
+<p>Client no longer needs to be concerned about <code>NormalizeName</code>.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">user</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">new_name</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h4 id="leaking-state">Leaking state</h4>
+<p>Public access to state that isn&rsquo;t directly related to a client&rsquo;s goal is considered <em>leaking state</em>.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
@@ -562,15 +566,14 @@ the client is at risk of a <em>invariant violation</em>.</p>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p>Clients shouldn&rsquo;t need direct access to internally managed state. Use dependency injection and
-tell instead of asking.</p>
+<p>Keep the public API surface as small as possible while still meeting the clients needs.</p>
 
 <div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">MessageRenderer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Renderer</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
   <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Render</span><span class="p">(</span><span class="k">const</span> <span class="n">Message</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">);</span>
 
  <span class="k">private</span><span class="o">:</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;&gt;</span> <span class="n">sub_renderers_</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
@@ -606,12 +609,12 @@ tell instead of asking.</p>
 </tbody>
 </table>
 <h2 id="hexagonal-architecture">Hexagonal Architecture</h2>
-<p>Hexagonal Architecture, proposed by Alistair Cockburn, breaks applications into two layers:</p>
+<p><em>Hexagonal architecture</em>, proposed by Alistair Cockburn, breaks applications into two layers:</p>
 <ul>
-<li><strong>Domain layer</strong> - Algorithms and domain models essential to the business.</li>
+<li><strong>Domain layer</strong> - Logic and models essential to the business domain.</li>
 <li><strong>Controller layer</strong> - All other responsibilities of the application.</li>
 </ul>
-<p>Interaction between the Domain layer and the Controller layer follow three guidelines:</p>
+<p>Interaction between the Domain layer and the Controller layer follows three guidelines:</p>
 <ol>
 <li>The Domain layer is isolated from the Controller layer.</li>
 <li>The Domain layer may not depend on the Controller layer, but the Controller layer may
@@ -620,24 +623,22 @@ depend on the Domain layer.</li>
 Domain layer.</li>
 </ol>
 <p><img src="/images/hexagonal_architecture.png" alt="Hexagonal Architecture"></p>
-
-<div class="notices tip" ><p>The Domain layer has high cyclomatic complexity and domain significance, while the Controller layer
+<p>The Domain layer has high cyclomatic complexity and domain significance, while the Controller layer
 has a large number of collaborators. Code that is both complex and involves many collaborators is
-overcomplicated and what Hexagonal Architecture aims to dissolve.</p>
-</div>
-
-<p>Communication can be divided into two different types:</p>
+overcomplicated and what Hexagonal architecture aims to dissolve.</p>
+<h2 id="communication">Communication</h2>
+<p>Communication can be classified into two different types:</p>
 <ul>
-<li><strong>Intra-system</strong> - Communication within the application; implementation details.</li>
-<li><strong>Inter-system</strong> - Communication with other applications; observable behavior.</li>
+<li><strong>Intra-process</strong> - Communication within the application; implementation details.</li>
+<li><strong>Inter-process</strong> - Communication with other applications; observable behavior.</li>
 </ul>
 <p>Mocks are necessary for emulating external applications and verifying inter-system communication
 patterns. However, mocks couple tests to implementation details, reducing their resistance to
 refactoring. For this reason, the use of mocks should be avoided when dealing with intra-system
-communication. Out-of-process dependencies only accessible by the application, are implementation
+communication. External dependencies only accessible by the application, are implementation
 details too, and should not be mocked either.</p>
 <h2 id="functional-architecture">Functional Architecture</h2>
-<p>Functional architecture builds off of Hexagonal Architecture with an added guideline that business
+<p><em>Functional architecture</em> builds off of Hexagonal architecture with an added guideline that business
 logic is written in a functional paradigm. The architecture generally flows in a three step process:</p>
 <ol>
 <li>The Controller layer gathers and prepare input.</li>
@@ -649,12 +650,12 @@ logic is written in a functional paradigm. The architecture generally flows in a
 <p>Object-oriented programming makes code understandable by encapsulating moving parts. Functional
 programming makes code understandable by minimizing moving parts. <em>&ndash;Michael Feathers</em></p>
 </blockquote>
-<p>Functional architectures trade maintainability for performance; pure functions tend to eagerly load
+<p>Functional architecture trades maintainability for performance; pure functions tend to eagerly load
 data when they could have been lazy.</p>
 <h2 id="controller-orchestration">Controller Orchestration</h2>
 <p>Functional architecture assumes a clearcut pipeline of inputs, decisions, and side effects. However,
-production applications are rarely that simple. What if those decisions lead to gathering more input
-and making more decisions? There are three strategies to consider:</p>
+production applications are rarely that simple. Decisions may involve gathering more input followed
+by making additional decisions. There are three strategies to consider:</p>
 <ol>
 <li><strong>Eagerly gather all the input</strong> - Preserve controller simplicity and isolated domain logic,
 but concede performance.</li>
@@ -664,12 +665,14 @@ concede isolated domain logic.</li>
 controller simplicity.</li>
 </ol>
 <p>Isolated domain logic is an attribute that should always be maximized because it has a huge impact
-on <em>maintainability</em> and <em>resistance to refactoring</em>. In cases where performance is not critical,
-feel free to stick to a Functional Architecture. Otherwise, controllers will need to orchestrate
-gathering input as a side effect of decisions from the Domain layer.</p>
+on <em>maintainability</em> and <em>resistance to refactoring</em>. Injecting dependencies into the Domain layer
+is rule out.</p>
+<p>In cases where performance is not critical, feel free to stick to a Functional architecture and
+eagerly gather input. Otherwise, allow controllers to orchestrate gathering input to meet the
+needs of the Domain layer.</p>
 
 <div class="notices tip" ><p>Controller orchestration will make controllers more complex, but complexity can be mitigated with
-familiar patterns like switching on a result or listening for events.</p>
+familiar patterns like switching on a result or listening for Domain layer events.</p>
 </div>
 
 
@@ -898,19 +901,19 @@ familiar patterns like switching on a result or listening for events.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1583003334"></script>
-    <script src="/js/perfect-scrollbar.min.js?1583003334"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1583003334"></script>
-    <script src="/js/jquery.sticky.js?1583003334"></script>
-    <script src="/js/featherlight.min.js?1583003334"></script>
-    <script src="/js/highlight.pack.js?1583003334"></script>
+    <script src="/js/clipboard.min.js?1583097848"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583097848"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583097848"></script>
+    <script src="/js/jquery.sticky.js?1583097848"></script>
+    <script src="/js/featherlight.min.js?1583097848"></script>
+    <script src="/js/highlight.pack.js?1583097848"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1583003334"></script>
-    <script src="/js/learn.js?1583003334"></script>
-    <script src="/js/hugo-learn.js?1583003334"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583097848"></script>
+    <script src="/js/learn.js?1583097848"></script>
+    <script src="/js/hugo-learn.js?1583097848"></script>
 
-    <link href="/mermaid/mermaid.css?1583003334" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1583003334"></script>
+    <link href="/mermaid/mermaid.css?1583097848" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583097848"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -11,20 +11,20 @@
     <title>Integration Testing :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1583003334" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1583003334" rel="stylesheet">
-    <link href="/css/hybrid.css?1583003334" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1583003334" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1583003334" rel="stylesheet">
-    <link href="/css/auto-complete.css?1583003334" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1583003334" rel="stylesheet">
-    <link href="/css/theme.css?1583003334" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1583003334" rel="stylesheet">
+    <link href="/css/nucleus.css?1583097848" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583097848" rel="stylesheet">
+    <link href="/css/hybrid.css?1583097848" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583097848" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583097848" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583097848" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583097848" rel="stylesheet">
+    <link href="/css/theme.css?1583097848" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583097848" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1583003334" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583097848" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1583003334"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583097848"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1583003334"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1583003334"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583097848"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583097848"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1583003334"></script>
+<script type="text/javascript" src="/js/search.js?1583097848"></script>
 
     
   </div>
@@ -411,12 +411,12 @@
 <h2 id="role-of-integration-tests">Role of Integration Tests</h2>
 <p>Integration tests verify:</p>
 <ul>
-<li>Interactions with out-of-process dependencies.</li>
-<li>Edge cases unsuitable for a unit tests.</li>
+<li>Interactions with external dependencies.</li>
+<li>Edge cases unsuitable for a unit test.</li>
 </ul>
-<p>Each integration test should choose a happy path route that tests the most out-of-process
-dependencies while still testing a single use case. If a single integration test won&rsquo;t do, write
-more until all out-of-process dependencies are covered.</p>
+<p>Each integration test should choose a happy path that exercises as many shared external dependencies
+as possible while staying within a single use case. If a single integration test doesn&rsquo;t cover all
+shared external dependencies, write more until all external dependencies are covered.</p>
 
 <div class="notices tip" ><p>To keep maintenance costs low, check as many edge cases as possible with unit tests before resorting
 to an integration test.</p>
@@ -432,11 +432,11 @@ controllers.</p>
 <p><img src="/images/test_matrix.png" alt="Test matrix"></p>
 <h4 id="interfaces">Interfaces</h4>
 <p>Genuine abstractions are <em>discovered</em>, not <em>invented</em>. For an interface to be genuine, it must have
-at least two implementations. Otherwise, the cost to the reader and the writer isn&rsquo;t worth it.</p>
-<p>Interfaces enable mocking. Write an interface to mock shared out-of-process dependencies.
-However, not all out-of-process dependencies need an interface. Private out-of-process dependencies
-don&rsquo;t need mocks and therefore don&rsquo;t benefit from an interface, unless they can be swapped for
-another implementation.</p>
+at least two implementations. Otherwise, the the added cognitive complexity isn&rsquo;t worth it.</p>
+<p>Interfaces enable mocking. Write an interface to mock shared external dependencies.
+However, not all external dependencies need an interface. Private external dependencies
+don&rsquo;t need mocks and therefore don&rsquo;t benefit from an interface, unless there is a need to be to swap
+them with another implementation in production.</p>
 <h4 id="layering">Layering</h4>
 <p>Adding layers of indirection where they are not appropriate makes code hard to reason with. Aim
 to have as few layers as possible. Most applications only need three layers: Domain, Controller, and
@@ -454,38 +454,38 @@ detail.</li>
 <p>Since <em>Support</em> logging is observable behavior, it is worth the testing effort. <em>Diagnostic</em>
 logging, however, is an implementation detail and isn&rsquo;t worth testing.</p>
 
-<div class="notices note" ><p>The Domain layer should not have dependencies, including loggers. Have the Controller layer inject a
-logger, or have the Domain layer emit a log event.</p>
+<div class="notices note" ><p>The Domain layer should not have dependencies, including loggers. The Controller layer may inject a
+logger, or the Domain layer may emit a log event.</p>
 </div>
 
 <p>Effective logging maximizes the signal to noise ratio. <em>Support</em> logging cannot be controlled
 because its a business requirement, but <em>Diagnostic</em> logging can. Minimize diagnostic logging
-in the Domain layer, only adding it for debugging and the subsequently removing it once finished.</p>
+in the Domain layer, only adding it for debugging and then subsequently removing it once finished.</p>
 <h2 id="mocking-best-practices">Mocking Best Practices</h2>
 <ul>
 <li><strong>Mocks are for integration tests only</strong> - Mentioned in
 <a href="/unit-testing/making_tests_work/#hexagonal-architecture">Hexagonal Architecture</a>, only shared
-out-of-process dependencies should be mocked. Since unit tests don&rsquo;t involve out-of-process
-dependencies, only integration tests should make use of mocks.</li>
-<li><strong>Never mock private out-of-process dependencies</strong> - When a private out-of-process dependency is too
+external dependencies should be mocked. Unit tests target the Domain layer which shouldn&rsquo;t
+communicate with external dependencies.</li>
+<li><strong>Never mock private external dependencies</strong> - When a private external dependency is too
 difficult or prohibitive to setup, don&rsquo;t try to mock it out. If that dependency cannot be tested
 as-is, it defeats the point of integration testing and should not be tested at all.</li>
-<li><strong>Mock the furthest edges of the system</strong> - Mock the type that directly communicates with the
-shared dependency, not the wrapper. Verify the message sent to the shared dependency, not the call
+<li><strong>Mock the furthest edges of the system</strong> - Mock the type that directly communicates with a
+shared dependency, not the wrapper. Verify the message sent to a shared dependency, not a call
 to a class you wrote. Doing so maximizes resistance against regressions.</li>
 <li><strong>Use as many mocks as necessary per test</strong> -  One mock per test is a common misconception. It&rsquo;s
 irrelevant how many mocks it takes to verify one unit of behavior. The number of mocks depends
-solely on the number of shared out-of-process dependencies participating in the unit of behavior.</li>
+solely on the number of shared external dependencies participating in the unit of behavior.</li>
 <li><strong>Verify the absence of unexpected messages too</strong> - It is not enough to verify your system is
-sending the correct messages to shared out-of-process dependencies, unexpected messages are a
+sending the correct messages to shared external dependencies, unexpected messages are a
 source of bugs too.</li>
-<li><strong>Mock only the types you own</strong> - When using a third party library that communicates with a shared
-out-of-process dependency, write a adapter for it and mock the adapter instead. Third-party
-libraries have arcane inner workings; it&rsquo;s futile to try to emulate their behavior.</li>
+<li><strong>Mock only the types you own</strong> - If your using a third party library to communicate with a shared
+external dependency, write a adapter for it and mock the adapter instead. Third-party
+libraries have arcane inner workings, so it&rsquo;s futile to try to emulate their behavior.</li>
 </ul>
 <h2 id="testing-the-database">Testing the Database</h2>
 <h4 id="setup">Setup</h4>
-<p>Be able to build the database from a series of migration scripts checked into source control. This
+<p>Be able to build your database from a series of migration scripts checked into source control. This
 includes tables, views, indexes, stored procedures, reference data and anything else critical to
 run the database in production.</p>
 
@@ -498,7 +498,7 @@ don&rsquo;t modify them. Make a new migration script instead of fixing the old o
 one prevents data loss.</p>
 <h4 id="transactions">Transactions</h4>
 <p>Transactions are capable of updating sets of data within the same business operation atomically.
-When transactions are involved, applications make two separate types of decisions:</p>
+When transactions are involved, applications need to make two separate types of decisions:</p>
 <ol>
 <li>Which data gets updated to what?</li>
 <li>Should a set of updates be kept or rolled back?</li>
@@ -519,7 +519,7 @@ data should be placed in the same document so that updates don&rsquo;t span more
 <h4 id="cleanup">Cleanup</h4>
 <p>There are many ways to cleanup a database between tests:</p>
 <ul>
-<li><strong>Restore a backup database before each test</strong> - Works, but slow.</li>
+<li><strong>Restore a backup database before each test</strong> - Works, but is slow.</li>
 <li><strong>Cleanup data at the end of the test</strong> - Might be skipped when test fails.</li>
 <li><strong>Wrap each test in a transaction and then don&rsquo;t commit</strong> - Makes behavior between production and
 testing inconsistent.</li>
@@ -527,13 +527,14 @@ testing inconsistent.</li>
 </ul>
 <h4 id="best-practices">Best Practices</h4>
 <ul>
-<li><strong>Avoid in-memory databases</strong> - Makes behavior between production and testing inconsistent.</li>
+<li><strong>Avoid in-memory databases</strong> - Behavior between production and testing should be consistent.</li>
 <li><strong>Reuse code in test sections</strong> - <em>Arrange</em> with factory or builder pattern, <em>act</em> with decorator
 pattern, and <em>assert</em> with handmade mocks (a.k.a. Spys).</li>
 <li><strong>Skip trivial database read tests</strong> - Writes are always important because the alter the state of
-the database. Test reads that are important or complex; disregard the rest.</li>
+the database. Reads that important or complex should be tested; disregard the rest.</li>
 <li><strong>Don&rsquo;t test repositories directly</strong> - Repositories are a controller, so they shouldn&rsquo;t be
-complex. They should be tested in an integration test like any other controller.</li>
+complex. The point of an integration test is to cover shared, external dependencies, not
+controllers.</li>
 </ul>
 
 
@@ -761,19 +762,19 @@ complex. They should be tested in an integration test like any other controller.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1583003334"></script>
-    <script src="/js/perfect-scrollbar.min.js?1583003334"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1583003334"></script>
-    <script src="/js/jquery.sticky.js?1583003334"></script>
-    <script src="/js/featherlight.min.js?1583003334"></script>
-    <script src="/js/highlight.pack.js?1583003334"></script>
+    <script src="/js/clipboard.min.js?1583097848"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583097848"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583097848"></script>
+    <script src="/js/jquery.sticky.js?1583097848"></script>
+    <script src="/js/featherlight.min.js?1583097848"></script>
+    <script src="/js/highlight.pack.js?1583097848"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1583003334"></script>
-    <script src="/js/learn.js?1583003334"></script>
-    <script src="/js/hugo-learn.js?1583003334"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583097848"></script>
+    <script src="/js/learn.js?1583097848"></script>
+    <script src="/js/hugo-learn.js?1583097848"></script>
 
-    <link href="/mermaid/mermaid.css?1583003334" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1583003334"></script>
+    <link href="/mermaid/mermaid.css?1583097848" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583097848"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ajguerrer.github.io/unit-testing/bigger_picture/</guid>
-      <description>What Makes a Good or Bad Test?  Unit testing enables sustainable growth in software projects by acting as a form of insurance against regressions. Good tests outweigh their maintenance cost with the cost of the bugs they prevent. Code is a liability, not an asset, and tests are code too. Tests that don&amp;rsquo;t verify business value, raise false alarms, run slow, and are difficult to maintain, do more harm than good.</description>
+      <description>What Makes a Good or Bad Test?  Unit testing enables sustainable growth in software projects by acting as a form of insurance against regressions. A good test has a lower maintenance cost than the cost of fixing the bugs it prevents. Code is a liability, not an asset, and tests are code too. Tests that don&amp;rsquo;t verify business value, raise false alarms, run slow, and are difficult to maintain, do more harm than good.</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       
       <guid>https://ajguerrer.github.io/unit-testing/integration_testing/</guid>
       <description>Role of Integration Tests Integration tests verify:
- Interactions with out-of-process dependencies. Edge cases unsuitable for a unit tests.  Each integration test should choose a happy path route that tests the most out-of-process dependencies while still testing a single use case. If a single integration test won&amp;rsquo;t do, write more until all out-of-process dependencies are covered.
+ Interactions with external dependencies. Edge cases unsuitable for a unit test.  Each integration test should choose a happy path that exercises as many shared external dependencies as possible while staying within a single use case. If a single integration test doesn&amp;rsquo;t cover all shared external dependencies, write more until all external dependencies are covered.
 To keep maintenance costs low, check as many edge cases as possible with unit tests before resorting to an integration test.</description>
     </item>
     

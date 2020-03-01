@@ -11,20 +11,20 @@
     <title>Unit Testing Anti-Patterns :: Notebook</title>
 
     
-    <link href="/css/nucleus.css?1583003334" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1583003334" rel="stylesheet">
-    <link href="/css/hybrid.css?1583003334" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1583003334" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1583003334" rel="stylesheet">
-    <link href="/css/auto-complete.css?1583003334" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1583003334" rel="stylesheet">
-    <link href="/css/theme.css?1583003334" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1583003334" rel="stylesheet">
+    <link href="/css/nucleus.css?1583097848" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1583097848" rel="stylesheet">
+    <link href="/css/hybrid.css?1583097848" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1583097848" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1583097848" rel="stylesheet">
+    <link href="/css/auto-complete.css?1583097848" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1583097848" rel="stylesheet">
+    <link href="/css/theme.css?1583097848" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1583097848" rel="stylesheet">
     
-      <link href="/css/theme-gruvbox.css?1583003334" rel="stylesheet">
+      <link href="/css/theme-gruvbox.css?1583097848" rel="stylesheet">
     
 
-    <script src="/js/jquery-3.3.1.min.js?1583003334"></script>
+    <script src="/js/jquery-3.3.1.min.js?1583097848"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -75,14 +75,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1583003334"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1583003334"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1583097848"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1583097848"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/ajguerrer.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1583003334"></script>
+<script type="text/javascript" src="/js/search.js?1583097848"></script>
 
     
   </div>
@@ -477,7 +477,8 @@ abstraction.</p>
 
 <h3 id="dont-expose-private-state">Don&rsquo;t expose private state</h3>
 <p>Its tempting to add a way to access internal state for the sake of testing.</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="k">class</span> <span class="nc">CustomerStatus</span> <span class="p">{</span>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="k">class</span> <span class="nc">CustomerStatus</span> <span class="p">{</span>
   <span class="n">kRegular</span><span class="p">,</span>
   <span class="n">kPreferred</span><span class="p">,</span>
 <span class="p">};</span>
@@ -492,8 +493,29 @@ abstraction.</p>
  <span class="k">private</span><span class="o">:</span>
   <span class="n">CustomerStatus</span> <span class="n">status_</span><span class="p">;</span>
 <span class="p">};</span>
-</code></pre></div><p>However exposing state will leak implementation details. Instead, look at how the production code
-uses the class.</p>
+</code></pre></div></div>
+
+<p>However exposing state will leak implementation details. Instead, look at how the production code
+uses the class and test accordingly.</p>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Customer</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">Customer</span><span class="p">(</span><span class="kt">double</span> <span class="n">starting_</span><span class="p">)</span>
+  <span class="kt">void</span> <span class="n">Promote</span><span class="p">()</span> <span class="p">{</span> <span class="n">status_</span> <span class="o">=</span> <span class="n">CustomerStatus</span><span class="o">::</span><span class="n">kPreferred</span><span class="p">;</span> <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">CustomerStatus</span> <span class="n">status_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">Customer</span><span class="p">,</span> <span class="n">PromotedCustomerReceivesDiscount</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Customer</span> <span class="n">customer</span><span class="p">;</span>
+  <span class="n">customer</span><span class="p">.</span><span class="n">Promote</span><span class="p">();</span>
+  <span class="n">Product</span><span class="o">&lt;</span><span class="n">kFujiApple</span><span class="o">&gt;</span> <span class="n">apple</span><span class="p">;</span>
+  <span class="n">customer</span><span class="p">.</span><span class="n">Purchase</span><span class="p">(</span><span class="n">apple</span><span class="p">);</span>
+  <span class="n">EXPECT_LT</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="n">Balance</span><span class="p">(),</span> <span class="n">apple</span><span class="p">.</span><span class="n">Price</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="dont-leak-domain-knowledge-to-tests">Don&rsquo;t leak domain knowledge to tests</h3>
 <p>Don&rsquo;t base expectations off of implementation details.</p>
 
@@ -521,7 +543,7 @@ uses the class.</p>
 </code></pre></div></div>
 
 <h3 id="dont-add-production-code-for-tests-only">Don&rsquo;t add production code for tests only</h3>
-<p>Mixing testing code with production code only adds to maintenance costs.</p>
+<p>Mixing test code with production code only adds to maintenance costs.</p>
 
 <div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Logger</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
@@ -581,10 +603,12 @@ Principle.</p>
  <span class="k">private</span><span class="o">:</span>
   <span class="n">StatisticsCalculator</span> <span class="n">calculator_</span><span class="p">;</span>
 <span class="p">};</span>
+</code></pre></div></div>
 
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">StatisticsCalculator</span><span class="o">::</span><span class="n">GetDeliveries</span><span class="p">(</span>
+
+<div class="notices warning" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">StatisticsCalculator</span><span class="o">::</span><span class="n">GetDeliveries</span><span class="p">(</span>
     <span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="p">{</span>
-  <span class="cm">/* Call an out-of-process dependency to get the list of deliveries */</span>
+  <span class="cm">/* Call an external dependency to get the list of deliveries */</span>
   <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span><span class="p">{};</span>
 <span class="p">}</span>
 
@@ -642,8 +666,10 @@ dependencies.</p>
   <span class="n">StatisticsCalculator</span> <span class="n">calculator_</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">DeliveryGateway</span><span class="o">&gt;</span> <span class="n">gateway_</span><span class="p">;</span>
 <span class="p">};</span>
+</code></pre></div></div>
 
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">CustomerController</span><span class="o">::</span><span class="n">GetStatistics</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="notices tip" ><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">CustomerController</span><span class="o">::</span><span class="n">GetStatistics</span><span class="p">(</span><span class="kt">int</span> <span class="n">customer_id</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeliveryRecord</span><span class="o">&gt;</span> <span class="n">records</span> <span class="o">=</span>
       <span class="n">gateway_</span><span class="o">-&gt;</span><span class="n">GetDeliveries</span><span class="p">(</span><span class="n">customer_id</span><span class="p">);</span>
   <span class="k">const</span> <span class="n">Statistic</span> <span class="n">stat</span> <span class="o">=</span> <span class="n">calculator_</span><span class="p">.</span><span class="n">Calculate</span><span class="p">(</span><span class="n">records</span><span class="p">);</span>
@@ -960,19 +986,19 @@ dependencies.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1583003334"></script>
-    <script src="/js/perfect-scrollbar.min.js?1583003334"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1583003334"></script>
-    <script src="/js/jquery.sticky.js?1583003334"></script>
-    <script src="/js/featherlight.min.js?1583003334"></script>
-    <script src="/js/highlight.pack.js?1583003334"></script>
+    <script src="/js/clipboard.min.js?1583097848"></script>
+    <script src="/js/perfect-scrollbar.min.js?1583097848"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1583097848"></script>
+    <script src="/js/jquery.sticky.js?1583097848"></script>
+    <script src="/js/featherlight.min.js?1583097848"></script>
+    <script src="/js/highlight.pack.js?1583097848"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1583003334"></script>
-    <script src="/js/learn.js?1583003334"></script>
-    <script src="/js/hugo-learn.js?1583003334"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1583097848"></script>
+    <script src="/js/learn.js?1583097848"></script>
+    <script src="/js/hugo-learn.js?1583097848"></script>
 
-    <link href="/mermaid/mermaid.css?1583003334" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1583003334"></script>
+    <link href="/mermaid/mermaid.css?1583097848" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1583097848"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
