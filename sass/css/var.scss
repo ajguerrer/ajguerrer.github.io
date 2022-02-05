@@ -1,0 +1,221 @@
+:root {
+//               dark        light
+// stonerose0 = "#303136"   "#E4E4E7"   
+// stonerose1 = "#494A50"   "#C9CACF"   
+// stonerose2 = "#61636B"   "#AFB0B6"   
+// stonerose3 = "#797B86"   "#94969E"   
+// stonerose4 = "#94969E"   "#797B86"   
+// stonerose5 = "#AFB0B6"   "#61636B"   
+// stonerose6 = "#C9CACF"   "#494A50"   
+// stonerose7 = "#E4E4E7"   "#303136"   
+//
+// stonerose8 = "#C2A3A3"   "#996666"
+// stonerose9 = "#C2B3A3"   "#998066"
+// stoneroseA = "#C2A3B3"   "#996680"
+// stoneroseB = "#A8C2A3"   "#6F9966"
+// stoneroseC = "#A3C2B5"   "#669980"
+// stoneroseD = "#A3B8C2"   "#668899"
+// stoneroseE = "#C2A3C2"   "#996699"
+
+//======================  Colors  ========================
+--primary-color: #668899;
+
+body.dark-mode {
+  --primary-color: #A3B8C2;
+}
+
+// light-mode colors
+--primary-light-color: #66889920;
+--text-primary-color: #61636B;
+--text-second-color: #494A50;
+--text-light-color: #797B86;
+--bg-color: #E4E4E7;
+--blur-bg-color: #E4E4E750;
+ 
+// dark-mode colors
+--dark-primary-light-color: #A3B8C220;
+--dark-text-primary-color: #AFB0B6;
+--dark-text-second-color: #94969E;
+--dark-text-light-color: #C9CACF;
+--dark-bg-color: #303136;
+--dark-blur-bg-color: #30313630;
+
+// colors for admonitions (specially styled quote block)
+--ad-info-color: #668899;
+--ad-info-bg-color: #66889930;
+--ad-important-color: #996699;
+--ad-important-bg-color: #99669930;
+--ad-tip-color: #669980;
+--ad-tip-bg-color: #66998030;
+--ad-question-color: #996699;
+--ad-question-bg-color: #99669930;
+--ad-caution-color: #998066;
+--ad-caution-bg-color: #99806630;
+--ad-warning-color: #996666;
+--ad-warning-bg-color: #99666630;
+--ad-star-color: #998066;
+--ad-star-bg-color: #99806630;
+--ad-check-color: #6F9966;
+--ad-check-bg-color: #6F996630;
+--ad-wrong-color: #996666;
+--ad-wrong-bg-color: #99666630;
+--ad-good-color: #6F9966;
+--ad-good-bg-color: #6F996630;
+--ad-bad-color: #996666;
+--ad-bad-bg-color: #99666630;
+--ad-happy-color: #6F9966;
+--ad-happy-bg-color: #6F996630;
+--ad-unhappy-color: #996666;
+--ad-unhappy-bg-color: #99666630;
+--ad-flag-color: #669980;
+--ad-flag-bg-color: #66998030;
+--ad-cc-license-color: #668899;
+--ad-cc-license-bg-color: #66889930;
+
+body.dark-mode {
+  --ad-info-color: #A3B8C2;
+  --ad-info-bg-color: #A3B8C230;
+  --ad-important-color: #C2A3C2;
+  --ad-important-bg-color: #C2A3C230;
+  --ad-tip-color: #A3C2B5;
+  --ad-tip-bg-color: #A3C2B530;
+  --ad-question-color: #C2A3C2;
+  --ad-question-bg-color: #C2A3C230;
+  --ad-caution-color: #C2B3A3;
+  --ad-caution-bg-color: #C2B3A330;
+  --ad-warning-color: #C2A3A3;
+  --ad-warning-bg-color: #C2A3A330;
+  --ad-star-color: #C2B3A3;
+  --ad-star-bg-color: #C2B3A330;
+  --ad-check-color: #A8C2A3;
+  --ad-check-bg-color: #A8C2A330;
+  --ad-wrong-color: #C2A3A3;
+  --ad-wrong-bg-color: #C2A3A330;
+  --ad-good-color: #A8C2A3;
+  --ad-good-bg-color: #A8C2A330;
+  --ad-bad-color: #C2A3A3;
+  --ad-bad-bg-color: #C2A3A330;
+  --ad-happy-color: #A8C2A3;
+  --ad-happy-bg-color: #A8C2A330;
+  --ad-unhappy-color: #C2A3A3;
+  --ad-unhappy-bg-color: #C2A3A330;
+  --ad-flag-color: #A3C2B5;
+  --ad-flag-bg-color: #A3C2B530;
+  --ad-cc-license-color: #A3B8C2;
+  --ad-cc-license-bg-color: #A3B8C230;
+}
+
+
+
+//======================  Typography  =====================
+--homepage-margin-top: 15vh;
+--homepage-max-width: 900px;
+--paragraph-font-size: 20px;
+--paragraph-line-height: 1.50;
+--img-border-radius: 4px;
+--pre-border-radius: 4px;
+--main-font: 'Dosis', Arial, Helvetica, sans-serif;
+--code-font: 'Iosevka', monospace;
+
+// Make footnotes one line with little spacing
+.footnote-definition {
+  display: flex;
+  align-items: baseline;
+  p {
+    margin: 0 10px;
+  }
+}
+
+article {
+
+  p > code {
+    font-size: 0.8em;
+  }
+  pre {
+      font-size: 0.8em;
+  }
+  // Fix code in blockquote. Also needed to change the shortcodes.
+  blockquote.note {
+    display: block;
+    .content {
+      overflow: auto;
+      width: 100%;
+    }
+    .header {
+      display: flex;
+    }
+    pre {
+      margin: 0.8em;
+    }
+  }
+}
+
+.next-previous {
+  display: flex;
+  .spacer {
+    flex-grow: 1;
+  }
+  a {
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-left: 20px;
+    color: var(--text-light-color);
+    &:hover {
+        color: var(--primary-color);
+    }
+  }
+}
+
+.svg-content {
+  display: flex; 
+  justify-content: center; 
+  margin: 1em 0;
+}
+
+// SVG CSS Coloring
+.outline-text {
+  stroke: var(--text-primary-color);
+  fill: none
+}
+.solid-text {
+  stroke: var(--text-primary-color);
+  fill: var(--text-primary-color);
+}
+.background-fill-outline-text {
+  stroke: var(--text-primary-color);
+  fill: var(--bg-color);
+}
+.blue-circle {
+  fill: #A3B8C2;
+}
+.yellow-circle {
+  fill: #C2B3A3;
+}
+.red-circle {
+  fill: #C2A3A3;
+}
+
+body.dark-mode {
+  .outline-text {
+    stroke: var(--dark-text-primary-color);
+    fill: none;
+  }
+  .solid-text {
+    stroke: var(--dark-text-primary-color);
+    fill: var(--dark-text-primary-color);
+  }
+  .background-fill-outline-text {
+    stroke: var(--dark-text-primary-color);
+    fill: var(--dark-bg-color);
+  }
+  .blue-circle {
+    fill: #668899;
+  }
+  .yellow-circle {
+    fill: #998066;
+  }
+  .red-circle {
+    fill: #996666;
+  }
+}
+}

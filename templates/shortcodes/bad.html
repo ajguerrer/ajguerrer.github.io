@@ -1,0 +1,11 @@
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        {% if header %}
+        <p><strong>{{ header }}</strong></p>
+        {% endif %}
+    </div> 
+    <div class="content">
+        {{ body | markdown | safe }}
+    </div>
+</blockquote>

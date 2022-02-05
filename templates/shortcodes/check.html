@@ -1,0 +1,11 @@
+<blockquote class="note check">
+    <div class="header">
+        <i class="ri-checkbox-circle-line ri-lg"></i>
+        {% if header %}
+        <p><strong>{{ header }}</strong></p>
+        {% endif %}
+    </div> 
+    <div class="content">
+        {{ body | markdown | safe }}
+    </div>
+</blockquote>

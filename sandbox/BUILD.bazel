@@ -1,0 +1,19 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+cc_library(
+    name = "sandbox",
+    srcs = ["sand.cc"],
+    hdrs = ["sand.h"],
+    deps = [
+        "@com_google_absl//absl/strings",
+    ],
+)
+
+cc_test(
+    name = "sandbox_test",
+    srcs = ["sand_test.cc"],
+    deps = [
+        ":sandbox",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
