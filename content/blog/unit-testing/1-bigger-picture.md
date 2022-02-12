@@ -1,7 +1,6 @@
 +++
-title = "The Bigger Picture"
-weight = 1
-date = 2020-03-01
+title = "Part 1: The Bigger Picture"
+date = 2020-01-06
 [taxonomies]
 categories = ["Unit Testing Principles, Practices, and Patterns"]
 tags = ["testing", "unit-testing"]

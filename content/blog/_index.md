@@ -1,7 +1,7 @@
 +++
 title = "ajguerrer::blog"
 description = "Andrew Guerrero's blog."
-sort_by = "weight"
+sort_by = "date"
 template = "blog.html"
 page_template = "post.html"
 insert_anchor_links = "none"

@@ -1,7 +1,6 @@
 +++
 title = "What Makes a Good End-to-End Test?"
 date = 2016-09-21
-weight = 15
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

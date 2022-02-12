@@ -1,7 +1,6 @@
 +++
 title = "Refactoring Tests in the Red"
 date = 2007-04-26
-weight = 37
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

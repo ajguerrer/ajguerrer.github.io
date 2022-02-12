@@ -1,7 +1,6 @@
 +++
 title = "Defeat \"Static Cling\""
 date = 2008-06-26
-weight = 32
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

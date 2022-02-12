@@ -1,7 +1,6 @@
 +++
 title = "Only Expect State-Changing Method Calls"
 date = 2017-12-11
-weight = 8
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

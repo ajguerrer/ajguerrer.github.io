@@ -1,7 +1,6 @@
 +++
-title = "Unit Testing Anti-patterns"
-weight = 4
-date = 2020-03-01
+title = "Part 4: Unit Testing Anti-patterns"
+date = 2020-01-06
 [taxonomies]
 categories = ["Unit Testing Principles, Practices, and Patterns"]
 tags = ["testing", "unit-testing"]

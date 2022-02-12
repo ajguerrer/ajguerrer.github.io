@@ -1,7 +1,6 @@
 +++
 title = "Change-Detector Tests Considered Harmful"
 date = 2015-01-27
-weight = 16
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

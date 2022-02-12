@@ -1,7 +1,6 @@
 +++
 title = "Sleeping != Synchronization"
 date = 2008-08-21
-weight = 31
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

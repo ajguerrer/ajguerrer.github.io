@@ -1,7 +1,6 @@
 +++
 title = "Obsessed With Primitives?"
 date = 2017-11-14
-weight = 9
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

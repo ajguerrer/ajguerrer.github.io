@@ -1,7 +1,6 @@
 +++
 title = "IdentifierNamingPostForWorldWideWebBlog"
 date = 2017-10-23
-weight = 10
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

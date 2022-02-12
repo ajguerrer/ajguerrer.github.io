@@ -1,7 +1,6 @@
 +++
 title = "Make Interfaces Hard to Misuse"
 date = 2018-07-25
-weight = 3
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

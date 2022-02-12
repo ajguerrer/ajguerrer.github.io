@@ -1,7 +1,6 @@
 +++
 title = "Fake Your Way To Better Tests"
 date = 2013-06-28
-weight = 26
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

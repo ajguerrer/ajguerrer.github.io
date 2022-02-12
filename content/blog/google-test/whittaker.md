@@ -1,7 +1,6 @@
 +++
 title = "Musings from James Whittaker"
-date = 2020-02-29
-weight = 3
+date = 2011-03-23
 [taxonomies]
 categories = ["Google Testing Blog"]
 tags = ["testing", "google"]

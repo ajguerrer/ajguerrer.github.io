@@ -1,7 +1,6 @@
 +++
 title = "Effective Testing"
 date = 2014-05-07
-weight = 21
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

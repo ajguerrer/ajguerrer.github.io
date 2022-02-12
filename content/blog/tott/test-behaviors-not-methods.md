@@ -1,7 +1,6 @@
 +++
 title = "Test Behaviors, Not Methods"
 date = 2014-04-14
-weight = 22
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

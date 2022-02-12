@@ -1,7 +1,6 @@
 +++
 title = "Test Behavior, Not Implementation"
 date = 2013-08-05
-weight = 24
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

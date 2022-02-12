@@ -1,7 +1,6 @@
 +++
 title = "Keep Cause and Effect Clear"
 date = 2017-01-31
-weight = 14
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

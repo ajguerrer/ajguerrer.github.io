@@ -1,7 +1,6 @@
 +++
 title = "Testing State vs. Testing Interactions"
 date = 2013-03-22
-weight = 28
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

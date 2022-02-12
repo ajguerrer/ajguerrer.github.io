@@ -1,7 +1,6 @@
 +++
 title = "Writing Descriptive Test Names"
 date = 2014-10-16
-weight = 18
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

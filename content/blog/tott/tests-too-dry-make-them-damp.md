@@ -1,7 +1,6 @@
 +++
 title = "Tests Too DRY? Make Them DAMP!"
 date = 2019-12-03
-weight = 1
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

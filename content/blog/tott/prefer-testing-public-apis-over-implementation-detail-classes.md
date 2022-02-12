@@ -1,7 +1,6 @@
 +++
 title = "Prefer Testing Public APIs Over Implementation-Detail Classes"
 date = 2015-01-14
-weight = 17
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

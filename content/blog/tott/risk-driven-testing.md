@@ -1,7 +1,6 @@
 +++
 title = "Risk-Driven Testing"
 date = 2014-05-30
-weight = 20
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

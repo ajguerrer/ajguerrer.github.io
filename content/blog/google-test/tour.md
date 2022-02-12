@@ -1,7 +1,6 @@
 +++
 title = "A Lightning Tour of the Google Testing Blog"
-date = 2019-07-27
-weight = 1
+date = 2017-04-17
 [taxonomies]
 categories = ["Google Testing Blog"]
 tags = ["testing", "google"]

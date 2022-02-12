@@ -1,7 +1,6 @@
 +++
 title = "Cleanly Create Test Data"
 date = 2018-02-20
-weight = 7
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

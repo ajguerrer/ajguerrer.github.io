@@ -1,7 +1,6 @@
 +++
 title = "Avoiding Friend Twister in C++"
 date = 2007-10-30
-weight = 36
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

@@ -1,7 +1,6 @@
 +++
 title = "Don't Overuse Mocks"
 date = 2013-05-28
-weight = 27
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

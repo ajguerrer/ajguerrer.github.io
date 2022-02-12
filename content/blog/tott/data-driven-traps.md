@@ -1,7 +1,6 @@
 +++
 title = "Data Driven Traps!"
 date = 2008-09-04
-weight = 30
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

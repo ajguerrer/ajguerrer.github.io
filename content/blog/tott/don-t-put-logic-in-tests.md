@@ -1,7 +1,6 @@
 +++
 title = "Don't Put Logic in Tests"
 date = 2014-07-31
-weight = 19
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

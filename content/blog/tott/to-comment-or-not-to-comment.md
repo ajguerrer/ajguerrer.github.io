@@ -1,7 +1,6 @@
 +++
 title = "To Comment or Not to Comment"
 date = 2017-07-17
-weight = 11
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

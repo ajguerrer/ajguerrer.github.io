@@ -1,7 +1,6 @@
 +++
 title = "Only Verify Relevant Method Arguments"
 date = 2018-06-26
-weight = 4
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

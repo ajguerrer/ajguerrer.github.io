@@ -1,7 +1,6 @@
 +++
 title = "Understanding Your Coverage Data"
 date = 2008-03-06
-weight = 34
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

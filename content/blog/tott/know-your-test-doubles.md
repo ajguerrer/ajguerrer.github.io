@@ -1,7 +1,6 @@
 +++
 title = "Know Your Test Doubles"
 date = 2013-07-18
-weight = 25
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

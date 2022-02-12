@@ -1,7 +1,6 @@
 +++
 title = "Code coverage goal: 80% and no less!"
 date = 2010-07-20
-weight = 29
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

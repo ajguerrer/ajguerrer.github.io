@@ -1,7 +1,6 @@
 +++
 title = "Keep Tests Focused"
 date = 2018-06-11
-weight = 5
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

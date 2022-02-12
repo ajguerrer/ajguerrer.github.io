@@ -1,7 +1,6 @@
 +++
 title = "Too Many Comments on Your Code Reviews?"
 date = 2017-06-19
-weight = 12
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

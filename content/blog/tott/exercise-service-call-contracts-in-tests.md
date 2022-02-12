@@ -1,7 +1,6 @@
 +++
 title = "Exercise Service Call Contracts in Tests"
 date = 2018-11-27
-weight = 2
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

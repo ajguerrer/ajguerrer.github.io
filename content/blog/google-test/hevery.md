@@ -1,7 +1,6 @@
 +++
 title = "Testable Code with Miško Hevery"
-date = 2020-01-18
-weight = 2
+date = 2008-11-26
 [taxonomies]
 categories = ["Google Testing Blog"]
 tags = ["testing", "google"]

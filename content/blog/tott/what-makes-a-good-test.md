@@ -1,7 +1,6 @@
 +++
 title = "What Makes a Good Test?"
 date = 2014-03-18
-weight = 23
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]

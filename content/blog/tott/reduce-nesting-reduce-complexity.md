@@ -1,7 +1,6 @@
 +++
 title = "Reduce Nesting, Reduce Complexity"
 date = 2017-06-15
-weight = 13
 [taxonomies]
 categories = ["Testing on the Toilet"]
 tags = ["testing", "google", "tott"]
