@@ -5,8 +5,11 @@ cc_library(
     srcs = ["sand.cc"],
     hdrs = ["sand.h"],
     deps = [
+        "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
+        "@com_google_absl//absl/types:span",
     ],
+    copts = ["-std=c++17"],
 )
 
 cc_test(
@@ -16,4 +19,5 @@ cc_test(
         ":sandbox",
         "@com_google_googletest//:gtest_main",
     ],
+    copts = ["-std=c++20"],
 )

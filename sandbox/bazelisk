@@ -1,0 +1,12 @@
+ROOT_DIR=`git rev-parse --show-toplevel`
+
+function bazelisk_container() {
+    docker rm -f bazelisk
+    docker build --pull --rm -f "$ROOT_DIR/sandbox/docker/Dockerfile" -t bazelisk:latest "$ROOT_DIR/sandbox/docker"
+    docker run -it -d --name bazelisk bazelisk bash
+}
+
+function bazelisk_build() {
+    docker cp "$ROOT_DIR/sandbox" bazelisk:/
+    docker exec -it bazelisk bazelisk build //:sandbox
+}

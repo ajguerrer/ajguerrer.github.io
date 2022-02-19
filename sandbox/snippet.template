@@ -1,0 +1,13 @@
+{% bad(header="Bad") %}
+```cpp
+
+```
+{% end %}
+
+
+
+{% good(header="Good") %}
+```cpp
+
+```
+{% end %}

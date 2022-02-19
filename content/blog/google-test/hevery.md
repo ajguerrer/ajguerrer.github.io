@@ -10,12 +10,12 @@ tags = ["testing", "google"]
 In the early days of the [Google Testing Blog], Miško Hevery contributed a wealth of posts related
 to making code more testable culminating into a [guide].
 
-This guide hit me hard during the early parts of my career. At Spectra, the server code rather
-infamously is collection of [class-based threads]. It is a fine pattern to use as long as other
-threads strictly pass messages to them. However, we turned them into Singletons and had other
-threads summon them into existence at will to call their methods directly. This pattern spread
-everywhere! As you can imagine, any testing that can be done to such an application is superficial.
-We could only test the little bits of logic that leaked into our models.
+This guide hit me hard during the early parts of my career. I have spent plenty of time working on
+server code rather that infamously is collection of [class-based threads]. It is a fine pattern to
+use as long as other threads strictly pass messages to them. However, we turned them into Singletons
+and had other threads summon them into existence at will to call their methods directly. This
+pattern spread everywhere! As you can imagine, any testing that can be done to such an application
+is superficial. We could only test the little bits of logic that leaked into our models.
 
 Miško's guide was a simple, directly applicable cookbook to problems such as these. Even though it
 was already too late for our server, it was nice to know there was a way out, given enough effort.

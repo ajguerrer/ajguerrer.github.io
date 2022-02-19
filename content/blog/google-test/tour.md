@@ -47,6 +47,11 @@ I plan to keep this updated as more posts are added.
   encourages consideration for how the interface will be *used*.[^5]
 - Good code quality is taught, not enforced. Create a culture that teaches code quality through code
   review, pair programming, and mentoring.[^15]
+- Don't obsess over coverage numbers. Use code coverage reports to identify areas that are not
+  covered and human judgement over whether to cover it. For example, frequently changed code should
+  be covered.[^19]
+- Consider investing in mutation testing, a automated tool that "mutates" code and expects tests to
+  fail. Tuned properly, it can help find oversights in tests that are worth fixing. [^20]
 
 ## Productivity
 
@@ -102,6 +107,10 @@ I plan to keep this updated as more posts are added.
 [^17]: [Discomfort as a Tool for Change](https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html)
 
 [^5]:  [Test first is fun!](https://testing.googleblog.com/2008/09/test-first-is-fun_08.html)
+
+[^19]: [Code Coverage Best Practices](https://testing.googleblog.com/2020/08/code-coverage-best-practices.html)
+
+[^20]: [Mutation Testing](https://testing.googleblog.com/2021/04/mutation-testing.html)
 
 [^6]:  [Presubmit And Performance](https://testing.googleblog.com/2008/09/presubmit-and-performance.html)
 
