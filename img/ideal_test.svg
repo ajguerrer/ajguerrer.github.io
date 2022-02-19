@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 811 791">
+   <g>
+      <ellipse cx="410.5" cy="540.5" rx="250" ry="250" fill-opacity="0.5" class="yellow-circle" stroke="none" pointer-events="all"/>
+      <ellipse cx="250.5" cy="250.5" rx="250" ry="250" fill-opacity="0.5" class="blue-circle" stroke="none" pointer-events="all"/>
+      <ellipse cx="560.5" cy="250.5" rx="250" ry="250" fill-opacity="0.5" class="red-circle" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 258px; height: 1px; padding-top: 221px; margin-left: 42px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 24px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                  <font style="font-size: 42px">Protection Against Regressions</font>
+               </div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="541" y="132" width="210" height="178.5" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 208px; height: 1px; padding-top: 221px; margin-left: 542px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Fast Feedback</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="275.25" y="532" width="270.5" height="161.5" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 269px; height: 1px; padding-top: 613px; margin-left: 276px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Resistance to Refactoring</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="355.25" y="180.5" width="110.5" height="81.5" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 109px; height: 1px; padding-top: 188px; margin-left: 356px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Brittle Tests</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="191" y="412" width="170" height="50" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 168px; height: 1px; padding-top: 419px; margin-left: 192px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Large Tests</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="441" y="412" width="180" height="50" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 178px; height: 1px; padding-top: 419px; margin-left: 442px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Trivial Tests</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="360.25" y="310.5" width="100.5" height="70" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 318px; margin-left: 411px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div class="diagram-text" style="display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: nowrap;">
+                  <span style="font-size: 28px">N/A</span>
+               </div>
+            </div>
+         </div>
+      </foreignObject>
+   </g>
+   <switch>
+      <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+      <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+         <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+      </a>
+   </switch>
+</svg>

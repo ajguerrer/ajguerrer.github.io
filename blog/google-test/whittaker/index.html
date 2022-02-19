@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Musings from James Whittaker</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Musings from James Whittaker</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2011-03-23</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/google"><i
+              class="ri-hashtag ri-sm"></i><span>google</span></a>
+        </div>
+      </div>    
+
+      
+
+      <p>James A. Whittaker wrote three thought-provoking series in the <a href="https://testing.googleblog.com/">Google Testing
+Blog</a>. I get the feeling he likes the number seven. Every one of
+his posts provided me with a unique and colorful take on what can sometimes be a dry subject. The
+abstract concepts shared in his posts shaped my foundational beliefs on testing software. </p>
+<p>Below you will find a few sentences per post which I think capture the essence of what Whittaker is
+conveying in each of his posts. The final series is a bit different than the first two; it's an 
+inside view of the structure and process inside the software shop known as Google.</p>
+<h2 id="the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</h2>
+<ol>
+<li><strong>Aimlessness</strong> - Do not test for the sake of testing. Every test should have a goal. Document
+what works and analyze what doesn't. Then, share with your colleagues.<sup class="footnote-reference"><a href="#1">1</a></sup></li>
+<li><strong>Repetitiveness</strong> - Running the same test suite over again without finding new bugs does not
+mean that there are no bugs. Variation is healthy.<sup class="footnote-reference"><a href="#2">2</a></sup></li>
+<li><strong>Amnesia</strong> - Chances are the problem your are trying to solve has been solved before. If the
+same issue keeps stinging you, or you had to answer a question the hard way, document it and put
+it in a place others will find it.<sup class="footnote-reference"><a href="#3">3</a></sup></li>
+<li><strong>Boredom</strong> - A bored tester rushes through the tactical aspects of testing without considering
+the interesting strategic aspects. The day testing gets &quot;figured out&quot; is the day it gets
+completely automated away.<sup class="footnote-reference"><a href="#4">4</a></sup></li>
+<li><strong>Homelessness</strong> - Testers are homeless. They don't actually live in the software like users do.
+Some bugs are only found with the hands of users doing their work in their environment.<sup class="footnote-reference"><a href="#5">5</a></sup></li>
+<li><strong>Blindness</strong> - Testers require tools to provide helpful feedback from software. It's tempting to
+settle down with a trusty set of tools, but doing so causes self-inflicted blindness to a growing
+ecosystem of useful feedback.<sup class="footnote-reference"><a href="#6">6</a></sup></li>
+<li><strong>Entropy</strong> - Testers increase entropy by giving developers things to do. This is unavoidable,
+but preventative. As developers do more <em>during</em> development, testers add less work, and entropy
+tends towards a minimum.<sup class="footnote-reference"><a href="#7">7</a></sup></li>
+</ol>
+<h2 id="an-ingredients-list-for-testing">An Ingredients List for Testing</h2>
+<ol>
+<li><strong>Product expertise</strong> - A good developer knows how the product works; a good tester knows how to
+use it.<sup class="footnote-reference"><a href="#8">8</a></sup></li>
+<li><strong>Bill of materials</strong> - Testers should be able to reference a complete list of features that can
+be tested.<sup class="footnote-reference"><a href="#9">9</a></sup> </li>
+<li><strong>Risk analysis</strong> - Features are not equally important, or equally time consuming to test. Have a
+model to quantitatively analyze the risk of each feature.<sup class="footnote-reference"><a href="#10">10</a></sup> </li>
+<li><strong>Domain expertise</strong> - It is not enough to be good at testing. Testers also need expertise with
+the technologies of the domain the product operates in.<sup class="footnote-reference"><a href="#11">11</a></sup></li>
+<li><strong>Test guidance</strong> - Whether it be technique, nomenclature, or history, testers need a way to
+identify and store tribal knowledge of the team.<sup class="footnote-reference"><a href="#12">12</a></sup></li>
+<li><strong>Variation</strong> - Tests often get stale. Wasting time running stale tests is also a form of risk.
+Adding variation can breathe new life into stale tests.<sup class="footnote-reference"><a href="#13">13</a></sup></li>
+<li><strong>Completeness analysis</strong> - Teams need a model to measure how well their testing efforts have
+covered the risk landscape of their product.<sup class="footnote-reference"><a href="#14">14</a></sup></li>
+</ol>
+<h2 id="how-google-tests-software">How Google Tests Software</h2>
+<p>Engineers are loaned out to product teams on an as-needed basis. Engineers are free to change
+product teams at their own cadence.<sup class="footnote-reference"><a href="#15">15</a></sup></p>
+<p>Developers own quality while testers support developers with tools and feedback. As developers get
+better at testing, less testers are needed. Successful teams have higher developer-to-tester ratios.
+<sup class="footnote-reference"><a href="#15">15</a></sup></p>
+<p>Development and test are not treated as separate disciplines. Developers test and testers code.<sup class="footnote-reference"><a href="#17">16</a></sup>
+Instead, each of the three roles look at the product from different angles:</p>
+<ul>
+<li><strong>SWE (Software Engineer)</strong> - Feature creators responsible for their work. SWEs design and write
+features, and then prove they work by writing and running tests.</li>
+<li><strong>SET (Software Engineer in Test)</strong> - Codebase caretakers who enable SWEs to write tests. SETs
+refactor code for testability, and write test features including test doubles and test framework.</li>
+<li><strong>TE (Test Engineer)</strong> - Product experts who analyze quality and risk from the perspective of the
+user. TEs write large tests and automation scrips as well as drive test execution and interpret
+their results.<sup class="footnote-reference"><a href="#16">17</a></sup></li>
+</ul>
+<p>SETs and TEs are usually not involved early in the design phase of a product. Only when the product
+gains traction do they begin to exert their influence.<sup class="footnote-reference"><a href="#20">18</a></sup> <sup class="footnote-reference"><a href="#22">19</a></sup></p>
+<p>SETs and SWEs have similar skill sets. Conversions from one role to another are common.<sup class="footnote-reference"><a href="#21">20</a></sup></p>
+<p>Quality is a work in progress that relies on getting product out to users and receiving feedback as
+quickly as possible. As its being developed, a release is pushed through several channels in order
+of increasing confidence in quality:</p>
+<ul>
+<li><strong>Canary</strong> - Only fit for ultra tolerant users running experiments.</li>
+<li><strong>Dev</strong> - Used by developers for day-to-day work.</li>
+<li><strong>Test</strong> - Used internally for day-to-day work.</li>
+<li><strong>Beta/Release</strong> - Fit for external exposure.<sup class="footnote-reference"><a href="#18">21</a></sup></li>
+</ul>
+<p>Tests are classified by scope, falling under three categories:</p>
+<ul>
+<li><strong>Small</strong> - Covers a single function, focusing on logic.</li>
+<li><strong>Medium</strong> - Covers a function and its nearest neighbors, focusing on interoperability.</li>
+<li><strong>Large</strong> -  Covers an entire user scenario, focusing on business requirements.<sup class="footnote-reference"><a href="#19">22</a></sup></li>
+</ul>
+<p>If a test doesn't require human cleverness or intuition, it is automated. Bug reporting is automated
+too.<sup class="footnote-reference"><a href="#19">22</a></sup></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://testing.googleblog.com/2009/06/7-plagues-of-software-testing.html">The 7 Plagues of Software Testing</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://testing.googleblog.com/2009/06/by-james.html">The plague of repetitiveness</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-amnesia.html">The Plague of Amnesia</a></p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-boredom.html">The Plague of Boredom</a></p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-homelessness.html">The Plague of Homelessness</a></p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p><a href="https://testing.googleblog.com/2009/07/plague-of-blindness.html">The Plague of Blindness</a></p>
+</div>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p><a href="https://testing.googleblog.com/2009/09/plague-of-entropy.html">The Plague of Entropy</a></p>
+</div>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p><a href="https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-one.html">An Ingredients List for Testing - Part One</a></p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p><a href="https://testing.googleblog.com/2010/08/ingredients-list-for-testing-part-two.html">An Ingredients List for Testing - Part Two</a></p>
+</div>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p><a href="https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-three.html">An Ingredients List for Testing - Part Three</a></p>
+</div>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p><a href="https://testing.googleblog.com/2010/09/ingredients-list-for-testing-part-four.html">An Ingredients List for Testing - Part Four</a></p>
+</div>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p><a href="https://testing.googleblog.com/2010/10/ingredients-list-for-testing-part-five.html">An Ingredients List for Testing - Part Five</a></p>
+</div>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p><a href="https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-six.html">An Ingredients List for Testing - Part Six</a></p>
+</div>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p><a href="https://testing.googleblog.com/2010/11/ingredients-list-for-testing-part-seven.html">An Ingredients List for Testing - Part Seven (of Seven)</a></p>
+</div>
+<div class="footnote-definition" id="15"><sup class="footnote-definition-label">15</sup>
+<p><a href="https://testing.googleblog.com/2011/01/how-google-tests-software.html">How Google Tests Software - Part One</a></p>
+</div>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">16</sup>
+<p><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-three.html">How Google Tests Software - Part Three</a></p>
+</div>
+<div class="footnote-definition" id="16"><sup class="footnote-definition-label">17</sup>
+<p><a href="https://testing.googleblog.com/2011/02/how-google-tests-software-part-two.html">How Google Tests Software - Part Two</a></p>
+</div>
+<div class="footnote-definition" id="20"><sup class="footnote-definition-label">18</sup>
+<p><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-six.html">How Google Tests Software - Part Six</a></p>
+</div>
+<div class="footnote-definition" id="22"><sup class="footnote-definition-label">19</sup>
+<p><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-part-seven.html">How Google Tests Software - Part Seven</a></p>
+</div>
+<div class="footnote-definition" id="21"><sup class="footnote-definition-label">20</sup>
+<p><a href="https://testing.googleblog.com/2011/05/how-google-tests-software-break-for-q.html">How Google Tests Software - A Break for Q&amp;A</a></p>
+</div>
+<div class="footnote-definition" id="18"><sup class="footnote-definition-label">21</sup>
+<p><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-four.html">How Google Tests Software - Part Four</a></p>
+</div>
+<div class="footnote-definition" id="19"><sup class="footnote-definition-label">22</sup>
+<p><a href="https://testing.googleblog.com/2011/03/how-google-tests-software-part-five.html">How Google Tests Software - Part Five</a></p>
+</div>
+
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;google-test&#x2F;tour&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+    <nav>
+      <ul>
+        <li>
+          <a class="toc-h2" href="#the-seven-plagues-of-software-testing">The Seven Plagues of Software Testing</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#an-ingredients-list-for-testing">An Ingredients List for Testing</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#how-google-tests-software">How Google Tests Software</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

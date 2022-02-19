@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>A Lightning Tour of the Google Testing Blog</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>A Lightning Tour of the Google Testing Blog</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2017-04-17</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/google"><i
+              class="ri-hashtag ri-sm"></i><span>google</span></a>
+        </div>
+      </div>    
+
+      
+
+      <p><a href="https://testing.googleblog.com/">Google Testing Blog</a> has a huge wealth of information for software
+engineers looking for resources on testing. Testing culture at Google is one that I really look up
+to and I am grateful to the engineers who shared these resources. With that said, keep in mind that
+some of the content can be outdated and/or opinionated. Testing is a widespread topic and there can
+be different, sometimes conflicting, answers to any given problem.</p>
+<p>Below you will find a a categorized list of key concepts I found in the blog with links to the
+particular post in which it was found. The idea here is brevity. If an item catches your eye, take a
+look at the linked blog post(s) for more info.</p>
+<p>I plan to keep this updated as more posts are added.</p>
+<h2 id="test-reliability">Test Reliability</h2>
+<ul>
+<li>Smaller tests run faster, are less flakey, and isolate failures. As a general rule of thumb, favor
+a pyramid-shaped composition of 70% small, 20% medium, and 10% large tests.<sup class="footnote-reference"><a href="#11">1</a></sup></li>
+<li>Test binary size and memory usage, including third-party testing tools, have a strong correlation
+on whether a test is flaky.<sup class="footnote-reference"><a href="#18">2</a></sup></li>
+<li>Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and
+more reliable to have smaller tests that break closer to the source of the problem.<sup class="footnote-reference"><a href="#3">3</a></sup> <sup class="footnote-reference"><a href="#4">4</a></sup></li>
+<li>Hermetic servers add speed and reliability into end-to-end tests. A environment is considered
+Hermetic if it can run an entire system under test on a single machine with fake network
+connections and database implementations.<sup class="footnote-reference"><a href="#9">5</a></sup></li>
+<li>Filter out flakey tests by rerunning failing tests. If a test fails three times in a row, consider
+it a real failure.<sup class="footnote-reference"><a href="#13">6</a></sup></li>
+<li>Build testability into the product. For example, a real-time system can rely on a fake clock
+instead of a hardware clock. Processes can spawn other processes attached to a debugger with
+debugging flags.<sup class="footnote-reference"><a href="#15">7</a></sup></li>
+</ul>
+<h2 id="code-quality">Code Quality</h2>
+<ul>
+<li>Releasing often gives teams an incentive to automate testing and reduce coupling with the rest of
+the system.<sup class="footnote-reference"><a href="#17">8</a></sup></li>
+<li>When a team provides <a href="../tott/#know-your-test-doubles">fakes</a> and writes tests for them, they
+become clients of their own software. Experiencing the perspective of the client gives the team an
+incentive to make their API easier to use.<sup class="footnote-reference"><a href="#17">8</a></sup></li>
+<li>While writing the header first encourages consideration for the interface, writing tests first
+encourages consideration for how the interface will be <em>used</em>.<sup class="footnote-reference"><a href="#5">9</a></sup></li>
+<li>Good code quality is taught, not enforced. Create a culture that teaches code quality through code
+review, pair programming, and mentoring.<sup class="footnote-reference"><a href="#15">7</a></sup></li>
+<li>Don't obsess over coverage numbers. Use code coverage reports to identify areas that are not
+covered and human judgement over whether to cover it. For example, frequently changed code should
+be covered.<sup class="footnote-reference"><a href="#19">10</a></sup></li>
+<li>Consider investing in mutation testing, a automated tool that &quot;mutates&quot; code and expects tests to
+fail. Tuned properly, it can help find oversights in tests that are worth fixing. <sup class="footnote-reference"><a href="#20">11</a></sup></li>
+</ul>
+<h2 id="productivity">Productivity</h2>
+<ul>
+<li>Automation is costly. Automate only the tests that you find yourself running often to reliably
+catch regressions on features with business value.<sup class="footnote-reference"><a href="#3">3</a></sup></li>
+<li>Speed up the feedback loop between test engineers and development engineers. Share the same space,
+tools, daily stand-ups, and design discussions.<sup class="footnote-reference"><a href="#3">3</a></sup></li>
+<li>Effective automation depends on test design. Good test design is built from a solid foundation of
+manual tests.<sup class="footnote-reference"><a href="#6">12</a></sup></li>
+<li>If a test plan isn't worth bothering to update, it isn't worth creating in the first place. A
+quick brainstorming session will suffice.<sup class="footnote-reference"><a href="#8">13</a></sup></li>
+<li>Use formatting tools, like clang-format, to improve readability.<sup class="footnote-reference"><a href="#14">14</a></sup></li>
+</ul>
+<h2 id="infrastructure">Infrastructure</h2>
+<ul>
+<li>Remove the detective work of tracking down bad changes by investing in a pre-submit system that
+runs automated tests against the commit before it reaches the depot.<sup class="footnote-reference"><a href="#7">15</a></sup> <sup class="footnote-reference"><a href="#13">6</a></sup></li>
+<li>Don't fall behind on updating third party dependencies. Update them quickly by setting up CI
+system with dependencies pinned at head.<sup class="footnote-reference"><a href="#12">16</a></sup></li>
+<li>Avoid making more than one branch by putting risky new changes behind feature flags.<sup class="footnote-reference"><a href="#14">14</a></sup></li>
+<li>Constantly look for opportunities to make the build system faster. Reduce the amount of code being
+compiled, replace tools with faster counterparts, and use distributed build systems.<sup class="footnote-reference"><a href="#16">17</a></sup></li>
+<li>Release early and release often. Services and websites can deploy rapidly. A good target for
+client projects is Chromes six week cycle.<sup class="footnote-reference"><a href="#16">17</a></sup></li>
+</ul>
+<h2 id="metrics-logging">Metrics &amp; Logging</h2>
+<ul>
+<li><em>Pre- vs post-production defect ratio</em> and a breakdown of <em>defects by component or functional
+area</em> help identify holes in test.<sup class="footnote-reference"><a href="#1">18</a></sup></li>
+<li>Premature performance optimization makes bad code. Develop in a clean, maintainable and
+extensible manner <em>first</em>, and then let benchmarks drive performance optimizations.<sup class="footnote-reference"><a href="#2">19</a></sup></li>
+<li>Remove unwanted noise by logging with conditional verbosity. Log all levels to a logging queue.
+If a transaction completes successfully, discard the unimportant levels.<sup class="footnote-reference"><a href="#10">20</a></sup></li>
+<li>Use two sets of logging levels, one for production builds and one for development builds.<sup class="footnote-reference"><a href="#10">20</a></sup></li>
+<li>Trace the time spent on every significant processing step. Measuring is the only way to detect
+performance issues or make claims about performance.<sup class="footnote-reference"><a href="#10">20</a></sup></li>
+<li>Write automated performance tests for performance sensitive parts of your product.<sup class="footnote-reference"><a href="#16">17</a></sup></li>
+</ul>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html">Just Say No to More End-to-End Tests</a></p>
+</div>
+<div class="footnote-definition" id="18"><sup class="footnote-definition-label">2</sup>
+<p><a href="https://testing.googleblog.com/2017/04/where-do-our-flaky-tests-come-from.html">Where do our flaky tests come from?</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p><a href="https://testing.googleblog.com/2007/10/automating-tests-vs-test-automation.html">Automating tests vs. test-automation</a></p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p><a href="https://testing.googleblog.com/2008/06/taming-beast-aka-how-to-test-ajax.html">Taming the Beast (a.k.a. how to test AJAX applications) : Part 1</a></p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">5</sup>
+<p><a href="https://testing.googleblog.com/2012/10/hermetic-servers.html">Hermetic Servers</a></p>
+</div>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">6</sup>
+<p><a href="https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html">Flaky Tests at Google and How We Mitigate Them</a></p>
+</div>
+<div class="footnote-definition" id="15"><sup class="footnote-definition-label">7</sup>
+<p><a href="https://testing.googleblog.com/2016/10/hackable-projects-pillar-2-debuggability.html">Hackable Projects - Pillar 2: Debuggability</a></p>
+</div>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">8</sup>
+<p><a href="https://testing.googleblog.com/2017/02/discomfort-as-tool-for-change.html">Discomfort as a Tool for Change</a></p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">9</sup>
+<p><a href="https://testing.googleblog.com/2008/09/test-first-is-fun_08.html">Test first is fun!</a></p>
+</div>
+<div class="footnote-definition" id="19"><sup class="footnote-definition-label">10</sup>
+<p><a href="https://testing.googleblog.com/2020/08/code-coverage-best-practices.html">Code Coverage Best Practices</a></p>
+</div>
+<div class="footnote-definition" id="20"><sup class="footnote-definition-label">11</sup>
+<p><a href="https://testing.googleblog.com/2021/04/mutation-testing.html">Mutation Testing</a></p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">12</sup>
+<p><a href="https://testing.googleblog.com/2008/09/presubmit-and-performance.html">Presubmit And Performance</a></p>
+</div>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">13</sup>
+<p><a href="https://testing.googleblog.com/2011/09/10-minute-test-plan.html">The 10 Minute Test Plan</a></p>
+</div>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p><a href="https://testing.googleblog.com/2016/08/hackable-projects.html">Hackable Projects - Pillar 1: Code Health</a></p>
+</div>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">15</sup>
+<p><a href="https://testing.googleblog.com/2009/06/burning-test-questions-at-google.html">Burning Test Questions at Google</a></p>
+</div>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">16</sup>
+<p><a href="https://testing.googleblog.com/2015/05/multi-repository-development.html">Multi-Repository Development</a></p>
+</div>
+<div class="footnote-definition" id="16"><sup class="footnote-definition-label">17</sup>
+<p><a href="https://testing.googleblog.com/2016/11/hackable-projects-pillar-3.html">Hackable Projects - Pillar 3: Infrastructure</a></p>
+</div>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">18</sup>
+<p><a href="https://testing.googleblog.com/2007/10/post-release-closing-loop_02.html">Post Release: Closing the loop</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">19</sup>
+<p><a href="https://testing.googleblog.com/2007/10/performance-testing.html">Performance Testing</a></p>
+</div>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">20</sup>
+<p><a href="https://testing.googleblog.com/2013/06/optimal-logging.html">Optimal Logging</a></p>
+</div>
+
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+            
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+          <!-- break so we don't set previous to something even heavier -->
+          
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;google-test&#x2F;hevery&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;google-test&#x2F;whittaker&#x2F;"><i class="ri-arrow-right-s-line ri-4x"></i></a>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+    <nav>
+      <ul>
+        <li>
+          <a class="toc-h2" href="#test-reliability">Test Reliability</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#code-quality">Code Quality</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#productivity">Productivity</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#infrastructure">Infrastructure</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#metrics-logging">Metrics &amp; Logging</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

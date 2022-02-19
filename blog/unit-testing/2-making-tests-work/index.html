@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Part 2: Making your Tests Work for You</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Part 2: Making your Tests Work for You</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2020-01-06</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/unit-testing"><i
+              class="ri-hashtag ri-sm"></i><span>unit-testing</span></a>
+        </div>
+      </div>    
+
+      
+
+      <h2 id="four-pillars-of-a-good-test">Four Pillars of a Good Test</h2>
+<ol>
+<li><strong>Protection against regressions</strong> - Ability to indicate the presence of regressions.</li>
+<li><strong>Resistance to refactoring</strong> - Degree to which a test can sustain refactoring without producing
+a false positive.</li>
+<li><strong>Fast feedback</strong> - Measure of how quickly the test executes.</li>
+<li><strong>Maintainability</strong> - Ability to read and run the test.</li>
+</ol>
+<table><thead><tr><th>Error Types</th><th>Functionality is Correct</th><th>Functionality is Broken</th></tr></thead><tbody>
+<tr><td><strong>Test Passes</strong></td><td>True negative</td><td>False negative (indicates poor protection against regressions)</td></tr>
+<tr><td><strong>Test Fails</strong></td><td>False positive (indicates poor resistance to refactoring)</td><td>True positive</td></tr>
+</tbody></table>
+<p>$$Test\ accuracy = {Signal \over Noise} = {True\ positives \over False\ positives}$$</p>
+<h2 id="the-ideal-test">The Ideal Test</h2>
+<ul>
+<li><em>Protection Against Regressions</em></li>
+<li><em>Resistance to Refactoring</em></li>
+<li><em>Fast Feedback</em></li>
+</ul>
+<p>Choose two. </p>
+<div class="svg-content">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="811px" height="791px" viewBox="-0.5 -0.5 811 791">
+   <g>
+      <ellipse cx="410.5" cy="540.5" rx="250" ry="250" fill-opacity="0.5" class="yellow-circle" stroke="none" pointer-events="all"/>
+      <ellipse cx="250.5" cy="250.5" rx="250" ry="250" fill-opacity="0.5" class="blue-circle" stroke="none" pointer-events="all"/>
+      <ellipse cx="560.5" cy="250.5" rx="250" ry="250" fill-opacity="0.5" class="red-circle" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 258px; height: 1px; padding-top: 221px; margin-left: 42px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 24px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                  <font style="font-size: 42px">Protection Against Regressions</font>
+               </div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="541" y="132" width="210" height="178.5" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 208px; height: 1px; padding-top: 221px; margin-left: 542px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Fast Feedback</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="275.25" y="532" width="270.5" height="161.5" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 269px; height: 1px; padding-top: 613px; margin-left: 276px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Resistance to Refactoring</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="355.25" y="180.5" width="110.5" height="81.5" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 109px; height: 1px; padding-top: 188px; margin-left: 356px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Brittle Tests</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="191" y="412" width="170" height="50" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 168px; height: 1px; padding-top: 419px; margin-left: 192px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Large Tests</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="441" y="412" width="180" height="50" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 178px; height: 1px; padding-top: 419px; margin-left: 442px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Trivial Tests</div>
+            </div>
+         </div>
+      </foreignObject>
+      <rect x="360.25" y="310.5" width="100.5" height="70" fill="none" stroke="none" pointer-events="all"/>
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+         <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 318px; margin-left: 411px;">
+            <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+               <div style="display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: nowrap;">
+                  <span style="font-size: 28px">N/A</span>
+               </div>
+            </div>
+         </div>
+      </foreignObject>
+   </g>
+   <switch>
+      <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+      <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+         <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+      </a>
+   </switch>
+</svg>
+</div>
+<p>Always chose to maximize <em>resistance to refactoring</em>. Then, test size becomes a slider between 
+<em>protection against regressions</em> and <em>fast feedback</em>.</p>
+<div class="svg-content">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="801px" height="491px" viewBox="-0.5 -0.5 801 491">
+  <g>
+    <ellipse cx="400" cy="150" rx="50" ry="50" class="outline-text" stroke-width="3" pointer-events="all"/>
+    <ellipse cx="530" cy="310" rx="50" ry="50" class="outline-text" stroke-width="3" pointer-events="all"/>
+    <ellipse cx="270" cy="310" rx="50" ry="50" class="outline-text" stroke-width="3" pointer-events="all"/>
+    <path d="M 494.64 274.64 L 435.36 185.36" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 480 310 L 320 310" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 305.36 274.64 L 364.64 185.36" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <rect x="265" y="370" width="10" height="60" class="solid-text" stroke-width="3" pointer-events="all"/>
+    <rect x="395" y="370" width="10" height="60" class="solid-text" stroke-width="3" pointer-events="all"/>
+    <rect x="525" y="370" width="10" height="60" class="solid-text" stroke-width="3" pointer-events="all"/>
+    <path d="M 222.5 406 L 222.5 417.5 L 201.5 400 L 222.5 382.5 L 222.5 394 L 577.5 394 L 577.5 382.5 L 598.5 400 L 577.5 417.5 L 577.5 406 Z" class="outline-text" stroke-width="3" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 50px; margin-left: 321px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Resistance to Refactoring</div>
+        </div>
+      </div>
+    </foreignObject>
+    <rect x="0" y="260" width="220" height="80" fill="none" stroke="none" pointer-events="all"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 300px; margin-left: 1px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+            <font style="font-size: 28px">Protection Against Regressions</font>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 310px; margin-left: 601px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Fast Feedback</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 143px; height: 1px; padding-top: 455px; margin-left: 329px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+            <font style="font-size: 28px">Medium</font>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 83px; height: 1px; padding-top: 455px; margin-left: 229px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+            <font style="font-size: 28px">Large</font>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+    <rect x="487.5" y="440" width="85" height="30" fill="none" stroke="none" pointer-events="all"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 83px; height: 1px; padding-top: 455px; margin-left: 489px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Small</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 150px; margin-left: 371px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Max</div>
+        </div>
+      </div>
+    </foreignObject>
+    <switch>
+      <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+      <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+        <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+      </a>
+    </switch>
+  </g>
+</svg>
+</div>
+<p>A diverse ratio of test sizes provides an ideal amount of both <em>protection against regressions</em> and 
+<em>fast feedback</em>. For any non-trivial production system, test counts should form a pyramid where the
+test count shrinks as test size grows.</p>
+<div class="svg-content">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="443px" height="363px" viewBox="-0.5 -0.5 443 363">
+  <g>
+    <path d="M 41 -39 L 401 181 L 41 401 Z" class="outline-text" stroke-width="3" stroke-miterlimit="10" transform="rotate(-90,221,181)" pointer-events="all"/>
+    <path d="M 367.96 244 L 74.92 242.92" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 146.2 124.12 L 297.12 123.4" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 306px; margin-left: 162px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Small Tests</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 181px; margin-left: 157px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Medium Tests</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 73px; height: 1px; padding-top: 81px; margin-left: 185px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Large Tests</div>
+        </div>
+      </div>
+    </foreignObject>
+  </g>
+  <switch>
+    <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+    <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+      <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>
+</div>
+<h2 id="preventing-false-positives">Preventing False Positives</h2>
+<p>When tests fail for the wrong reasons, developers quickly loose trust in their tests. However, 
+without trustworthy tests, refactoring is risky. This trap leads to real bugs slipping through.</p>
+<p>Fast positives are formed from coupling between the test and implementation details:</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3a3;">TEST</span><span>(Render, IsCorrect) {
+</span><span>  std::ifstream </span><span style="color:#c2a3a3;">in</span><span>(&quot;</span><span style="color:#a8c2a3;">message_renderer.cc</span><span>&quot;);
+</span><span>  std::stringstream sstr;
+</span><span>  sstr &lt;&lt; in.</span><span style="color:#c2a3a3;">rdbuf</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(sstr.</span><span style="color:#c2a3a3;">str</span><span>(), </span><span style="color:#c2a3c2;">R</span><span>&quot;(</span><span style="color:#a8c2a3;">#include &quot;message_renderer.h&quot;
+</span><span style="color:#a8c2a3;">#include &quot;body_renderer.h&quot;
+</span><span style="color:#a8c2a3;">#include &quot;title_renderer.h&quot;
+</span><span style="color:#a8c2a3;">#include &quot;footer_renderer.h&quot;
+</span><span style="color:#a8c2a3;">
+</span><span style="color:#a8c2a3;">#include &lt;memory&gt;
+</span><span style="color:#a8c2a3;">#include &lt;numeric&gt;
+</span><span style="color:#a8c2a3;">#include &lt;string&gt;
+</span><span style="color:#a8c2a3;">
+</span><span style="color:#a8c2a3;">MessageRenderer::MessageRenderer()
+</span><span style="color:#a8c2a3;">    : sub_renderers_({std::make_unique&lt;TitleRenderer&gt;(),
+</span><span style="color:#a8c2a3;">                      std::make_unique&lt;BodyRenderer&gt;(),
+</span><span style="color:#a8c2a3;">                      std::make_unique&lt;FooterRenderer&gt;()}) {}
+</span><span style="color:#a8c2a3;">
+</span><span style="color:#a8c2a3;">std::string MessageRenderer::Render(const Message&amp; message) {
+</span><span style="color:#a8c2a3;">  return std::accumulate(sub_renderers_.begin(), sub_renderers_.end(),
+</span><span style="color:#a8c2a3;">                         std::string{},
+</span><span style="color:#a8c2a3;">                         [&amp;](std::string m, std::shared_ptr&lt;Renderer&gt; r) {
+</span><span style="color:#a8c2a3;">                           return std::move(m) + r-&gt;Render(message);
+</span><span style="color:#a8c2a3;">                         });
+</span><span style="color:#a8c2a3;">}</span><span>)&quot;);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Instead of testing the code, test the behavior.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3a3;">TEST</span><span>(Render, BasicMessage) {
+</span><span>  MessageRenderer renderer;
+</span><span>  </span><span style="color:#c2a3c2;">const</span><span> Message </span><span style="color:#c2a3a3;">message</span><span>{title : &quot;</span><span style="color:#a8c2a3;">a</span><span>&quot;, body : &quot;</span><span style="color:#a8c2a3;">b</span><span>&quot;, footer : &quot;</span><span style="color:#a8c2a3;">c</span><span>&quot;};
+</span><span>
+</span><span>  std::string html = renderer.</span><span style="color:#c2a3a3;">Render</span><span>(message);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(html,
+</span><span>            &quot;</span><span style="color:#a8c2a3;">&lt;head&gt;&lt;title&gt;a&lt;/title&gt;&lt;/head&gt;&lt;body&gt;b&lt;/body&gt;&lt;footer&gt;c&lt;/footer&gt;</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h2 id="types-of-test-doubles">Types of Test Doubles</h2>
+<ul>
+<li><strong>Mock</strong> <em>(mock, spy)</em> - Emulate and verify <em>outgoing</em> interactions from the SUT.</li>
+<li><strong>Stub</strong> <em>(stub, dummy, fake)</em> - Emulate <em>incoming</em> interactions to the SUT.</li>
+</ul>
+<blockquote class="note info">
+    <div class="header">
+        <i class="ri-information-line ri-lg"></i>
+        
+        <p><strong>Info</strong></p>
+        
+    </div> 
+    <div class="content">
+        <p>The term <em>mock</em> can also refer to the mocking framework itself. Mocking frameworks are also 
+generally responsible for creating stubs which can be confusing.</p>
+
+    </div>
+</blockquote>
+<p>Mocks can emulate interactions like stubs, but stubs should never assert interactions like mocks. 
+Asserting interactions with stubs is <em>over-specification</em>, a common anti-pattern.</p>
+<h2 id="encapsulation">Encapsulation</h2>
+<p>A well-designed API hides all implementation details behind a private API, leaving only observable 
+behavior in the public API. Implementation details should never <em>leak</em> into the public API.</p>
+<h4 id="invariant-violation">Invariant violation</h4>
+<p>API's that require several steps to achieve an individual goal are prone to <em>invariant violation</em>.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">User </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">SetName</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> std::string</span><span>&amp; </span><span style="color:#c2a3a3;">name</span><span style="color:#e4e4e7;">) { name_ </span><span>=</span><span style="color:#e4e4e7;"> name; }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  std::string </span><span style="color:#a3b8c2;">NormalizeName</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> std::string</span><span>&amp; </span><span style="color:#c2a3a3;">name</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">std::</span><span style="color:#c2a3a3;">string</span><span style="color:#e4e4e7;">(absl::</span><span style="color:#c2a3a3;">StripAsciiWhitespace</span><span style="color:#e4e4e7;">(name)).</span><span style="color:#c2a3a3;">substr</span><span style="color:#e4e4e7;">(</span><span style="color:#c2b3a3;">50</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::string name_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#797b86;">// Client must remember to `NormalizeName` before `SetName`.
+</span><span>std::string normalized_name = user.</span><span style="color:#c2a3a3;">NormalizeName</span><span>(new_name);
+</span><span>user.</span><span style="color:#c2a3a3;">SetName</span><span>(normalized_name);
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>A client should be able to achieve any individual goal atomically.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">User </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">SetName</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> std::string</span><span>&amp; </span><span style="color:#c2a3a3;">name</span><span style="color:#e4e4e7;">) { name_ </span><span>= </span><span style="color:#c2a3a3;">NormalizeName</span><span style="color:#e4e4e7;">(name); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::string </span><span style="color:#a3b8c2;">NormalizeName</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> std::string</span><span>&amp; </span><span style="color:#c2a3a3;">name</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">std::</span><span style="color:#c2a3a3;">string</span><span style="color:#e4e4e7;">(absl::</span><span style="color:#c2a3a3;">StripAsciiWhitespace</span><span style="color:#e4e4e7;">(name)).</span><span style="color:#c2a3a3;">substr</span><span style="color:#e4e4e7;">(</span><span style="color:#c2b3a3;">50</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  std::string name_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#797b86;">// Client no longer needs to be concerned about `NormalizeName`.
+</span><span>user.</span><span style="color:#c2a3a3;">SetName</span><span>(new_name);
+</span></code></pre>
+
+    </div>
+</blockquote><h4 id="leaking-state">Leaking state</h4>
+<p>Public access to state that isn't directly related to a client's goal is considered <em>leaking state</em>. </p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MessageRenderer </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">Renderer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::vector&lt;std::shared_ptr&lt;Renderer&gt;&gt; </span><span style="color:#a3b8c2;">GetSubRenderers</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> sub_renderers_;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> std::string </span><span style="color:#a3b8c2;">Render</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Message</span><span>&amp; </span><span style="color:#c2a3a3;">message</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::vector&lt;std::shared_ptr&lt;Renderer&gt;&gt; sub_renderers_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Keep the public API surface as small as possible while still meeting the clients needs.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MessageRenderer </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">Renderer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> std::string </span><span style="color:#a3b8c2;">Render</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Message</span><span>&amp; </span><span style="color:#c2a3a3;">message</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::vector&lt;std::unique_ptr&lt;Renderer&gt;&gt; sub_renderers_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote><h2 id="styles-of-unit-testing">Styles of Unit Testing</h2>
+<ul>
+<li><strong>Output-based</strong> - Verify output with a given input. Requires 
+<a href="https://ajguerrer.github.io/blog/unit-testing/2-making-tests-work/#functional-architecture">pure functions</a>.</li>
+<li><strong>State-based</strong> - Perform operation, then verify state of SUT and collaborators.</li>
+<li><strong>Communication-based</strong> - Perform operation, then verify communication with collaborators.</li>
+</ul>
+<table><thead><tr><th>Style</th><th>Output-based</th><th>State-based</th><th>Communication-based</th></tr></thead><tbody>
+<tr><td><strong>Resistance to refactoring</strong></td><td>High</td><td>Medium</td><td>Medium</td></tr>
+<tr><td><strong>Maintainability</strong></td><td>High</td><td>Medium</td><td>Low</td></tr>
+</tbody></table>
+<h2 id="hexagonal-architecture">Hexagonal Architecture</h2>
+<p><em>Hexagonal architecture</em>, proposed by Alistair Cockburn, breaks applications into two layers:</p>
+<ul>
+<li><strong>Domain layer</strong> - Logic and models essential to the business domain.</li>
+<li><strong>Controller layer</strong> - All other responsibilities of the application.</li>
+</ul>
+<p>Interaction between the Domain layer and the Controller layer follows three guidelines: </p>
+<ol>
+<li>The Domain layer is isolated from the Controller layer.</li>
+<li>The Domain layer may not depend on the Controller layer, but the Controller layer may 
+depend on the Domain layer.</li>
+<li>Communication with external applications is handled by the Controller layer, not the 
+Domain layer.</li>
+</ol>
+<div class="svg-content">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="676px" height="453px" viewBox="-0.5 -0.5 676 453">
+  <g>
+    <path d="M 101 91 L 301 91 L 401 271 L 301 451 L 101 451 L 1 271 Z" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 369.81 194.05 L 455.43 145.95" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 363.92 197.36 L 369.57 189.03 L 369.81 194.05 L 373.97 196.87 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 461.32 142.64 L 455.68 150.97 L 455.43 145.95 L 451.27 143.13 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 499.11 1 L 615.32 1 L 673.42 101 L 615.32 201 L 499.11 201 L 441 101 Z" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <ellipse cx="201.01" cy="271" rx="83.75" ry="83.75" class="outline-text" stroke-width="3" pointer-events="all"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 122px; height: 1px; padding-top: 271px; margin-left: 140px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Domain Layer</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 152px; height: 1px; padding-top: 136px; margin-left: 125px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Controller Layer</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 181px; height: 1px; padding-top: 101px; margin-left: 467px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">External<br />
+Dependency</div>
+        </div>
+      </div>
+    </foreignObject>
+  </g>
+  <switch>
+    <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+    <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+      <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>
+</div>
+<p>The Domain layer has high cyclomatic complexity and domain significance, while the Controller layer 
+has a large number of collaborators. Code that is both complex and involves many collaborators is 
+overcomplicated and what Hexagonal architecture aims to dissolve. </p>
+<h2 id="communication">Communication</h2>
+<p>Communication can be classified into two different types:</p>
+<ul>
+<li><strong>Intra-process</strong> - Communication within the application; implementation details.</li>
+<li><strong>Inter-process</strong> - Communication with other applications; observable behavior.</li>
+</ul>
+<p>Mocks are necessary for emulating external applications and verifying inter-system communication 
+patterns. However, mocks couple tests to implementation details, reducing their resistance to 
+refactoring. For this reason, the use of mocks should be avoided when dealing with intra-system 
+communication. External dependencies only accessible by the application, are implementation 
+details too, and should not be mocked either.</p>
+<h2 id="functional-architecture">Functional Architecture</h2>
+<p><em>Functional architecture</em> builds off of Hexagonal architecture with an added guideline that business 
+logic is written in a functional paradigm. The architecture generally flows in a three step process:</p>
+<ol>
+<li>The Controller layer gathers and prepare input.</li>
+<li>The Domain layer makes decisions based on prepared input.</li>
+<li>The Controller layer converts decisions into side effects.</li>
+</ol>
+<div class="svg-content">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="458px" height="427px" viewBox="-0.5 -0.5 458 427">
+  <g>
+    <rect x="301" y="193" width="200" height="40" rx="6" ry="6" class="background-fill-outline-text" stroke-width="3" transform="rotate(90,401,213)" pointer-events="all"/>
+    <path d="M 241 203 Q 311 203 311 138 Q 311 73 356 73 Q 401 73 401 102.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 401 109.65 L 396.5 100.65 L 401 102.9 L 405.5 100.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <rect x="1" y="193" width="240" height="40" rx="6" ry="6" class="background-fill-outline-text" stroke-width="3" pointer-events="all"/>
+    <path d="M 251 213 Q 321 213 321 148 Q 321 83 366 83 Q 411 83 411 112.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 411 119.65 L 406.5 110.65 L 411 112.9 L 415.5 110.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 41 53 L 41.07 182.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 41.08 189.65 L 36.57 180.65 L 41.07 182.9 L 45.57 180.64 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 81 63 L 81.07 192.22" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 81.08 198.97 L 76.57 189.97 L 81.07 192.22 L 85.57 189.96 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 161 63 L 161 189.74" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 161 196.49 L 156.5 187.49 L 161 189.74 L 165.5 187.49 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 201 53 L 201.07 182.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 201.08 189.65 L 196.57 180.65 L 201.07 182.9 L 205.57 180.64 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 41 233 L 41 342.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 41 349.65 L 36.5 340.65 L 41 342.9 L 45.5 340.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 81 233 L 81 352.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 81 359.65 L 76.5 350.65 L 81 352.9 L 85.5 350.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 120.5 233 L 120.57 362.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 120.58 369.65 L 116.07 360.65 L 120.57 362.9 L 125.07 360.64 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 161 233 L 161 352.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 161 359.65 L 156.5 350.65 L 161 352.9 L 165.5 350.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 201 233 L 201 342.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 201 349.65 L 196.5 340.65 L 201 342.9 L 205.5 340.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 152px; height: 1px; padding-top: 33px; margin-left: 45px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Input</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 152px; height: 1px; padding-top: 393px; margin-left: 45px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Side effects</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 183px; height: 1px; padding-top: 33px; margin-left: 272px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Prepared input</div>
+        </div>
+      </div>
+    </foreignObject>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 183px; height: 1px; padding-top: 393px; margin-left: 265px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Decisions</div>
+        </div>
+      </div>
+    </foreignObject>
+    <path d="M 421 333 Q 421 353 366 353 Q 311 353 311 298 Q 311 243 274.23 243" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 267.48 243 L 276.48 238.5 L 274.23 243 L 276.48 247.5 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 411 323 Q 411 343 366 343 Q 321 343 321 288 Q 321 233 261.1 233" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 254.35 233 L 263.35 228.5 L 261.1 233 L 263.35 237.5 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 401 313 Q 401 333 366 333 Q 331 333 331 278 Q 331 223 251.1 223" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 244.35 223 L 253.35 218.5 L 251.1 223 L 253.35 227.5 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <rect x="11" y="203" width="240" height="40" rx="6" ry="6" class="background-fill-outline-text" stroke-width="3" pointer-events="all"/>
+    <rect x="24.13" y="213" width="240" height="40" rx="6" ry="6" class="background-fill-outline-text" stroke-width="3" pointer-events="all"/>
+    <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 238px; height: 1px; padding-top: 233px; margin-left: 25px;">
+        <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+          <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Controller</div>
+        </div>
+      </div>
+    </foreignObject>
+    <path d="M 121 73 L 121.08 202.22" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 121.09 208.97 L 116.58 199.97 L 121.08 202.22 L 125.58 199.96 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+    <rect x="311" y="203" width="200" height="40" rx="6" ry="6" class="background-fill-outline-text" stroke-width="3" transform="rotate(90,411,223)" pointer-events="all"/>
+    <rect x="321" y="213" width="200" height="40" rx="6" ry="6" class="background-fill-outline-text" stroke-width="3" transform="rotate(90,421,233)" pointer-events="all"/>
+    <g transform="rotate(90 421 233)">
+      <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 233px; margin-left: 322px;">
+          <div style="box-sizing: border-box; font-size: 0px; text-align: center;">
+            <div style="display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Domain Logic</div>
+          </div>
+        </div>
+      </foreignObject>
+    </g>
+    <path d="M 264.13 223 Q 331 223 331 158 Q 331 93 376 93 Q 421 93 421 122.9" class="outline-text" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 421 129.65 L 416.5 120.65 L 421 122.9 L 425.5 120.65 Z" class="solid-text" stroke-width="3" stroke-miterlimit="10" pointer-events="all"/>
+  </g>
+  <switch>
+    <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+    <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+      <text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>
+</div>
+<blockquote>
+<p>Object-oriented programming makes code understandable by encapsulating moving parts. Functional
+programming makes code understandable by minimizing moving parts. <em>--Michael Feathers</em></p>
+</blockquote>
+<p>Functional architecture trades maintainability for performance; pure functions tend to eagerly load 
+data when they could have been lazy.</p>
+<h2 id="controller-orchestration">Controller Orchestration</h2>
+<p>Functional architecture assumes a clearcut pipeline of inputs, decisions, and side effects. However,
+production applications are rarely that simple. Decisions may involve gathering more input followed
+by making additional decisions. There are three strategies to consider:</p>
+<ol>
+<li><strong>Eagerly gather all the input</strong> - Preserve controller simplicity and isolated domain logic, 
+but concede performance.</li>
+<li><strong>Inject dependencies into the Domain layer</strong> - Preserve controller simplicity and performance, but
+concede isolated domain logic.</li>
+<li><strong>Allow controller orchestration</strong> - Preserve isolated domain logic and performance, but concede 
+controller simplicity.</li>
+</ol>
+<p>Isolated domain logic is an attribute that should always be maximized because it has a huge impact 
+on <em>maintainability</em> and <em>resistance to refactoring</em>. Injecting dependencies into the Domain layer
+is rule out. </p>
+<p>In cases where performance is not critical, feel free to stick to a Functional architecture and 
+eagerly gather input. Otherwise, allow controllers to orchestrate gathering input to meet the 
+needs of the Domain layer.</p>
+<blockquote class="note info">
+    <div class="header">
+        <i class="ri-information-line ri-lg"></i>
+        
+        <p><strong>Info</strong></p>
+        
+    </div> 
+    <div class="content">
+        <p>Controller orchestration will make controllers more complex, but complexity can be mitigated with 
+familiar patterns like switching on a result or listening for Domain layer events.</p>
+
+    </div>
+</blockquote>
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;unit-testing&#x2F;1-bigger-picture&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+    <nav>
+      <ul>
+        <li>
+          <a class="toc-h2" href="#four-pillars-of-a-good-test">Four Pillars of a Good Test</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#the-ideal-test">The Ideal Test</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#preventing-false-positives">Preventing False Positives</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#types-of-test-doubles">Types of Test Doubles</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#encapsulation">Encapsulation</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#invariant-violation">Invariant violation</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#leaking-state">Leaking state</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="toc-h2" href="#styles-of-unit-testing">Styles of Unit Testing</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#hexagonal-architecture">Hexagonal Architecture</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#communication">Communication</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#functional-architecture">Functional Architecture</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#controller-orchestration">Controller Orchestration</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

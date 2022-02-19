@@ -1,0 +1,1686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>ajguerrer::blog</title>
+	<subtitle>Andrew Guerrero&#x27;s blog.</subtitle>
+	<link href="https://ajguerrer.github.io/blog/unit-testing/feed.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ajguerrer.github.io/blog/unit-testing/"/>
+	<updated>2020-01-06T00:00:00+00:00</updated>
+	<id>https://ajguerrer.github.io/blog/unit-testing/feed.xml</id>
+	<entry xml:lang="en">
+		<title>Part 1: The Bigger Picture</title>
+		<published>2020-01-06T00:00:00+00:00</published>
+		<updated>2020-01-06T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/unit-testing/1-bigger-picture/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/unit-testing/1-bigger-picture/</id>
+		<content type="html">&lt;h2 id=&quot;what-makes-a-good-or-bad-test&quot;&gt;What Makes a Good or Bad Test?&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Unit testing enables &lt;em&gt;sustainable&lt;&#x2F;em&gt; growth in software projects by acting as a form of insurance 
+against regressions. A good test has a lower maintenance cost than the cost of fixing the bugs it 
+prevents.&lt;&#x2F;li&gt;
+&lt;li&gt;Code is a liability, not an asset, and tests are code too. Tests that don&#x27;t verify business value, 
+raise false alarms, run slow, and are difficult to maintain, do more harm than good.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;code-coverage-metrics&quot;&gt;Code Coverage Metrics&lt;&#x2F;h2&gt;
+&lt;p&gt;Coverage metrics are a good negative indicator for test quality, but a bad positive one.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;curly-braces&quot;&gt;Curly Braces&lt;&#x2F;h4&gt;
+&lt;p&gt;Curly braces count.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsStringLong&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; std::string&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;length&lt;&#x2F;span&gt;&lt;span&gt;() &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(IsStringLong, ShortString) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool&lt;&#x2F;span&gt;&lt;span&gt; result = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsStringLong&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;abc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(result, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;75% of 4 lines covered.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;refactoring&quot;&gt;Refactoring&lt;&#x2F;h4&gt;
+&lt;p&gt;Refactoring can be used to &amp;quot;game&amp;quot; coverage by condensing the code.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsStringLong&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; std::string&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;) { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;length&lt;&#x2F;span&gt;&lt;span&gt;() &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;100% of 1 line covered.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;test-quality&quot;&gt;Test Quality&lt;&#x2F;h4&gt;
+&lt;p&gt;Coverage metrics say nothing about the quality of the test.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsStringLong&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; std::string&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;length&lt;&#x2F;span&gt;&lt;span&gt;() &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(IsStringLong, ShortString) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool&lt;&#x2F;span&gt;&lt;span&gt; result1 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsStringLong&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;abc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool&lt;&#x2F;span&gt;&lt;span&gt; result2 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsStringLong&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;abcdef&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;100% of 4 lines covered.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;external-dependencies&quot;&gt;External Dependencies&lt;&#x2F;h4&gt;
+&lt;p&gt;Coverage metrics do not include coverage of external libraries.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Parse&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; std::string&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;) { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;atoi&lt;&#x2F;span&gt;&lt;span&gt;(input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;c_str&lt;&#x2F;span&gt;&lt;span&gt;()); }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(IsStringLong, ShortString) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; result = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Parse&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(result, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;100% of 1 line covered.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note tip&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-lightbulb-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Tip&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;&lt;strong&gt;Hospital Analogy&lt;&#x2F;strong&gt; - Temperature is another good negative indicator, but a bad positive indicator. 
+Nurses take temperature measurements to see if a patient&#x27;s body is unwell. But, regulating the 
+patient&#x27;s temperature is never &lt;em&gt;the goal&lt;&#x2F;em&gt;. Otherwise, hospitals would tend towards more &amp;quot;effective&amp;quot; 
+strategies, like dumping patients with fevers into ice baths. Instead, nurses continuously monitor 
+a patients temperature while focusing on the root cause of the illness.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h2 id=&quot;what-makes-a-successful-test-suite&quot;&gt;What Makes a Successful Test Suite&lt;&#x2F;h2&gt;
+&lt;p&gt;A successful test suite has the following properties:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Integrated into the development cycle.&lt;&#x2F;li&gt;
+&lt;li&gt;Targets only the most important parts of the code base.&lt;&#x2F;li&gt;
+&lt;li&gt;Provides maximum value with minimum maintenance costs.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Enforcing test quality is a tough problem; one that requires personal judgement and skill.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dependency-classification&quot;&gt;Dependency Classification&lt;&#x2F;h2&gt;
+&lt;p&gt;Dependencies may be shared or private; mutable or immutable; internal or external.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Private&lt;&#x2F;strong&gt; - Managed and consumed exclusively by the executable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Shared&lt;&#x2F;strong&gt; -  Managed and&#x2F;or consumed by another executable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Immutable&lt;&#x2F;strong&gt; - State cannot change in the lifetime of the executable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Mutable&lt;&#x2F;strong&gt; - State may change in the lifetime of the executable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Internal&lt;&#x2F;strong&gt; - Exists within the executable.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;External&lt;&#x2F;strong&gt; Exists outside the executable.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote class=&quot;note info&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-information-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Info&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;Executable in this context may refer to a production application or a test executable containing a
+suite of test(s).&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h2 id=&quot;test-isolation&quot;&gt;Test Isolation&lt;&#x2F;h2&gt;
+&lt;p&gt;Varying degrees of isolation can be used when writing tests:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Heavy Isolation&lt;&#x2F;strong&gt; - Replace all mutable dependencies with test doubles. Development tends to
+start at the top of the object graph and work it&#x27;s way down.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Light Isolation&lt;&#x2F;strong&gt; - Replace all mutable, shared dependencies with test doubles. Development 
+tends to start at the bottom of the object graph and work it&#x27;s way up.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;granularity&quot;&gt;Granularity&lt;&#x2F;h4&gt;
+&lt;p&gt;Heavy isolation helps increase granularity. However, it is easy to fall into the trap of testing
+&lt;em&gt;implementation details&lt;&#x2F;em&gt; instead of &lt;em&gt;behavior&lt;&#x2F;em&gt;. &lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre style=&quot;background-color:#303136;color:#afb0b6;&quot;&gt;&lt;code&gt;&lt;span&gt;When I call my dog, he moves his front left leg, 
+&lt;&#x2F;span&gt;&lt;span&gt;followed by his front right leg, 
+&lt;&#x2F;span&gt;&lt;span&gt;then the back right leg, 
+&lt;&#x2F;span&gt;&lt;span&gt;his head turns, 
+&lt;&#x2F;span&gt;&lt;span&gt;and the tail starts wagging.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;What is the purpose of those movements?&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre style=&quot;background-color:#303136;color:#afb0b6;&quot;&gt;&lt;code&gt;&lt;span&gt;When I call my dog, he comes right to me.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;A test should tell a story about the problem your code helps to solve, and this story should be 
+cohesive and meaningful to a business expert.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;coupling&quot;&gt;Coupling&lt;&#x2F;h4&gt;
+&lt;p&gt;Heavy isolation can make it easier to test coupled classes. Substituting a classes dependencies with
+test doubles can help break up coupling in a large graph of dependencies. However, dependance on 
+test doubles is a good negative indicator of quality code design.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;feedback&quot;&gt;Feedback&lt;&#x2F;h4&gt;
+&lt;p&gt;Heavy isolation makes it easier to narrow down bugs, while light isolation tends to produce 
+cascades of failing tests. However, this issue can be mitigated by running tests regularly.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;test-structure&quot;&gt;Test Structure&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Arrange&lt;&#x2F;em&gt;, &lt;em&gt;Act&lt;&#x2F;em&gt;, then &lt;em&gt;Assert&lt;&#x2F;em&gt; (AAA).&lt;&#x2F;li&gt;
+&lt;li&gt;Watch out for &lt;em&gt;Act&lt;&#x2F;em&gt; and &lt;em&gt;Assert&lt;&#x2F;em&gt; sections larger than one line, which may indicate the test: 
+&lt;ul&gt;
+&lt;li&gt;Verifies more than one behavior and needs to be split.&lt;&#x2F;li&gt;
+&lt;li&gt;Requires verification of more than one outcome, a.k.a &lt;em&gt;invariant violation&lt;&#x2F;em&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Arrange&lt;&#x2F;em&gt; sections should not be placed inside test fixtures. Doing so:
+&lt;ul&gt;
+&lt;li&gt;Introduces coupling between tests.&lt;&#x2F;li&gt;
+&lt;li&gt;Decreases readability.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Simplify tedious &lt;em&gt;Arrange&lt;&#x2F;em&gt; sections with the &lt;em&gt;factory pattern&lt;&#x2F;em&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Avoid using conditional logic, including loop conditions.&lt;&#x2F;li&gt;
+&lt;li&gt;Name tests using plain english, describing behavior from the perspective of a business expert.&lt;&#x2F;li&gt;
+&lt;li&gt;Tests that verify the same behavior with different values may be parameterized, but never at the
+expense of readability.&lt;&#x2F;li&gt;
+&lt;li&gt;Consider an assertion library that reads fluently.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Part 2: Making your Tests Work for You</title>
+		<published>2020-01-06T00:00:00+00:00</published>
+		<updated>2020-01-06T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/unit-testing/2-making-tests-work/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/unit-testing/2-making-tests-work/</id>
+		<content type="html">&lt;h2 id=&quot;four-pillars-of-a-good-test&quot;&gt;Four Pillars of a Good Test&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Protection against regressions&lt;&#x2F;strong&gt; - Ability to indicate the presence of regressions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Resistance to refactoring&lt;&#x2F;strong&gt; - Degree to which a test can sustain refactoring without producing
+a false positive.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Fast feedback&lt;&#x2F;strong&gt; - Measure of how quickly the test executes.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Maintainability&lt;&#x2F;strong&gt; - Ability to read and run the test.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Error Types&lt;&#x2F;th&gt;&lt;th&gt;Functionality is Correct&lt;&#x2F;th&gt;&lt;th&gt;Functionality is Broken&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Test Passes&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;True negative&lt;&#x2F;td&gt;&lt;td&gt;False negative (indicates poor protection against regressions)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Test Fails&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;False positive (indicates poor resistance to refactoring)&lt;&#x2F;td&gt;&lt;td&gt;True positive&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;$$Test\ accuracy = {Signal \over Noise} = {True\ positives \over False\ positives}$$&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-ideal-test&quot;&gt;The Ideal Test&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Protection Against Regressions&lt;&#x2F;em&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Resistance to Refactoring&lt;&#x2F;em&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Fast Feedback&lt;&#x2F;em&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Choose two. &lt;&#x2F;p&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot;
+   xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;811px&quot; height=&quot;791px&quot; viewBox=&quot;-0.5 -0.5 811 791&quot;&gt;
+   &lt;g&gt;
+      &lt;ellipse cx=&quot;410.5&quot; cy=&quot;540.5&quot; rx=&quot;250&quot; ry=&quot;250&quot; fill-opacity=&quot;0.5&quot; class=&quot;yellow-circle&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;ellipse cx=&quot;250.5&quot; cy=&quot;250.5&quot; rx=&quot;250&quot; ry=&quot;250&quot; fill-opacity=&quot;0.5&quot; class=&quot;blue-circle&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;ellipse cx=&quot;560.5&quot; cy=&quot;250.5&quot; rx=&quot;250&quot; ry=&quot;250&quot; fill-opacity=&quot;0.5&quot; class=&quot;red-circle&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 258px; height: 1px; padding-top: 221px; margin-left: 42px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 24px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+                  &lt;font style=&quot;font-size: 42px&quot;&gt;Protection Against Regressions&lt;&#x2F;font&gt;
+               &lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+      &lt;rect x=&quot;541&quot; y=&quot;132&quot; width=&quot;210&quot; height=&quot;178.5&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 208px; height: 1px; padding-top: 221px; margin-left: 542px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Fast Feedback&lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+      &lt;rect x=&quot;275.25&quot; y=&quot;532&quot; width=&quot;270.5&quot; height=&quot;161.5&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 269px; height: 1px; padding-top: 613px; margin-left: 276px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Resistance to Refactoring&lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+      &lt;rect x=&quot;355.25&quot; y=&quot;180.5&quot; width=&quot;110.5&quot; height=&quot;81.5&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 109px; height: 1px; padding-top: 188px; margin-left: 356px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Brittle Tests&lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+      &lt;rect x=&quot;191&quot; y=&quot;412&quot; width=&quot;170&quot; height=&quot;50&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 168px; height: 1px; padding-top: 419px; margin-left: 192px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Large Tests&lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+      &lt;rect x=&quot;441&quot; y=&quot;412&quot; width=&quot;180&quot; height=&quot;50&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 178px; height: 1px; padding-top: 419px; margin-left: 442px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Trivial Tests&lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+      &lt;rect x=&quot;360.25&quot; y=&quot;310.5&quot; width=&quot;100.5&quot; height=&quot;70&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+         &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 318px; margin-left: 411px;&quot;&gt;
+            &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+               &lt;div style=&quot;display: inline-block; font-size: 42px; line-height: 1.2; pointer-events: all; white-space: nowrap;&quot;&gt;
+                  &lt;span style=&quot;font-size: 28px&quot;&gt;N&#x2F;A&lt;&#x2F;span&gt;
+               &lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+         &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+   &lt;&#x2F;g&gt;
+   &lt;switch&gt;
+      &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot;&#x2F;&gt;
+      &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+         &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+      &lt;&#x2F;a&gt;
+   &lt;&#x2F;switch&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;Always chose to maximize &lt;em&gt;resistance to refactoring&lt;&#x2F;em&gt;. Then, test size becomes a slider between 
+&lt;em&gt;protection against regressions&lt;&#x2F;em&gt; and &lt;em&gt;fast feedback&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot;
+  xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;801px&quot; height=&quot;491px&quot; viewBox=&quot;-0.5 -0.5 801 491&quot;&gt;
+  &lt;g&gt;
+    &lt;ellipse cx=&quot;400&quot; cy=&quot;150&quot; rx=&quot;50&quot; ry=&quot;50&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;ellipse cx=&quot;530&quot; cy=&quot;310&quot; rx=&quot;50&quot; ry=&quot;50&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;ellipse cx=&quot;270&quot; cy=&quot;310&quot; rx=&quot;50&quot; ry=&quot;50&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 494.64 274.64 L 435.36 185.36&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 480 310 L 320 310&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 305.36 274.64 L 364.64 185.36&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;rect x=&quot;265&quot; y=&quot;370&quot; width=&quot;10&quot; height=&quot;60&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;395&quot; y=&quot;370&quot; width=&quot;10&quot; height=&quot;60&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;525&quot; y=&quot;370&quot; width=&quot;10&quot; height=&quot;60&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 222.5 406 L 222.5 417.5 L 201.5 400 L 222.5 382.5 L 222.5 394 L 577.5 394 L 577.5 382.5 L 598.5 400 L 577.5 417.5 L 577.5 406 Z&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-linejoin=&quot;round&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 50px; margin-left: 321px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Resistance to Refactoring&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;rect x=&quot;0&quot; y=&quot;260&quot; width=&quot;220&quot; height=&quot;80&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 300px; margin-left: 1px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;Protection Against Regressions&lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 310px; margin-left: 601px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Fast Feedback&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 143px; height: 1px; padding-top: 455px; margin-left: 329px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;Medium&lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 83px; height: 1px; padding-top: 455px; margin-left: 229px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;Large&lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;rect x=&quot;487.5&quot; y=&quot;440&quot; width=&quot;85&quot; height=&quot;30&quot; fill=&quot;none&quot; stroke=&quot;none&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 83px; height: 1px; padding-top: 455px; margin-left: 489px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Small&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 150px; margin-left: 371px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Max&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;switch&gt;
+      &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot;&#x2F;&gt;
+      &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+        &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+      &lt;&#x2F;a&gt;
+    &lt;&#x2F;switch&gt;
+  &lt;&#x2F;g&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;A diverse ratio of test sizes provides an ideal amount of both &lt;em&gt;protection against regressions&lt;&#x2F;em&gt; and 
+&lt;em&gt;fast feedback&lt;&#x2F;em&gt;. For any non-trivial production system, test counts should form a pyramid where the
+test count shrinks as test size grows.&lt;&#x2F;p&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot;
+  xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;443px&quot; height=&quot;363px&quot; viewBox=&quot;-0.5 -0.5 443 363&quot;&gt;
+  &lt;g&gt;
+    &lt;path d=&quot;M 41 -39 L 401 181 L 41 401 Z&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; transform=&quot;rotate(-90,221,181)&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 367.96 244 L 74.92 242.92&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 146.2 124.12 L 297.12 123.4&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 306px; margin-left: 162px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Small Tests&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 181px; margin-left: 157px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Medium Tests&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 73px; height: 1px; padding-top: 81px; margin-left: 185px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Large Tests&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+  &lt;&#x2F;g&gt;
+  &lt;switch&gt;
+    &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot;&#x2F;&gt;
+    &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+      &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+    &lt;&#x2F;a&gt;
+  &lt;&#x2F;switch&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;h2 id=&quot;preventing-false-positives&quot;&gt;Preventing False Positives&lt;&#x2F;h2&gt;
+&lt;p&gt;When tests fail for the wrong reasons, developers quickly loose trust in their tests. However, 
+without trustworthy tests, refactoring is risky. This trap leads to real bugs slipping through.&lt;&#x2F;p&gt;
+&lt;p&gt;Fast positives are formed from coupling between the test and implementation details:&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(Render, IsCorrect) {
+&lt;&#x2F;span&gt;&lt;span&gt;  std::ifstream &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;in&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;message_renderer.cc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  std::stringstream sstr;
+&lt;&#x2F;span&gt;&lt;span&gt;  sstr &amp;lt;&amp;lt; in.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;rdbuf&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(sstr.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;R&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;quot;message_renderer.h&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;quot;body_renderer.h&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;quot;title_renderer.h&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;quot;footer_renderer.h&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;lt;memory&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;lt;numeric&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;#include &amp;lt;string&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;MessageRenderer::MessageRenderer()
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;    : sub_renderers_({std::make_unique&amp;lt;TitleRenderer&amp;gt;(),
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;                      std::make_unique&amp;lt;BodyRenderer&amp;gt;(),
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;                      std::make_unique&amp;lt;FooterRenderer&amp;gt;()}) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;std::string MessageRenderer::Render(const Message&amp;amp; message) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;  return std::accumulate(sub_renderers_.begin(), sub_renderers_.end(),
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;                         std::string{},
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;                         [&amp;amp;](std::string m, std::shared_ptr&amp;lt;Renderer&amp;gt; r) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;                           return std::move(m) + r-&amp;gt;Render(message);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;                         });
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;)&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Instead of testing the code, test the behavior.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(Render, BasicMessage) {
+&lt;&#x2F;span&gt;&lt;span&gt;  MessageRenderer renderer;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; Message &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;message&lt;&#x2F;span&gt;&lt;span&gt;{title : &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, body : &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, footer : &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  std::string html = renderer.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Render&lt;&#x2F;span&gt;&lt;span&gt;(message);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(html,
+&lt;&#x2F;span&gt;&lt;span&gt;            &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;a&amp;lt;&#x2F;title&amp;gt;&amp;lt;&#x2F;head&amp;gt;&amp;lt;body&amp;gt;b&amp;lt;&#x2F;body&amp;gt;&amp;lt;footer&amp;gt;c&amp;lt;&#x2F;footer&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h2 id=&quot;types-of-test-doubles&quot;&gt;Types of Test Doubles&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Mock&lt;&#x2F;strong&gt; &lt;em&gt;(mock, spy)&lt;&#x2F;em&gt; - Emulate and verify &lt;em&gt;outgoing&lt;&#x2F;em&gt; interactions from the SUT.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Stub&lt;&#x2F;strong&gt; &lt;em&gt;(stub, dummy, fake)&lt;&#x2F;em&gt; - Emulate &lt;em&gt;incoming&lt;&#x2F;em&gt; interactions to the SUT.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote class=&quot;note info&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-information-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Info&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;The term &lt;em&gt;mock&lt;&#x2F;em&gt; can also refer to the mocking framework itself. Mocking frameworks are also 
+generally responsible for creating stubs which can be confusing.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Mocks can emulate interactions like stubs, but stubs should never assert interactions like mocks. 
+Asserting interactions with stubs is &lt;em&gt;over-specification&lt;&#x2F;em&gt;, a common anti-pattern.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;encapsulation&quot;&gt;Encapsulation&lt;&#x2F;h2&gt;
+&lt;p&gt;A well-designed API hides all implementation details behind a private API, leaving only observable 
+behavior in the public API. Implementation details should never &lt;em&gt;leak&lt;&#x2F;em&gt; into the public API.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;invariant-violation&quot;&gt;Invariant violation&lt;&#x2F;h4&gt;
+&lt;p&gt;API&#x27;s that require several steps to achieve an individual goal are prone to &lt;em&gt;invariant violation&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;User &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;SetName&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::string&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) { name_ &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; name; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;NormalizeName&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::string&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(absl::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StripAsciiWhitespace&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(name)).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;substr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string name_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Client must remember to `NormalizeName` before `SetName`.
+&lt;&#x2F;span&gt;&lt;span&gt;std::string normalized_name = user.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;NormalizeName&lt;&#x2F;span&gt;&lt;span&gt;(new_name);
+&lt;&#x2F;span&gt;&lt;span&gt;user.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetName&lt;&#x2F;span&gt;&lt;span&gt;(normalized_name);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;A client should be able to achieve any individual goal atomically.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;User &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;SetName&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::string&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) { name_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;NormalizeName&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(name); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;NormalizeName&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::string&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(absl::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StripAsciiWhitespace&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(name)).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;substr&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string name_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Client no longer needs to be concerned about `NormalizeName`.
+&lt;&#x2F;span&gt;&lt;span&gt;user.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetName&lt;&#x2F;span&gt;&lt;span&gt;(new_name);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h4 id=&quot;leaking-state&quot;&gt;Leaking state&lt;&#x2F;h4&gt;
+&lt;p&gt;Public access to state that isn&#x27;t directly related to a client&#x27;s goal is considered &lt;em&gt;leaking state&lt;&#x2F;em&gt;. &lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;MessageRenderer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Renderer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;std::shared_ptr&amp;lt;Renderer&amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetSubRenderers&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; sub_renderers_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Render&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Message&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;message&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;std::shared_ptr&amp;lt;Renderer&amp;gt;&amp;gt; sub_renderers_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Keep the public API surface as small as possible while still meeting the clients needs.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;MessageRenderer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Renderer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Render&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Message&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;message&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;std::unique_ptr&amp;lt;Renderer&amp;gt;&amp;gt; sub_renderers_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h2 id=&quot;styles-of-unit-testing&quot;&gt;Styles of Unit Testing&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Output-based&lt;&#x2F;strong&gt; - Verify output with a given input. Requires 
+&lt;a href=&quot;https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;unit-testing&#x2F;2-making-tests-work&#x2F;#functional-architecture&quot;&gt;pure functions&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;State-based&lt;&#x2F;strong&gt; - Perform operation, then verify state of SUT and collaborators.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Communication-based&lt;&#x2F;strong&gt; - Perform operation, then verify communication with collaborators.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Style&lt;&#x2F;th&gt;&lt;th&gt;Output-based&lt;&#x2F;th&gt;&lt;th&gt;State-based&lt;&#x2F;th&gt;&lt;th&gt;Communication-based&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Resistance to refactoring&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;High&lt;&#x2F;td&gt;&lt;td&gt;Medium&lt;&#x2F;td&gt;&lt;td&gt;Medium&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Maintainability&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;High&lt;&#x2F;td&gt;&lt;td&gt;Medium&lt;&#x2F;td&gt;&lt;td&gt;Low&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h2 id=&quot;hexagonal-architecture&quot;&gt;Hexagonal Architecture&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;em&gt;Hexagonal architecture&lt;&#x2F;em&gt;, proposed by Alistair Cockburn, breaks applications into two layers:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Domain layer&lt;&#x2F;strong&gt; - Logic and models essential to the business domain.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Controller layer&lt;&#x2F;strong&gt; - All other responsibilities of the application.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Interaction between the Domain layer and the Controller layer follows three guidelines: &lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;The Domain layer is isolated from the Controller layer.&lt;&#x2F;li&gt;
+&lt;li&gt;The Domain layer may not depend on the Controller layer, but the Controller layer may 
+depend on the Domain layer.&lt;&#x2F;li&gt;
+&lt;li&gt;Communication with external applications is handled by the Controller layer, not the 
+Domain layer.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot;
+  xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;676px&quot; height=&quot;453px&quot; viewBox=&quot;-0.5 -0.5 676 453&quot;&gt;
+  &lt;g&gt;
+    &lt;path d=&quot;M 101 91 L 301 91 L 401 271 L 301 451 L 101 451 L 1 271 Z&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 369.81 194.05 L 455.43 145.95&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 363.92 197.36 L 369.57 189.03 L 369.81 194.05 L 373.97 196.87 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 461.32 142.64 L 455.68 150.97 L 455.43 145.95 L 451.27 143.13 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 499.11 1 L 615.32 1 L 673.42 101 L 615.32 201 L 499.11 201 L 441 101 Z&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;ellipse cx=&quot;201.01&quot; cy=&quot;271&quot; rx=&quot;83.75&quot; ry=&quot;83.75&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 122px; height: 1px; padding-top: 271px; margin-left: 140px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Domain Layer&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 152px; height: 1px; padding-top: 136px; margin-left: 125px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Controller Layer&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 181px; height: 1px; padding-top: 101px; margin-left: 467px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;External&lt;br &#x2F;&gt;
+Dependency&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+  &lt;&#x2F;g&gt;
+  &lt;switch&gt;
+    &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot;&#x2F;&gt;
+    &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+      &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+    &lt;&#x2F;a&gt;
+  &lt;&#x2F;switch&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;The Domain layer has high cyclomatic complexity and domain significance, while the Controller layer 
+has a large number of collaborators. Code that is both complex and involves many collaborators is 
+overcomplicated and what Hexagonal architecture aims to dissolve. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;communication&quot;&gt;Communication&lt;&#x2F;h2&gt;
+&lt;p&gt;Communication can be classified into two different types:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Intra-process&lt;&#x2F;strong&gt; - Communication within the application; implementation details.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Inter-process&lt;&#x2F;strong&gt; - Communication with other applications; observable behavior.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Mocks are necessary for emulating external applications and verifying inter-system communication 
+patterns. However, mocks couple tests to implementation details, reducing their resistance to 
+refactoring. For this reason, the use of mocks should be avoided when dealing with intra-system 
+communication. External dependencies only accessible by the application, are implementation 
+details too, and should not be mocked either.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;functional-architecture&quot;&gt;Functional Architecture&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;em&gt;Functional architecture&lt;&#x2F;em&gt; builds off of Hexagonal architecture with an added guideline that business 
+logic is written in a functional paradigm. The architecture generally flows in a three step process:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;The Controller layer gathers and prepare input.&lt;&#x2F;li&gt;
+&lt;li&gt;The Domain layer makes decisions based on prepared input.&lt;&#x2F;li&gt;
+&lt;li&gt;The Controller layer converts decisions into side effects.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot;
+  xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;458px&quot; height=&quot;427px&quot; viewBox=&quot;-0.5 -0.5 458 427&quot;&gt;
+  &lt;g&gt;
+    &lt;rect x=&quot;301&quot; y=&quot;193&quot; width=&quot;200&quot; height=&quot;40&quot; rx=&quot;6&quot; ry=&quot;6&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; transform=&quot;rotate(90,401,213)&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 241 203 Q 311 203 311 138 Q 311 73 356 73 Q 401 73 401 102.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 401 109.65 L 396.5 100.65 L 401 102.9 L 405.5 100.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;1&quot; y=&quot;193&quot; width=&quot;240&quot; height=&quot;40&quot; rx=&quot;6&quot; ry=&quot;6&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 251 213 Q 321 213 321 148 Q 321 83 366 83 Q 411 83 411 112.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 411 119.65 L 406.5 110.65 L 411 112.9 L 415.5 110.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 41 53 L 41.07 182.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 41.08 189.65 L 36.57 180.65 L 41.07 182.9 L 45.57 180.64 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 81 63 L 81.07 192.22&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 81.08 198.97 L 76.57 189.97 L 81.07 192.22 L 85.57 189.96 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 161 63 L 161 189.74&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 161 196.49 L 156.5 187.49 L 161 189.74 L 165.5 187.49 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 201 53 L 201.07 182.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 201.08 189.65 L 196.57 180.65 L 201.07 182.9 L 205.57 180.64 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 41 233 L 41 342.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 41 349.65 L 36.5 340.65 L 41 342.9 L 45.5 340.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 81 233 L 81 352.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 81 359.65 L 76.5 350.65 L 81 352.9 L 85.5 350.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 120.5 233 L 120.57 362.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 120.58 369.65 L 116.07 360.65 L 120.57 362.9 L 125.07 360.64 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 161 233 L 161 352.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 161 359.65 L 156.5 350.65 L 161 352.9 L 165.5 350.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 201 233 L 201 342.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 201 349.65 L 196.5 340.65 L 201 342.9 L 205.5 340.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 152px; height: 1px; padding-top: 33px; margin-left: 45px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Input&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 152px; height: 1px; padding-top: 393px; margin-left: 45px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Side effects&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 183px; height: 1px; padding-top: 33px; margin-left: 272px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Prepared input&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 183px; height: 1px; padding-top: 393px; margin-left: 265px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Decisions&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;path d=&quot;M 421 333 Q 421 353 366 353 Q 311 353 311 298 Q 311 243 274.23 243&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 267.48 243 L 276.48 238.5 L 274.23 243 L 276.48 247.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 411 323 Q 411 343 366 343 Q 321 343 321 288 Q 321 233 261.1 233&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 254.35 233 L 263.35 228.5 L 261.1 233 L 263.35 237.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 401 313 Q 401 333 366 333 Q 331 333 331 278 Q 331 223 251.1 223&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 244.35 223 L 253.35 218.5 L 251.1 223 L 253.35 227.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;11&quot; y=&quot;203&quot; width=&quot;240&quot; height=&quot;40&quot; rx=&quot;6&quot; ry=&quot;6&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;24.13&quot; y=&quot;213&quot; width=&quot;240&quot; height=&quot;40&quot; rx=&quot;6&quot; ry=&quot;6&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 238px; height: 1px; padding-top: 233px; margin-left: 25px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Controller&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;path d=&quot;M 121 73 L 121.08 202.22&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 121.09 208.97 L 116.58 199.97 L 121.08 202.22 L 125.58 199.96 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;311&quot; y=&quot;203&quot; width=&quot;200&quot; height=&quot;40&quot; rx=&quot;6&quot; ry=&quot;6&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; transform=&quot;rotate(90,411,223)&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;rect x=&quot;321&quot; y=&quot;213&quot; width=&quot;200&quot; height=&quot;40&quot; rx=&quot;6&quot; ry=&quot;6&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; transform=&quot;rotate(90,421,233)&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+    &lt;g transform=&quot;rotate(90 421 233)&quot;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+        &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 233px; margin-left: 322px;&quot;&gt;
+          &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+            &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Domain Logic&lt;&#x2F;div&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+    &lt;&#x2F;g&gt;
+    &lt;path d=&quot;M 264.13 223 Q 331 223 331 158 Q 331 93 376 93 Q 421 93 421 122.9&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot;&#x2F;&gt;
+    &lt;path d=&quot;M 421 129.65 L 416.5 120.65 L 421 122.9 L 425.5 120.65 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot;&#x2F;&gt;
+  &lt;&#x2F;g&gt;
+  &lt;switch&gt;
+    &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot;&#x2F;&gt;
+    &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+      &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+    &lt;&#x2F;a&gt;
+  &lt;&#x2F;switch&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Object-oriented programming makes code understandable by encapsulating moving parts. Functional
+programming makes code understandable by minimizing moving parts. &lt;em&gt;--Michael Feathers&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Functional architecture trades maintainability for performance; pure functions tend to eagerly load 
+data when they could have been lazy.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;controller-orchestration&quot;&gt;Controller Orchestration&lt;&#x2F;h2&gt;
+&lt;p&gt;Functional architecture assumes a clearcut pipeline of inputs, decisions, and side effects. However,
+production applications are rarely that simple. Decisions may involve gathering more input followed
+by making additional decisions. There are three strategies to consider:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Eagerly gather all the input&lt;&#x2F;strong&gt; - Preserve controller simplicity and isolated domain logic, 
+but concede performance.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Inject dependencies into the Domain layer&lt;&#x2F;strong&gt; - Preserve controller simplicity and performance, but
+concede isolated domain logic.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Allow controller orchestration&lt;&#x2F;strong&gt; - Preserve isolated domain logic and performance, but concede 
+controller simplicity.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Isolated domain logic is an attribute that should always be maximized because it has a huge impact 
+on &lt;em&gt;maintainability&lt;&#x2F;em&gt; and &lt;em&gt;resistance to refactoring&lt;&#x2F;em&gt;. Injecting dependencies into the Domain layer
+is rule out. &lt;&#x2F;p&gt;
+&lt;p&gt;In cases where performance is not critical, feel free to stick to a Functional architecture and 
+eagerly gather input. Otherwise, allow controllers to orchestrate gathering input to meet the 
+needs of the Domain layer.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note info&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-information-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Info&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;Controller orchestration will make controllers more complex, but complexity can be mitigated with 
+familiar patterns like switching on a result or listening for Domain layer events.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Part 3: Integration Testing</title>
+		<published>2020-01-06T00:00:00+00:00</published>
+		<updated>2020-01-06T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/unit-testing/3-integration-testing/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/unit-testing/3-integration-testing/</id>
+		<content type="html">&lt;h2 id=&quot;role-of-integration-tests&quot;&gt;Role of Integration Tests&lt;&#x2F;h2&gt;
+&lt;p&gt;Integration tests are medium sized tests that verify:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Interactions with external dependencies.&lt;&#x2F;li&gt;
+&lt;li&gt;Edge cases with resource costs unsuitable for a unit test.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Each integration test should choose a happy path that exercises as many shared external dependencies 
+as possible while staying within a single use case. If a single integration test doesn&#x27;t cover all 
+shared external dependencies, write more until all external dependencies are covered.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note tip&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-lightbulb-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Tip&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;To keep maintenance costs low, check as many edge cases as possible with unit tests before resorting 
+to an integration test.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note info&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-information-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Info&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;Edge cases that can be checked before starting an operation and changing state, such as
+preconditions, adhere to the &lt;em&gt;Fail Fast principle&lt;&#x2F;em&gt; and don&#x27;t require an integration test.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;While unit tests are great for testing domain logic, integration tests are great for testing 
+controllers.&lt;&#x2F;p&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;593px&quot; height=&quot;472px&quot; viewBox=&quot;-0.5 -0.5 593 472&quot;&gt;
+  &lt;g&gt;
+    &lt;rect x=&quot;63&quot; y=&quot;88&quot; width=&quot;220&quot; height=&quot;160&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;63&quot; y=&quot;248&quot; width=&quot;220&quot; height=&quot;160&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;283&quot; y=&quot;88&quot; width=&quot;220&quot; height=&quot;160&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;283&quot; y=&quot;248&quot; width=&quot;220&quot; height=&quot;160&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 63 408 L 572.9 408&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 63 408 L 63 18.1&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 579.65 408 L 570.65 412.5 L 572.9 408 L 570.65 403.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 63 11.35 L 67.5 20.35 L 63 18.1 L 58.5 20.35 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 328px; margin-left: 284px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;
+              Controller layer
+              &lt;br &#x2F;&gt;
+              -
+              &lt;br &#x2F;&gt;
+              Integration test
+            &lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 168px; margin-left: 64px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;
+              Domain layer
+              &lt;br &#x2F;&gt;
+              -
+              &lt;br &#x2F;&gt;
+              Unit test
+            &lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 328px; margin-left: 64px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;
+              Trivial code
+              &lt;br &#x2F;&gt;
+              -
+              &lt;br &#x2F;&gt;
+              Don&#x27;t test
+            &lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 168px; margin-left: 284px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;font style=&quot;font-size: 28px&quot;&gt;
+              Overcomplicated Code
+              &lt;br &#x2F;&gt;
+              -
+              &lt;br &#x2F;&gt;
+              Avoid writing
+            &lt;&#x2F;font&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 298px; height: 1px; padding-top: 438px; margin-left: 134px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Number of collaborators&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;g transform=&quot;rotate(-90 33 238)&quot;&gt;
+      &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+        &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 298px; height: 1px; padding-top: 238px; margin-left: -116px;&quot;&gt;
+          &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+            &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;Control flow complexity&lt;&#x2F;div&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;foreignObject&gt;
+    &lt;&#x2F;g&gt;
+  &lt;&#x2F;g&gt;
+  &lt;switch&gt;
+    &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; &#x2F;&gt;
+    &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+      &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+    &lt;&#x2F;a&gt;
+  &lt;&#x2F;switch&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;h4 id=&quot;interfaces&quot;&gt;Interfaces&lt;&#x2F;h4&gt;
+&lt;p&gt;Genuine abstractions are &lt;em&gt;discovered&lt;&#x2F;em&gt;, not &lt;em&gt;invented&lt;&#x2F;em&gt;. For an interface to be genuine, it must have 
+at least two implementations. Otherwise, the the added cognitive complexity isn&#x27;t worth it.&lt;&#x2F;p&gt;
+&lt;p&gt;Interfaces enable mocking. Write an interface to mock shared external dependencies. 
+However, not all external dependencies need an interface. Private external dependencies 
+don&#x27;t need mocks and therefore don&#x27;t benefit from an interface, unless there is a need to be to swap
+them with another implementation in production.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;layering&quot;&gt;Layering&lt;&#x2F;h4&gt;
+&lt;p&gt;Adding layers of indirection where they are not appropriate makes code hard to reason with. Aim
+to have as few layers as possible. Most applications only need three layers: Domain, Controller, and 
+Infrastructure. The Domain and Controller Layers are already familiar. The Infrastructure Layer
+provides utility libraries such as logging and networking.&lt;&#x2F;p&gt;
+&lt;div class=&quot;svg-content&quot;&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE svg PUBLIC &quot;-&#x2F;&#x2F;W3C&#x2F;&#x2F;DTD SVG 1.1&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;www.w3.org&#x2F;Graphics&#x2F;SVG&#x2F;1.1&#x2F;DTD&#x2F;svg11.dtd&quot;&gt;
+&lt;svg xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&quot; xmlns:xlink=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xlink&quot; version=&quot;1.1&quot; width=&quot;502px&quot; height=&quot;212px&quot; viewBox=&quot;-0.5 -0.5 502 212&quot;&gt;
+  &lt;g&gt;
+    &lt;rect x=&quot;270&quot; y=&quot;50&quot; width=&quot;20&quot; height=&quot;160&quot; rx=&quot;3&quot; ry=&quot;3&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;330&quot; y=&quot;50&quot; width=&quot;20&quot; height=&quot;160&quot; rx=&quot;3&quot; ry=&quot;3&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;390&quot; y=&quot;50&quot; width=&quot;20&quot; height=&quot;160&quot; rx=&quot;3&quot; ry=&quot;3&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 180 165 Q 180 165 209.9 165&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 216.65 165 L 207.65 169.5 L 209.9 165 L 207.65 160.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;10&quot; y=&quot;70&quot; width=&quot;170&quot; height=&quot;120&quot; rx=&quot;18&quot; ry=&quot;18&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 168px; height: 1px; padding-top: 130px; margin-left: 11px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 12px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;span style=&quot;font-size: 28px ; white-space: normal&quot;&gt;Infrastructure Layer&lt;&#x2F;span&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;rect x=&quot;220&quot; y=&quot;140&quot; width=&quot;240&quot; height=&quot;50&quot; rx=&quot;7.5&quot; ry=&quot;7.5&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 238px; height: 1px; padding-top: 165px; margin-left: 221px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 12px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;span style=&quot;font-size: 28px ; white-space: normal&quot;&gt;Domain Layer&lt;&#x2F;span&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;path d=&quot;M 220 95 Q 220 95 190.8 95&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 184.05 95 L 193.05 90.5 L 190.8 95 L 193.05 99.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 460 95 Q 500 95 500 130 Q 500 165 470.1 165&quot; class=&quot;outline-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;stroke&quot; &#x2F;&gt;
+    &lt;path d=&quot;M 463.35 165 L 472.35 160.5 L 470.1 165 L 472.35 169.5 Z&quot; class=&quot;solid-text&quot; stroke-width=&quot;3&quot; stroke-miterlimit=&quot;10&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;rect x=&quot;220&quot; y=&quot;70&quot; width=&quot;240&quot; height=&quot;50&quot; rx=&quot;7.5&quot; ry=&quot;7.5&quot; class=&quot;background-fill-outline-text&quot; stroke-width=&quot;3&quot; pointer-events=&quot;all&quot; &#x2F;&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 238px; height: 1px; padding-top: 95px; margin-left: 221px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 12px; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;&quot;&gt;
+            &lt;span style=&quot;font-size: 28px ; white-space: normal&quot;&gt;Controller Layer&lt;&#x2F;span&gt;
+          &lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+    &lt;foreignObject pointer-events=&quot;none&quot; width=&quot;100%&quot; height=&quot;100%&quot; requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; style=&quot;overflow: visible; text-align: left;&quot;&gt;
+      &lt;div xmlns=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;1999&#x2F;xhtml&quot; style=&quot;display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 20px; margin-left: 340px;&quot;&gt;
+        &lt;div style=&quot;box-sizing: border-box; font-size: 0px; text-align: center;&quot;&gt;
+          &lt;div style=&quot;display: inline-block; font-size: 28px; line-height: 1.2; pointer-events: all; white-space: nowrap;&quot;&gt;Use cases&lt;&#x2F;div&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;foreignObject&gt;
+  &lt;&#x2F;g&gt;
+  &lt;switch&gt;
+    &lt;g requiredFeatures=&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;SVG11&#x2F;feature#Extensibility&quot; &#x2F;&gt;
+    &lt;a transform=&quot;translate(0,-5)&quot; xlink:href=&quot;https:&#x2F;&#x2F;www.diagrams.net&#x2F;doc&#x2F;faq&#x2F;svg-export-text-problems&quot; target=&quot;_blank&quot;&gt;
+      &lt;text text-anchor=&quot;middle&quot; font-size=&quot;10px&quot; x=&quot;50%&quot; y=&quot;100%&quot;&gt;Text is not SVG - cannot display&lt;&#x2F;text&gt;
+    &lt;&#x2F;a&gt;
+  &lt;&#x2F;switch&gt;
+&lt;&#x2F;svg&gt;
+&lt;&#x2F;div&gt;
+&lt;h4 id=&quot;logging&quot;&gt;Logging&lt;&#x2F;h4&gt;
+&lt;p&gt;Logging falls under two categories:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Support logging&lt;&#x2F;strong&gt; - messages are intended to be consumed by support staff and system admins; 
+observable behavior.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnostic logging&lt;&#x2F;strong&gt; - messages are intended to be consumed by developers; implementation 
+detail.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Since &lt;em&gt;Support&lt;&#x2F;em&gt; logging is observable behavior, it is worth the testing effort. &lt;em&gt;Diagnostic&lt;&#x2F;em&gt; 
+logging, however, is an implementation detail and isn&#x27;t worth testing.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note tip&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-lightbulb-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Tip&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;The Domain layer should not have dependencies, including loggers. The Controller layer may inject a 
+logger, or the Domain layer may emit a log event.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Effective logging maximizes the signal to noise ratio. &lt;em&gt;Support&lt;&#x2F;em&gt; logging cannot be controlled 
+because its a business requirement, but &lt;em&gt;Diagnostic&lt;&#x2F;em&gt; logging can. Minimize diagnostic logging
+in the Domain layer, only adding it for debugging and then subsequently removing it once finished.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;mocking-best-practices&quot;&gt;Mocking Best Practices&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Mocks are for integration tests only&lt;&#x2F;strong&gt; - Mentioned in 
+&lt;a href=&quot;&#x2F;unit-testing&#x2F;making_tests_work&#x2F;#hexagonal-architecture&quot;&gt;Hexagonal Architecture&lt;&#x2F;a&gt;, only shared 
+external dependencies should be mocked. Unit tests target the Domain layer which shouldn&#x27;t
+communicate with external dependencies.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Never mock private external dependencies&lt;&#x2F;strong&gt; - When a private external dependency is too 
+difficult or prohibitive to setup, don&#x27;t try to mock it out. If that dependency cannot be tested 
+as-is, it defeats the point of integration testing and should not be tested at all.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Mock the furthest edges of the system&lt;&#x2F;strong&gt; - Mock the type that directly communicates with a 
+shared dependency, not the wrapper. Verify the message sent to a shared dependency, not a call
+to a class you wrote. Doing so maximizes resistance against regressions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Use as many mocks as necessary per test&lt;&#x2F;strong&gt; -  One mock per test is a common misconception. It&#x27;s 
+irrelevant how many mocks it takes to verify one unit of behavior. The number of mocks depends
+solely on the number of shared external dependencies participating in the unit of behavior.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Verify the absence of unexpected messages too&lt;&#x2F;strong&gt; - It is not enough to verify your system is 
+sending the correct messages to shared external dependencies, unexpected messages are a
+source of bugs too.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Mock only the types you own&lt;&#x2F;strong&gt; - If your using a third party library to communicate with a shared
+external dependency, write a adapter for it and mock the adapter instead. Third-party 
+libraries have arcane inner workings, so it&#x27;s futile to try to emulate their behavior.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;testing-the-database&quot;&gt;Testing the Database&lt;&#x2F;h2&gt;
+&lt;h4 id=&quot;setup&quot;&gt;Setup&lt;&#x2F;h4&gt;
+&lt;p&gt;Be able to build your database from a series of migration scripts checked into source control. This 
+includes tables, views, indexes, stored procedures, reference data and anything else critical to 
+run the database in production.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note info&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-information-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Info&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;&lt;em&gt;Reference data&lt;&#x2F;em&gt; is data that is necessary for the application to run, but isn&#x27;t actively modified 
+by the application.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Migration scripts should be used in both testing and production. Once committed to source control,
+don&#x27;t modify them. Make a new migration script instead of fixing the old one, unless fixing the old
+one prevents data loss.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;transactions&quot;&gt;Transactions&lt;&#x2F;h4&gt;
+&lt;p&gt;Transactions are capable of updating sets of data within the same business operation atomically. 
+When transactions are involved, applications need to make two separate types of decisions:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Which data gets updated to what?&lt;&#x2F;li&gt;
+&lt;li&gt;Should a set of updates be kept or rolled back?&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;These decisions should be separated into two different responsibilities:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Repositories&lt;&#x2F;strong&gt; - Can access and modify database data; lifetime lasts the duration of the query.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Transactions&lt;&#x2F;strong&gt; - Commits or rolls back a set of updates in full; lifetime lasts the duration of
+the business operation.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote class=&quot;note info&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-information-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Info&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;Non-relational databases lack transactions. Instead, updates to the document are atomic. Related 
+data should be placed in the same document so that updates don&#x27;t span more than one document.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;To replicate the production environment as closely as possible, integration tests should wrap the 
+&lt;em&gt;act&lt;&#x2F;em&gt; section in a separate transaction from the &lt;em&gt;arrange&lt;&#x2F;em&gt; and &lt;em&gt;assert&lt;&#x2F;em&gt; sections.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;cleanup&quot;&gt;Cleanup&lt;&#x2F;h4&gt;
+&lt;p&gt;There are many ways to cleanup a database between tests:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Restore a backup database before each test&lt;&#x2F;strong&gt; - Works, but is slow.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Cleanup data at the end of the test&lt;&#x2F;strong&gt; - Might be skipped when test fails.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Wrap each test in a transaction and then don&#x27;t commit&lt;&#x2F;strong&gt; - Makes behavior between production and 
+testing inconsistent.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Cleanup data at the beginning of the test&lt;&#x2F;strong&gt; - Fast, consistent, and won&#x27;t get skipped.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;best-practices&quot;&gt;Best Practices&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Avoid in-memory databases&lt;&#x2F;strong&gt; - Behavior between production and testing should be consistent.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Reuse code in test sections&lt;&#x2F;strong&gt; - &lt;em&gt;Arrange&lt;&#x2F;em&gt; with factory or builder pattern, &lt;em&gt;act&lt;&#x2F;em&gt; with decorator
+pattern, and &lt;em&gt;assert&lt;&#x2F;em&gt; with handmade mocks (a.k.a. Spys).&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Skip trivial database read tests&lt;&#x2F;strong&gt; - Writes are always important because the alter the state of
+the database. Reads that important or complex should be tested; disregard the rest.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Don&#x27;t test repositories directly&lt;&#x2F;strong&gt; - Repositories are a controller, so they shouldn&#x27;t be 
+complex. The point of an integration test is to cover shared, external dependencies, not 
+controllers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Part 4: Unit Testing Anti-patterns</title>
+		<published>2020-01-06T00:00:00+00:00</published>
+		<updated>2020-01-06T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/unit-testing/4-antipatterns/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/unit-testing/4-antipatterns/</id>
+		<content type="html">&lt;h3 id=&quot;don-t-test-private-methods-directly&quot;&gt;Don&#x27;t test private methods directly&lt;&#x2F;h3&gt;
+&lt;p&gt;Only test observable behavior. Coupling a test to implementation details will reduce the tests 
+resistance to refactoring.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Order &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GenerateDescription&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetPrice&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Customer customer_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;Product&amp;gt; products_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;std::string Order::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GenerateDescription&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;absl::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StrCat&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Customer name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, customer_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;, total number of products: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, products_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;                      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;, total price: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetPrice&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span&gt;Order::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetPrice&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; basePrice =
+&lt;&#x2F;span&gt;&lt;span&gt;      std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;accumulate&lt;&#x2F;span&gt;&lt;span&gt;(products_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;begin&lt;&#x2F;span&gt;&lt;span&gt;(), products_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;, sum_base_prices);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; discount = customer_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;discount&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; taxes =
+&lt;&#x2F;span&gt;&lt;span&gt;      std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;accumulate&lt;&#x2F;span&gt;&lt;span&gt;(products_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;begin&lt;&#x2F;span&gt;&lt;span&gt;(), products_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;, sum_taxes);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; basePrice * discount + taxes;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;If a private method is hard to test indirectly, then it either has dead code or is in need of an 
+abstraction.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Order &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GenerateDescription&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Customer customer_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;Product&amp;gt; products_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;PriceCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(Customer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, std::vector&amp;lt;Product&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;products&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;std::string Order::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GenerateDescription&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;  PriceCalculator calc;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;absl::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StrCat&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Customer name: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, customer_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;, total number of products: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, products_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;                      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;, total price: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, calc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span&gt;(customer_, products_));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span&gt;PriceCalculator::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span&gt;(Customer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                                 std::vector&amp;lt;Product&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;products&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; basePrice =
+&lt;&#x2F;span&gt;&lt;span&gt;      std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;accumulate&lt;&#x2F;span&gt;&lt;span&gt;(products.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;begin&lt;&#x2F;span&gt;&lt;span&gt;(), products.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;, sum_base_prices);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; discount = customer.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;discount&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; taxes =
+&lt;&#x2F;span&gt;&lt;span&gt;      std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;accumulate&lt;&#x2F;span&gt;&lt;span&gt;(products.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;begin&lt;&#x2F;span&gt;&lt;span&gt;(), products.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;, sum_taxes);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; basePrice * discount + taxes;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;don-t-expose-private-state&quot;&gt;Don&#x27;t expose private state&lt;&#x2F;h3&gt;
+&lt;p&gt;Its tempting to add a way to access internal state for the sake of testing.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;enum class &lt;&#x2F;span&gt;&lt;span&gt;CustomerStatus {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kRegular&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kPreferred&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Customer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Promote&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { status_ &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; CustomerStatus::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kPreferred&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetDiscount&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(status_ &lt;&#x2F;span&gt;&lt;span&gt;==&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; CustomerStatus::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kPreferred&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span&gt;? &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.95 &lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  CustomerStatus status_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;However exposing state will leak implementation details. Instead, look at how the production code 
+uses the class and test accordingly.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Customer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Customer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;double &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;starting_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Promote&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { status_ &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; CustomerStatus::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kPreferred&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  CustomerStatus status_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(Customer, PromotedCustomerReceivesDiscount) {
+&lt;&#x2F;span&gt;&lt;span&gt;  Customer customer;
+&lt;&#x2F;span&gt;&lt;span&gt;  customer.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Promote&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  Product&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kFujiApple&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; apple;
+&lt;&#x2F;span&gt;&lt;span&gt;  customer.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Purchase&lt;&#x2F;span&gt;&lt;span&gt;(apple);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_LT&lt;&#x2F;span&gt;&lt;span&gt;(customer.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Balance&lt;&#x2F;span&gt;&lt;span&gt;(), apple.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Price&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;don-t-leak-domain-knowledge-to-tests&quot;&gt;Don&#x27;t leak domain knowledge to tests&lt;&#x2F;h3&gt;
+&lt;p&gt;Don&#x27;t base expectations off of implementation details.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Calculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; a &lt;&#x2F;span&gt;&lt;span&gt;+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; b; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(Calculator, Add) {
+&lt;&#x2F;span&gt;&lt;span&gt;  Calculator calc;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; a = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; b = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; expected = a + b;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; actual = calc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span&gt;(a, b);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(actual, expected);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;While it may sound counterintuitive at first, using hardcoded values in your tests is a good thing.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(Calculator, Add) {
+&lt;&#x2F;span&gt;&lt;span&gt;  Calculator calc;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(calc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;don-t-add-production-code-for-tests-only&quot;&gt;Don&#x27;t add production code for tests only&lt;&#x2F;h3&gt;
+&lt;p&gt;Mixing test code with production code only adds to maintenance costs.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Logger &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Logger&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;is_test_environment&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;is_test_environment_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(is_test_environment) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(is_test_environment_) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    std::cout &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; text &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&amp;lt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3c2b5;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; is_test_environment_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Instead, write two distinct implementations that share a common interface.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Logger &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;ProductionLogger &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Logger &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{ std::cout &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; text &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&amp;lt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3c2b5;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;FakeLogger &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Logger &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;text&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Controller &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;SomeMethod&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Logger&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;logger&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) { logger.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;SomeMethod was called&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;don-t-mock-concrete-classes&quot;&gt;Don&#x27;t mock concrete classes&lt;&#x2F;h3&gt;
+&lt;p&gt;Treat urges to mock a concrete class as a warning flag for violating the Single Responsibility 
+Principle.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;StatisticsCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::vector&amp;lt;DeliveryRecord&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetDeliveries&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Statistic &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;CustomerController &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;CustomerController&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; StatisticsCalculator&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calculator&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calculator_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(calculator) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetStatistics&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  StatisticsCalculator calculator_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span&gt;std::vector&amp;lt;DeliveryRecord&amp;gt; StatisticsCalculator::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetDeliveries&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;* Call an external dependency to get the list of deliveries *&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;vector&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;DeliveryRecord&amp;gt;{};
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;std::string CustomerController::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetStatistics&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  Statistic stat = calculator_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span&gt;(customer_id);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;absl::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StrCat&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Total weight delivered: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, stat.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;totalWeight&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;. Total cost: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, stat.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;totalCost&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;MockStatisticsCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;StatisticsCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;MOCK_METHOD&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::vector&amp;lt;DeliveryRecord&amp;gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetDeliveries&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; customer_id),
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;              (override));
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(CustomerController, CustomerWithNoDeliveries) {
+&lt;&#x2F;span&gt;&lt;span&gt;  MockStatisticsCalculator calc;
+&lt;&#x2F;span&gt;&lt;span&gt;  CustomerController &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;controller&lt;&#x2F;span&gt;&lt;span&gt;(calc);
+&lt;&#x2F;span&gt;&lt;span&gt;  std::string result = controller.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetStatistics&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Total weight delivered: 0. Total cost: 0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, result);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Separate unrelated responsibilities into two different classes, plus an interface for the shared 
+dependencies.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;DeliveryGateway &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;~DeliveryGateway&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(){};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::vector&amp;lt;DeliveryRecord&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetDeliveries&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;ConcreteDeliveryGateway &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;DeliveryGateway &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;DeliveryRecord&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetDeliveries&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;StatisticsCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Statistic &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::vector&amp;lt;DeliveryRecord&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;records&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;CustomerController &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;CustomerController&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; StatisticsCalculator&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calculator&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;                     std::unique_ptr&amp;lt;DeliveryGateway&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;gateway&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calculator_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(calculator), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;gateway_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(gateway)) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::string &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetStatistics&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  StatisticsCalculator calculator_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;DeliveryGateway&amp;gt; gateway_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span&gt;std::string CustomerController::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetStatistics&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;customer_id&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; std::vector&amp;lt;DeliveryRecord&amp;gt; records =
+&lt;&#x2F;span&gt;&lt;span&gt;      gateway_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetDeliveries&lt;&#x2F;span&gt;&lt;span&gt;(customer_id);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; Statistic stat = calculator_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Calculate&lt;&#x2F;span&gt;&lt;span&gt;(records);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;absl::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StrCat&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Total weight delivered: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, stat.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;totalWeight&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;                      &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;. Total cost: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, stat.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;totalCost&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(CustomerController, CustomerWithNoDeliveries) {
+&lt;&#x2F;span&gt;&lt;span&gt;  StatisticsCalculator calc;
+&lt;&#x2F;span&gt;&lt;span&gt;  CustomerController &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;controller&lt;&#x2F;span&gt;&lt;span&gt;(calc, std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;MockDeliveryGateway&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  std::string result = controller.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetStatistics&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Total weight delivered: 0. Total cost: 0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, result);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;don-t-use-time-as-an-ambient-context&quot;&gt;Don&#x27;t use time as an ambient context&lt;&#x2F;h3&gt;
+&lt;p&gt;Using time as an ambient context adds unnecessary shared dependencies, making testing difficult.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;using&lt;&#x2F;span&gt;&lt;span&gt; std::chrono::system_clock;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span&gt;time_point = std::chrono::time_point&amp;lt;system_clock&amp;gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;DateTimeServer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;DateTimeServer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;now_func_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;system_clock::now) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Init&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::function&amp;lt;time_point()&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;now_func&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) { now_func_ &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; now_func; }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  time_point &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Now&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;now_func_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::function&amp;lt;time_point()&amp;gt; now_func_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Bad&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span&gt;DateTimeServer server;
+&lt;&#x2F;span&gt;&lt;span&gt;std::time_t time = system_clock::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;to_time_t&lt;&#x2F;span&gt;&lt;span&gt;(server.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Now&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;std::cout &amp;lt;&amp;lt; std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ctime&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;time) &amp;lt;&amp;lt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3c2b5;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;std::function&amp;lt;time_point()&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;now&lt;&#x2F;span&gt;&lt;span&gt;([] {
+&lt;&#x2F;span&gt;&lt;span&gt;  std::tm &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;time&lt;&#x2F;span&gt;&lt;span&gt;{tm_mday : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, tm_mon : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, tm_year : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;120&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;system_clock::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;from_time_t&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;mktime&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;time));
+&lt;&#x2F;span&gt;&lt;span&gt;});
+&lt;&#x2F;span&gt;&lt;span&gt;server.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Init&lt;&#x2F;span&gt;&lt;span&gt;(now);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;time = system_clock::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;to_time_t&lt;&#x2F;span&gt;&lt;span&gt;(server.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Now&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;std::cout &amp;lt;&amp;lt; std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ctime&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;time) &amp;lt;&amp;lt; &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3c2b5;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Instead, inject the time dependency explicitly either as a value or a service. &lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;DateTimeServer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;~DateTimeServer&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(){};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; time_point &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Now&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;ConcreteDateTimeServer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;DateTimeServer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  time_point &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Now&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;system_clock::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;now&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;InquiryController &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;InquiryController&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::unique_ptr&amp;lt;DateTimeServer&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;server&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;date_time_server_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(server)) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ApproveInquiry&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;DateTimeServer&amp;gt; date_time_server_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;InquiryController::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ApproveInquiry&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  Inquiry inquiry = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetById&lt;&#x2F;span&gt;&lt;span&gt;(id);
+&lt;&#x2F;span&gt;&lt;span&gt;  inquiry.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Approve&lt;&#x2F;span&gt;&lt;span&gt;(date_time_server_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Now&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SaveInquiry&lt;&#x2F;span&gt;&lt;span&gt;(inquiry);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Prefer injecting values over injecting services.&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Good&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;InquiryController::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ApproveInquiry&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span&gt;, time_point &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;date_time&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;  Inquiry inquiry = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetById&lt;&#x2F;span&gt;&lt;span&gt;(id);
+&lt;&#x2F;span&gt;&lt;span&gt;  inquiry.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Approve&lt;&#x2F;span&gt;&lt;span&gt;(date_time);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SaveInquiry&lt;&#x2F;span&gt;&lt;span&gt;(inquiry);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;</content>
+	</entry>
+</feed>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Part 4: Unit Testing Anti-patterns</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Part 4: Unit Testing Anti-patterns</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2020-01-06</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/unit-testing"><i
+              class="ri-hashtag ri-sm"></i><span>unit-testing</span></a>
+        </div>
+      </div>    
+
+      
+
+      <h3 id="don-t-test-private-methods-directly">Don't test private methods directly</h3>
+<p>Only test observable behavior. Coupling a test to implementation details will reduce the tests 
+resistance to refactoring.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Order </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::string </span><span style="color:#a3b8c2;">GenerateDescription</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">float </span><span style="color:#a3b8c2;">GetPrice</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  Customer customer_;
+</span><span style="color:#e4e4e7;">  std::vector&lt;Product&gt; products_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span>std::string Order::</span><span style="color:#a3b8c2;">GenerateDescription</span><span>() {
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span>absl::</span><span style="color:#c2a3a3;">StrCat</span><span>(&quot;</span><span style="color:#a8c2a3;">Customer name: </span><span>&quot;, customer_.</span><span style="color:#c2a3a3;">name</span><span>,
+</span><span>                      &quot;</span><span style="color:#a8c2a3;">, total number of products: </span><span>&quot;, products_.</span><span style="color:#c2a3a3;">size</span><span>(),
+</span><span>                      &quot;</span><span style="color:#a8c2a3;">, total price: </span><span>&quot;, </span><span style="color:#c2a3a3;">GetPrice</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3c2;">float </span><span>Order::</span><span style="color:#a3b8c2;">GetPrice</span><span>() {
+</span><span>  </span><span style="color:#c2a3c2;">float</span><span> basePrice =
+</span><span>      std::</span><span style="color:#c2a3a3;">accumulate</span><span>(products_.</span><span style="color:#c2a3a3;">begin</span><span>(), products_.</span><span style="color:#c2a3a3;">end</span><span>(), </span><span style="color:#c2b3a3;">0.0</span><span>, sum_base_prices);
+</span><span>  </span><span style="color:#c2a3c2;">float</span><span> discount = customer_.</span><span style="color:#c2a3a3;">discount</span><span>;
+</span><span>  </span><span style="color:#c2a3c2;">float</span><span> taxes =
+</span><span>      std::</span><span style="color:#c2a3a3;">accumulate</span><span>(products_.</span><span style="color:#c2a3a3;">begin</span><span>(), products_.</span><span style="color:#c2a3a3;">end</span><span>(), </span><span style="color:#c2b3a3;">0.0</span><span>, sum_taxes);
+</span><span>
+</span><span>  </span><span style="color:#c2a3c2;">return</span><span> basePrice * discount + taxes;
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>If a private method is hard to test indirectly, then it either has dead code or is in need of an 
+abstraction.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Order </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::string </span><span style="color:#a3b8c2;">GenerateDescription</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  Customer customer_;
+</span><span style="color:#e4e4e7;">  std::vector&lt;Product&gt; products_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">PriceCalculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">float </span><span style="color:#a3b8c2;">Calculate</span><span style="color:#e4e4e7;">(Customer </span><span style="color:#c2a3a3;">customer</span><span style="color:#e4e4e7;">, std::vector&lt;Product&gt; </span><span style="color:#c2a3a3;">products</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span>std::string Order::</span><span style="color:#a3b8c2;">GenerateDescription</span><span>() {
+</span><span>  PriceCalculator calc;
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span>absl::</span><span style="color:#c2a3a3;">StrCat</span><span>(&quot;</span><span style="color:#a8c2a3;">Customer name: </span><span>&quot;, customer_.</span><span style="color:#c2a3a3;">name</span><span>,
+</span><span>                      &quot;</span><span style="color:#a8c2a3;">, total number of products: </span><span>&quot;, products_.</span><span style="color:#c2a3a3;">size</span><span>(),
+</span><span>                      &quot;</span><span style="color:#a8c2a3;">, total price: </span><span>&quot;, calc.</span><span style="color:#c2a3a3;">Calculate</span><span>(customer_, products_));
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3c2;">float </span><span>PriceCalculator::</span><span style="color:#a3b8c2;">Calculate</span><span>(Customer </span><span style="color:#c2a3a3;">customer</span><span>,
+</span><span>                                 std::vector&lt;Product&gt; </span><span style="color:#c2a3a3;">products</span><span>) {
+</span><span>  </span><span style="color:#c2a3c2;">float</span><span> basePrice =
+</span><span>      std::</span><span style="color:#c2a3a3;">accumulate</span><span>(products.</span><span style="color:#c2a3a3;">begin</span><span>(), products.</span><span style="color:#c2a3a3;">end</span><span>(), </span><span style="color:#c2b3a3;">0.0</span><span>, sum_base_prices);
+</span><span>  </span><span style="color:#c2a3c2;">float</span><span> discount = customer.</span><span style="color:#c2a3a3;">discount</span><span>;
+</span><span>  </span><span style="color:#c2a3c2;">float</span><span> taxes =
+</span><span>      std::</span><span style="color:#c2a3a3;">accumulate</span><span>(products.</span><span style="color:#c2a3a3;">begin</span><span>(), products.</span><span style="color:#c2a3a3;">end</span><span>(), </span><span style="color:#c2b3a3;">0.0</span><span>, sum_taxes);
+</span><span>
+</span><span>  </span><span style="color:#c2a3c2;">return</span><span> basePrice * discount + taxes;
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="don-t-expose-private-state">Don't expose private state</h3>
+<p>Its tempting to add a way to access internal state for the sake of testing.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">enum class </span><span>CustomerStatus {
+</span><span>  </span><span style="color:#c2b3a3;">kRegular</span><span>,
+</span><span>  </span><span style="color:#c2b3a3;">kPreferred</span><span>,
+</span><span>};
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Customer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Promote</span><span style="color:#e4e4e7;">() { status_ </span><span>=</span><span style="color:#e4e4e7;"> CustomerStatus::</span><span style="color:#c2b3a3;">kPreferred</span><span style="color:#e4e4e7;">; }
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">float </span><span style="color:#a3b8c2;">GetDiscount</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">(status_ </span><span>==</span><span style="color:#e4e4e7;"> CustomerStatus::</span><span style="color:#c2b3a3;">kPreferred</span><span style="color:#e4e4e7;">) </span><span>? </span><span style="color:#c2b3a3;">0.95 </span><span>: </span><span style="color:#c2b3a3;">1</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  CustomerStatus status_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>However exposing state will leak implementation details. Instead, look at how the production code 
+uses the class and test accordingly.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Customer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">Customer</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">double </span><span style="color:#c2a3a3;">starting_</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#c2a3a3;">Promote</span><span style="color:#e4e4e7;">() { status_ </span><span>=</span><span style="color:#e4e4e7;"> CustomerStatus::</span><span style="color:#c2b3a3;">kPreferred</span><span style="color:#e4e4e7;">; }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  CustomerStatus status_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(Customer, PromotedCustomerReceivesDiscount) {
+</span><span>  Customer customer;
+</span><span>  customer.</span><span style="color:#c2a3a3;">Promote</span><span>();
+</span><span>  Product&lt;</span><span style="color:#c2b3a3;">kFujiApple</span><span>&gt; apple;
+</span><span>  customer.</span><span style="color:#c2a3a3;">Purchase</span><span>(apple);
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_LT</span><span>(customer.</span><span style="color:#c2a3a3;">Balance</span><span>(), apple.</span><span style="color:#c2a3a3;">Price</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="don-t-leak-domain-knowledge-to-tests">Don't leak domain knowledge to tests</h3>
+<p>Don't base expectations off of implementation details.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Calculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">int </span><span style="color:#a3b8c2;">Add</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">a</span><span style="color:#e4e4e7;">, </span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">b</span><span style="color:#e4e4e7;">) { </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> a </span><span>+</span><span style="color:#e4e4e7;"> b; }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(Calculator, Add) {
+</span><span>  Calculator calc;
+</span><span>  </span><span style="color:#c2a3c2;">int</span><span> a = </span><span style="color:#c2b3a3;">1</span><span>;
+</span><span>  </span><span style="color:#c2a3c2;">int</span><span> b = </span><span style="color:#c2b3a3;">3</span><span>;
+</span><span>  </span><span style="color:#c2a3c2;">int</span><span> expected = a + b;
+</span><span>  </span><span style="color:#c2a3c2;">int</span><span> actual = calc.</span><span style="color:#c2a3a3;">Add</span><span>(a, b);
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(actual, expected);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>While it may sound counterintuitive at first, using hardcoded values in your tests is a good thing.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3a3;">TEST</span><span>(Calculator, Add) {
+</span><span>  Calculator calc;
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(calc.</span><span style="color:#c2a3a3;">Add</span><span>(</span><span style="color:#c2b3a3;">1</span><span>, </span><span style="color:#c2b3a3;">3</span><span>), </span><span style="color:#c2b3a3;">4</span><span>);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="don-t-add-production-code-for-tests-only">Don't add production code for tests only</h3>
+<p>Mixing test code with production code only adds to maintenance costs.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Logger </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">Logger</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">bool </span><span style="color:#c2a3a3;">is_test_environment</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">is_test_environment_</span><span style="color:#e4e4e7;">(is_test_environment) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Log</span><span style="color:#e4e4e7;">(std::string </span><span style="color:#c2a3a3;">text</span><span style="color:#e4e4e7;">) </span><span style="color:#c2a3c2;">const </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">if </span><span style="color:#e4e4e7;">(is_test_environment_) </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">    std::cout </span><span>&lt;&lt;</span><span style="color:#e4e4e7;"> text </span><span>&lt;&lt; &#39;</span><span style="color:#a3c2b5;">\n</span><span>&#39;</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool</span><span style="color:#e4e4e7;"> is_test_environment_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Instead, write two distinct implementations that share a common interface.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Logger </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual void </span><span style="color:#a3b8c2;">Log</span><span style="color:#e4e4e7;">(std::string </span><span style="color:#c2a3a3;">text</span><span style="color:#e4e4e7;">) </span><span style="color:#c2a3c2;">const </span><span>= </span><span style="color:#c2b3a3;">0</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">ProductionLogger </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">Logger </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Log</span><span style="color:#e4e4e7;">(std::string </span><span style="color:#c2a3a3;">text</span><span style="color:#e4e4e7;">) </span><span style="color:#c2a3c2;">const </span><span style="color:#e4e4e7;">{ std::cout </span><span>&lt;&lt;</span><span style="color:#e4e4e7;"> text </span><span>&lt;&lt; &#39;</span><span style="color:#a3c2b5;">\n</span><span>&#39;</span><span style="color:#e4e4e7;">; }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">FakeLogger </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">Logger </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Log</span><span style="color:#e4e4e7;">(std::string </span><span style="color:#c2a3a3;">text</span><span style="color:#e4e4e7;">) </span><span style="color:#c2a3c2;">const </span><span style="color:#e4e4e7;">{}
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Controller </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">SomeMethod</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Logger</span><span>&amp; </span><span style="color:#c2a3a3;">logger</span><span style="color:#e4e4e7;">) { logger.</span><span style="color:#c2a3a3;">Log</span><span style="color:#e4e4e7;">(</span><span>&quot;</span><span style="color:#a8c2a3;">SomeMethod was called</span><span>&quot;</span><span style="color:#e4e4e7;">); }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="don-t-mock-concrete-classes">Don't mock concrete classes</h3>
+<p>Treat urges to mock a concrete class as a warning flag for violating the Single Responsibility 
+Principle.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">StatisticsCalculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> std::vector&lt;DeliveryRecord&gt; </span><span style="color:#a3b8c2;">GetDeliveries</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">  Statistic </span><span style="color:#a3b8c2;">Calculate</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">CustomerController </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">CustomerController</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> StatisticsCalculator</span><span>&amp; </span><span style="color:#c2a3a3;">calculator</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">calculator_</span><span style="color:#e4e4e7;">(calculator) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  std::string </span><span style="color:#a3b8c2;">GetStatistics</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  StatisticsCalculator calculator_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>std::vector&lt;DeliveryRecord&gt; StatisticsCalculator::</span><span style="color:#a3b8c2;">GetDeliveries</span><span>(
+</span><span>    </span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span>) {
+</span><span>  </span><span style="color:#797b86;">/* Call an external dependency to get the list of deliveries */
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span>std::</span><span style="color:#c2a3a3;">vector</span><span>&lt;DeliveryRecord&gt;{};
+</span><span>}
+</span><span>
+</span><span>std::string CustomerController::</span><span style="color:#a3b8c2;">GetStatistics</span><span>(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span>) {
+</span><span>  Statistic stat = calculator_.</span><span style="color:#c2a3a3;">Calculate</span><span>(customer_id);
+</span><span>
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span>absl::</span><span style="color:#c2a3a3;">StrCat</span><span>(&quot;</span><span style="color:#a8c2a3;">Total weight delivered: </span><span>&quot;, stat.</span><span style="color:#c2a3a3;">totalWeight</span><span>,
+</span><span>                      &quot;</span><span style="color:#a8c2a3;">. Total cost: </span><span>&quot;, stat.</span><span style="color:#c2a3a3;">totalCost</span><span>);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MockStatisticsCalculator </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">StatisticsCalculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">MOCK_METHOD</span><span style="color:#e4e4e7;">(std::vector&lt;DeliveryRecord&gt;, </span><span style="color:#c2a3a3;">GetDeliveries</span><span style="color:#e4e4e7;">, (</span><span style="color:#c2a3c2;">int</span><span style="color:#e4e4e7;"> customer_id),
+</span><span style="color:#e4e4e7;">              (override));
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(CustomerController, CustomerWithNoDeliveries) {
+</span><span>  MockStatisticsCalculator calc;
+</span><span>  CustomerController </span><span style="color:#c2a3a3;">controller</span><span>(calc);
+</span><span>  std::string result = controller.</span><span style="color:#c2a3a3;">GetStatistics</span><span>(</span><span style="color:#c2b3a3;">1</span><span>);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(&quot;</span><span style="color:#a8c2a3;">Total weight delivered: 0. Total cost: 0</span><span>&quot;, result);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Separate unrelated responsibilities into two different classes, plus an interface for the shared 
+dependencies.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">DeliveryGateway </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual </span><span style="color:#a3b8c2;">~DeliveryGateway</span><span style="color:#e4e4e7;">(){};
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> std::vector&lt;DeliveryRecord&gt; </span><span style="color:#a3b8c2;">GetDeliveries</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span style="color:#e4e4e7;">) </span><span>= </span><span style="color:#c2b3a3;">0</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">ConcreteDeliveryGateway </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">DeliveryGateway </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::vector&lt;DeliveryRecord&gt; </span><span style="color:#a3b8c2;">GetDeliveries</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">StatisticsCalculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  Statistic </span><span style="color:#a3b8c2;">Calculate</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> std::vector&lt;DeliveryRecord&gt;</span><span>&amp; </span><span style="color:#c2a3a3;">records</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">CustomerController </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">CustomerController</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> StatisticsCalculator</span><span>&amp; </span><span style="color:#c2a3a3;">calculator</span><span style="color:#e4e4e7;">,
+</span><span style="color:#e4e4e7;">                     std::unique_ptr&lt;DeliveryGateway&gt; </span><span style="color:#c2a3a3;">gateway</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">calculator_</span><span style="color:#e4e4e7;">(calculator), </span><span style="color:#c2a3a3;">gateway_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(gateway)) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  std::string </span><span style="color:#a3b8c2;">GetStatistics</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  StatisticsCalculator calculator_;
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;DeliveryGateway&gt; gateway_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>std::string CustomerController::</span><span style="color:#a3b8c2;">GetStatistics</span><span>(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">customer_id</span><span>) {
+</span><span>  </span><span style="color:#c2a3c2;">const</span><span> std::vector&lt;DeliveryRecord&gt; records =
+</span><span>      gateway_-&gt;</span><span style="color:#c2a3a3;">GetDeliveries</span><span>(customer_id);
+</span><span>  </span><span style="color:#c2a3c2;">const</span><span> Statistic stat = calculator_.</span><span style="color:#c2a3a3;">Calculate</span><span>(records);
+</span><span>
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span>absl::</span><span style="color:#c2a3a3;">StrCat</span><span>(&quot;</span><span style="color:#a8c2a3;">Total weight delivered: </span><span>&quot;, stat.</span><span style="color:#c2a3a3;">totalWeight</span><span>,
+</span><span>                      &quot;</span><span style="color:#a8c2a3;">. Total cost: </span><span>&quot;, stat.</span><span style="color:#c2a3a3;">totalCost</span><span>);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3a3;">TEST</span><span>(CustomerController, CustomerWithNoDeliveries) {
+</span><span>  StatisticsCalculator calc;
+</span><span>  CustomerController </span><span style="color:#c2a3a3;">controller</span><span>(calc, std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;MockDeliveryGateway&gt;());
+</span><span>
+</span><span>  std::string result = controller.</span><span style="color:#c2a3a3;">GetStatistics</span><span>(</span><span style="color:#c2b3a3;">1</span><span>);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(&quot;</span><span style="color:#a8c2a3;">Total weight delivered: 0. Total cost: 0</span><span>&quot;, result);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="don-t-use-time-as-an-ambient-context">Don't use time as an ambient context</h3>
+<p>Using time as an ambient context adds unnecessary shared dependencies, making testing difficult.</p>
+<pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">using</span><span> std::chrono::system_clock;
+</span><span style="color:#c2a3c2;">using </span><span>time_point = std::chrono::time_point&lt;system_clock&gt;;
+</span></code></pre>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">DateTimeServer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">DateTimeServer</span><span style="color:#e4e4e7;">() : </span><span style="color:#c2a3a3;">now_func_</span><span style="color:#e4e4e7;">(</span><span>&amp;</span><span style="color:#e4e4e7;">system_clock::now) {}
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Init</span><span style="color:#e4e4e7;">(std::function&lt;time_point()&gt; </span><span style="color:#c2a3a3;">now_func</span><span style="color:#e4e4e7;">) { now_func_ </span><span>=</span><span style="color:#e4e4e7;"> now_func; }
+</span><span style="color:#e4e4e7;">  time_point </span><span style="color:#a3b8c2;">Now</span><span style="color:#e4e4e7;">() { </span><span style="color:#c2a3c2;">return </span><span style="color:#c2a3a3;">now_func_</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::function&lt;time_point()&gt; now_func_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>DateTimeServer server;
+</span><span>std::time_t time = system_clock::</span><span style="color:#c2a3a3;">to_time_t</span><span>(server.</span><span style="color:#c2a3a3;">Now</span><span>());
+</span><span>std::cout &lt;&lt; std::</span><span style="color:#a3b8c2;">ctime</span><span>(&amp;time) &lt;&lt; &#39;</span><span style="color:#a3c2b5;">\n</span><span>&#39;;
+</span><span>
+</span><span>std::function&lt;time_point()&gt; </span><span style="color:#a3b8c2;">now</span><span>([] {
+</span><span>  std::tm </span><span style="color:#a3b8c2;">time</span><span>{tm_mday : </span><span style="color:#c2b3a3;">1</span><span>, tm_mon : </span><span style="color:#c2b3a3;">0</span><span>, tm_year : </span><span style="color:#c2b3a3;">120</span><span>};
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span>system_clock::</span><span style="color:#c2a3a3;">from_time_t</span><span>(std::</span><span style="color:#a3b8c2;">mktime</span><span>(&amp;time));
+</span><span>});
+</span><span>server.</span><span style="color:#c2a3a3;">Init</span><span>(now);
+</span><span>
+</span><span>time = system_clock::</span><span style="color:#c2a3a3;">to_time_t</span><span>(server.</span><span style="color:#c2a3a3;">Now</span><span>());
+</span><span>std::cout &lt;&lt; std::</span><span style="color:#a3b8c2;">ctime</span><span>(&amp;time) &lt;&lt; &#39;</span><span style="color:#a3c2b5;">\n</span><span>&#39;;
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Instead, inject the time dependency explicitly either as a value or a service. </p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">DateTimeServer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual </span><span style="color:#a3b8c2;">~DateTimeServer</span><span style="color:#e4e4e7;">(){};
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> time_point </span><span style="color:#a3b8c2;">Now</span><span style="color:#e4e4e7;">() </span><span>= </span><span style="color:#c2b3a3;">0</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">ConcreteDateTimeServer </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">DateTimeServer </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  time_point </span><span style="color:#a3b8c2;">Now</span><span style="color:#e4e4e7;">() { </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">system_clock::</span><span style="color:#c2a3a3;">now</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">InquiryController </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">InquiryController</span><span style="color:#e4e4e7;">(std::unique_ptr&lt;DateTimeServer&gt; </span><span style="color:#c2a3a3;">server</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">date_time_server_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(server)) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">ApproveInquiry</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">id</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;DateTimeServer&gt; date_time_server_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">void </span><span>InquiryController::</span><span style="color:#a3b8c2;">ApproveInquiry</span><span>(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">id</span><span>) {
+</span><span>  Inquiry inquiry = </span><span style="color:#c2a3a3;">GetById</span><span>(id);
+</span><span>  inquiry.</span><span style="color:#c2a3a3;">Approve</span><span>(date_time_server_-&gt;</span><span style="color:#c2a3a3;">Now</span><span>());
+</span><span>  </span><span style="color:#c2a3a3;">SaveInquiry</span><span>(inquiry);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Prefer injecting values over injecting services.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">void </span><span>InquiryController::</span><span style="color:#a3b8c2;">ApproveInquiry</span><span>(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">id</span><span>, time_point </span><span style="color:#c2a3a3;">date_time</span><span>) {
+</span><span>  Inquiry inquiry = </span><span style="color:#c2a3a3;">GetById</span><span>(id);
+</span><span>  inquiry.</span><span style="color:#c2a3a3;">Approve</span><span>(date_time);
+</span><span>  </span><span style="color:#c2a3a3;">SaveInquiry</span><span>(inquiry);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+          <!-- break so we don't set previous to something even heavier -->
+          
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;unit-testing&#x2F;3-integration-testing&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;unit-testing&#x2F;1-bigger-picture&#x2F;"><i class="ri-arrow-right-s-line ri-4x"></i></a>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+    <nav>
+      <ul>
+        <li>
+          <a class="toc-h2" href="#don-t-test-private-methods-directly">Don&#x27;t test private methods directly</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#don-t-expose-private-state">Don&#x27;t expose private state</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#don-t-leak-domain-knowledge-to-tests">Don&#x27;t leak domain knowledge to tests</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#don-t-add-production-code-for-tests-only">Don&#x27;t add production code for tests only</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#don-t-mock-concrete-classes">Don&#x27;t mock concrete classes</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#don-t-use-time-as-an-ambient-context">Don&#x27;t use time as an ambient context</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

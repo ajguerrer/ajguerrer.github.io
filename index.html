@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>ajguerrer</title>
+    <meta name="description" content="Personal website of Andrew Guerrero">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/home.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<main>
+    <div class="info">
+        <img src="img&#x2F;avatar.webp" alt="avatar">
+        <div class="info-text">
+            <p>
+                <span id="name">Andrew Guerrero</span>
+                <span id="id">@ajguerrer</span>
+                </p>
+            <p id="bio"> Software Engineer and aspiring Rustacean </p>
+        </div>
+    </div>
+    <div class="link">
+        <div class="left">
+            <a href="/blog" id="blog">
+                <i class="ri-open-arm-line ri-xl"></i>
+                <span>Blog</span>
+            </a>
+            <a href="/projects" id="projects">
+                <i class="ri-seedling-line ri-xl"></i>
+                <span>Projects</span>
+            </a>
+            </div>
+        <div class="right">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;ajguerrer" aria-label="GitHub" target="_blank" rel='noreferrer noopener'><i class="ri-github-line ri-xl"></i></a>
+            <a href="https:&#x2F;&#x2F;twitter.com&#x2F;ajguerrer" aria-label="Twitter" target="_blank" rel='noreferrer noopener'><i class="ri-twitter-line ri-xl"></i></a>
+            <a href="mailto:ajguerrer@gmail.com" aria-label="Email" target="_blank" rel='noreferrer noopener'><i class="ri-mail-line ri-xl"></i></a>
+            <button id="color-toggle"  aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+        </div>
+    </div>
+    <div class="brief"><h3 id="hello">Hello!</h3>
+<p>I'm a software engineer currently working at Spectra Logic. I started working there as an intern
+while completing my Bachelor of Science Electrical and Computer Engineering at the University of
+Colorado. Along the way, I developed a passion for software engineering while working close to the
+hardware.</p>
+<p>At Spectra, I maintain fancy jukeboxes (a.k.a SCSI Medium Changers) storing some of the world's most
+important data. Inside is a distributed system, custom built from the ground up, composed of
+multiple protocols and transports where clusters of sensors and motors (robots) scramble to load
+tape media into drives. We call them tape libraries.</p>
+<p>Much of my focus is directed internally toward my teammates. Running on those tape libraries is an
+atomic fully upgradable Yocto-based Linux distribution I developed and maintain so my team always
+has the tools and features they need to write awesome software. I also rewrote a build system from a
+collection of Perl and Ruby scripts to composable, declarative Jenkins pipelines, while
+simultaneously migrating the codebase from Perforce to GitHub. Combined with an simple, consistent
+workflow, my teammates develop in a more familiar environment with a tighter feedback loop. Next
+stop for Jenkins is the cloud!</p>
+<p>Recently, I have developed quite the hankering for the Rust programming language. In the past couple
+years, I have been learning Rust through a couple personal projects in my free time - including a
+reflective protobuf library and a async network stack. Feel free to check them out!</p></div>
+</main>
+<script src="/js/dark.js"></script>
+</body>
+
+</html>

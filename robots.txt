@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ajguerrer.github.io/sitemap.xml

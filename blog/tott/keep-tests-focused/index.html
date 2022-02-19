@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Keep Tests Focused</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Keep Tests Focused</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2018-06-11</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/google"><i
+              class="ri-hashtag ri-sm"></i><span>google</span></a><a class="tag" href="https://ajguerrer.github.io/tags/tott"><i
+              class="ri-hashtag ri-sm"></i><span>tott</span></a>
+        </div>
+      </div>    
+
+      
+
+      <p>Testing too many scenarios at once can make it difficult to understand test and reason about the
+failure.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3a3;">TEST_F</span><span>(BankAccountTest, WithdrawFromAccount) {
+</span><span>  Transaction transaction = account_.</span><span style="color:#c2a3a3;">Deposit</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">5</span><span>));
+</span><span>  clock_.</span><span style="color:#c2a3a3;">AdvanceTime</span><span>(</span><span style="color:#c2b3a3;">kMinTimeToSettle</span><span>);
+</span><span>  account_.</span><span style="color:#c2a3a3;">Settle</span><span>(transaction);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_THAT</span><span>(account_.</span><span style="color:#c2a3a3;">Withdraw</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">5</span><span>)), </span><span style="color:#c2a3a3;">IsOk</span><span>());
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_THAT</span><span>(account_.</span><span style="color:#c2a3a3;">Withdraw</span><span>(</span><span style="color:#c2a3a3;">USd</span><span>(</span><span style="color:#c2b3a3;">1</span><span>)), </span><span style="color:#c2a3a3;">IsRejected</span><span>());
+</span><span>  account_.</span><span style="color:#c2a3a3;">SetOverdraftLimit</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">1</span><span>));
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_THAT</span><span>(account_.</span><span style="color:#c2a3a3;">Withdraw</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">1</span><span>)), </span><span style="color:#c2a3a3;">IsOk</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Break up each scenario into its own test.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3a3;">TEST_F</span><span>(BankAccountTest, CanWithdrawWithinBalance) {
+</span><span>  </span><span style="color:#c2a3a3;">DepositAndSettle</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">5</span><span>));
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_THAT</span><span>(account_.</span><span style="color:#c2a3a3;">Withdraw</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">5</span><span>)), </span><span style="color:#c2a3a3;">IsOk</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST_F</span><span>(BankAccountTest, CannotOverdraw) {
+</span><span>  </span><span style="color:#c2a3a3;">DepositAndSettle</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">5</span><span>));
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_THAT</span><span>(account_.</span><span style="color:#c2a3a3;">Withdraw</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">6</span><span>)), </span><span style="color:#c2a3a3;">IsRejected</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST_F</span><span>(BankAccountTest, CanOverdrawUpToOverdraftLimit) {
+</span><span>  </span><span style="color:#c2a3a3;">DepositAndSettle</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">5</span><span>));
+</span><span>  account_.</span><span style="color:#c2a3a3;">SetOverdraftLimit</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">1</span><span>));
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_THAT</span><span>(account_.</span><span style="color:#c2a3a3;">Withdraw</span><span>(</span><span style="color:#c2a3a3;">Usd</span><span>(</span><span style="color:#c2b3a3;">6</span><span>)), </span><span style="color:#c2a3a3;">IsOk</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>Notice how each test only verifies the output of one call per test.</p>
+
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+          <!-- break so we don't set previous to something even heavier -->
+          
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;tott&#x2F;only-verify-relevant-method-arguments&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;tott&#x2F;understanding-code-in-review&#x2F;"><i class="ri-arrow-right-s-line ri-4x"></i></a>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

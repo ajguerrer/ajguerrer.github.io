@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Part 1: The Bigger Picture</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Part 1: The Bigger Picture</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2020-01-06</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/unit-testing"><i
+              class="ri-hashtag ri-sm"></i><span>unit-testing</span></a>
+        </div>
+      </div>    
+
+      
+
+      <h2 id="what-makes-a-good-or-bad-test">What Makes a Good or Bad Test?</h2>
+<ul>
+<li>Unit testing enables <em>sustainable</em> growth in software projects by acting as a form of insurance 
+against regressions. A good test has a lower maintenance cost than the cost of fixing the bugs it 
+prevents.</li>
+<li>Code is a liability, not an asset, and tests are code too. Tests that don't verify business value, 
+raise false alarms, run slow, and are difficult to maintain, do more harm than good.</li>
+</ul>
+<h2 id="code-coverage-metrics">Code Coverage Metrics</h2>
+<p>Coverage metrics are a good negative indicator for test quality, but a bad positive one.</p>
+<h4 id="curly-braces">Curly Braces</h4>
+<p>Curly braces count.</p>
+<pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsStringLong</span><span>(</span><span style="color:#c2a3c2;">const</span><span> std::string&amp; </span><span style="color:#c2a3a3;">input</span><span>) {
+</span><span>  </span><span style="color:#c2a3c2;">if </span><span>(input.</span><span style="color:#c2a3a3;">length</span><span>() &gt; </span><span style="color:#c2b3a3;">5</span><span>) {
+</span><span>    </span><span style="color:#c2a3c2;">return </span><span style="color:#c2b3a3;">true</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span style="color:#c2b3a3;">false</span><span>;
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(IsStringLong, ShortString) {
+</span><span>  </span><span style="color:#c2a3c2;">bool</span><span> result = </span><span style="color:#c2a3a3;">IsStringLong</span><span>(&quot;</span><span style="color:#a8c2a3;">abc</span><span>&quot;);
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(result, </span><span style="color:#c2b3a3;">false</span><span>);
+</span><span>}
+</span></code></pre>
+<p>75% of 4 lines covered.</p>
+<h4 id="refactoring">Refactoring</h4>
+<p>Refactoring can be used to &quot;game&quot; coverage by condensing the code.</p>
+<pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsStringLong</span><span>(</span><span style="color:#c2a3c2;">const</span><span> std::string&amp; </span><span style="color:#c2a3a3;">input</span><span>) { </span><span style="color:#c2a3c2;">return</span><span> input.</span><span style="color:#c2a3a3;">length</span><span>() &gt; </span><span style="color:#c2b3a3;">5</span><span>; }
+</span></code></pre>
+<p>100% of 1 line covered.</p>
+<h4 id="test-quality">Test Quality</h4>
+<p>Coverage metrics say nothing about the quality of the test.</p>
+<pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsStringLong</span><span>(</span><span style="color:#c2a3c2;">const</span><span> std::string&amp; </span><span style="color:#c2a3a3;">input</span><span>) {
+</span><span>  </span><span style="color:#c2a3c2;">if </span><span>(input.</span><span style="color:#c2a3a3;">length</span><span>() &gt; </span><span style="color:#c2b3a3;">5</span><span>) {
+</span><span>    </span><span style="color:#c2a3c2;">return </span><span style="color:#c2b3a3;">true</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#c2a3c2;">return </span><span style="color:#c2b3a3;">false</span><span>;
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(IsStringLong, ShortString) {
+</span><span>  </span><span style="color:#c2a3c2;">bool</span><span> result1 = </span><span style="color:#c2a3a3;">IsStringLong</span><span>(&quot;</span><span style="color:#a8c2a3;">abc</span><span>&quot;);
+</span><span>  </span><span style="color:#c2a3c2;">bool</span><span> result2 = </span><span style="color:#c2a3a3;">IsStringLong</span><span>(&quot;</span><span style="color:#a8c2a3;">abcdef</span><span>&quot;);
+</span><span>}
+</span></code></pre>
+<p>100% of 4 lines covered.</p>
+<h4 id="external-dependencies">External Dependencies</h4>
+<p>Coverage metrics do not include coverage of external libraries.</p>
+<pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">int </span><span style="color:#a3b8c2;">Parse</span><span>(</span><span style="color:#c2a3c2;">const</span><span> std::string&amp; </span><span style="color:#c2a3a3;">input</span><span>) { </span><span style="color:#c2a3c2;">return </span><span>std::</span><span style="color:#a3b8c2;">atoi</span><span>(input.</span><span style="color:#c2a3a3;">c_str</span><span>()); }
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(IsStringLong, ShortString) {
+</span><span>  </span><span style="color:#c2a3c2;">int</span><span> result = </span><span style="color:#c2a3a3;">Parse</span><span>(&quot;</span><span style="color:#a8c2a3;">5</span><span>&quot;);
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(result, </span><span style="color:#c2b3a3;">5</span><span>);
+</span><span>}
+</span></code></pre>
+<p>100% of 1 line covered.</p>
+<blockquote class="note tip">
+    <div class="header">
+        <i class="ri-lightbulb-line ri-lg"></i>
+        
+        <p><strong>Tip</strong></p>
+        
+    </div> 
+    <div class="content">
+        <p><strong>Hospital Analogy</strong> - Temperature is another good negative indicator, but a bad positive indicator. 
+Nurses take temperature measurements to see if a patient's body is unwell. But, regulating the 
+patient's temperature is never <em>the goal</em>. Otherwise, hospitals would tend towards more &quot;effective&quot; 
+strategies, like dumping patients with fevers into ice baths. Instead, nurses continuously monitor 
+a patients temperature while focusing on the root cause of the illness.</p>
+
+    </div>
+</blockquote><h2 id="what-makes-a-successful-test-suite">What Makes a Successful Test Suite</h2>
+<p>A successful test suite has the following properties:</p>
+<ol>
+<li>Integrated into the development cycle.</li>
+<li>Targets only the most important parts of the code base.</li>
+<li>Provides maximum value with minimum maintenance costs.</li>
+</ol>
+<p>Enforcing test quality is a tough problem; one that requires personal judgement and skill.</p>
+<h2 id="dependency-classification">Dependency Classification</h2>
+<p>Dependencies may be shared or private; mutable or immutable; internal or external.</p>
+<ul>
+<li><strong>Private</strong> - Managed and consumed exclusively by the executable.</li>
+<li><strong>Shared</strong> -  Managed and/or consumed by another executable.</li>
+<li><strong>Immutable</strong> - State cannot change in the lifetime of the executable.</li>
+<li><strong>Mutable</strong> - State may change in the lifetime of the executable.</li>
+<li><strong>Internal</strong> - Exists within the executable.</li>
+<li><strong>External</strong> Exists outside the executable.</li>
+</ul>
+<blockquote class="note info">
+    <div class="header">
+        <i class="ri-information-line ri-lg"></i>
+        
+        <p><strong>Info</strong></p>
+        
+    </div> 
+    <div class="content">
+        <p>Executable in this context may refer to a production application or a test executable containing a
+suite of test(s).</p>
+
+    </div>
+</blockquote><h2 id="test-isolation">Test Isolation</h2>
+<p>Varying degrees of isolation can be used when writing tests:</p>
+<ul>
+<li><strong>Heavy Isolation</strong> - Replace all mutable dependencies with test doubles. Development tends to
+start at the top of the object graph and work it's way down.</li>
+<li><strong>Light Isolation</strong> - Replace all mutable, shared dependencies with test doubles. Development 
+tends to start at the bottom of the object graph and work it's way up.</li>
+</ul>
+<h4 id="granularity">Granularity</h4>
+<p>Heavy isolation helps increase granularity. However, it is easy to fall into the trap of testing
+<em>implementation details</em> instead of <em>behavior</em>. </p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre style="background-color:#303136;color:#afb0b6;"><code><span>When I call my dog, he moves his front left leg, 
+</span><span>followed by his front right leg, 
+</span><span>then the back right leg, 
+</span><span>his head turns, 
+</span><span>and the tail starts wagging.
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>What is the purpose of those movements?</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre style="background-color:#303136;color:#afb0b6;"><code><span>When I call my dog, he comes right to me.
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>A test should tell a story about the problem your code helps to solve, and this story should be 
+cohesive and meaningful to a business expert.</p>
+<h4 id="coupling">Coupling</h4>
+<p>Heavy isolation can make it easier to test coupled classes. Substituting a classes dependencies with
+test doubles can help break up coupling in a large graph of dependencies. However, dependance on 
+test doubles is a good negative indicator of quality code design.</p>
+<h4 id="feedback">Feedback</h4>
+<p>Heavy isolation makes it easier to narrow down bugs, while light isolation tends to produce 
+cascades of failing tests. However, this issue can be mitigated by running tests regularly.</p>
+<h2 id="test-structure">Test Structure</h2>
+<ul>
+<li><em>Arrange</em>, <em>Act</em>, then <em>Assert</em> (AAA).</li>
+<li>Watch out for <em>Act</em> and <em>Assert</em> sections larger than one line, which may indicate the test: 
+<ul>
+<li>Verifies more than one behavior and needs to be split.</li>
+<li>Requires verification of more than one outcome, a.k.a <em>invariant violation</em>.</li>
+</ul>
+</li>
+<li><em>Arrange</em> sections should not be placed inside test fixtures. Doing so:
+<ul>
+<li>Introduces coupling between tests.</li>
+<li>Decreases readability.</li>
+</ul>
+</li>
+<li>Simplify tedious <em>Arrange</em> sections with the <em>factory pattern</em>.</li>
+<li>Avoid using conditional logic, including loop conditions.</li>
+<li>Name tests using plain english, describing behavior from the perspective of a business expert.</li>
+<li>Tests that verify the same behavior with different values may be parameterized, but never at the
+expense of readability.</li>
+<li>Consider an assertion library that reads fluently.</li>
+</ul>
+
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+          <!-- break so we don't set previous to something even heavier -->
+          
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;unit-testing&#x2F;4-antipatterns&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;unit-testing&#x2F;2-making-tests-work&#x2F;"><i class="ri-arrow-right-s-line ri-4x"></i></a>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+    <nav>
+      <ul>
+        <li>
+          <a class="toc-h2" href="#what-makes-a-good-or-bad-test">What Makes a Good or Bad Test?</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#code-coverage-metrics">Code Coverage Metrics</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#curly-braces">Curly Braces</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#refactoring">Refactoring</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#test-quality">Test Quality</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#external-dependencies">External Dependencies</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="toc-h2" href="#what-makes-a-successful-test-suite">What Makes a Successful Test Suite</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#dependency-classification">Dependency Classification</a>
+        </li>
+        <li>
+          <a class="toc-h2" href="#test-isolation">Test Isolation</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#granularity">Granularity</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#coupling">Coupling</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#feedback">Feedback</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="toc-h2" href="#test-structure">Test Structure</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

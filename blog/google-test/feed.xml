@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>ajguerrer::blog</title>
+	<subtitle>Andrew Guerrero&#x27;s blog.</subtitle>
+	<link href="https://ajguerrer.github.io/blog/google-test/feed.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://ajguerrer.github.io/blog/google-test/"/>
+	<updated>2017-04-17T00:00:00+00:00</updated>
+	<id>https://ajguerrer.github.io/blog/google-test/feed.xml</id>
+	<entry xml:lang="en">
+		<title>A Lightning Tour of the Google Testing Blog</title>
+		<published>2017-04-17T00:00:00+00:00</published>
+		<updated>2017-04-17T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/google-test/tour/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/google-test/tour/</id>
+		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;&quot;&gt;Google Testing Blog&lt;&#x2F;a&gt; has a huge wealth of information for software
+engineers looking for resources on testing. Testing culture at Google is one that I really look up
+to and I am grateful to the engineers who shared these resources. With that said, keep in mind that
+some of the content can be outdated and&#x2F;or opinionated. Testing is a widespread topic and there can
+be different, sometimes conflicting, answers to any given problem.&lt;&#x2F;p&gt;
+&lt;p&gt;Below you will find a a categorized list of key concepts I found in the blog with links to the
+particular post in which it was found. The idea here is brevity. If an item catches your eye, take a
+look at the linked blog post(s) for more info.&lt;&#x2F;p&gt;
+&lt;p&gt;I plan to keep this updated as more posts are added.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;test-reliability&quot;&gt;Test Reliability&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Smaller tests run faster, are less flakey, and isolate failures. As a general rule of thumb, favor
+a pyramid-shaped composition of 70% small, 20% medium, and 10% large tests.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#11&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Test binary size and memory usage, including third-party testing tools, have a strong correlation
+on whether a test is flaky.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#18&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Beware of using UI testing to verify underlying functionality. In these cases, it is cheaper and
+more reliable to have smaller tests that break closer to the source of the problem.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#4&quot;&gt;4&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Hermetic servers add speed and reliability into end-to-end tests. A environment is considered
+Hermetic if it can run an entire system under test on a single machine with fake network
+connections and database implementations.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#9&quot;&gt;5&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Filter out flakey tests by rerunning failing tests. If a test fails three times in a row, consider
+it a real failure.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#13&quot;&gt;6&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Build testability into the product. For example, a real-time system can rely on a fake clock
+instead of a hardware clock. Processes can spawn other processes attached to a debugger with
+debugging flags.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#15&quot;&gt;7&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;code-quality&quot;&gt;Code Quality&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Releasing often gives teams an incentive to automate testing and reduce coupling with the rest of
+the system.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#17&quot;&gt;8&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;When a team provides &lt;a href=&quot;..&#x2F;tott&#x2F;#know-your-test-doubles&quot;&gt;fakes&lt;&#x2F;a&gt; and writes tests for them, they
+become clients of their own software. Experiencing the perspective of the client gives the team an
+incentive to make their API easier to use.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#17&quot;&gt;8&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;While writing the header first encourages consideration for the interface, writing tests first
+encourages consideration for how the interface will be &lt;em&gt;used&lt;&#x2F;em&gt;.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#5&quot;&gt;9&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Good code quality is taught, not enforced. Create a culture that teaches code quality through code
+review, pair programming, and mentoring.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#15&quot;&gt;7&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Don&#x27;t obsess over coverage numbers. Use code coverage reports to identify areas that are not
+covered and human judgement over whether to cover it. For example, frequently changed code should
+be covered.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#19&quot;&gt;10&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Consider investing in mutation testing, a automated tool that &amp;quot;mutates&amp;quot; code and expects tests to
+fail. Tuned properly, it can help find oversights in tests that are worth fixing. &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#20&quot;&gt;11&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;productivity&quot;&gt;Productivity&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Automation is costly. Automate only the tests that you find yourself running often to reliably
+catch regressions on features with business value.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Speed up the feedback loop between test engineers and development engineers. Share the same space,
+tools, daily stand-ups, and design discussions.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Effective automation depends on test design. Good test design is built from a solid foundation of
+manual tests.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#6&quot;&gt;12&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;If a test plan isn&#x27;t worth bothering to update, it isn&#x27;t worth creating in the first place. A
+quick brainstorming session will suffice.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#8&quot;&gt;13&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Use formatting tools, like clang-format, to improve readability.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#14&quot;&gt;14&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;infrastructure&quot;&gt;Infrastructure&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove the detective work of tracking down bad changes by investing in a pre-submit system that
+runs automated tests against the commit before it reaches the depot.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#7&quot;&gt;15&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#13&quot;&gt;6&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Don&#x27;t fall behind on updating third party dependencies. Update them quickly by setting up CI
+system with dependencies pinned at head.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#12&quot;&gt;16&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Avoid making more than one branch by putting risky new changes behind feature flags.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#14&quot;&gt;14&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Constantly look for opportunities to make the build system faster. Reduce the amount of code being
+compiled, replace tools with faster counterparts, and use distributed build systems.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#16&quot;&gt;17&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Release early and release often. Services and websites can deploy rapidly. A good target for
+client projects is Chromes six week cycle.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#16&quot;&gt;17&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;metrics-logging&quot;&gt;Metrics &amp;amp; Logging&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Pre- vs post-production defect ratio&lt;&#x2F;em&gt; and a breakdown of &lt;em&gt;defects by component or functional
+area&lt;&#x2F;em&gt; help identify holes in test.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;18&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Premature performance optimization makes bad code. Develop in a clean, maintainable and
+extensible manner &lt;em&gt;first&lt;&#x2F;em&gt;, and then let benchmarks drive performance optimizations.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;19&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Remove unwanted noise by logging with conditional verbosity. Log all levels to a logging queue.
+If a transaction completes successfully, discard the unimportant levels.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#10&quot;&gt;20&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Use two sets of logging levels, one for production builds and one for development builds.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#10&quot;&gt;20&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Trace the time spent on every significant processing step. Measuring is the only way to detect
+performance issues or make claims about performance.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#10&quot;&gt;20&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Write automated performance tests for performance sensitive parts of your product.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#16&quot;&gt;17&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;11&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2015&#x2F;04&#x2F;just-say-no-to-more-end-to-end-tests.html&quot;&gt;Just Say No to More End-to-End Tests&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;18&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2017&#x2F;04&#x2F;where-do-our-flaky-tests-come-from.html&quot;&gt;Where do our flaky tests come from?&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;3&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;3&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2007&#x2F;10&#x2F;automating-tests-vs-test-automation.html&quot;&gt;Automating tests vs. test-automation&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;4&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;4&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2008&#x2F;06&#x2F;taming-beast-aka-how-to-test-ajax.html&quot;&gt;Taming the Beast (a.k.a. how to test AJAX applications) : Part 1&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;9&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;5&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2012&#x2F;10&#x2F;hermetic-servers.html&quot;&gt;Hermetic Servers&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;13&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;6&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2016&#x2F;05&#x2F;flaky-tests-at-google-and-how-we.html&quot;&gt;Flaky Tests at Google and How We Mitigate Them&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;15&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;7&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2016&#x2F;10&#x2F;hackable-projects-pillar-2-debuggability.html&quot;&gt;Hackable Projects - Pillar 2: Debuggability&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;17&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;8&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2017&#x2F;02&#x2F;discomfort-as-tool-for-change.html&quot;&gt;Discomfort as a Tool for Change&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;5&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;9&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2008&#x2F;09&#x2F;test-first-is-fun_08.html&quot;&gt;Test first is fun!&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;19&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;10&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2020&#x2F;08&#x2F;code-coverage-best-practices.html&quot;&gt;Code Coverage Best Practices&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;20&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;11&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2021&#x2F;04&#x2F;mutation-testing.html&quot;&gt;Mutation Testing&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;6&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;12&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2008&#x2F;09&#x2F;presubmit-and-performance.html&quot;&gt;Presubmit And Performance&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;8&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;13&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;09&#x2F;10-minute-test-plan.html&quot;&gt;The 10 Minute Test Plan&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;14&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;14&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2016&#x2F;08&#x2F;hackable-projects.html&quot;&gt;Hackable Projects - Pillar 1: Code Health&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;7&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;15&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;06&#x2F;burning-test-questions-at-google.html&quot;&gt;Burning Test Questions at Google&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;12&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;16&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2015&#x2F;05&#x2F;multi-repository-development.html&quot;&gt;Multi-Repository Development&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;16&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;17&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2016&#x2F;11&#x2F;hackable-projects-pillar-3.html&quot;&gt;Hackable Projects - Pillar 3: Infrastructure&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;18&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2007&#x2F;10&#x2F;post-release-closing-loop_02.html&quot;&gt;Post Release: Closing the loop&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;19&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2007&#x2F;10&#x2F;performance-testing.html&quot;&gt;Performance Testing&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;10&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;20&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2013&#x2F;06&#x2F;optimal-logging.html&quot;&gt;Optimal Logging&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Musings from James Whittaker</title>
+		<published>2011-03-23T00:00:00+00:00</published>
+		<updated>2011-03-23T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/google-test/whittaker/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/google-test/whittaker/</id>
+		<content type="html">&lt;p&gt;James A. Whittaker wrote three thought-provoking series in the &lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;&quot;&gt;Google Testing
+Blog&lt;&#x2F;a&gt;. I get the feeling he likes the number seven. Every one of
+his posts provided me with a unique and colorful take on what can sometimes be a dry subject. The
+abstract concepts shared in his posts shaped my foundational beliefs on testing software. &lt;&#x2F;p&gt;
+&lt;p&gt;Below you will find a few sentences per post which I think capture the essence of what Whittaker is
+conveying in each of his posts. The final series is a bit different than the first two; it&#x27;s an 
+inside view of the structure and process inside the software shop known as Google.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-seven-plagues-of-software-testing&quot;&gt;The Seven Plagues of Software Testing&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Aimlessness&lt;&#x2F;strong&gt; - Do not test for the sake of testing. Every test should have a goal. Document
+what works and analyze what doesn&#x27;t. Then, share with your colleagues.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Repetitiveness&lt;&#x2F;strong&gt; - Running the same test suite over again without finding new bugs does not
+mean that there are no bugs. Variation is healthy.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Amnesia&lt;&#x2F;strong&gt; - Chances are the problem your are trying to solve has been solved before. If the
+same issue keeps stinging you, or you had to answer a question the hard way, document it and put
+it in a place others will find it.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Boredom&lt;&#x2F;strong&gt; - A bored tester rushes through the tactical aspects of testing without considering
+the interesting strategic aspects. The day testing gets &amp;quot;figured out&amp;quot; is the day it gets
+completely automated away.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#4&quot;&gt;4&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Homelessness&lt;&#x2F;strong&gt; - Testers are homeless. They don&#x27;t actually live in the software like users do.
+Some bugs are only found with the hands of users doing their work in their environment.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#5&quot;&gt;5&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Blindness&lt;&#x2F;strong&gt; - Testers require tools to provide helpful feedback from software. It&#x27;s tempting to
+settle down with a trusty set of tools, but doing so causes self-inflicted blindness to a growing
+ecosystem of useful feedback.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#6&quot;&gt;6&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Entropy&lt;&#x2F;strong&gt; - Testers increase entropy by giving developers things to do. This is unavoidable,
+but preventative. As developers do more &lt;em&gt;during&lt;&#x2F;em&gt; development, testers add less work, and entropy
+tends towards a minimum.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#7&quot;&gt;7&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;an-ingredients-list-for-testing&quot;&gt;An Ingredients List for Testing&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Product expertise&lt;&#x2F;strong&gt; - A good developer knows how the product works; a good tester knows how to
+use it.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#8&quot;&gt;8&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Bill of materials&lt;&#x2F;strong&gt; - Testers should be able to reference a complete list of features that can
+be tested.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#9&quot;&gt;9&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; &lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Risk analysis&lt;&#x2F;strong&gt; - Features are not equally important, or equally time consuming to test. Have a
+model to quantitatively analyze the risk of each feature.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#10&quot;&gt;10&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; &lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Domain expertise&lt;&#x2F;strong&gt; - It is not enough to be good at testing. Testers also need expertise with
+the technologies of the domain the product operates in.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#11&quot;&gt;11&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Test guidance&lt;&#x2F;strong&gt; - Whether it be technique, nomenclature, or history, testers need a way to
+identify and store tribal knowledge of the team.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#12&quot;&gt;12&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Variation&lt;&#x2F;strong&gt; - Tests often get stale. Wasting time running stale tests is also a form of risk.
+Adding variation can breathe new life into stale tests.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#13&quot;&gt;13&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Completeness analysis&lt;&#x2F;strong&gt; - Teams need a model to measure how well their testing efforts have
+covered the risk landscape of their product.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#14&quot;&gt;14&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;how-google-tests-software&quot;&gt;How Google Tests Software&lt;&#x2F;h2&gt;
+&lt;p&gt;Engineers are loaned out to product teams on an as-needed basis. Engineers are free to change
+product teams at their own cadence.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#15&quot;&gt;15&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Developers own quality while testers support developers with tools and feedback. As developers get
+better at testing, less testers are needed. Successful teams have higher developer-to-tester ratios.
+&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#15&quot;&gt;15&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Development and test are not treated as separate disciplines. Developers test and testers code.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#17&quot;&gt;16&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;
+Instead, each of the three roles look at the product from different angles:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SWE (Software Engineer)&lt;&#x2F;strong&gt; - Feature creators responsible for their work. SWEs design and write
+features, and then prove they work by writing and running tests.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;SET (Software Engineer in Test)&lt;&#x2F;strong&gt; - Codebase caretakers who enable SWEs to write tests. SETs
+refactor code for testability, and write test features including test doubles and test framework.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;TE (Test Engineer)&lt;&#x2F;strong&gt; - Product experts who analyze quality and risk from the perspective of the
+user. TEs write large tests and automation scrips as well as drive test execution and interpret
+their results.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#16&quot;&gt;17&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;SETs and TEs are usually not involved early in the design phase of a product. Only when the product
+gains traction do they begin to exert their influence.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#20&quot;&gt;18&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#22&quot;&gt;19&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;SETs and SWEs have similar skill sets. Conversions from one role to another are common.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#21&quot;&gt;20&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Quality is a work in progress that relies on getting product out to users and receiving feedback as
+quickly as possible. As its being developed, a release is pushed through several channels in order
+of increasing confidence in quality:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Canary&lt;&#x2F;strong&gt; - Only fit for ultra tolerant users running experiments.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Dev&lt;&#x2F;strong&gt; - Used by developers for day-to-day work.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Test&lt;&#x2F;strong&gt; - Used internally for day-to-day work.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Beta&#x2F;Release&lt;&#x2F;strong&gt; - Fit for external exposure.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#18&quot;&gt;21&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Tests are classified by scope, falling under three categories:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Small&lt;&#x2F;strong&gt; - Covers a single function, focusing on logic.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Medium&lt;&#x2F;strong&gt; - Covers a function and its nearest neighbors, focusing on interoperability.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Large&lt;&#x2F;strong&gt; -  Covers an entire user scenario, focusing on business requirements.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#19&quot;&gt;22&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;If a test doesn&#x27;t require human cleverness or intuition, it is automated. Bug reporting is automated
+too.&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#19&quot;&gt;22&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;06&#x2F;7-plagues-of-software-testing.html&quot;&gt;The 7 Plagues of Software Testing&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;06&#x2F;by-james.html&quot;&gt;The plague of repetitiveness&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;3&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;3&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;07&#x2F;plague-of-amnesia.html&quot;&gt;The Plague of Amnesia&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;4&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;4&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;07&#x2F;plague-of-boredom.html&quot;&gt;The Plague of Boredom&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;5&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;5&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;07&#x2F;plague-of-homelessness.html&quot;&gt;The Plague of Homelessness&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;6&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;6&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;07&#x2F;plague-of-blindness.html&quot;&gt;The Plague of Blindness&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;7&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;7&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2009&#x2F;09&#x2F;plague-of-entropy.html&quot;&gt;The Plague of Entropy&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;8&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;8&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;08&#x2F;ingredients-list-for-testing-part-one.html&quot;&gt;An Ingredients List for Testing - Part One&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;9&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;9&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;08&#x2F;ingredients-list-for-testing-part-two.html&quot;&gt;An Ingredients List for Testing - Part Two&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;10&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;10&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;09&#x2F;ingredients-list-for-testing-part-three.html&quot;&gt;An Ingredients List for Testing - Part Three&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;11&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;11&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;09&#x2F;ingredients-list-for-testing-part-four.html&quot;&gt;An Ingredients List for Testing - Part Four&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;12&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;12&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;10&#x2F;ingredients-list-for-testing-part-five.html&quot;&gt;An Ingredients List for Testing - Part Five&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;13&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;13&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;11&#x2F;ingredients-list-for-testing-part-six.html&quot;&gt;An Ingredients List for Testing - Part Six&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;14&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;14&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2010&#x2F;11&#x2F;ingredients-list-for-testing-part-seven.html&quot;&gt;An Ingredients List for Testing - Part Seven (of Seven)&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;15&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;15&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;01&#x2F;how-google-tests-software.html&quot;&gt;How Google Tests Software - Part One&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;17&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;16&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;02&#x2F;how-google-tests-software-part-three.html&quot;&gt;How Google Tests Software - Part Three&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;16&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;17&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;02&#x2F;how-google-tests-software-part-two.html&quot;&gt;How Google Tests Software - Part Two&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;20&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;18&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;05&#x2F;how-google-tests-software-part-six.html&quot;&gt;How Google Tests Software - Part Six&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;22&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;19&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;05&#x2F;how-google-tests-software-part-seven.html&quot;&gt;How Google Tests Software - Part Seven&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;21&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;20&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;05&#x2F;how-google-tests-software-break-for-q.html&quot;&gt;How Google Tests Software - A Break for Q&amp;amp;A&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;18&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;21&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;03&#x2F;how-google-tests-software-part-four.html&quot;&gt;How Google Tests Software - Part Four&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;19&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;22&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&#x2F;2011&#x2F;03&#x2F;how-google-tests-software-part-five.html&quot;&gt;How Google Tests Software - Part Five&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Testable Code with Miško Hevery</title>
+		<published>2008-11-26T00:00:00+00:00</published>
+		<updated>2008-11-26T00:00:00+00:00</updated>
+		<link href="https://ajguerrer.github.io/blog/google-test/hevery/" type="text/html"/>
+		<id>https://ajguerrer.github.io/blog/google-test/hevery/</id>
+		<content type="html">&lt;p&gt;In the early days of the &lt;a href=&quot;https:&#x2F;&#x2F;testing.googleblog.com&quot;&gt;Google Testing Blog&lt;&#x2F;a&gt;, Miško Hevery contributed a wealth of posts related
+to making code more testable culminating into a &lt;a href=&quot;http:&#x2F;&#x2F;misko.hevery.com&#x2F;code-reviewers-guide&quot;&gt;guide&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This guide hit me hard during the early parts of my career. I have spent plenty of time working on
+server code rather that infamously is collection of &lt;a href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;cpp&#x2F;parallel&#x2F;multithreading-creating-user-interface-threads&quot;&gt;class-based threads&lt;&#x2F;a&gt;. It is a fine pattern to
+use as long as other threads strictly pass messages to them. However, we turned them into Singletons
+and had other threads summon them into existence at will to call their methods directly. This
+pattern spread everywhere! As you can imagine, any testing that can be done to such an application
+is superficial. We could only test the little bits of logic that leaked into our models.&lt;&#x2F;p&gt;
+&lt;p&gt;Miško&#x27;s guide was a simple, directly applicable cookbook to problems such as these. Even though it
+was already too late for our server, it was nice to know there was a way out, given enough effort.
+Primarily, his guide teaches you how proactively avoid untestable patterns or reactively refactor
+them out.&lt;&#x2F;p&gt;
+&lt;p&gt;Without further ado, here is a summary to the key concepts in the guide with examples translated
+from Java to C++.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;dependency-injection&quot;&gt;Dependency Injection&lt;&#x2F;h2&gt;
+&lt;p&gt;A testable class is one that can be constructed in isolation or with test double collaborators. Once
+constructed, they have all the dependencies they need. This is known as Dependency Injection.&lt;&#x2F;p&gt;
+&lt;p&gt;Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage
+inheritance for creating test double collaborators. This is the primary tool in a testers toolkit
+and the primary benefit Dependency Injection brings.&lt;&#x2F;p&gt;
+&lt;p&gt;Below are some examples of constructor flaws and how they can be fixed with Dependency Injection.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;static-method-calls&quot;&gt;Static method calls&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;AccountView &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Hard-coded static method call
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;AccountView&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { user_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;RPCClient::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetUser&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  User user_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(AccountViewTest, SlowAndFlakyTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Unit test is slow and requires working network connection.
+&lt;&#x2F;span&gt;&lt;span&gt;  AccountView view;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;AccountView &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;AccountView&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;): &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(user) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; user_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(AccountViewTest, FastAndReliableTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; User does not need to be retrieved over the network.
+&lt;&#x2F;span&gt;&lt;span&gt;  User user;
+&lt;&#x2F;span&gt;&lt;span&gt;  AccountView &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;view&lt;&#x2F;span&gt;&lt;span&gt;(user);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;conditional-logic&quot;&gt;Conditional logic&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Car &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Car&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(CarType &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;type&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Only two ways to make a car and none of them for testing
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;switch &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(type) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kCoupe&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        engine_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;FastEngine&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        tires_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SmoothTires&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;case &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kTruck&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        engine_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;StrongEngine&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        tires_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;KnobbyTires&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;assert&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Engine engine_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Tires tires_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(CarTest, HardToTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Want a car with fake engine and tires but can only make real ones.
+&lt;&#x2F;span&gt;&lt;span&gt;  Car &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;car&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kCoupe&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;Car &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Car&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::unique_ptr&amp;lt;Engine&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;engine&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, std::unique_ptr&amp;lt;Tires&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;tires&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;engine_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(engine)), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;tires_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(tires)) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;Engine&amp;gt; engine_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;Tires&amp;gt; tires_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(CarTest, EasyToTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Car is fully configurable
+&lt;&#x2F;span&gt;&lt;span&gt;  Car &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;car&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;FakeEngine&amp;gt;(), std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;FakeTires&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;constructing-dependencies&quot;&gt;Constructing dependencies&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;House &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;House&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;kitchen_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bedroom_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  ModernKitchen kitchen_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  SpareBedroom bedroom_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(HouseTest, HardToTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; house is stuck with ModernKitchen and SpareBedroom objects
+&lt;&#x2F;span&gt;&lt;span&gt;  House house;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;House &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;House&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::unique_ptr&amp;lt;Kitchen&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;kitchen&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;,
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;        std::unique_ptr&amp;lt;Bedroom&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bedroom&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;kitchen_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(kitchen)), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bedroom_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(bedroom)) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;Kitchen&amp;gt; kitchen_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;Bedroom&amp;gt; bedroom_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(HouseTest, EasyToTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; house uses lightweight test doubles
+&lt;&#x2F;span&gt;&lt;span&gt;  House &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;house&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;MockKitchen&amp;gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;              std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;MockBedroom&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;partial-construction&quot;&gt;Partial construction&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;VisualVoicemail &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Constructs a partially initialized VisualVoicemail.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Don&amp;#39;t forget to call Initialize in production, or SetCalls in test!
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;VisualVoicemail&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(user) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Initialize&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetCalls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(Server::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetCallsFor&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(user_));
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Hack to allow test access to private methods.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Making this function public is not a better idea.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;friend class&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; VisualVoicemailTest_BrittleDesign_Test;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;SetCalls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::vector&amp;lt;Call&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) { calls_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(calls); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  User user_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;Call&amp;gt; calls_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(VisualVoicemailTest, BrittleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  DummyUser user;
+&lt;&#x2F;span&gt;&lt;span&gt;  VisualVoicemail &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;voicemail&lt;&#x2F;span&gt;&lt;span&gt;(user);
+&lt;&#x2F;span&gt;&lt;span&gt;  std::vector&amp;lt;Call&amp;gt; calls = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;BuildListOfTestCalls&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  voicemail.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetCalls&lt;&#x2F;span&gt;&lt;span&gt;(calls);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;VisualVoicemail &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;VisualVoicemail&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; std::vector&amp;lt;Call&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calls_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(calls) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::vector&amp;lt;Call&amp;gt; calls_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(VisualVoicemailTest, FlexibleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  VisualVoicemail &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;voicemail&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;BuildListOfTestCalls&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;law-of-demeter&quot;&gt;Law of Demeter&lt;&#x2F;h2&gt;
+&lt;p&gt;A class becomes difficult to test if it gets its dependencies from anywhere besides it&#x27;s interface.
+For example, a class may get a dependency by asking one of it dependencies, breaking the Law of
+Demeter.&lt;&#x2F;p&gt;
+&lt;p&gt;Violations of the Law of Demeter are a sign of both bad Dependency Injection, for passing in the
+wrong dependency, and bad encapsulation, for exposing secondary dependencies in the first place.&lt;&#x2F;p&gt;
+&lt;p&gt;Below are examples of Law of Demeter violations and how they can be fixed with accurate interfaces
+and encapsulation.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;indirect-dependencies&quot;&gt;Indirect dependencies&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;SalesTaxCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;SalesTaxCalculator&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; TaxTable&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;taxTable&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;taxTable_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(taxTable) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ComputeSalesTax&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Invoice&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;invoice&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Get the correct dependencies first...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    Address address &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; user.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetAddress&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; amount &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; invoice.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetSubTotal&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; ..then do the calculation.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; amount &lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; taxTable_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetTaxRate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(address);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  TaxTable taxTable_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(SalesTaxCalculatorTest, ComplexTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  SalesTaxCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calc&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TaxTable&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  User &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Address&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;1600 Amphitheater Parkway...&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;));
+&lt;&#x2F;span&gt;&lt;span&gt;  Invoice &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;invoice&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ProductX&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;95.00&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; ...
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.09&lt;&#x2F;span&gt;&lt;span&gt;, calc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ComputeSalesTax&lt;&#x2F;span&gt;&lt;span&gt;(user, invoice));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;SalesTaxCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;SalesTaxCalculator&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; TaxTable&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;taxTable&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;taxTable_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(taxTable) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ComputeSalesTax&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Address&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;address&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const float &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;amount&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Already have the correct dependencies; do the calculation.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; amount &lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; taxTable_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetTaxRate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(address);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  TaxTable taxTable_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(SalesTaxCalculatorTest, StraightforwardTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  SalesTaxCalculator &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;calc&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TaxTable&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  Address &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;address&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;1600 Amphitheater Parkway...&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; ...
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0.09&lt;&#x2F;span&gt;&lt;span&gt;, calc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ComputeSalesTax&lt;&#x2F;span&gt;&lt;span&gt;(address, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;95.00&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;overusing-getters-setters&quot;&gt;Overusing getters&#x2F;setters&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;LoginPage &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;LoginPage&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::shared_ptr&amp;lt;RPCClient&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;client&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; HttpRequest&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;request&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;client_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(client), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;request_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(request) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Login&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Even using a getter once is one more time than it needs to be.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    std::string cookie &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; request_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetCookie&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;g&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Using a member access operator twice in one statement is right out!
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; client_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetAuthenticator&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Authenticate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;RPCClient&amp;gt; client_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  HttpRequest request_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(LoginPageTest, ComplexBrittleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  MockRPCClient &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;mock_client&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_shared&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;FakeAuthenticator&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  std::vector&amp;lt;Cookie&amp;gt; cookies = {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Cookie&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;g&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;xyz123&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)};
+&lt;&#x2F;span&gt;&lt;span&gt;  MockHttpRequest &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;mock_request&lt;&#x2F;span&gt;&lt;span&gt;(cookies);
+&lt;&#x2F;span&gt;&lt;span&gt;  LoginPage &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;page&lt;&#x2F;span&gt;&lt;span&gt;(client, request);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_CALL&lt;&#x2F;span&gt;&lt;span&gt;(mock_client, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetAuthenticator&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_CALL&lt;&#x2F;span&gt;&lt;span&gt;(mock_request, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetCookie&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;g&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;));
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_TRUE&lt;&#x2F;span&gt;&lt;span&gt;(page.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Login&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;LoginPage &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;LoginPage&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::shared_ptr&amp;lt;Authenticator&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;authenticator&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Cookie&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;cookie&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;authenticator_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(authenticator)), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;cookie_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(cookie) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Login&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; authenticator_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Authenticate&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(cookie_); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;Authenticator&amp;gt; authenticator_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  Cookie cookie_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(LoginPageTest, SimpleFlexibleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  LoginPage &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;page&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_shared&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;FakeAuthenticator&amp;gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Cookie&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;g&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;xyz123&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;));
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_TRUE&lt;&#x2F;span&gt;&lt;span&gt;(page.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Login&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;exposing-dependencies&quot;&gt;Exposing dependencies&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;UpdateBug &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;UpdateBug&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::shared_ptr&amp;lt;DatabaseInterface&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;db&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;db_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(db) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Execute&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Bug&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bug&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Impose internal lock management on client. Don&amp;#39;t do this!
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    db_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetLock&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Lock&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    db_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Save&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(bug);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    db_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetLock&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Unlock&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;DatabaseInterface&amp;gt; db_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; This test shouldn&amp;#39;t be needed, but we must enforce Lock&#x2F;Unlock is called
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; around Save.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(UpdateBugTest, HardToTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  MockLock mock_lock;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span&gt; mock_db = std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_shared&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;MockDatabase&amp;gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  Bug &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bug&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;description&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  UpdateBug &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;updateBug&lt;&#x2F;span&gt;&lt;span&gt;(mock_db);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_CALL&lt;&#x2F;span&gt;&lt;span&gt;(*mock_db, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetLock&lt;&#x2F;span&gt;&lt;span&gt;()).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;WillRepeatedly&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ReturnRef&lt;&#x2F;span&gt;&lt;span&gt;(mock_lock));
+&lt;&#x2F;span&gt;&lt;span&gt;  {
+&lt;&#x2F;span&gt;&lt;span&gt;    InSequence dummy;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_CALL&lt;&#x2F;span&gt;&lt;span&gt;(mock_lock, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Lock&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_CALL&lt;&#x2F;span&gt;&lt;span&gt;(*mock_db, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Save&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Ref&lt;&#x2F;span&gt;&lt;span&gt;(bug)));
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_CALL&lt;&#x2F;span&gt;&lt;span&gt;(mock_lock, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Unlock&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  updateBug.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Execute&lt;&#x2F;span&gt;&lt;span&gt;(bug);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;UpdateBug &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;UpdateBug&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::shared_ptr&amp;lt;DatabaseInterface&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;db&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;db_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(db) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;Execute&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Bug&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bug&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Save calls Lock&#x2F;Unlock internally
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    db_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Save&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(bug);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;DatabaseInterface&amp;gt; db_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Go strait to testing state. No need for mock test since locking interaction
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; is encapsulated in the database.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(UpdateBugTest, EasyTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;auto&lt;&#x2F;span&gt;&lt;span&gt; db = std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_shared&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;FakeDatabase&amp;gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  UpdateBug &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;updateBug&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  Bug &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;bug&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;description&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  updateBug.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Execute&lt;&#x2F;span&gt;&lt;span&gt;(bug);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_EQ&lt;&#x2F;span&gt;&lt;span&gt;(bug, db.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetLastSaved&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;context-objects&quot;&gt;Context Objects&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;MembershipPlan &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; *snip*
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ProcessOrder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(UserContext&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;userContext&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    User user &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; userContext.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetUser&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    PlanLevel level &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; userContext.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetLevel&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    Order order &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; userContext.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetOrder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; do some processing ...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(MembershipPlanTest, BrittleUnreadableTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  MembershipPlan plan;
+&lt;&#x2F;span&gt;&lt;span&gt;  UserContext userContext;
+&lt;&#x2F;span&gt;&lt;span&gt;  userContext.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetUser&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;User&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Kim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;));
+&lt;&#x2F;span&gt;&lt;span&gt;  userContext.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetLevel&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;PlanLevel&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;143&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;yearly&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;));
+&lt;&#x2F;span&gt;&lt;span&gt;  userContext.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;SetOrder&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;Order&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;SuperDeluxe&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;));
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Hopefully this is all the setup the userContext needs to call ProcessOrder
+&lt;&#x2F;span&gt;&lt;span&gt;  plan.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ProcessOrder&lt;&#x2F;span&gt;&lt;span&gt;(userContext);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Make assertions against userContext and plan...
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;MembershipPlan &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; ...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;ProcessOrder&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, Order&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;order&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; PlanLevel&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;level&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; do some processing ...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(MembershipPlanTest, FlexibleSimpleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  MembershipPlan plan;
+&lt;&#x2F;span&gt;&lt;span&gt;  User &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;Kim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  Order &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;order&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;SuperDeluxe&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; PlanLevel &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;level&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;143&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;yearly&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  plan.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ProcessOrder&lt;&#x2F;span&gt;&lt;span&gt;(user, order, level);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Make assertions against user, order and plan...
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h2 id=&quot;global-state&quot;&gt;Global State&lt;&#x2F;h2&gt;
+&lt;p&gt;Global state is difficult to understand. Ideally, the interface of an object should fully describe
+it&#x27;s dependencies. Global state ruins this ideal because it can be used anywhere without warning.
+Such flexibility may seem convenient to the original developer, but to others it&#x27;s confusing.
+Especially in large code bases, it can be difficult to realize that some global state exists and
+reason about the circumstances in which it should or shouldn&#x27;t be used.&lt;&#x2F;p&gt;
+&lt;p&gt;Global state is the enemy of testing. It strongly couples itself to the code that uses it. Global
+scope encourages widespread usage, further compounding coupling issues. Coupling to concrete types
+makes it impossible to write test doubles and global state must be concrete because it uses the
+&lt;code&gt;static&lt;&#x2F;code&gt; keyword.&lt;&#x2F;p&gt;
+&lt;p&gt;Below are some examples of global state and how they can be fixed with Dependency Injection.
+However, Dependency Injection alone is often not enough to fix &lt;code&gt;static&lt;&#x2F;code&gt; methods. For those, an
+adapter called the repository pattern can help remove the
+&lt;a href=&quot;..&#x2F;tott&#x2F;#defeat-static-cling&quot;&gt;static cling&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Note, the solutions to the examples should not feel good and require a lot of work. It is really
+tough to test global state. The best solution is to never use it or refactor away from it
+altogether.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;singletons&quot;&gt;Singletons&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;LoginService &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;static&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; LoginService&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;static&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; LoginService instance;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; instance;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; *snip*
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;AdminDashboard &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsAuthenticatedAdmin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;LoginService::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsAuthenticatedAdmin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(user);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; *snip*
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST_F&lt;&#x2F;span&gt;&lt;span&gt;(AdminDashboardTest, FlakeySlowAndBrittleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; AdminDashboard is forced to use the real LoginService singleton.
+&lt;&#x2F;span&gt;&lt;span&gt;  User &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;username&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;password&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ASSERT_TRUE&lt;&#x2F;span&gt;&lt;span&gt;(adminDashboard_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsAuthenticatedAdmin&lt;&#x2F;span&gt;&lt;span&gt;(user));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;LoginServiceRepository &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;~LoginServiceRepository&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; LoginService&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;AdminDashboard &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;AdminDashboard&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::shared_ptr&amp;lt;LoginServiceRepository&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;loginService&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;loginService_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(loginService) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsAuthenticatedAdmin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; User&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; loginService_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsAuthenticatedAdmin&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(user);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;LoginServiceRepository&amp;gt; loginService_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(AdminDashboardTest, ReliableFastAndFlexibleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Can now use test doubles for the LoginService singleton.
+&lt;&#x2F;span&gt;&lt;span&gt;  AdminDashboard &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;adminDashboard&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_shared&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;MockLoginService&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  User &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;user&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;username&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a8c2a3;&quot;&gt;password&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ASSERT_TRUE&lt;&#x2F;span&gt;&lt;span&gt;(adminDashboard.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsAuthenticatedAdmin&lt;&#x2F;span&gt;&lt;span&gt;(user));
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;flags&quot;&gt;Flags&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;static bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kFlagUseRealBackend&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;RpcClient &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;static&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; RpcClient&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;static&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; RpcClient instance;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; instance;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; backend_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;RpcClient&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kFlagUseRealBackend&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      backend_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;&amp;lt;RealBackend&amp;gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      backend_ &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;&amp;lt;DummyBackend&amp;gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; *snip*
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;Backend&amp;gt; backend_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; The 2nd test to run could fail if both tests are run in parallel because
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; the RpcClient is static and both tests are a part of the same test suite.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(RpcClientTest, SmallComplexAndFlakeyTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kFlagUseRealBackend &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  RpcClient&amp;amp; client = RpcClient::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_FALSE&lt;&#x2F;span&gt;&lt;span&gt;(client.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(RpcClientTest, LargeComplexAndFlakeyTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;kFlagUseRealBackend &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  RpcClient&amp;amp; client = RpcClient::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;GetInstance&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_TRUE&lt;&#x2F;span&gt;&lt;span&gt;(client.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;RpcClient &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;explicit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;RpcClient&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::unique_ptr&amp;lt;Backend&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;backend&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;backend_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(backend)) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; backend_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(); }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;Backend&amp;gt; backend_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Now, both tests pass.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(RpcClientTest, SmallSimpleAndReliableTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  RpcClient &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;client&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;DummyBackend&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_FALSE&lt;&#x2F;span&gt;&lt;span&gt;(client.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(RpcClientTest, LargeSimpleAndReliableTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  RpcClient &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;client&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;RealBackend&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;EXPECT_TRUE&lt;&#x2F;span&gt;&lt;span&gt;(client.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsReal&lt;&#x2F;span&gt;&lt;span&gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h3 id=&quot;static-methods&quot;&gt;Static methods&lt;&#x2F;h3&gt;
+&lt;blockquote class=&quot;note bad&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-down-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Untestable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;TrainSchedule &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; *snip *
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;Schedule&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;FindNextTrain&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Do some work...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Static method accessing slow third party service
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(TrackStatus::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsClosed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(track)) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Do even more work...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; schedule;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST_F&lt;&#x2F;span&gt;&lt;span&gt;(TrainScheduleTest, FlakeySlowAndBrittleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Forces third party TrackStatus to get called
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ASSERT_NE&lt;&#x2F;span&gt;&lt;span&gt;(trainSchedule_.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;FindNextTrain&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;nullptr&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;blockquote class=&quot;note good&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-thumb-up-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Testable&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;pre data-lang=&quot;cpp&quot; style=&quot;background-color:#303136;color:#afb0b6;&quot; class=&quot;language-cpp &quot;&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;TrackStatusRepository &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;~TrackStatusRepository&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;virtual bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsClosed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Track&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;track&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;RealTrackStatusRepository &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;TrackStatusRepository &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; ... Wrap each of the third party library&amp;#39;s methods.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;IsClosed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; Track&lt;&#x2F;span&gt;&lt;span&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;track&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;TrackStatus::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsClosed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(track);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3b3;&quot;&gt;TrainSchedule &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;TrainSchedule&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::unique_ptr&amp;lt;TrackStatusRepository&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;trackStatus&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      : &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;trackStatus_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;move&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(trackStatus)) {}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; *snip *
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::shared_ptr&amp;lt;Schedule&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3b8c2;&quot;&gt;FindNextTrain&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;() {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Do some work...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(trackStatus_-&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;IsClosed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;(track)) {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Do even more work...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; schedule;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3c2;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;  std::unique_ptr&amp;lt;TrackStatusRepository&amp;gt; trackStatus_;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#e4e4e7;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;TEST&lt;&#x2F;span&gt;&lt;span&gt;(TrainScheduleTest, ReliableFastAndFlexibleTest) {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#797b86;&quot;&gt;&#x2F;&#x2F; Now TrainSchedule can be tested in isolation.
+&lt;&#x2F;span&gt;&lt;span&gt;  TrainSchedule &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;trainSchedule&lt;&#x2F;span&gt;&lt;span&gt;(std::&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;make_unique&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;StubTrackStatusRepository&amp;gt;());
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;ASSERT_NE&lt;&#x2F;span&gt;&lt;span&gt;(trainSchedule.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2a3a3;&quot;&gt;FindNextTrain&lt;&#x2F;span&gt;&lt;span&gt;(), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#c2b3a3;&quot;&gt;nullptr&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;&lt;h2 id=&quot;single-responsibility-principle&quot;&gt;Single Responsibility Principle&lt;&#x2F;h2&gt;
+&lt;p&gt;If you have a class that feels like it:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Contains hidden interactions that make you scratch your head.&lt;&#x2F;li&gt;
+&lt;li&gt;Is difficult to read and retain in memory.&lt;&#x2F;li&gt;
+&lt;li&gt;Is difficult to reason about its state or contains a bunch of conditional logic.&lt;&#x2F;li&gt;
+&lt;li&gt;Is difficult to describe what it does or the word &#x27;and&#x27; is used.&lt;&#x2F;li&gt;
+&lt;li&gt;Requires too many dependencies.&lt;&#x2F;li&gt;
+&lt;li&gt;Requires too much work to write a test double.&lt;&#x2F;li&gt;
+&lt;li&gt;Requires too many tests for full coverage.&lt;&#x2F;li&gt;
+&lt;li&gt;Requires large tests with complex setup&#x2F;teardown.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Then, that class is likely violating the Single Responsibility Principle. Such classes hide points
+of flexibility and encapsulate interaction instead of encapsulating behavior. Poor flexibility and
+encapsulation creates brittle design and strong coupling. The result is a class that&#x27;s hard to test.&lt;&#x2F;p&gt;
+&lt;p&gt;Opportunity to fix a violation of the Single Responsibility Principle is either proactive or
+reactive, depending on whether the violation is caught before or after it&#x27;s committed to the
+codebase.&lt;&#x2F;p&gt;
+&lt;p&gt;It should go without saying that the proactive approach is less work.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;proactive&quot;&gt;Proactive&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Identify the individual responsibilities.&lt;&#x2F;li&gt;
+&lt;li&gt;Give each responsibility a crisp name.&lt;&#x2F;li&gt;
+&lt;li&gt;Extract functionality into each class.&lt;&#x2F;li&gt;
+&lt;li&gt;Celebrate how much easier the class is to test.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;reactive&quot;&gt;Reactive&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Extract a class in the place where behavior is being altered with new functionality.&lt;&#x2F;li&gt;
+&lt;li&gt;Start to move chunks of behavior out of the legacy class and test each chunk in isolation.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;blockquote class=&quot;note tip&quot;&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;i class=&quot;ri-lightbulb-line ri-lg&quot;&gt;&lt;&#x2F;i&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Tip&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+        
+    &lt;&#x2F;div&gt; 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;p&gt;&lt;code&gt;static&lt;&#x2F;code&gt; methods are a sign of a homeless method. It likely belongs to one of the parameters it
+takes.&lt;&#x2F;p&gt;
+
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;blockquote&gt;</content>
+	</entry>
+</feed>

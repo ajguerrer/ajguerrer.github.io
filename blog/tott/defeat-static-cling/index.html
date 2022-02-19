@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Defeat &quot;Static Cling&quot;</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Defeat &quot;Static Cling&quot;</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2008-06-26</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/google"><i
+              class="ri-hashtag ri-sm"></i><span>google</span></a><a class="tag" href="https://ajguerrer.github.io/tags/tott"><i
+              class="ri-hashtag ri-sm"></i><span>tott</span></a>
+        </div>
+      </div>    
+
+      
+
+      <p>Static functions, like this singleton <code>GetInstance</code> method, are a sign of tight coupling.</p>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Bad</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MyObject </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">int </span><span style="color:#a3b8c2;">DoSomething</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">id</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">TheirEntity::</span><span style="color:#c2a3a3;">GetInstance</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">GetSomething</span><span style="color:#e4e4e7;">(id);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>There is a way around this using the Repository Pattern.</p>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Good</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">TheirEntityRepository </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual </span><span style="color:#a3b8c2;">~TheirEntityRepository</span><span style="color:#e4e4e7;">() </span><span>= </span><span style="color:#c2a3c2;">default</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> TheirEntity</span><span>&amp; </span><span style="color:#a3b8c2;">GetInstance</span><span style="color:#e4e4e7;">() </span><span>= </span><span style="color:#c2b3a3;">0</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// Other static methods here
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">TheirEntityStaticRepository </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">TheirEntityRepository </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  TheirEntity</span><span>&amp; </span><span style="color:#a3b8c2;">GetInstance</span><span style="color:#e4e4e7;">() { </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">TheirEntity::</span><span style="color:#c2a3a3;">GetInstance</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MyObject </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">MyObject</span><span style="color:#e4e4e7;">(std::unique_ptr&lt;TheirEntityRepository&gt; </span><span style="color:#c2a3a3;">repository</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">repository_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(repository)) {}
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">int </span><span style="color:#a3b8c2;">DoSomething</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">int </span><span style="color:#c2a3a3;">id</span><span style="color:#e4e4e7;">) { </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> repository_-&gt;</span><span style="color:#c2a3a3;">GetInstance</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">GetSomething</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;TheirEntityRepository&gt; repository_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span></code></pre>
+
+    </div>
+</blockquote>
+<p>All thats left is to derive a <code>MockTheirEntityRepository</code> suitable for your testing needs.</p>
+
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+          <!-- break so we don't set previous to something even heavier -->
+          
+
+      <div class="next-previous">
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;tott&#x2F;sleeping-synchronization&#x2F;"><i class="ri-arrow-left-s-line ri-4x"></i></a>
+              
+        <div class="spacer"></div>
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;tott&#x2F;testable-contracts-make-exceptional-neighbors&#x2F;"><i class="ri-arrow-right-s-line ri-4x"></i></a>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>

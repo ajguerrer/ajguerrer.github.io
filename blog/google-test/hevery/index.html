@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Testable Code with Miško Hevery</title>
+    <meta name="description" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ajguerrer.github.io/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/var.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/post.css" />
+    
+</head>
+
+<body>
+    <script>if(localStorage.getItem('theme')=='dark'){document.body.classList.add('dark-mode');}</script>
+    
+<header >
+    <div class="top">
+        <a class="header blog" href="/blog"><i class="ri-open-arm-line ri-2x"></i><span>Blog</span></a>
+        <a class="back" href="/"><i class="ri-arrow-left-s-line ri-1x"></i><span>Home</span></a>
+        <div class="icon">
+            <a id="go-home" href="/" aria-label="home" ><i class="ri-home-4-line ri-xl"></i></a>
+            <a href="/blog/feed.xml" aria-label="rss feed" ><i class="ri-rss-line ri-xl"></i></a>
+            <button id="color-toggle" aria-label="dark light mode switch"><i class="ri-moon-line ri-xl"></i></button>
+            <button id="toc-toggle" aria-label="table of content"><i class="ri-menu-2-line ri-xl"></i></button>
+            </div>
+    </div>
+    <div id="progress-bar"></div>
+</header>
+
+<div class="wrap">
+  <div class="blank"></div>
+  <main>
+    <div id="top"></div>
+    <article>
+      <h1>Testable Code with Miško Hevery</h1>
+      <div id="post-info">
+        <div class="date">
+          <span id="publish">2008-11-26</span>
+          </div>
+        <div class="tags">
+          <a class="tag" href="https://ajguerrer.github.io/tags/testing"><i
+              class="ri-hashtag ri-sm"></i><span>testing</span></a><a class="tag" href="https://ajguerrer.github.io/tags/google"><i
+              class="ri-hashtag ri-sm"></i><span>google</span></a>
+        </div>
+      </div>    
+
+      
+
+      <p>In the early days of the <a href="https://testing.googleblog.com">Google Testing Blog</a>, Miško Hevery contributed a wealth of posts related
+to making code more testable culminating into a <a href="http://misko.hevery.com/code-reviewers-guide">guide</a>.</p>
+<p>This guide hit me hard during the early parts of my career. I have spent plenty of time working on
+server code rather that infamously is collection of <a href="https://docs.microsoft.com/en-us/cpp/parallel/multithreading-creating-user-interface-threads">class-based threads</a>. It is a fine pattern to
+use as long as other threads strictly pass messages to them. However, we turned them into Singletons
+and had other threads summon them into existence at will to call their methods directly. This
+pattern spread everywhere! As you can imagine, any testing that can be done to such an application
+is superficial. We could only test the little bits of logic that leaked into our models.</p>
+<p>Miško's guide was a simple, directly applicable cookbook to problems such as these. Even though it
+was already too late for our server, it was nice to know there was a way out, given enough effort.
+Primarily, his guide teaches you how proactively avoid untestable patterns or reactively refactor
+them out.</p>
+<p>Without further ado, here is a summary to the key concepts in the guide with examples translated
+from Java to C++.</p>
+<h2 id="dependency-injection">Dependency Injection</h2>
+<p>A testable class is one that can be constructed in isolation or with test double collaborators. Once
+constructed, they have all the dependencies they need. This is known as Dependency Injection.</p>
+<p>Dependencies do not need to be concrete classes. Abstract classes allow testers to leverage
+inheritance for creating test double collaborators. This is the primary tool in a testers toolkit
+and the primary benefit Dependency Injection brings.</p>
+<p>Below are some examples of constructor flaws and how they can be fixed with Dependency Injection.</p>
+<h3 id="static-method-calls">Static method calls</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">AccountView </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// Hard-coded static method call
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">AccountView</span><span style="color:#e4e4e7;">() { user_ </span><span>= </span><span style="color:#e4e4e7;">RPCClient::</span><span style="color:#c2a3a3;">GetInstance</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">GetUser</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  User user_;
+</span><span style="color:#e4e4e7;">}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(AccountViewTest, SlowAndFlakyTest) {
+</span><span>  </span><span style="color:#797b86;">// Unit test is slow and requires working network connection.
+</span><span>  AccountView view;
+</span><span>};
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">AccountView </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">AccountView</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> User</span><span>&amp; </span><span style="color:#c2a3a3;">user</span><span style="color:#e4e4e7;">): </span><span style="color:#c2a3a3;">user_</span><span style="color:#e4e4e7;">(user) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> User</span><span>&amp;</span><span style="color:#e4e4e7;"> user_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(AccountViewTest, FastAndReliableTest) {
+</span><span>  </span><span style="color:#797b86;">// User does not need to be retrieved over the network.
+</span><span>  User user;
+</span><span>  AccountView </span><span style="color:#c2a3a3;">view</span><span>(user);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="conditional-logic">Conditional logic</h3>
+<p><blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Car </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">Car</span><span style="color:#e4e4e7;">(CarType </span><span style="color:#c2a3a3;">type</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Only two ways to make a car and none of them for testing
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">switch </span><span style="color:#e4e4e7;">(type) {
+</span><span style="color:#e4e4e7;">      </span><span style="color:#c2a3c2;">case </span><span style="color:#c2b3a3;">kCoupe</span><span style="color:#e4e4e7;">: {
+</span><span style="color:#e4e4e7;">        engine_ </span><span>= </span><span style="color:#c2a3a3;">FastEngine</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">        tires_ </span><span>= </span><span style="color:#c2a3a3;">SmoothTires</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">        </span><span style="color:#c2a3c2;">break</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">      }
+</span><span style="color:#e4e4e7;">      </span><span style="color:#c2a3c2;">case </span><span style="color:#c2b3a3;">kTruck</span><span style="color:#e4e4e7;">: {
+</span><span style="color:#e4e4e7;">        engine_ </span><span>= </span><span style="color:#c2a3a3;">StrongEngine</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">        tires_ </span><span>= </span><span style="color:#c2a3a3;">KnobbyTires</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">      }
+</span><span style="color:#e4e4e7;">      </span><span style="color:#c2a3c2;">default</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">        </span><span style="color:#a3b8c2;">assert</span><span style="color:#e4e4e7;">(</span><span style="color:#c2b3a3;">false</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">    }
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  Engine engine_;
+</span><span style="color:#e4e4e7;">  Tires tires_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(CarTest, HardToTest) {
+</span><span>  </span><span style="color:#797b86;">// Want a car with fake engine and tires but can only make real ones.
+</span><span>  Car </span><span style="color:#c2a3a3;">car</span><span>(</span><span style="color:#c2b3a3;">kCoupe</span><span>);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">Car </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">Car</span><span style="color:#e4e4e7;">(std::unique_ptr&lt;Engine&gt; </span><span style="color:#c2a3a3;">engine</span><span style="color:#e4e4e7;">, std::unique_ptr&lt;Tires&gt; </span><span style="color:#c2a3a3;">tires</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">engine_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(engine)), </span><span style="color:#c2a3a3;">tires_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(tires)) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;Engine&gt; engine_;
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;Tires&gt; tires_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(CarTest, EasyToTest) {
+</span><span>  </span><span style="color:#797b86;">// Car is fully configurable
+</span><span>  Car </span><span style="color:#c2a3a3;">car</span><span>(std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;FakeEngine&gt;(), std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;FakeTires&gt;());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote></p>
+<h3 id="constructing-dependencies">Constructing dependencies</h3>
+<p><blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">House </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">House</span><span style="color:#e4e4e7;">() : </span><span style="color:#c2a3a3;">kitchen_</span><span style="color:#e4e4e7;">(), </span><span style="color:#c2a3a3;">bedroom_</span><span style="color:#e4e4e7;">() {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  ModernKitchen kitchen_;
+</span><span style="color:#e4e4e7;">  SpareBedroom bedroom_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(HouseTest, HardToTest) {
+</span><span>  </span><span style="color:#797b86;">// house is stuck with ModernKitchen and SpareBedroom objects
+</span><span>  House house;
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">House </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">House</span><span style="color:#e4e4e7;">(std::unique_ptr&lt;Kitchen&gt; </span><span style="color:#c2a3a3;">kitchen</span><span style="color:#e4e4e7;">,
+</span><span style="color:#e4e4e7;">        std::unique_ptr&lt;Bedroom&gt; </span><span style="color:#c2a3a3;">bedroom</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">kitchen_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(kitchen)), </span><span style="color:#c2a3a3;">bedroom_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(bedroom)) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;Kitchen&gt; kitchen_;
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;Bedroom&gt; bedroom_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(HouseTest, EasyToTest) {
+</span><span>  </span><span style="color:#797b86;">// house uses lightweight test doubles
+</span><span>  House </span><span style="color:#c2a3a3;">house</span><span>(std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;MockKitchen&gt;(),
+</span><span>              std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;MockBedroom&gt;());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote></p>
+<h3 id="partial-construction">Partial construction</h3>
+<p><blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">VisualVoicemail </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// Constructs a partially initialized VisualVoicemail.
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// Don&#39;t forget to call Initialize in production, or SetCalls in test!
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">VisualVoicemail</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> User</span><span>&amp; </span><span style="color:#c2a3a3;">user</span><span style="color:#e4e4e7;">) : </span><span style="color:#c2a3a3;">user_</span><span style="color:#e4e4e7;">(user) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Initialize</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3a3;">SetCalls</span><span style="color:#e4e4e7;">(Server::</span><span style="color:#c2a3a3;">GetCallsFor</span><span style="color:#e4e4e7;">(user_));
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// Hack to allow test access to private methods.
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// Making this function public is not a better idea.
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">friend class</span><span style="color:#e4e4e7;"> VisualVoicemailTest_BrittleDesign_Test;
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">SetCalls</span><span style="color:#e4e4e7;">(std::vector&lt;Call&gt; </span><span style="color:#c2a3a3;">calls</span><span style="color:#e4e4e7;">) { calls_ </span><span>= </span><span style="color:#e4e4e7;">std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(calls); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  User user_;
+</span><span style="color:#e4e4e7;">  std::vector&lt;Call&gt; calls_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(VisualVoicemailTest, BrittleTest) {
+</span><span>  DummyUser user;
+</span><span>  VisualVoicemail </span><span style="color:#c2a3a3;">voicemail</span><span>(user);
+</span><span>  std::vector&lt;Call&gt; calls = </span><span style="color:#c2a3a3;">BuildListOfTestCalls</span><span>();
+</span><span>  voicemail.</span><span style="color:#c2a3a3;">SetCalls</span><span>(calls);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote>
+<blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">VisualVoicemail </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">VisualVoicemail</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> std::vector&lt;Call&gt;</span><span>&amp; </span><span style="color:#c2a3a3;">calls</span><span style="color:#e4e4e7;">) : </span><span style="color:#c2a3a3;">calls_</span><span style="color:#e4e4e7;">(calls) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::vector&lt;Call&gt; calls_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(VisualVoicemailTest, FlexibleTest) {
+</span><span>  VisualVoicemail </span><span style="color:#c2a3a3;">voicemail</span><span>(</span><span style="color:#c2a3a3;">BuildListOfTestCalls</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote></p>
+<h2 id="law-of-demeter">Law of Demeter</h2>
+<p>A class becomes difficult to test if it gets its dependencies from anywhere besides it's interface.
+For example, a class may get a dependency by asking one of it dependencies, breaking the Law of
+Demeter.</p>
+<p>Violations of the Law of Demeter are a sign of both bad Dependency Injection, for passing in the
+wrong dependency, and bad encapsulation, for exposing secondary dependencies in the first place.</p>
+<p>Below are examples of Law of Demeter violations and how they can be fixed with accurate interfaces
+and encapsulation.</p>
+<h3 id="indirect-dependencies">Indirect dependencies</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">SalesTaxCalculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">SalesTaxCalculator</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> TaxTable</span><span>&amp; </span><span style="color:#c2a3a3;">taxTable</span><span style="color:#e4e4e7;">) : </span><span style="color:#c2a3a3;">taxTable_</span><span style="color:#e4e4e7;">(taxTable) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">float </span><span style="color:#a3b8c2;">ComputeSalesTax</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> User</span><span>&amp; </span><span style="color:#c2a3a3;">user</span><span style="color:#e4e4e7;">, </span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Invoice</span><span>&amp; </span><span style="color:#c2a3a3;">invoice</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Get the correct dependencies first...
+</span><span style="color:#e4e4e7;">    Address address </span><span>=</span><span style="color:#e4e4e7;"> user.</span><span style="color:#c2a3a3;">GetAddress</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">float</span><span style="color:#e4e4e7;"> amount </span><span>=</span><span style="color:#e4e4e7;"> invoice.</span><span style="color:#c2a3a3;">GetSubTotal</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// ..then do the calculation.
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> amount </span><span>*</span><span style="color:#e4e4e7;"> taxTable_.</span><span style="color:#c2a3a3;">GetTaxRate</span><span style="color:#e4e4e7;">(address);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  TaxTable taxTable_;
+</span><span style="color:#e4e4e7;">}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(SalesTaxCalculatorTest, ComplexTest) {
+</span><span>  SalesTaxCalculator </span><span style="color:#c2a3a3;">calc</span><span>(</span><span style="color:#c2a3a3;">TaxTable</span><span>());
+</span><span>  User </span><span style="color:#c2a3a3;">user</span><span>(</span><span style="color:#c2a3a3;">Address</span><span>(&quot;</span><span style="color:#a8c2a3;">1600 Amphitheater Parkway...</span><span>&quot;));
+</span><span>  Invoice </span><span style="color:#c2a3a3;">invoice</span><span>(</span><span style="color:#c2b3a3;">1</span><span>, </span><span style="color:#c2a3a3;">ProductX</span><span>(</span><span style="color:#c2b3a3;">95.00</span><span>));
+</span><span>  </span><span style="color:#797b86;">// ...
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(</span><span style="color:#c2b3a3;">0.09</span><span>, calc.</span><span style="color:#c2a3a3;">ComputeSalesTax</span><span>(user, invoice));
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">SalesTaxCalculator </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">SalesTaxCalculator</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> TaxTable</span><span>&amp; </span><span style="color:#c2a3a3;">taxTable</span><span style="color:#e4e4e7;">) : </span><span style="color:#c2a3a3;">taxTable_</span><span style="color:#e4e4e7;">(taxTable) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">float </span><span style="color:#a3b8c2;">ComputeSalesTax</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Address</span><span>&amp; </span><span style="color:#c2a3a3;">address</span><span style="color:#e4e4e7;">, </span><span style="color:#c2a3c2;">const float </span><span style="color:#c2a3a3;">amount</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Already have the correct dependencies; do the calculation.
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> amount </span><span>*</span><span style="color:#e4e4e7;"> taxTable_.</span><span style="color:#c2a3a3;">GetTaxRate</span><span style="color:#e4e4e7;">(address);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  TaxTable taxTable_;
+</span><span style="color:#e4e4e7;">}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(SalesTaxCalculatorTest, StraightforwardTest) {
+</span><span>  SalesTaxCalculator </span><span style="color:#c2a3a3;">calc</span><span>(</span><span style="color:#c2a3a3;">TaxTable</span><span>());
+</span><span>  Address </span><span style="color:#c2a3a3;">address</span><span>(&quot;</span><span style="color:#a8c2a3;">1600 Amphitheater Parkway...</span><span>&quot;)
+</span><span>  </span><span style="color:#797b86;">// ...
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(</span><span style="color:#c2b3a3;">0.09</span><span>, calc.</span><span style="color:#c2a3a3;">ComputeSalesTax</span><span>(address, </span><span style="color:#c2b3a3;">95.00</span><span>));
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="overusing-getters-setters">Overusing getters/setters</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">LoginPage </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">LoginPage</span><span style="color:#e4e4e7;">(std::shared_ptr&lt;RPCClient&gt; </span><span style="color:#c2a3a3;">client</span><span style="color:#e4e4e7;">, </span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> HttpRequest</span><span>&amp; </span><span style="color:#c2a3a3;">request</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">client_</span><span style="color:#e4e4e7;">(client), </span><span style="color:#c2a3a3;">request_</span><span style="color:#e4e4e7;">(request) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">Login</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Even using a getter once is one more time than it needs to be.
+</span><span style="color:#e4e4e7;">    std::string cookie </span><span>=</span><span style="color:#e4e4e7;"> request_.</span><span style="color:#c2a3a3;">GetCookie</span><span style="color:#e4e4e7;">(</span><span>&quot;</span><span style="color:#a8c2a3;">g</span><span>&quot;</span><span style="color:#e4e4e7;">);
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Using a member access operator twice in one statement is right out!
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> client_.</span><span style="color:#c2a3a3;">GetAuthenticator</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">Authenticate</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;RPCClient&gt; client_;
+</span><span style="color:#e4e4e7;">  HttpRequest request_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(LoginPageTest, ComplexBrittleTest) {
+</span><span>  MockRPCClient </span><span style="color:#c2a3a3;">mock_client</span><span>(</span><span style="color:#c2a3a3;">make_shared</span><span>&lt;FakeAuthenticator&gt;());
+</span><span>  std::vector&lt;Cookie&gt; cookies = {</span><span style="color:#c2a3a3;">Cookie</span><span>(&quot;</span><span style="color:#a8c2a3;">g</span><span>&quot;, &quot;</span><span style="color:#a8c2a3;">xyz123</span><span>&quot;)};
+</span><span>  MockHttpRequest </span><span style="color:#c2a3a3;">mock_request</span><span>(cookies);
+</span><span>  LoginPage </span><span style="color:#c2a3a3;">page</span><span>(client, request);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_CALL</span><span>(mock_client, </span><span style="color:#c2a3a3;">GetAuthenticator</span><span>());
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_CALL</span><span>(mock_request, </span><span style="color:#c2a3a3;">GetCookie</span><span>(&quot;</span><span style="color:#a8c2a3;">g</span><span>&quot;));
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_TRUE</span><span>(page.</span><span style="color:#c2a3a3;">Login</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">LoginPage </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">LoginPage</span><span style="color:#e4e4e7;">(std::shared_ptr&lt;Authenticator&gt; </span><span style="color:#c2a3a3;">authenticator</span><span style="color:#e4e4e7;">, </span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Cookie</span><span>&amp; </span><span style="color:#c2a3a3;">cookie</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">authenticator_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(authenticator)), </span><span style="color:#c2a3a3;">cookie_</span><span style="color:#e4e4e7;">(cookie) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">Login</span><span style="color:#e4e4e7;">() { </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> authenticator_.</span><span style="color:#c2a3a3;">Authenticate</span><span style="color:#e4e4e7;">(cookie_); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;Authenticator&gt; authenticator_;
+</span><span style="color:#e4e4e7;">  Cookie cookie_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(LoginPageTest, SimpleFlexibleTest) {
+</span><span>  LoginPage </span><span style="color:#c2a3a3;">page</span><span>(std::</span><span style="color:#c2a3a3;">make_shared</span><span>&lt;FakeAuthenticator&gt;(), </span><span style="color:#c2a3a3;">Cookie</span><span>(&quot;</span><span style="color:#a8c2a3;">g</span><span>&quot;, &quot;</span><span style="color:#a8c2a3;">xyz123</span><span>&quot;));
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_TRUE</span><span>(page.</span><span style="color:#c2a3a3;">Login</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="exposing-dependencies">Exposing dependencies</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">UpdateBug </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">UpdateBug</span><span style="color:#e4e4e7;">(std::shared_ptr&lt;DatabaseInterface&gt; </span><span style="color:#c2a3a3;">db</span><span style="color:#e4e4e7;">) : </span><span style="color:#c2a3a3;">db_</span><span style="color:#e4e4e7;">(db) {}
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Execute</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Bug</span><span>&amp; </span><span style="color:#c2a3a3;">bug</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Impose internal lock management on client. Don&#39;t do this!
+</span><span style="color:#e4e4e7;">    db_-&gt;</span><span style="color:#c2a3a3;">GetLock</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">Lock</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">    db_-&gt;</span><span style="color:#c2a3a3;">Save</span><span style="color:#e4e4e7;">(bug);
+</span><span style="color:#e4e4e7;">    db_-&gt;</span><span style="color:#c2a3a3;">GetLock</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">Unlock</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;DatabaseInterface&gt; db_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#797b86;">// This test shouldn&#39;t be needed, but we must enforce Lock/Unlock is called
+</span><span style="color:#797b86;">// around Save.
+</span><span style="color:#c2a3a3;">TEST</span><span>(UpdateBugTest, HardToTest) {
+</span><span>  MockLock mock_lock;
+</span><span>  </span><span style="color:#c2a3c2;">auto</span><span> mock_db = std::</span><span style="color:#c2a3a3;">make_shared</span><span>&lt;MockDatabase&gt;();
+</span><span>  Bug </span><span style="color:#c2a3a3;">bug</span><span>(&quot;</span><span style="color:#a8c2a3;">description</span><span>&quot;);
+</span><span>  UpdateBug </span><span style="color:#c2a3a3;">updateBug</span><span>(mock_db);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_CALL</span><span>(*mock_db, </span><span style="color:#c2a3a3;">GetLock</span><span>()).</span><span style="color:#c2a3a3;">WillRepeatedly</span><span>(</span><span style="color:#c2a3a3;">ReturnRef</span><span>(mock_lock));
+</span><span>  {
+</span><span>    InSequence dummy;
+</span><span>    </span><span style="color:#c2a3a3;">EXPECT_CALL</span><span>(mock_lock, </span><span style="color:#c2a3a3;">Lock</span><span>());
+</span><span>    </span><span style="color:#c2a3a3;">EXPECT_CALL</span><span>(*mock_db, </span><span style="color:#c2a3a3;">Save</span><span>(</span><span style="color:#c2a3a3;">Ref</span><span>(bug)));
+</span><span>    </span><span style="color:#c2a3a3;">EXPECT_CALL</span><span>(mock_lock, </span><span style="color:#c2a3a3;">Unlock</span><span>());
+</span><span>  }
+</span><span>
+</span><span>  updateBug.</span><span style="color:#c2a3a3;">Execute</span><span>(bug);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">UpdateBug </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">UpdateBug</span><span style="color:#e4e4e7;">(std::shared_ptr&lt;DatabaseInterface&gt; </span><span style="color:#c2a3a3;">db</span><span style="color:#e4e4e7;">) : </span><span style="color:#c2a3a3;">db_</span><span style="color:#e4e4e7;">(db) {}
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">Execute</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Bug</span><span>&amp; </span><span style="color:#c2a3a3;">bug</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Save calls Lock/Unlock internally
+</span><span style="color:#e4e4e7;">    db_-&gt;</span><span style="color:#c2a3a3;">Save</span><span style="color:#e4e4e7;">(bug);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;DatabaseInterface&gt; db_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#797b86;">// Go strait to testing state. No need for mock test since locking interaction
+</span><span style="color:#797b86;">// is encapsulated in the database.
+</span><span style="color:#c2a3a3;">TEST</span><span>(UpdateBugTest, EasyTest) {
+</span><span>  </span><span style="color:#c2a3c2;">auto</span><span> db = std::</span><span style="color:#c2a3a3;">make_shared</span><span>&lt;FakeDatabase&gt;();
+</span><span>  UpdateBug </span><span style="color:#c2a3a3;">updateBug</span><span>();
+</span><span>  Bug </span><span style="color:#c2a3a3;">bug</span><span>(&quot;</span><span style="color:#a8c2a3;">description</span><span>&quot;);
+</span><span>  updateBug.</span><span style="color:#c2a3a3;">Execute</span><span>(bug);
+</span><span>
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_EQ</span><span>(bug, db.</span><span style="color:#c2a3a3;">GetLastSaved</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="context-objects">Context Objects</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MembershipPlan </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// *snip*
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">ProcessOrder</span><span style="color:#e4e4e7;">(UserContext</span><span>&amp; </span><span style="color:#c2a3a3;">userContext</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    User user </span><span>=</span><span style="color:#e4e4e7;"> userContext.</span><span style="color:#c2a3a3;">GetUser</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">    PlanLevel level </span><span>=</span><span style="color:#e4e4e7;"> userContext.</span><span style="color:#c2a3a3;">GetLevel</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">    Order order </span><span>=</span><span style="color:#e4e4e7;"> userContext.</span><span style="color:#c2a3a3;">GetOrder</span><span style="color:#e4e4e7;">();
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// do some processing ...
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(MembershipPlanTest, BrittleUnreadableTest) {
+</span><span>  MembershipPlan plan;
+</span><span>  UserContext userContext;
+</span><span>  userContext.</span><span style="color:#c2a3a3;">SetUser</span><span>(</span><span style="color:#c2a3a3;">User</span><span>(&quot;</span><span style="color:#a8c2a3;">Kim</span><span>&quot;));
+</span><span>  userContext.</span><span style="color:#c2a3a3;">SetLevel</span><span>(</span><span style="color:#c2a3a3;">PlanLevel</span><span>(</span><span style="color:#c2b3a3;">143</span><span>, &quot;</span><span style="color:#a8c2a3;">yearly</span><span>&quot;));
+</span><span>  userContext.</span><span style="color:#c2a3a3;">SetOrder</span><span>(</span><span style="color:#c2a3a3;">Order</span><span>(&quot;</span><span style="color:#a8c2a3;">SuperDeluxe</span><span>&quot;, </span><span style="color:#c2b3a3;">100</span><span>, </span><span style="color:#c2b3a3;">true</span><span>));
+</span><span>  </span><span style="color:#797b86;">// Hopefully this is all the setup the userContext needs to call ProcessOrder
+</span><span>  plan.</span><span style="color:#c2a3a3;">ProcessOrder</span><span>(userContext);
+</span><span>
+</span><span>  </span><span style="color:#797b86;">// Make assertions against userContext and plan...
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">MembershipPlan </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// ...
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">void </span><span style="color:#a3b8c2;">ProcessOrder</span><span style="color:#e4e4e7;">(User</span><span>&amp; </span><span style="color:#c2a3a3;">user</span><span style="color:#e4e4e7;">, Order</span><span>&amp; </span><span style="color:#c2a3a3;">order</span><span style="color:#e4e4e7;">, </span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> PlanLevel</span><span>&amp; </span><span style="color:#c2a3a3;">level</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// do some processing ...
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(MembershipPlanTest, FlexibleSimpleTest) {
+</span><span>  MembershipPlan plan;
+</span><span>  User </span><span style="color:#c2a3a3;">user</span><span>(&quot;</span><span style="color:#a8c2a3;">Kim</span><span>&quot;);
+</span><span>  Order </span><span style="color:#c2a3a3;">order</span><span>(&quot;</span><span style="color:#a8c2a3;">SuperDeluxe</span><span>&quot;, </span><span style="color:#c2b3a3;">100</span><span>, </span><span style="color:#c2b3a3;">true</span><span>);
+</span><span>  </span><span style="color:#c2a3c2;">const</span><span> PlanLevel </span><span style="color:#c2a3a3;">level</span><span>(</span><span style="color:#c2b3a3;">143</span><span>, &quot;</span><span style="color:#a8c2a3;">yearly</span><span>&quot;);
+</span><span>  plan.</span><span style="color:#c2a3a3;">ProcessOrder</span><span>(user, order, level);
+</span><span>
+</span><span>  </span><span style="color:#797b86;">// Make assertions against user, order and plan...
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h2 id="global-state">Global State</h2>
+<p>Global state is difficult to understand. Ideally, the interface of an object should fully describe
+it's dependencies. Global state ruins this ideal because it can be used anywhere without warning.
+Such flexibility may seem convenient to the original developer, but to others it's confusing.
+Especially in large code bases, it can be difficult to realize that some global state exists and
+reason about the circumstances in which it should or shouldn't be used.</p>
+<p>Global state is the enemy of testing. It strongly couples itself to the code that uses it. Global
+scope encourages widespread usage, further compounding coupling issues. Coupling to concrete types
+makes it impossible to write test doubles and global state must be concrete because it uses the
+<code>static</code> keyword.</p>
+<p>Below are some examples of global state and how they can be fixed with Dependency Injection.
+However, Dependency Injection alone is often not enough to fix <code>static</code> methods. For those, an
+adapter called the repository pattern can help remove the
+<a href="../tott/#defeat-static-cling">static cling</a>.</p>
+<p>Note, the solutions to the examples should not feel good and require a lot of work. It is really
+tough to test global state. The best solution is to never use it or refactor away from it
+altogether.</p>
+<h3 id="singletons">Singletons</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">LoginService </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">static</span><span style="color:#e4e4e7;"> LoginService</span><span>&amp; </span><span style="color:#a3b8c2;">GetInstance</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">static</span><span style="color:#e4e4e7;"> LoginService instance;
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> instance;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// *snip*
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">AdminDashboard </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsAuthenticatedAdmin</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> User</span><span>&amp; </span><span style="color:#c2a3a3;">user</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">LoginService::</span><span style="color:#c2a3a3;">GetInstance</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">IsAuthenticatedAdmin</span><span style="color:#e4e4e7;">(user);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// *snip*
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST_F</span><span>(AdminDashboardTest, FlakeySlowAndBrittleTest) {
+</span><span>  </span><span style="color:#797b86;">// AdminDashboard is forced to use the real LoginService singleton.
+</span><span>  User </span><span style="color:#c2a3a3;">user</span><span>(&quot;</span><span style="color:#a8c2a3;">username</span><span>&quot;, &quot;</span><span style="color:#a8c2a3;">password</span><span>&quot;);
+</span><span>  </span><span style="color:#c2a3a3;">ASSERT_TRUE</span><span>(adminDashboard_.</span><span style="color:#c2a3a3;">IsAuthenticatedAdmin</span><span>(user));
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">LoginServiceRepository </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual </span><span style="color:#a3b8c2;">~LoginServiceRepository</span><span style="color:#e4e4e7;">() </span><span>= </span><span style="color:#c2a3c2;">default</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual</span><span style="color:#e4e4e7;"> LoginService</span><span>&amp; </span><span style="color:#a3b8c2;">GetInstance</span><span style="color:#e4e4e7;">() </span><span>= </span><span style="color:#c2b3a3;">0</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">AdminDashboard </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">AdminDashboard</span><span style="color:#e4e4e7;">(std::shared_ptr&lt;LoginServiceRepository&gt; </span><span style="color:#c2a3a3;">loginService</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">loginService_</span><span style="color:#e4e4e7;">(loginService) {}
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsAuthenticatedAdmin</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> User</span><span>&amp; </span><span style="color:#c2a3a3;">user</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> loginService_-&gt;</span><span style="color:#c2a3a3;">GetInstance</span><span style="color:#e4e4e7;">().</span><span style="color:#c2a3a3;">IsAuthenticatedAdmin</span><span style="color:#e4e4e7;">(user);
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;LoginServiceRepository&gt; loginService_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(AdminDashboardTest, ReliableFastAndFlexibleTest) {
+</span><span>  </span><span style="color:#797b86;">// Can now use test doubles for the LoginService singleton.
+</span><span>  AdminDashboard </span><span style="color:#c2a3a3;">adminDashboard</span><span>(std::</span><span style="color:#c2a3a3;">make_shared</span><span>&lt;MockLoginService&gt;());
+</span><span>  User </span><span style="color:#c2a3a3;">user</span><span>(&quot;</span><span style="color:#a8c2a3;">username</span><span>&quot;, &quot;</span><span style="color:#a8c2a3;">password</span><span>&quot;);
+</span><span>  </span><span style="color:#c2a3a3;">ASSERT_TRUE</span><span>(adminDashboard.</span><span style="color:#c2a3a3;">IsAuthenticatedAdmin</span><span>(user));
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="flags">Flags</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">static bool </span><span style="color:#c2b3a3;">kFlagUseRealBackend</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">RpcClient </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">static</span><span style="color:#e4e4e7;"> RpcClient</span><span>&amp; </span><span style="color:#a3b8c2;">GetInstance</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">static</span><span style="color:#e4e4e7;"> RpcClient instance;
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> instance;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsReal</span><span style="color:#e4e4e7;">() { </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> backend_-&gt;</span><span style="color:#c2a3a3;">IsReal</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">RpcClient</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">if </span><span style="color:#e4e4e7;">(</span><span style="color:#c2b3a3;">kFlagUseRealBackend</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">      backend_ </span><span>= </span><span style="color:#e4e4e7;">std::</span><span style="color:#c2a3a3;">make_unique</span><span style="color:#e4e4e7;">&lt;RealBackend&gt;();
+</span><span style="color:#e4e4e7;">    } </span><span style="color:#c2a3c2;">else </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">      backend_ </span><span>= </span><span style="color:#e4e4e7;">std::</span><span style="color:#c2a3a3;">make_unique</span><span style="color:#e4e4e7;">&lt;DummyBackend&gt;();
+</span><span style="color:#e4e4e7;">    }
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// *snip*
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;Backend&gt; backend_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#797b86;">// The 2nd test to run could fail if both tests are run in parallel because
+</span><span style="color:#797b86;">// the RpcClient is static and both tests are a part of the same test suite.
+</span><span style="color:#c2a3a3;">TEST</span><span>(RpcClientTest, SmallComplexAndFlakeyTest) {
+</span><span>  </span><span style="color:#c2b3a3;">kFlagUseRealBackend </span><span>= </span><span style="color:#c2b3a3;">false</span><span>;
+</span><span>  RpcClient&amp; client = RpcClient::</span><span style="color:#c2a3a3;">GetInstance</span><span>();
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_FALSE</span><span>(client.</span><span style="color:#c2a3a3;">IsReal</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(RpcClientTest, LargeComplexAndFlakeyTest) {
+</span><span>  </span><span style="color:#c2b3a3;">kFlagUseRealBackend </span><span>= </span><span style="color:#c2b3a3;">true</span><span>;
+</span><span>  RpcClient&amp; client = RpcClient::</span><span style="color:#c2a3a3;">GetInstance</span><span>();
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_TRUE</span><span>(client.</span><span style="color:#c2a3a3;">IsReal</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">RpcClient </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">explicit </span><span style="color:#a3b8c2;">RpcClient</span><span style="color:#e4e4e7;">(std::unique_ptr&lt;Backend&gt; </span><span style="color:#c2a3a3;">backend</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">backend_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(backend)) {}
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsReal</span><span style="color:#e4e4e7;">() { </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> backend_-&gt;</span><span style="color:#c2a3a3;">IsReal</span><span style="color:#e4e4e7;">(); }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;Backend&gt; backend_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#797b86;">// Now, both tests pass.
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(RpcClientTest, SmallSimpleAndReliableTest) {
+</span><span>  RpcClient </span><span style="color:#c2a3a3;">client</span><span>(std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;DummyBackend&gt;());
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_FALSE</span><span>(client.</span><span style="color:#c2a3a3;">IsReal</span><span>());
+</span><span>}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(RpcClientTest, LargeSimpleAndReliableTest) {
+</span><span>  RpcClient </span><span style="color:#c2a3a3;">client</span><span>(std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;RealBackend&gt;());
+</span><span>  </span><span style="color:#c2a3a3;">EXPECT_TRUE</span><span>(client.</span><span style="color:#c2a3a3;">IsReal</span><span>());
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h3 id="static-methods">Static methods</h3>
+<blockquote class="note bad">
+    <div class="header">
+        <i class="ri-thumb-down-line ri-lg"></i>
+        
+        <p><strong>Untestable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">TrainSchedule </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// *snip *
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;Schedule&gt; </span><span style="color:#a3b8c2;">FindNextTrain</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Do some work...
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Static method accessing slow third party service
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">if </span><span style="color:#e4e4e7;">(TrackStatus::</span><span style="color:#c2a3a3;">IsClosed</span><span style="color:#e4e4e7;">(track)) {
+</span><span style="color:#e4e4e7;">      </span><span style="color:#797b86;">// Do even more work...
+</span><span style="color:#e4e4e7;">    }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> schedule;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">}
+</span><span>
+</span><span style="color:#c2a3a3;">TEST_F</span><span>(TrainScheduleTest, FlakeySlowAndBrittleTest) {
+</span><span>  </span><span style="color:#797b86;">// Forces third party TrackStatus to get called
+</span><span>  </span><span style="color:#c2a3a3;">ASSERT_NE</span><span>(trainSchedule_.</span><span style="color:#c2a3a3;">FindNextTrain</span><span>(), </span><span style="color:#c2b3a3;">nullptr</span><span>);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><blockquote class="note good">
+    <div class="header">
+        <i class="ri-thumb-up-line ri-lg"></i>
+        
+        <p><strong>Testable</strong></p>
+        
+    </div> 
+    <div class="content">
+        <pre data-lang="cpp" style="background-color:#303136;color:#afb0b6;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">TrackStatusRepository </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual </span><span style="color:#a3b8c2;">~TrackStatusRepository</span><span style="color:#e4e4e7;">() </span><span>= </span><span style="color:#c2a3c2;">default</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">virtual bool </span><span style="color:#a3b8c2;">IsClosed</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Track</span><span>&amp; </span><span style="color:#c2a3a3;">track</span><span style="color:#e4e4e7;">) </span><span>= </span><span style="color:#c2b3a3;">0</span><span style="color:#e4e4e7;">;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">RealTrackStatusRepository </span><span style="color:#e4e4e7;">: </span><span style="color:#c2a3c2;">public </span><span style="color:#c2a3b3;">TrackStatusRepository </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;">  </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// ... Wrap each of the third party library&#39;s methods.
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">bool </span><span style="color:#a3b8c2;">IsClosed</span><span style="color:#e4e4e7;">(</span><span style="color:#c2a3c2;">const</span><span style="color:#e4e4e7;"> Track</span><span>&amp; </span><span style="color:#c2a3a3;">track</span><span style="color:#e4e4e7;">) {
+</span><span style="color:#e4e4e7;">      </span><span style="color:#c2a3c2;">return </span><span style="color:#e4e4e7;">TrackStatus::</span><span style="color:#c2a3a3;">IsClosed</span><span style="color:#e4e4e7;">(track);
+</span><span style="color:#e4e4e7;">    }
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3c2;">class </span><span style="color:#c2a3b3;">TrainSchedule </span><span style="color:#e4e4e7;">{
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">public</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  </span><span style="color:#a3b8c2;">TrainSchedule</span><span style="color:#e4e4e7;">(std::unique_ptr&lt;TrackStatusRepository&gt; </span><span style="color:#c2a3a3;">trackStatus</span><span style="color:#e4e4e7;">)
+</span><span style="color:#e4e4e7;">      : </span><span style="color:#c2a3a3;">trackStatus_</span><span style="color:#e4e4e7;">(std::</span><span style="color:#c2a3a3;">move</span><span style="color:#e4e4e7;">(trackStatus)) {}
+</span><span style="color:#e4e4e7;">  </span><span style="color:#797b86;">// *snip *
+</span><span style="color:#e4e4e7;">  std::shared_ptr&lt;Schedule&gt; </span><span style="color:#a3b8c2;">FindNextTrain</span><span style="color:#e4e4e7;">() {
+</span><span style="color:#e4e4e7;">    </span><span style="color:#797b86;">// Do some work...
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">if </span><span style="color:#e4e4e7;">(trackStatus_-&gt;</span><span style="color:#c2a3a3;">IsClosed</span><span style="color:#e4e4e7;">(track)) {
+</span><span style="color:#e4e4e7;">      </span><span style="color:#797b86;">// Do even more work...
+</span><span style="color:#e4e4e7;">    }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;">    </span><span style="color:#c2a3c2;">return</span><span style="color:#e4e4e7;"> schedule;
+</span><span style="color:#e4e4e7;">  }
+</span><span style="color:#e4e4e7;">
+</span><span style="color:#e4e4e7;"> </span><span style="color:#c2a3c2;">private</span><span style="color:#e4e4e7;">:
+</span><span style="color:#e4e4e7;">  std::unique_ptr&lt;TrackStatusRepository&gt; trackStatus_;
+</span><span style="color:#e4e4e7;">}</span><span>;
+</span><span>
+</span><span style="color:#c2a3a3;">TEST</span><span>(TrainScheduleTest, ReliableFastAndFlexibleTest) {
+</span><span>  </span><span style="color:#797b86;">// Now TrainSchedule can be tested in isolation.
+</span><span>  TrainSchedule </span><span style="color:#c2a3a3;">trainSchedule</span><span>(std::</span><span style="color:#c2a3a3;">make_unique</span><span>&lt;StubTrackStatusRepository&gt;());
+</span><span>  </span><span style="color:#c2a3a3;">ASSERT_NE</span><span>(trainSchedule.</span><span style="color:#c2a3a3;">FindNextTrain</span><span>(), </span><span style="color:#c2b3a3;">nullptr</span><span>);
+</span><span>}
+</span></code></pre>
+
+    </div>
+</blockquote><h2 id="single-responsibility-principle">Single Responsibility Principle</h2>
+<p>If you have a class that feels like it:</p>
+<ul>
+<li>Contains hidden interactions that make you scratch your head.</li>
+<li>Is difficult to read and retain in memory.</li>
+<li>Is difficult to reason about its state or contains a bunch of conditional logic.</li>
+<li>Is difficult to describe what it does or the word 'and' is used.</li>
+<li>Requires too many dependencies.</li>
+<li>Requires too much work to write a test double.</li>
+<li>Requires too many tests for full coverage.</li>
+<li>Requires large tests with complex setup/teardown.</li>
+</ul>
+<p>Then, that class is likely violating the Single Responsibility Principle. Such classes hide points
+of flexibility and encapsulate interaction instead of encapsulating behavior. Poor flexibility and
+encapsulation creates brittle design and strong coupling. The result is a class that's hard to test.</p>
+<p>Opportunity to fix a violation of the Single Responsibility Principle is either proactive or
+reactive, depending on whether the violation is caught before or after it's committed to the
+codebase.</p>
+<p>It should go without saying that the proactive approach is less work.</p>
+<h3 id="proactive">Proactive</h3>
+<ol>
+<li>Identify the individual responsibilities.</li>
+<li>Give each responsibility a crisp name.</li>
+<li>Extract functionality into each class.</li>
+<li>Celebrate how much easier the class is to test.</li>
+</ol>
+<h3 id="reactive">Reactive</h3>
+<ol>
+<li>Extract a class in the place where behavior is being altered with new functionality.</li>
+<li>Start to move chunks of behavior out of the legacy class and test each chunk in isolation.</li>
+</ol>
+<blockquote class="note tip">
+    <div class="header">
+        <i class="ri-lightbulb-line ri-lg"></i>
+        
+        <p><strong>Tip</strong></p>
+        
+    </div> 
+    <div class="content">
+        <p><code>static</code> methods are a sign of a homeless method. It likely belongs to one of the parameters it
+takes.</p>
+
+    </div>
+</blockquote>
+      
+      <!-- I could not get page.lighter and page.heavier to work, so lets do it the hard way -->
+
+      <!-- find the current section by searching subsections for a matching page -->
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+
+      <!-- initially a bool, if found gets set to a page -->
+      
+      
+      
+      <!-- iterate pages from lightest to heaviest -->
+      
+        
+          
+        
+      
+        
+          
+          <!-- break so we don't set previous to something even heavier -->
+          
+
+      <div class="next-previous">
+              
+        <div class="spacer"></div>
+        
+          <a href="https:&#x2F;&#x2F;ajguerrer.github.io&#x2F;blog&#x2F;google-test&#x2F;tour&#x2F;"><i class="ri-arrow-right-s-line ri-4x"></i></a>
+        
+      </div>
+    </article>
+  </main>
+  <aside >  
+    <nav>
+      <ul>
+        <li>
+          <a class="toc-h2" href="#dependency-injection">Dependency Injection</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#static-method-calls">Static method calls</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#conditional-logic">Conditional logic</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#constructing-dependencies">Constructing dependencies</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#partial-construction">Partial construction</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="toc-h2" href="#law-of-demeter">Law of Demeter</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#indirect-dependencies">Indirect dependencies</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#overusing-getters-setters">Overusing getters&#x2F;setters</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#exposing-dependencies">Exposing dependencies</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#context-objects">Context Objects</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="toc-h2" href="#global-state">Global State</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#singletons">Singletons</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#flags">Flags</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#static-methods">Static methods</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="toc-h2" href="#single-responsibility-principle">Single Responsibility Principle</a>
+          <ul>
+            <li>
+              <a class="toc-h3" href="#proactive">Proactive</a>
+            </li>
+            <li>
+              <a class="toc-h3" href="#reactive">Reactive</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+<footer>
+    <div class="copyright">
+        Andrew Guerrero
+    </div>
+    <div class="credits">
+        <span>Powered by <a href="https://www.getzola.org/" target="_blank" rel='noreferrer noopener'>Zola</a> and <a href="https://github.com/isunjn/serene" target="_blank" rel='noreferrer noopener'>Serene</a></span>
+    </div>
+</footer>
+<script src="/js/dark.js"></script>    
+<script src="/js/toc.js"></script>
+<script src="/js/progress.js"></script>
+<script src="/js/lightense.min.js"></script>
+<script src="/js/img.js"></script>
+</body>
+
+</html>
